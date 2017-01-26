@@ -4,7 +4,7 @@
   "description": "Client for creating and updating CWRC XML documents in GitHub through the GitHub API.",
   "main": "src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha spec -w"
   },
   "repository": {
     "type": "git",
@@ -24,5 +24,10 @@
   "homepage": "https://github.com/jchartrand/CWRC-Git#readme",
   "dependencies": {
     "github": "8.1.1"
+  },
+  "devDependencies": {
+    "chai": "3.5.0",
+    "mocha": "3.2.0",
+    "nock": "9.0.2"
   }
 }
