@@ -1,14 +1,17 @@
 {
   "name": "cwrcgit",
-  "version": "0.0.1",
+  "version": "0.0.0-development",
   "description": "Client for creating and updating CWRC XML documents in GitHub through the GitHub API.",
   "main": "src/index.js",
   "scripts": {
-    "test": "mocha spec -w"
+    "commit": "git-cz",
+    "test": "mocha spec -w",
+    "test:single": "mocha spec",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jchartrand/CWRC-Git.git"
+    "url": "https://github.com/jchartrand/CWRC-Git.git"
   },
   "keywords": [
     "xml",
@@ -17,7 +20,7 @@
     "github"
   ],
   "author": "“James <“jc.chartrand@gmail.com”> (http://openskysolutions.ca)",
-  "license": "ISC",
+  "license": "",
   "bugs": {
     "url": "https://github.com/jchartrand/CWRC-Git/issues"
   },
@@ -30,6 +33,10 @@
     "commitizen": "2.9.5",
     "cz-conventional-changelog": "1.2.0",
     "mocha": "3.2.0",
-    "nock": "9.0.2"
+    "nock": "9.0.2",
+    "semantic-release": "^6.3.2"
+  },
+  "czConfig": {
+    "path": "node_modules/cz-conventional-changelog"
   }
 }
