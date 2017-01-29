@@ -74,7 +74,7 @@ describe(".getReposForUser", function() {
     /*afterEach(function() {
       var deleteRepoNock = nock('https://api.github.com:443', {"encodedQueryParams":true})
         .delete('/repos/jchartrand/aTest')
-        .query({"access_token":"87d460b04b1ccf0a698183db9dcaafe246f3159e"})
+        .query({"access_token":config.personal_oath_for_testing})
         .reply(204, "");
       cwrcGit.authenticate(githubOauthToken);
       cwrcGit.deleteRepo({owner: owner, repo: testRepo});
