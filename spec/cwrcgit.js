@@ -1,7 +1,7 @@
 var cwrcGit = require("../src/index.js");
 var nock = require('nock');
 var expect = require('chai').expect;
-var config = require('../config');
+var config = require('../config.js');
 var fixtures = require('../fixturesAndMocks/fixtures.js');
 var mocks = require('../fixturesAndMocks/mocks.js');
 
