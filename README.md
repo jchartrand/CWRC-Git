@@ -75,11 +75,13 @@ deleteRepo({})
 
 * change some stuff to satisfy new test
 
-* if you are working from a fork of the repo, then commit change to github and submit a pull request
+NOTE:  if you are working from a fork of the repo, then commit change to github and submit a pull request
 
-* if you are working within a cloned copy, do the following to setup automatic semantic release through continuous integration using semantic-relase and commitizen
+### Release to NPM
 
-make sure you've got NPM configured to publish to the NPM registry:
+If you are working within a cloned copy, do the following to setup automatic semantic release through continuous integration using semantic-relase and commitizen, otherwise if your are working from a fork, submit a pull-request.
+
+Make sure you've got NPM configured to publish to the NPM registry:
 
 ```
 npm set init.author.name "James Chartrand"
@@ -96,13 +98,17 @@ If necessary (although it should already have been done, but maybe the NPM autho
 
 `semantic-release-cli setup`
 
-Answer the questions asked as follows:
+which will ask you a series of questions, which at the time of writing this were:
 
-** The Github repository is not private.
-** The NPM repository is the default.  
-** The NPM username, email, and github username will be read from the NPM set inits you specified above, and your local github settings.  
-** When asked 'What CI are you using?', choose 'Travis CI'
-** When asked 'What kind of '.travis.yml' do you want?  choose 'Single Node.js version'
+```
+semantic-release-cli setup
+? What is your npm registry? https://registry.npmjs.org/
+? What is your npm username? jchartrand
+? What is your npm password? *******
+? What is your GitHub username? jchartrand
+? What is your GitHub password? ********
+? What CI are you using? Travis CI
+```
 
 Anytime you want to submit a commit, stage your changes (e.g., git add -A) then instead of using git's commit command, instead automatically use `npm run commit` which uses commitizen to create commits that are structured to adhere to the semantic-release conventions (which are the same as those used by Google: https://github.com/angular/angular.js/blob/master/CONTRIBUTING.md#commit )
 
