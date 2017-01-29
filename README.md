@@ -101,22 +101,10 @@ Answer the questions asked as follows:
 ** The Github repository is not private.
 ** The NPM repository is the default.  
 ** The NPM username, email, and github username will be read from the NPM set inits you specified above, and your local github settings.  
-## When asked 'What CI are you using?', choose 'Travis CI'
-## When asked 'What kind of '.travis.yml' do you want?  choose 'Single Node.js version'
+** When asked 'What CI are you using?', choose 'Travis CI'
+** When asked 'What kind of '.travis.yml' do you want?  choose 'Single Node.js version'
 
 Anytime you want to submit a commit, stage your changes (e.g., git add -A) then instead of using git's commit command, instead automatically use `npm run commit` which uses commitizen to create commits that are structured to adhere to the semantic-release conventions (which are the same as those used by Google: https://github.com/angular/angular.js/blob/master/CONTRIBUTING.md#commit )
-
-NOTE to ME:
-
-still have to follow these to setup semantic-release and commitizen (although I did do:  npm i -D commitizen cz-conventional-changelog)
-
-https://egghead.io/lessons/javascript-how-to-write-a-javascript-library-automating-releases-with-semantic-release
-
-https://egghead.io/lessons/javascript-how-to-write-a-javascript-library-writing-conventional-commits-with-commitizen
-
-and watch the rest after this again, i.e.,
-
-https://egghead.io/lessons/javascript-how-to-write-a-javascript-library-automatically-releasing-with-travisci
 
 
 * check code coverage results on github page (coverage badge percentage)
