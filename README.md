@@ -1,5 +1,8 @@
 # CWRC-Git
 
+[![Travis](https://img.shields.io/travis/jchartrand/CWRC-Git.svg)](https://travis-ci.org/jchartrand/CWRC-Git)
+[![Codecov](https://img.shields.io/codecov/jchartrand/CWRC-Git.svg)]()
+
 1. [Overview](#overview)
 1. [Demo](#demo)
 1. [Installation](#installation)
@@ -79,7 +82,7 @@ NOTE:  if you are working from a fork of the repo, then commit change to github 
 
 ### Release to NPM
 
-If you are working within a cloned copy, do the following to setup automatic semantic release through continuous integration using semantic-relase and commitizen, otherwise if your are working from a fork, submit a pull-request.
+If you are working within a cloned copy, do the following to setup automatic semantic release through continuous integration using semantic-release (which in turn uses Travis) and commitizen, otherwise if your are working from a fork, submit a pull-request.
 
 Make sure you've got NPM configured to publish to the NPM registry:
 
@@ -87,7 +90,7 @@ Make sure you've got NPM configured to publish to the NPM registry:
 npm set init.author.name "James Chartrand"
 npm set init.author.email "jc.chartrand@gmail.com"
 npm set init.author.url "http://openskysolutions.ca"
-npm login  (and then answer prompts)
+npm login  (answer prompts approriately)
 ```
 
 and install semantic-release-cli globally:
@@ -110,7 +113,9 @@ semantic-release-cli setup
 ? What CI are you using? Travis CI
 ```
 
-Anytime you want to submit a commit, stage your changes (e.g., git add -A) then instead of using git's commit command, instead automatically use `npm run commit` which uses commitizen to create commits that are structured to adhere to the semantic-release conventions (which are the same as those used by Google: https://github.com/angular/angular.js/blob/master/CONTRIBUTING.md#commit )
+Semantic-release will setup a Travis build (on the Travis web site in the Travis account associated with the given Github username) and a trigger in GitHub to run the Travis build on the Travis site whenever you push a change to the GitHub repo.  The Travis build will also deploy a new version to the NPM registry if the commited change is either a new feature or a breaking change.
+
+To submit a commit, stage your changes (e.g., git add -A) then instead of using git's commit command, instead use `npm run commit` which uses commitizen to create commits that are structured to adhere to the semantic-release conventions (which are the same as those used by Google: https://github.com/angular/angular.js/blob/master/CONTRIBUTING.md#commit )
 
 
 * check code coverage results on github page (coverage badge percentage)
