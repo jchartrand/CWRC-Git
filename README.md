@@ -1,7 +1,7 @@
 # CWRC-Git
 
 [![Travis](https://img.shields.io/travis/jchartrand/CWRC-Git.svg)](https://travis-ci.org/jchartrand/CWRC-Git)
-[![Codecov](https://img.shields.io/codecov/jchartrand/CWRC-Git.svg)]()
+[![Codecov](https://img.shields.io/codecov/c/github/jchartrand/CWRC-Git.svg)]()
 
 1. [Overview](#overview)
 1. [Demo](#demo)
