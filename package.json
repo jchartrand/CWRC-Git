@@ -5,8 +5,9 @@
   "main": "src/index.js",
   "scripts": {
     "commit": "git-cz",
+    "report-coverage": "cat ./coverage/lcov.info | codecov",
     "test": "mocha spec -w",
-    "test:single": "mocha spec",
+    "test:single": "istanbul cover -x *.test.js _mocha -- -R spec spec",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "repository": {
@@ -20,7 +21,7 @@
     "github"
   ],
   "author": "“James <“jc.chartrand@gmail.com”> (http://openskysolutions.ca)",
-  "license": "",
+  "license": "GPL-2.0",
   "bugs": {
     "url": "https://github.com/jchartrand/CWRC-Git/issues"
   },
@@ -30,8 +31,10 @@
   },
   "devDependencies": {
     "chai": "3.5.0",
+    "codecov.io": "0.1.6",
     "commitizen": "2.9.5",
     "cz-conventional-changelog": "1.2.0",
+    "istanbul": "0.4.5",
     "mocha": "3.2.0",
     "nock": "9.0.2",
     "semantic-release": "^6.3.2"
