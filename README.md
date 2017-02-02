@@ -1,7 +1,12 @@
 # CWRC-Git
 
 [![Travis](https://img.shields.io/travis/jchartrand/CWRC-Git.svg)](https://travis-ci.org/jchartrand/CWRC-Git)
-[![Codecov](https://img.shields.io/codecov/c/github/jchartrand/CWRC-Git.svg)]()
+[![Codecov](https://img.shields.io/codecov/c/github/jchartrand/CWRC-Git.svg)](https://codecov.io/gh/jchartrand/CWRC-Git)
+[![version](https://img.shields.io/npm/v/cwrcgit.svg?style=flat-square)](http://npm.im/cwrcgit)
+[![downloads](https://img.shields.io/npm/dm/cwrcgit.svg?style=flat-square)](http://npm-stat.com/charts.html?package=cwrcgit&from=2015-08-01)
+[![GPL-2.0](https://img.shields.io/npm/l/cwrcgit.svg?style=flat-square)](http://opensource.org/licenses/GPL-2.0)
+[![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg?style=flat-square)](https://github.com/semantic-release/semantic-release)
+
 
 1. [Overview](#overview)
 1. [Demo](#demo)
@@ -80,7 +85,7 @@ getDoc({
 		repo: github repository name
 	})
 
-getAnnotationsgetDoc({
+getAnnotations({
 		owner: github username, 
 		repo: github repository name
 	})
@@ -107,9 +112,8 @@ getAnnotationsgetDoc({
 
 * change some stuff to satisfy new test
 
-NOTE:  if you are working from a fork of the repo, then commit change to github and submit a pull request
 
-### Release to NPM
+### Commit to Github / Build in Travis / Release to NPM
 
 If you are working within a cloned copy, do the following to setup automatic semantic release through continuous integration using semantic-release (which in turn uses Travis) and commitizen.  Otherwise, if you are working from a fork, then submit a pull-request.
 
@@ -163,16 +167,25 @@ script:
   - npm run check-coverage
 ```
 
-Of course, if the githooks that check tests and code coverage themselves passed, then the Travis check for tests and code coverage should also be fine. 
+Of course, if the githooks that check tests and code coverage themselves passed, then the Travis check for tests and code coverage should also be fine.
 
-The Travis build also publishes the code coverage statistics to codecov.io where the coverage can be viewed. codecov.io also provides us with the code coverage badge at the top of this README.
+Results of the travis build are here:
 
-Finally the Travis build publishes a new version (if the commit was designated as a new feature or breaking change) to NPM.
+`https://travis-ci.org/jchartrand/CWRC-Git` 
+
+The Travis build also publishes the code coverage statistics to codecov.io where the coverage can be viewed:
+
+`https://codecov.io/gh/jchartrand/CWRC-Git/`
+
+ codecov.io also provides us with the code coverage badge at the top of this README.
+
+Finally the Travis build publishes a new version (if the commit was designated as a new feature or breaking change) to NPM:
+
+https://www.npmjs.com/package/cwrcgit
 
 Testing uses mocha and chai.  Tests are in the `spec` directory. 
 
 This module makes http calls to the GitHub API, including calls to create new repositories.  Rather than make those calls for every test, [nock](https://github.com/node-nock/nock) instead mocks the calls to GitHub (intercepts the calls and instead returns pre-recorded data).
-
 
 
 ### Contributing
