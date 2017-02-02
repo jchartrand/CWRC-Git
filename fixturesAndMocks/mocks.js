@@ -12,7 +12,7 @@ function getDetailsForAuthenticatedUserNock() {
 function getReposForAuthenticatedUserNock() {
   return nock('https://api.github.com:443', {"encodedQueryParams":true})
   .get('/user/repos')
-  .query({"access_token":"b77d1bca3768ecc28e301cb72f365d558e86f9fe"})
+  .query({"access_token":config.personal_oath_for_testing})
   .reply(200, [{"id":19289649,"name":fixtures.testRepo}]);
 
 }
