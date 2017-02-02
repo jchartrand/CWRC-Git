@@ -14,11 +14,11 @@
 
 ### Overview
 
-NPM package for creating and updating CWRC XML documents in GitHub through the GitHub API.  Used by the [CWRC-GitServer](https://github.com/cwrc/CWRC-GitServer), whose web API is in turn used by the [CWRC-GitWriter](https://github.com/cwrc/CWRC-GitWriter].
+NPM package for creating and updating CWRC XML documents in GitHub through the GitHub API.  Used by the [CWRC-GitServer](https://github.com/cwrc/CWRC-GitServer), whose web API is in turn used by the [CWRC-GitWriter](https://github.com/cwrc/CWRC-GitWriter).
 
 ### Demo 
 
-A [CWRC GitHub Sandbox](http://208.75.74.217/editor_github.html) uses the NPM package published from this repository along with the code in [CWRC-Writer](https://github.com/cwrc/CWRC-Writer), [CWRC-GitServer](https://github.com/cwrc/CWRC-GitServer), [CWRC-GitWriter](https://github.com/cwrc/CWRC-GitWriter], and [CWRC-GitDelegator](https://github.com/cwrc/CWRC-GitServer). The same code is easily (for someone with modest development experience) installed on any server to run your own instance.
+The [CWRC GitHub Sandbox](http://208.75.74.217/editor_github.html) uses the NPM package published from this repository along with the code in [CWRC-Writer](https://github.com/cwrc/CWRC-Writer), [CWRC-GitServer](https://github.com/cwrc/CWRC-GitServer), [CWRC-GitWriter](https://github.com/cwrc/CWRC-GitWriter), and [CWRC-GitDelegator](https://github.com/cwrc/CWRC-GitServer). The same code is easily (for someone with modest development experience) installed on any server to run your own instance.
 
 ### Installation
 
@@ -61,7 +61,6 @@ getDoc({})
 
 getAnnotations({})
 
-deleteRepo({})
 ```
 
 ### Development
@@ -82,7 +81,7 @@ NOTE:  if you are working from a fork of the repo, then commit change to github 
 
 ### Release to NPM
 
-If you are working within a cloned copy, do the following to setup automatic semantic release through continuous integration using semantic-release (which in turn uses Travis) and commitizen, otherwise if your are working from a fork, submit a pull-request.
+If you are working within a cloned copy, do the following to setup automatic semantic release through continuous integration using semantic-release (which in turn uses Travis) and commitizen.  Otherwise, if you are working from a fork, then submit a pull-request.
 
 Make sure you've got NPM configured to publish to the NPM registry:
 
@@ -92,12 +91,11 @@ npm set init.author.email "jc.chartrand@gmail.com"
 npm set init.author.url "http://openskysolutions.ca"
 npm login  (answer prompts approriately)
 ```
-
 and install semantic-release-cli globally:
 
 `npm install -g semantic-release-cli`
 
-If necessary (although it should already have been done, but maybe the NPM author information has changed for example) configure it:
+If necessary (it should already have been done, but maybe the NPM author information has changed for example) configure semantic release:
 
 `semantic-release-cli setup`
 
@@ -113,16 +111,39 @@ semantic-release-cli setup
 ? What CI are you using? Travis CI
 ```
 
-Semantic-release will setup a Travis build (on the Travis web site in the Travis account associated with the given Github username) and a trigger in GitHub to run the Travis build on the Travis site whenever you push a change to the GitHub repo.  The Travis build will also deploy a new version to the NPM registry if the commited change is either a new feature or a breaking change.
+Semantic-release sets up a Travis build (on the Travis web site in the Travis account associated with the given Github username) and a trigger in GitHub to run the Travis build on the Travis site whenever you push a change to the GitHub repo.  The Travis build will also deploy a new version to the NPM registry if the commited change is either a new feature or a breaking change.
 
 To submit a commit, stage your changes (e.g., git add -A) then instead of using git's commit command, instead use `npm run commit` which uses commitizen to create commits that are structured to adhere to the semantic-release conventions (which are the same as those used by Google: https://github.com/angular/angular.js/blob/master/CONTRIBUTING.md#commit )
 
+The NPM `ghooks` package is used to add two pre-commit git hooks that will check that all mocha tests pass and that code coverage is 100% (as caluclated by istanbul) before allowing a commit to proceed.  The hooks are set in package.json:
 
-* check code coverage results on github page (coverage badge percentage)
+```
+"config": {
+    "ghooks": {
+      "pre-commit": "npm run test:single && npm run check-coverage"
+    }
+  }
+```
 
-Testing uses mocha and chai.  Tests are in spec. 
+After the commit has succeeded then `git push` it all up to github, which will in turn trigger the Travis build.  The Travis build is also set to confirm that all tests pass and that code coverage is 100%.  This is set in the `.travis.yml` file:
 
-This module makes http calls to the GitHub API, including calls to create new repositories.  Rather than make those calls for every test, [nock](https://github.com/node-nock/nock) instead mocks the calls to GitHub (intercepts the calls and instead returns pre-recorded data).  
+```
+script:
+  - npm run test:single
+  - npm run check-coverage
+```
+
+Of course, if the githooks that check tests and code coverage themselves passed, then the Travis check for tests and code coverage should also be fine. 
+
+The Travis build also publishes the code coverage statistics to codecov.io where the coverage can be viewed. codecov.io also provides us with the code coverage badge at the top of this README.
+
+Finally the Travis build publishes a new version (if the commit was designated as a new feature or breaking change) to NPM.
+
+Testing uses mocha and chai.  Tests are in the `spec` directory. 
+
+This module makes http calls to the GitHub API, including calls to create new repositories.  Rather than make those calls for every test, [nock](https://github.com/node-nock/nock) instead mocks the calls to GitHub (intercepts the calls and instead returns pre-recorded data).
+
+
 
 ### Contributing
 
@@ -132,7 +153,7 @@ Please contact us if you'd like to contribute.  Standard pull requests, includin
 
 Who would use this?
 
-Anyone wanting to use the CWRC-Writer to author XML documents and add RDF annotations, and save those documents to GitHub.
+Anyone wanting to use the CWRC-Writer to author XML documents with RDF annotations, and save those documents to GitHub.
 
 ### License
 

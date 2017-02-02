@@ -2,6 +2,35 @@ var nock = require('nock');
 var config = require('../config');
 var fixtures = require('./fixtures.js');
 
+function getDetailsForAuthenticatedUserNock() {
+  return nock('https://api.github.com:443', {"encodedQueryParams":true})
+    .get('/user')
+    .query({"access_token":config.personal_oath_for_testing})
+    .reply(200, {"login":fixtures.owner,"id":547165,"avatar_url":"https://avatars.githubusercontent.com/u/547165?v=3","gravatar_id":"","url":"https://api.github.com/users/jchartrand","html_url":"https://github.com/jchartrand","followers_url":"https://api.github.com/users/jchartrand/followers","following_url":"https://api.github.com/users/jchartrand/following{/other_user}","gists_url":"https://api.github.com/users/jchartrand/gists{/gist_id}","starred_url":"https://api.github.com/users/jchartrand/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/jchartrand/subscriptions","organizations_url":"https://api.github.com/users/jchartrand/orgs","repos_url":"https://api.github.com/users/jchartrand/repos","events_url":"https://api.github.com/users/jchartrand/events{/privacy}","received_events_url":"https://api.github.com/users/jchartrand/received_events","type":"User","site_admin":false,"name":null,"company":null,"blog":null,"location":null,"email":null,"hireable":null,"bio":null,"public_repos":13,"public_gists":0,"followers":3,"following":1,"created_at":"2011-01-04T15:50:51Z","updated_at":"2017-01-31T21:24:53Z"});
+}
+
+function getReposForAuthenticatedUserNock() {
+  return nock('https://api.github.com:443', {"encodedQueryParams":true})
+  .get('/user/repos')
+  .query({"access_token":"b77d1bca3768ecc28e301cb72f365d558e86f9fe"})
+  .reply(200, [{"id":19289649,"name":fixtures.testRepo}]);
+
+}
+
+/*function getGithubTreeFailureNock() {
+  // In this one, I only return what's needed for the test to continue, i.e., the newSHA
+  return nock('https://api.github.com:443', {"encodedQueryParams":true})
+        .post(`/repos/${fixtures.owner}/${fixtures.testRepo}/git/trees`, 
+          {"tree":[
+            {"path":"document.xml","mode":"100644","type":"blob","content":fixtures.testDoc},
+            {"path":"annotations.json","mode":"100644","type":"blob","content":fixtures.annotationBundleText}
+          ],
+          "base_tree":fixtures.baseTreeSHA
+        })
+        .query({"access_token":config.personal_oath_for_testing})
+        .reply(201, {"sha":fixtures.newTreeSHA});
+}*/
+
 function  getGithubCommitNock() {
   // NOTE:  I put in more in the reply than necessary. I  put it in
       // to help explain what's going on.
@@ -145,6 +174,7 @@ function getReposForGithubUserNock() {
     
 
 module.exports = {
+  getDetailsForAuthenticatedUserNock: getDetailsForAuthenticatedUserNock,
   getGithubCommitNock: getGithubCommitNock,
   getCreateGithubCWRCBranchNock:getCreateGithubCWRCBranchNock,
   getUpdateGithubCWRCBranchNock:getUpdateGithubCWRCBranchNock,
@@ -155,5 +185,6 @@ module.exports = {
   getDocumentFromGithubNock:getDocumentFromGithubNock,
   getAnnotationsFromGithubNock:getAnnotationsFromGithubNock,
   getBranchInfoFromGithubNock:getBranchInfoFromGithubNock,
-  getReposForGithubUserNock: getReposForGithubUserNock
+  getReposForGithubUserNock: getReposForGithubUserNock,
+  getReposForAuthenticatedUserNock: getReposForAuthenticatedUserNock
 }

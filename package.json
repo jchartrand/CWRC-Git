@@ -5,6 +5,7 @@
   "main": "src/index.js",
   "scripts": {
     "commit": "git-cz",
+    "check-coverage": "istanbul check-coverage --statements 100 --branches 100 --functions 100 --lines 100",
     "report-coverage": "cat ./coverage/lcov.info | codecov",
     "test": "mocha spec -w",
     "test:single": "istanbul cover -x *.test.js _mocha -- -R spec spec",
@@ -34,6 +35,7 @@
     "codecov.io": "0.1.6",
     "commitizen": "2.9.5",
     "cz-conventional-changelog": "1.2.0",
+    "ghooks": "2.0.0",
     "istanbul": "0.4.5",
     "mocha": "3.2.0",
     "nock": "9.0.2",
@@ -41,5 +43,10 @@
   },
   "czConfig": {
     "path": "node_modules/cz-conventional-changelog"
+  },
+  "config": {
+    "ghooks": {
+      "pre-commit": "npm run test:single && npm run check-coverage"
+    }
   }
 }

@@ -17,27 +17,22 @@ var github = new GitHubApi({
 });
 
 function authenticate(gitHubOAuthToken) {
-   // console.log("In the cwrcGit.authenticate, and the token is: ");
-   // console.log(gitHubOAuthToken);
-
-    return github.authenticate({type: "oauth",token: gitHubOAuthToken});
+   return github.authenticate({type: "oauth",token: gitHubOAuthToken})
 }
 
 function getDetailsForAuthenticatedUser() {
-    return github.users.get({});
+    return github.users.get({})
 }
 
 function getReposForAuthenticatedUser(){
-    return github.repos.getAll({});
+    console.log("in the getgetReposForAuthenticatedUserDetails");
+    return github.repos.getAll({})
 }
 
 function getReposForUser(theDetails) {
-    return github.repos.getForUser(theDetails);
+    return github.repos.getForUser(theDetails)
 }
 
-function getRepoById(theDetails){
-    return github.repos.getById({id: req.params.repoid});
-}
 
 // expects in theDetails argument: 
 // {
@@ -88,10 +83,6 @@ function createRepoForDoc(theDetails) {
 // returns the chained result object for passing to further promise based calls.
 
 function saveDoc(theDetails) {
-
-    console.log("the details in the cwrcGit.saveDoc");
-    console.log(theDetails);
-
     return createTree(theDetails)
             .then(createCommit)
             .then(updateCWRCDraftsBranch)
@@ -102,6 +93,7 @@ function saveDoc(theDetails) {
 function logError(error) {
     console.error("oh no!");
     console.log(error);
+    return Promise.reject(new Error(`Failed to call the GitHub API:  ${error}`));
 }
 
 function getMainText(chainedResult) {
@@ -166,10 +158,6 @@ function buildNewTree(chainedResult) {
     return chainedResult;
 }
 
-function deleteRepo(theDetails){
-    return github.repos.delete(theDetails);
-}
-
 function createRepo(chainedResult){
     var createParams = {
         name: chainedResult.repo,   
@@ -181,8 +169,7 @@ function createRepo(chainedResult){
         .then(githubResponse=>{
             chainedResult.owner = githubResponse.owner.login;
             return chainedResult;
-        },
-        error=>{console.log("error in createRepo: "); console.log(error)}
+        }
 
     )
 }
@@ -319,6 +306,5 @@ module.exports = {
 	saveDoc: saveDoc,
 	getDoc: getDoc,
     createRepoForDoc: createRepoForDoc,
-    getAnnotations: getAnnotations,
-    deleteRepo: deleteRepo
+    getAnnotations: getAnnotations
 };

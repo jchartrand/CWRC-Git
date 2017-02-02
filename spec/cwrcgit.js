@@ -12,7 +12,7 @@ cwrcGit.authenticate(config.personal_oath_for_testing);
 // to the console, for use in nock.  I've put past nock recordings in /fixturesAndMocks/mocks.js,
 //  which nock now returns for calls to GitHub that it intercepts (by virtue of 'requiring' nock
 // above.)  See https://github.com/node-nock/nock for full details.
-// nock.recorder.rec();
+//     nock.recorder.rec();
 
 describe("cwrcGit", function() {
 
@@ -42,6 +42,8 @@ describe("cwrcGit", function() {
 
   });
 
+
+
 describe(".getReposForUser", function() {
   
     beforeEach(function() {
@@ -52,13 +54,32 @@ describe(".getReposForUser", function() {
       cwrcGit.getReposForUser({username:fixtures.owner})
           .then(result=>{
             expect(result).to.exist;
+            expect(result[0].owner.login).to.equal(fixtures.owner)
             done();
           });
     });
 
   });
 
-  describe("createRepoForDoc", function() {
+describe(".getReposForAuthenticatedUser", function() {
+  
+    beforeEach(function() {
+      var getReposForAuthenticatedUserNock = mocks.getReposForAuthenticatedUserNock();
+    });
+
+    it("returns correctly", function (done) {
+      cwrcGit.getReposForAuthenticatedUser()
+          .then(result=>{
+            expect(result).to.exist;
+            expect(result[0].name).to.equal(fixtures.testRepo);
+            done();
+          })
+    })// .timeout(5000); // to force mocha to wait longer for async to return
+
+  });
+
+
+  describe(".createRepoForDoc", function() {
     
     beforeEach(function() {
   
@@ -105,9 +126,25 @@ describe(".getReposForUser", function() {
 
   });
 
+describe(".getDetailsForAuthenticatedUser", function() {
+    
+    beforeEach(function() {
+      var createGithubRepoNock = mocks.getDetailsForAuthenticatedUserNock();
+    });
 
+    it("returns correctly", function (done) {
+        cwrcGit.getDetailsForAuthenticatedUser()
+          .then(
+            result=>{
+              expect(result).to.exist;
+              done()
+            }
+          )
+    });
 
-describe("saveDoc", function() {
+  });
+
+describe(".saveDoc", function() {
     
     beforeEach(function() {
       var createGithubTreeNock = mocks.getGithubTreeNock();
@@ -135,6 +172,22 @@ describe("saveDoc", function() {
               expect(result.annotations).to.equal(fixtures.annotationBundleText);
               expect(result.owner).to.equal(fixtures.owner);
               expect(result.repo).to.equal(fixtures.testRepo);
+              done()
+            }
+          )
+    });
+
+    it("returns a rejected promise for missing arguments", function(done) {
+      
+        cwrcGit.saveDoc(
+          {owner: fixtures.owner, 
+          repo: fixtures.testRepo, 
+          baseTreeSHA: fixtures.baseTreeSHA, 
+          parentCommitSHA: fixtures.parentCommitSHA,
+          annotations: fixtures.annotationBundleText,
+          versionTimestamp: fixtures.versionTimestamp
+        }).catch(error=>{ 
+              expect(error).to.exist;
               done()
             }
           )
