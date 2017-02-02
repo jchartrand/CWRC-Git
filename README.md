@@ -7,6 +7,7 @@
 1. [Demo](#demo)
 1. [Installation](#installation)
 1. [Use](#use)
+1. [API](#api)
 1. [Development](#development)
 1. [Contributing](#contributing)
 1. [FAQ](#faq)
@@ -42,26 +43,51 @@ var repos = cwrcGit.getReposForAuthenticatedUser();
 
 The spec directory contains specifications (tests) that can help better understand the API. Also see [CWRC-GitServer](https://github.com/cwrc/CWRC-GitServer) which fully uses the API.
 
+### API
+
 The methods exposed (API) by this package are:
 
 ```
-authenticate(gitHubOAuthToken)
+authenticate(gitHubOAuthToken) - must first be called before any of the other methods
 
 getDetailsForAuthenticatedUser()
 
 getReposForAuthenticatedUser()
 
-getReposForUser({})
+getReposForUser({username:gitHubUserNameGoesHere})
 
-createRepoForDoc({})
+createRepoForDoc({
+		repo: the repository name,
+	    isPrivate: true/false, 
+	    doc:the XML document itself, 
+	    description: description of the repo/doc,
+	    annotations: bundle of oa annotations as single string of rdf,
+	    versionTimestamp: timestamp which acts as the version number
+    })
 
-saveDoc({})
+saveDoc({
+		owner: github username,
+	    repo: repository name,
+	    doc:the XML document itself, 
+	    baseTreeSHA: baseTreeSHA, 
+	    parentCommitSHA: parentCommitSHA,
+	    annotations: bundle of oa annotations as single string of rdf,
+	    versionTimestamp: timestamp which acts as the version number
+    })
 
-getDoc({})
+getDoc({
+		owner: github username, 
+		repo: github repository name
+	})
 
-getAnnotations({})
+getAnnotationsgetDoc({
+		owner: github username, 
+		repo: github repository name
+	})
 
 ```
+
+
 
 ### Development
 
@@ -70,6 +96,10 @@ getAnnotations({})
 * `npm install` to install the node.js dependencies 
 	
 	NOTE:  we use `npm set save-exact true` to save dependencies as exact version numbers so NPM should install exact versions when you run install
+
+* The config.js file specifies several passwords and tokens.  You'll have to set these values appropriately in your cloned repo.  To prevent git from noticing that you've changed the file (so that you don't inadvertently commit the file and push it to the public repo thereby exposing the passwords) use:
+
+`git update-index --skip-worktree config.js`
 
 * write a test (or two)for your new functionality (in 'spec' directory)
 
