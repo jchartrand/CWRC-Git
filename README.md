@@ -2,10 +2,10 @@
 
 [![Travis](https://img.shields.io/travis/jchartrand/CWRC-Git.svg)](https://travis-ci.org/jchartrand/CWRC-Git)
 [![Codecov](https://img.shields.io/codecov/c/github/jchartrand/CWRC-Git.svg)](https://codecov.io/gh/jchartrand/CWRC-Git)
-[![version](https://img.shields.io/npm/v/cwrcgit.svg?style=flat-square)](http://npm.im/cwrcgit)
-[![downloads](https://img.shields.io/npm/dm/cwrcgit.svg?style=flat-square)](http://npm-stat.com/charts.html?package=cwrcgit&from=2015-08-01)
-[![GPL-2.0](https://img.shields.io/npm/l/cwrcgit.svg?style=flat-square)](http://opensource.org/licenses/GPL-2.0)
-[![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg?style=flat-square)](https://github.com/semantic-release/semantic-release)
+[![version](https://img.shields.io/npm/v/cwrcgit.svg)](http://npm.im/cwrcgit)
+[![downloads](https://img.shields.io/npm/dm/cwrcgit.svg)](http://npm-stat.com/charts.html?package=cwrcgit&from=2015-08-01)
+[![GPL-2.0](https://img.shields.io/npm/l/cwrcgit.svg)](http://opensource.org/licenses/GPL-2.0)
+[![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 
 
 1. [Overview](#overview)
