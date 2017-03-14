@@ -44,7 +44,7 @@ function getTemplates(theDetails){
 }
 
 function getTemplate(theDetails){
-    let path = 'templates/' + (theDetails.path || letter.xml);
+    let path = 'templates/' + (theDetails.path || 'letter.xml');
     return github.repos.getContent(
         {
             owner: theDetails.owner || 'cwrc', 

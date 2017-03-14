@@ -178,7 +178,7 @@ describe(".getTemplate", function() {
     });
 
     it("returns correctly", function (done) {
-        cwrcGit.getTemplate({owner: 'cwrc', repo: 'CWRC-Writer-Templates', path: 'templates/letter.xml', ref: 'master'})
+        cwrcGit.getTemplate({owner: 'cwrc', repo: 'CWRC-Writer-Templates', path: 'letter.xml', ref: 'master'})
           .then(
             result=>{
               expect(result).to.exist;
@@ -198,7 +198,7 @@ describe(".getTemplate", function() {
     })
 
     it("returns the decoded document", function(done) {
-      cwrcGit.getTemplate({owner: 'cwrc', repo: 'CWRC-Writer-Templates', path: 'templates/letter.xml', ref: 'master'})
+      cwrcGit.getTemplate({owner: 'cwrc', repo: 'CWRC-Writer-Templates', path: 'letter.xml', ref: 'master'})
           .then(
             result=>{
               expect(result).to.contain(`<?xml version="1.0" encoding="UTF-8"?>`)
