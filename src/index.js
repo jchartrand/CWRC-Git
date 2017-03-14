@@ -44,12 +44,13 @@ function getTemplates(theDetails){
 }
 
 function getTemplate(theDetails){
+    let path = 'templates/' + (theDetails.path || letter.xml);
     return github.repos.getContent(
         {
             owner: theDetails.owner || 'cwrc', 
             repo: theDetails.repo || 'CWRC-Writer-Templates', 
             ref: theDetails.branch || 'master', 
-            path: theDetails.sha || 'templates/letter.xml'
+            path: path
         }
     ).then(
         result=>{
