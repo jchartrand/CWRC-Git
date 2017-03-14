@@ -5,14 +5,13 @@ var config = require('../config.js');
 var fixtures = require('../fixturesAndMocks/fixtures.js');
 var mocks = require('../fixturesAndMocks/mocks.js');
 
-
 cwrcGit.authenticate(config.personal_oath_for_testing);
 
 // uncomment the line below to let calls through to Github, and have nock output the results
 // to the console, for use in nock.  I've put past nock recordings in /fixturesAndMocks/mocks.js,
 //  which nock now returns for calls to GitHub that it intercepts (by virtue of 'requiring' nock
 // above.)  See https://github.com/node-nock/nock for full details.
-//     nock.recorder.rec();
+  //   nock.recorder.rec();
 
 describe("cwrcGit", function() {
 
@@ -129,7 +128,7 @@ describe(".getReposForAuthenticatedUser", function() {
 describe(".getDetailsForAuthenticatedUser", function() {
     
     beforeEach(function() {
-      var createGithubRepoNock = mocks.getDetailsForAuthenticatedUserNock();
+      var getDetailsForAuthenticatedUserNock = mocks.getDetailsForAuthenticatedUserNock();
     });
 
     it("returns correctly", function (done) {
@@ -143,6 +142,75 @@ describe(".getDetailsForAuthenticatedUser", function() {
     });
 
   });
+
+describe(".getTemplates", function() {
+    
+    beforeEach(function() {
+      var getTemplatesNock = mocks.getTemplatesNock();
+    });
+
+    it("returns correctly", function (done) {
+        cwrcGit.getTemplates({owner: 'cwrc', repo: 'CWRC-Writer-Templates', path: 'templates', ref: 'master'})
+          .then(
+            result=>{
+              expect(result).to.exist;
+              done()
+            }
+          )
+    }).timeout(5000);
+
+    it("returns correctly with defaults", function (done) {
+        cwrcGit.getTemplates({})
+          .then(
+            result=>{
+              expect(result).to.exist;
+              done()
+            }
+          )
+    }).timeout(5000);
+
+  });
+
+describe(".getTemplate", function() {
+    
+    beforeEach(function() {
+      var getTemplateNock = mocks.getTemplateNock();
+    });
+
+    it("returns correctly", function (done) {
+        cwrcGit.getTemplate({owner: 'cwrc', repo: 'CWRC-Writer-Templates', path: 'templates/letter.xml', ref: 'master'})
+          .then(
+            result=>{
+              expect(result).to.exist;
+              done()
+            }
+          )
+    })
+
+    it("returns correctly for defaults", function (done) {
+        cwrcGit.getTemplate({})
+          .then(
+            result=>{
+              expect(result).to.exist;
+              done()
+            }
+          )
+    })
+
+    it("returns the decoded document", function(done) {
+      cwrcGit.getTemplate({owner: 'cwrc', repo: 'CWRC-Writer-Templates', path: 'templates/letter.xml', ref: 'master'})
+          .then(
+            result=>{
+              expect(result).to.contain(`<?xml version="1.0" encoding="UTF-8"?>`)
+              expect(result).to.contain(`<title>Sample Letter Title</title>`)
+              done()
+            }
+          )
+      
+    })
+
+  });
+
 
 describe(".saveDoc", function() {
     

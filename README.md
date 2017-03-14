@@ -1,3 +1,5 @@
+![Picture](http://www.cwrc.ca/wp-content/uploads/2010/12/CWRC_Dec-2-10_smaller.png)
+
 # CWRC-Git
 
 [![Travis](https://img.shields.io/travis/jchartrand/CWRC-Git.svg)](https://travis-ci.org/jchartrand/CWRC-Git)
@@ -89,6 +91,17 @@ getAnnotations({
 		owner: github username, 
 		repo: github repository name
 	})
+
+getTemplates({owner: github username, 
+		repo: github repository name,
+		ref: the branch
+		path: path to template files
+	})
+
+getTemplate(download_url_from_getTemplates_call)
+
+
+
 
 ```
 

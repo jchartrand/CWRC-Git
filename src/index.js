@@ -25,12 +25,37 @@ function getDetailsForAuthenticatedUser() {
 }
 
 function getReposForAuthenticatedUser(){
-    console.log("in the getgetReposForAuthenticatedUserDetails");
     return github.repos.getAll({})
 }
 
 function getReposForUser(theDetails) {
     return github.repos.getForUser(theDetails)
+}
+
+function getTemplates(theDetails){
+    return github.repos.getContent(
+        {
+            owner: theDetails.owner || 'cwrc', 
+            repo: theDetails.repo || 'CWRC-Writer-Templates', 
+            ref: theDetails.branch || 'master', 
+            path: theDetails.path || 'templates'
+        }
+    )
+}
+
+function getTemplate(theDetails){
+    return github.repos.getContent(
+        {
+            owner: theDetails.owner || 'cwrc', 
+            repo: theDetails.repo || 'CWRC-Writer-Templates', 
+            ref: theDetails.branch || 'master', 
+            path: theDetails.sha || 'templates/letter.xml'
+        }
+    ).then(
+        result=>{
+            return Buffer.from(result.content, 'base64').toString('utf8');
+        }
+    )
 }
 
 
@@ -306,5 +331,7 @@ module.exports = {
 	saveDoc: saveDoc,
 	getDoc: getDoc,
     createRepoForDoc: createRepoForDoc,
-    getAnnotations: getAnnotations
+    getAnnotations: getAnnotations,
+    getTemplates: getTemplates,
+    getTemplate: getTemplate
 };
