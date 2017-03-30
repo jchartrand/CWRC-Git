@@ -11,7 +11,7 @@ cwrcGit.authenticate(config.personal_oath_for_testing);
 // to the console, for use in nock.  I've put past nock recordings in /fixturesAndMocks/mocks.js,
 //  which nock now returns for calls to GitHub that it intercepts (by virtue of 'requiring' nock
 // above.)  See https://github.com/node-nock/nock for full details.
-  //   nock.recorder.rec();
+   //  nock.recorder.rec();
 
 describe("cwrcGit", function() {
 
@@ -210,6 +210,26 @@ describe(".getTemplate", function() {
     })
 
   });
+
+
+describe(".search", function() {
+    
+    beforeEach(function() {
+      var getSearchNock = mocks.getSearchNock();
+    });
+
+    it("returns correctly", function (done) {
+        cwrcGit.search('cwrc-melbourne+repo:jchartrand/cleanDoc2')
+          .then(
+            result=>{
+              expect(result).to.exist
+              done()
+            }
+          )
+    })//.timeout(5000); // to force mocha to wait longer for async to return
+
+  });
+
 
 
 describe(".saveDoc", function() {

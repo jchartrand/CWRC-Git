@@ -322,7 +322,9 @@ function updateCWRCDraftsBranch(chainedResult) {
     ).then(githubResponse=>chainedResult)
 }
 
-
+function search(query) {
+    return github.search.code({q: query});
+}
 
 module.exports = {
     authenticate: authenticate,
@@ -334,5 +336,6 @@ module.exports = {
     createRepoForDoc: createRepoForDoc,
     getAnnotations: getAnnotations,
     getTemplates: getTemplates,
-    getTemplate: getTemplate
+    getTemplate: getTemplate,
+    search: search
 };

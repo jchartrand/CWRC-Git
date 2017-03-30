@@ -22,11 +22,11 @@
 
 ### Overview
 
-NPM package for creating and updating CWRC XML documents in GitHub through the GitHub API.  Used by the [CWRC-GitServer](https://github.com/cwrc/CWRC-GitServer), whose web API is in turn used by the [CWRC-GitWriter](https://github.com/cwrc/CWRC-GitWriter).
+NPM package for searching GitHub, and for creating and updating CWRC XML documents in GitHub, all through the GitHub API.  Used by the [CWRC-GitServer](https://github.com/cwrc/CWRC-GitServer), whose web API is in turn used by the [CWRC-GitWriter](https://github.com/cwrc/CWRC-GitWriter).
 
 ### Demo 
 
-The [CWRC GitHub Sandbox](http://208.75.74.217/editor_github.html) uses the NPM package published from this repository along with the code in [CWRC-Writer](https://github.com/cwrc/CWRC-Writer), [CWRC-GitServer](https://github.com/cwrc/CWRC-GitServer), [CWRC-GitWriter](https://github.com/cwrc/CWRC-GitWriter), and [CWRC-GitDelegator](https://github.com/cwrc/CWRC-GitServer). The same code is easily (for someone with modest development experience) installed on any server to run your own instance.
+The [CWRC GitHub Sandbox](http://208.75.74.217) is a running instance of [CWRC-GitWriter](https://github.com/cwrc/CWRC-GitWriter), which used the NPM package published from this repository along with the code in [CWRC-WriterBase](https://github.com/cwrc/CWRC-WriterBase), [CWRC-GitServer](https://github.com/cwrc/CWRC-GitServer), [CWRC-GitDelegator](https://github.com/cwrc/CWRC-GitServer), and [CWRC-GitServerClient](https://github.com/cwrc/CWRC-GitServerClient). The same code is easily (for someone with modest development experience) installed on any server to run your own instance.  If you are looking to put together your own CWRC-Writer, [CWRC-GitWriter](https://github.com/cwrc/CWRC-GitWriter) is probably a good place to start.
 
 ### Installation
 
@@ -92,13 +92,20 @@ getAnnotations({
 		repo: github repository name
 	})
 
-getTemplates({owner: github username, 
+getTemplates({
+		owner: github username, 
 		repo: github repository name,
 		ref: the branch
 		path: path to template files
 	})
 
 getTemplate(download_url_from_getTemplates_call)
+
+search({
+		user: github username (optional)
+		topics: array of github topics (optional),
+		query: query terms (required)
+	})
 
 ```
 
