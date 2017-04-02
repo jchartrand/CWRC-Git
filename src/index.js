@@ -11,7 +11,8 @@ var github = new GitHubApi({
     protocol: "https",
     host: "api.github.com", 
     headers: {
-        "user-agent": "My-Cool-GitHub-App" 
+        "user-agent": "My-Cool-GitHub-App",
+        "Accept": "application/vnd.github.v3.text-match+json"
     },
     timeout: 5000
 });
