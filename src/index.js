@@ -1,4 +1,8 @@
 var GitHubApi = require("github");
+var DOMParser = require('xmldom').DOMParser;
+var XMLSerializer = require('xmldom').XMLSerializer;
+var serializer = new XMLSerializer();
+
 // We chain together the calls to github as a series of chained promises, and pass
 // the growing result as an object along the promise chain, ultimately returning
 // the object, which holds the new document, new annotations, treeSHA, and commitSHA
@@ -70,7 +74,7 @@ function getTemplate(theDetails){
 function getDoc(theDetails) {
     return getMainText(theDetails)
         .then(getAnnotations, logError)
-        .then(getCWRCBranchSHAs, logError)
+        .then(getMasterBranchSHAs, logError)
 }
 
 
@@ -91,11 +95,27 @@ function createRepoForDoc(theDetails) {
         .then(getMasterBranchSHAs)
         .then(createTree)
         .then(createCommit)
-        .then(createCWRCDraftsBranch)
+        .then(updateMasterBranch)
+      //  .then(createCWRCDraftsBranch)
         .then(createCWRCVersionTag)
         .catch(logError)
 }
 
+function createRepo(chainedResult){
+    var createParams = {
+        name: chainedResult.repo,   
+        auto_init: true, 
+        private: chainedResult.isPrivate, 
+        description: chainedResult.description 
+    }
+    return github.repos.create(createParams)
+        .then(githubResponse=>{
+            chainedResult.owner = githubResponse.owner.login;
+            return chainedResult;
+        }
+
+    )
+}
 
 // expects in theDetails: 
 // {
@@ -112,10 +132,11 @@ function createRepoForDoc(theDetails) {
 function saveDoc(theDetails) {
     return createTree(theDetails)
             .then(createCommit)
-            .then(updateCWRCDraftsBranch)
+            .then(updateMasterBranch)
             .then(createCWRCVersionTag)
             .catch(logError)
 }
+
 
 function logError(error) {
     console.error("oh no!");
@@ -128,7 +149,7 @@ function getMainText(chainedResult) {
         {
             owner: chainedResult.owner, 
             repo: chainedResult.repo, 
-            ref:'cwrc-drafts', 
+            ref:'master', 
             path:'document.xml'
         }
     ).then(
@@ -144,7 +165,7 @@ function getAnnotations(chainedResult) {
         {
             owner: chainedResult.owner, 
             repo: chainedResult.repo, 
-            ref:'cwrc-drafts', 
+            ref:'master', 
             path:'annotations.json'
         }
     ).then(
@@ -158,8 +179,46 @@ function getAnnotations(chainedResult) {
 function buildNewTree(chainedResult) {
     // TODO - change this to loop over annotations from original doc, and add one object per annotation, with
     // new URIs.
-    var newDoc = chainedResult.doc;  // TODO will first rewrite the RDF in the doc.
-    var newAnnotations = chainedResult.annotations;  // TODO will first rewrit the URIs in the RDF
+   
+    if (!chainedResult.doc) return Promise.reject(new Error(`Missing document.`));
+
+    let doc = new DOMParser().parseFromString(chainedResult.doc)
+
+    let header = doc.documentElement.getElementsByTagName('teiHeader')[0]
+    let encodingDesc = header.getElementsByTagName('encodingDesc')
+    if (!encodingDesc.length) {
+        encodingDesc = doc.createElement('encodingDesc')
+        header.appendChild(encodingDesc)
+    } else {
+        encodingDesc = encodingDesc[0]
+    }
+    let appInfo = encodingDesc.getElementsByTagName('appInfo');
+    if (!appInfo.length) {
+        appInfo = doc.createElement('appInfo')
+        encodingDesc.appendChild(appInfo)
+    } else {
+        appInfo = appInfo[0]
+    }
+    let application = appInfo.getElementsByTagName('application')
+    if (!application.length) {
+        application = doc.createElement('application')
+        appInfo.appendChild(application)
+    } else {
+        application = application[0]
+    }
+    application.setAttribute('version', '1.0')
+    application.setAttribute('ident', 'CWRC-GitWriter-web-app')
+    application.setAttribute('notAfter', (new Date()).toISOString())
+
+    /*<appInfo>
+     <application version="1.0" ident="CWRC-GitWriter" notAfter="${(new Date()).toISOString()}">
+     </application>
+    </appInfo>*/
+
+    let newDoc = serializer.serializeToString(doc)
+    
+
+    var newAnnotations = chainedResult.annotations;  // TODO will first rewrite the URIs in the RDF
     chainedResult.newDoc = newDoc;
     chainedResult.newAnnotations = newAnnotations;
     chainedResult.newTree = [
@@ -185,22 +244,9 @@ function buildNewTree(chainedResult) {
     return chainedResult;
 }
 
-function createRepo(chainedResult){
-    var createParams = {
-        name: chainedResult.repo,   
-        auto_init: true, 
-        private: chainedResult.isPrivate, 
-        description: chainedResult.description 
-    }
-    return github.repos.create(createParams)
-        .then(githubResponse=>{
-            chainedResult.owner = githubResponse.owner.login;
-            return chainedResult;
-        }
 
-    )
-}
 
+/*
 function getCWRCBranchSHAs(chainedResult) {
     return github.repos.getBranch(
         {
@@ -216,6 +262,7 @@ function getCWRCBranchSHAs(chainedResult) {
         }
     )
 }
+*/
 
 function getMasterBranchSHAs(chainedResult) {
     return github.repos.getBranch(
@@ -267,7 +314,7 @@ function createCommit(chainedResult) {
         {
             owner: chainedResult.owner,
             repo: chainedResult.repo,
-            message: 'saving cwrc draft', 
+            message: 'saving cwrc version', 
             parents: [chainedResult.parentCommitSHA],
             tree: chainedResult.newTreeSHA
 
@@ -284,7 +331,7 @@ function createCommit(chainedResult) {
 // expects in chainedResult: newCommitSHA
 // adds to chainedResult: nothing
 // returns: chainedResult
-function createCWRCDraftsBranch(chainedResult) {
+/*function createCWRCDraftsBranch(chainedResult) {
     return github.gitdata.createReference(
         {
             owner: chainedResult.owner,
@@ -293,7 +340,7 @@ function createCWRCDraftsBranch(chainedResult) {
             sha: chainedResult.newCommitSHA
         }
     ).then(githubResponse=>chainedResult)
-}
+}*/
 
 //expects chainedResult.newCommitTag
 // adds to chainedResult: nothing
@@ -303,7 +350,7 @@ function createCWRCVersionTag(chainedResult) {
         {
             owner: chainedResult.owner,
             repo: chainedResult.repo,
-            ref: `refs/tags/cwrc-drafts/${chainedResult.versionTimestamp}`, 
+            ref: `refs/tags/cwrc/${chainedResult.versionTimestamp}`, 
             sha: chainedResult.newCommitSHA
         }
     ).then(githubResponse=>chainedResult)
@@ -312,6 +359,7 @@ function createCWRCVersionTag(chainedResult) {
 // expects chainedResult.newCommitSHA
 // adds to chainedResult: nothing
 // returns: chainedResult
+/*
 function updateCWRCDraftsBranch(chainedResult) {
     return github.gitdata.updateReference(
         {
@@ -322,6 +370,22 @@ function updateCWRCDraftsBranch(chainedResult) {
         }
     ).then(githubResponse=>chainedResult)
 }
+*/
+
+// expects chainedResult.newCommitSHA
+// adds to chainedResult: nothing
+// returns: chainedResult
+function updateMasterBranch(chainedResult) {
+    return github.gitdata.updateReference(
+        {
+            owner: chainedResult.owner,
+            repo: chainedResult.repo,
+            ref: 'heads/master', 
+            sha: chainedResult.newCommitSHA
+        }
+    ).then(githubResponse=>chainedResult)
+}
+
 
 function search(query) {
     return github.search.code({q: query});

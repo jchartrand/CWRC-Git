@@ -11,7 +11,7 @@ cwrcGit.authenticate(config.personal_oath_for_testing);
 // to the console, for use in nock.  I've put past nock recordings in /fixturesAndMocks/mocks.js,
 //  which nock now returns for calls to GitHub that it intercepts (by virtue of 'requiring' nock
 // above.)  See https://github.com/node-nock/nock for full details.
- //    nock.recorder.rec();
+   //  nock.recorder.rec();
 
 describe("cwrcGit", function() {
 
@@ -86,7 +86,8 @@ describe(".getReposForAuthenticatedUser", function() {
       var getMasterBranchFromGithubNock = mocks.getMasterBranchFromGithubNock();    
       var createGithubTreeNock = mocks.getGithubTreeNock();
       var createGithubCommitNock = mocks.getGithubCommitNock();
-      var createGithubCWRCBranchNock = mocks.getCreateGithubCWRCBranchNock();
+      //var createGithubCWRCBranchNock = mocks.getCreateGithubCWRCBranchNock();
+      var updateGithubCWRCBranchNock = mocks.getUpdateGithubCWRCBranchNock();
       var createGithubTagNock = mocks.getCreateGithubTagNock();
       
     });
@@ -121,7 +122,8 @@ describe(".getReposForAuthenticatedUser", function() {
               done()
             }
           )
-    });
+    })//.timeout(9000);
+;
 
   });
 
@@ -275,6 +277,31 @@ describe(".saveDoc", function() {
           )
     });
 
+    it("adds to existing version", function (done) {
+     // console.error('pending mocks: %j', nock.pendingMocks());
+        cwrcGit.saveDoc(
+          {owner: fixtures.owner, 
+          repo: fixtures.testRepo,
+          doc:fixtures.testDocWithVersion, 
+          baseTreeSHA: fixtures.baseTreeSHA, 
+          parentCommitSHA: fixtures.parentCommitSHA,
+          annotations: fixtures.annotationBundleText,
+          versionTimestamp: fixtures.versionTimestamp
+        })
+          .then(
+            result=>{
+              expect(result.baseTreeSHA).to.be.a('string');
+              expect(result.parentCommitSHA).to.be.a('string');
+              expect(result.doc).to.equal(fixtures.testDocWithVersion);
+              expect(result.annotations).to.equal(fixtures.annotationBundleText);
+              expect(result.owner).to.equal(fixtures.owner);
+              expect(result.repo).to.equal(fixtures.testRepo);
+              done()
+            }
+          )
+    });
+
+
     it("returns a rejected promise for missing arguments", function(done) {
       
         cwrcGit.saveDoc(
@@ -290,6 +317,8 @@ describe(".saveDoc", function() {
             }
           )
     });
+
+
 
   });
 

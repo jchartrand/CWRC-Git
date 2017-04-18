@@ -28,13 +28,14 @@
   },
   "homepage": "https://github.com/jchartrand/CWRC-Git#readme",
   "dependencies": {
-    "github": "8.1.1"
+    "github": "8.1.1",
+    "xmldom": "0.1.27"
   },
   "devDependencies": {
     "chai": "3.5.0",
     "codecov.io": "0.1.6",
     "commitizen": "2.9.5",
-    "cz-conventional-changelog": "1.2.0", 
+    "cz-conventional-changelog": "1.2.0",
     "ghooks": "2.0.0",
     "istanbul": "0.4.5",
     "mocha": "3.2.0",
