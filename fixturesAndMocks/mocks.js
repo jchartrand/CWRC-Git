@@ -155,11 +155,11 @@ function getBranchInfoFromGithubNock() {
         .get(`/repos/${fixtures.owner}/${fixtures.testRepo}/branches/master`)
         .query({"access_token":config.personal_oath_for_testing})
         .reply(200, { "commit": {
-                        "sha": "thid doesn't matter",
+                        "sha": fixtures.parentCommitSHA,
                         "commit": {
-                          "message": "a fake commit message",
+                          "message": "test commit",
                           "tree": {
-                            "sha": "someSHAorAnother"
+                            "sha": fixtures.baseTreeSHA
                           }
                         }
                       }

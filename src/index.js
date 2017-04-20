@@ -103,6 +103,7 @@ function createRepoForDoc(theDetails) {
         .then(updateMasterBranch)
       //  .then(createCWRCDraftsBranch)
         .then(createCWRCVersionTag)
+        .then(getDoc)
         .catch(logError)
 }
 
@@ -139,6 +140,7 @@ function saveDoc(theDetails) {
             .then(createCommit)
             .then(updateMasterBranch)
             .then(createCWRCVersionTag)
+            .then(getDoc)
             .catch(logError)
 }
 
@@ -360,6 +362,8 @@ function createCWRCVersionTag(chainedResult) {
         }
     ).then(githubResponse=>chainedResult)
 }
+
+
 
 // expects chainedResult.newCommitSHA
 // adds to chainedResult: nothing

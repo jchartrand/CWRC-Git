@@ -82,6 +82,10 @@ describe(".getReposForAuthenticatedUser", function() {
     
     beforeEach(function() {
   
+      var getDocumentFromGithubNock = mocks.getDocumentFromGithubNock();
+      var getAnnotationsFromGithubNock = mocks.getAnnotationsFromGithubNock();
+      var getBranchInfoFromGithubNock = mocks.getBranchInfoFromGithubNock();
+
       var createGithubRepoNock = mocks.getCreateGithubRepoNock();
       var getMasterBranchFromGithubNock = mocks.getMasterBranchFromGithubNock();    
       var createGithubTreeNock = mocks.getGithubTreeNock();
@@ -247,6 +251,12 @@ describe(".search", function() {
 describe(".saveDoc", function() {
     
     beforeEach(function() {
+
+      var getDocumentFromGithubNock = mocks.getDocumentFromGithubNock();
+      var getAnnotationsFromGithubNock = mocks.getAnnotationsFromGithubNock();
+      var getBranchInfoFromGithubNock = mocks.getBranchInfoFromGithubNock();
+                 
+
       var createGithubTreeNock = mocks.getGithubTreeNock();
       var createGithubCommitNock = mocks.getGithubCommitNock();
       var updateGithubCWRCBranchNock = mocks.getUpdateGithubCWRCBranchNock();
@@ -292,7 +302,7 @@ describe(".saveDoc", function() {
             result=>{
               expect(result.baseTreeSHA).to.be.a('string');
               expect(result.parentCommitSHA).to.be.a('string');
-              expect(result.doc).to.equal(fixtures.testDocWithVersion);
+              expect(result.doc).to.equal(fixtures.testDoc);
               expect(result.annotations).to.equal(fixtures.annotationBundleText);
               expect(result.owner).to.equal(fixtures.owner);
               expect(result.repo).to.equal(fixtures.testRepo);
