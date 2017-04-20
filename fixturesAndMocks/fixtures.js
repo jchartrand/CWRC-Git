@@ -1,6 +1,9 @@
 var config = require('../config');
 //var jwt = require('jsonwebtoken');
-
+// we use the cwrcAppName to match CWRC GitHub repositories that are themselves documemnts,
+// but we don't match to match repositories that are code repositories,
+// so here we sneakily concatenate the full string to avoid matches on this code repo.
+var cwrcAppName = "CWRC-GitWriter" + "-web-app";
 var testDoc = `<?xml version="1.0" encoding="UTF-8"?>
 <TEI xmlns="http://www.tei-c.org/ns/1.0" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:cw="http://cwrc.ca/ns/cw#" xmlns:w="http://cwrctc.artsrn.ualberta.ca/#">
   <teiHeader>
@@ -66,7 +69,7 @@ var testDocWithVersion = `<?xml version="1.0" encoding="UTF-8"?>
         <p>Created from original research by members of CWRC/CSÉC unless otherwise noted.</p>
       </sourceDesc>
     </fileDesc>
-  <encodingDesc><appInfo><application version="1.0" ident="CWRC-GitWriter-web-app" notAfter="2017-04-18T03:59:19.634Z"/></appInfo></encodingDesc></teiHeader>
+  <encodingDesc><appInfo><application version="1.0" ident="${cwrcAppName}" notAfter="2017-04-18T03:59:19.634Z"/></appInfo></encodingDesc></teiHeader>
   <text>
     <body>
       <div type="letter">

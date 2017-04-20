@@ -3,6 +3,11 @@ var DOMParser = require('xmldom').DOMParser;
 var XMLSerializer = require('xmldom').XMLSerializer;
 var serializer = new XMLSerializer();
 
+// we use the cwrcAppName to match CWRC GitHub repositories that are themselves documemnts,
+// but we don't match to match repositories that are code repositories,
+// so here we sneakily concatenate the full string to avoid matches on this code repo.
+var cwrcAppName = "CWRC-GitWriter" + "-web-app";
+
 // We chain together the calls to github as a series of chained promises, and pass
 // the growing result as an object along the promise chain, ultimately returning
 // the object, which holds the new document, new annotations, treeSHA, and commitSHA
@@ -207,7 +212,7 @@ function buildNewTree(chainedResult) {
         application = application[0]
     }
     application.setAttribute('version', '1.0')
-    application.setAttribute('ident', 'CWRC-GitWriter-web-app')
+    application.setAttribute('ident', cwrcAppName)
     application.setAttribute('notAfter', (new Date()).toISOString())
 
     /*<appInfo>
