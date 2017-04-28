@@ -101,7 +101,6 @@ function createRepoForDoc(theDetails) {
         .then(createTree)
         .then(createCommit)
         .then(updateMasterBranch)
-      //  .then(createCWRCDraftsBranch)
         .then(createCWRCVersionTag)
         .then(getDoc)
         .catch(logError)
