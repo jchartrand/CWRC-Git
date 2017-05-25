@@ -69,7 +69,7 @@ var testDocWithVersion = `<?xml version="1.0" encoding="UTF-8"?>
         <p>Created from original research by members of CWRC/CSÉC unless otherwise noted.</p>
       </sourceDesc>
     </fileDesc>
-  <encodingDesc><appInfo><application version="1.0" ident="${cwrcAppName}" notAfter="2017-04-18T03:59:19.634Z"/></appInfo></encodingDesc></teiHeader>
+  <encodingDesc><appInfo><application version="1.0" ident="${cwrcAppName}" notAfter="2017-04-18T03:59:19.634Z"><label>${cwrcAppName}</label></application></appInfo></encodingDesc></teiHeader>
   <text>
     <body>
       <div type="letter">

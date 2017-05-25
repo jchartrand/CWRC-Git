@@ -212,14 +212,16 @@ function buildNewTree(chainedResult) {
     } else {
         application = application[0]
     }
+
     application.setAttribute('version', '1.0')
     application.setAttribute('ident', cwrcAppName)
     application.setAttribute('notAfter', (new Date()).toISOString())
-
-    /*<appInfo>
-     <application version="1.0" ident="CWRC-GitWriter" notAfter="${(new Date()).toISOString()}">
-     </application>
-    </appInfo>*/
+    let applicationLabel = application.getElementsByTagName('label')
+    if (!applicationLabel.length) {
+        applicationLabel = doc.createElement('label')
+        applicationLabel.appendChild(doc.createTextNode(cwrcAppName))
+        application.appendChild(applicationLabel)
+    }
 
     let newDoc = serializer.serializeToString(doc)
     
