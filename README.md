@@ -143,11 +143,12 @@ npm set init.author.email "jc.chartrand@gmail.com"
 npm set init.author.url "http://openskysolutions.ca"
 npm login  (answer prompts approriately)
 ```
-and install semantic-release-cli globally:
+
+Install semantic-release-cli globally:
 
 `npm install -g semantic-release-cli`
 
-If necessary (it should already have been done, but maybe the NPM author information has changed for example) configure semantic release:
+If necessary (although this was probably already done by someone else, but maybe the NPM author information has changed for example) configure semantic release:
 
 `semantic-release-cli setup`
 
@@ -163,7 +164,15 @@ semantic-release-cli setup
 ? What CI are you using? Travis CI
 ```
 
-Semantic-release sets up a Travis build (on the Travis web site in the Travis account associated with the given Github username) and a trigger in GitHub to run the Travis build on the Travis site whenever you push a change to the GitHub repo.  The Travis build will also deploy a new version to the NPM registry if the commited change is either a new feature or a breaking change.
+Semantic-release-cli configures the corresponding Travis build (on the Travis web site in the Travis account associated with the given Github username) so that when the Travis build is triggered (whenever you push a change to the GitHub repo), Travis will run semantic-release, which will in turn:
+
+- write a new version number to package.json
+- deploy a new version to the NPM registry if the commited change is either a new feature or a breaking change.
+- generate a changelog
+- create a release in the Github project
+
+A full description of what semantic-release-cli does is [here](https://github.com/semantic-release/cli#what-it-does).
+A full description of what semantic-release itself does is [here](https://github.com/semantic-release/semantic-release#how-does-it-work)
 
 To submit a commit, stage your changes (e.g., git add -A) then instead of using git's commit command, instead use `npm run commit` which uses commitizen to create commits that are structured to adhere to the semantic-release conventions (which are the same as those used by Google: https://github.com/angular/angular.js/blob/master/CONTRIBUTING.md#commit )
 
