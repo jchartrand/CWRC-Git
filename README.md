@@ -2,8 +2,8 @@
 
 # CWRC-Git
 
-[![Travis](https://img.shields.io/travis/jchartrand/CWRC-Git.svg)](https://travis-ci.org/jchartrand/CWRC-Git)
-[![Codecov](https://img.shields.io/codecov/c/github/jchartrand/CWRC-Git.svg)](https://codecov.io/gh/jchartrand/CWRC-Git)
+[![Travis](https://img.shields.io/travis/cwrc/CWRC-Git.svg)](https://travis-ci.org/cwrc/CWRC-Git)
+[![Codecov](https://img.shields.io/codecov/c/github/cwrc/CWRC-Git.svg)](https://codecov.io/gh/cwrc/CWRC-Git)
 [![version](https://img.shields.io/npm/v/cwrcgit.svg)](http://npm.im/cwrcgit)
 [![downloads](https://img.shields.io/npm/dm/cwrcgit.svg)](http://npm-stat.com/charts.html?package=cwrcgit&from=2015-08-01)
 [![GPL-2.0](https://img.shields.io/npm/l/cwrcgit.svg)](http://opensource.org/licenses/GPL-2.0)
@@ -120,7 +120,7 @@ search({
 	
 	NOTE:  we use `npm set save-exact true` to save dependencies as exact version numbers so NPM should install exact versions when you run install
 
-* The config.js file specifies several passwords and tokens.  You'll have to set these values appropriately in your cloned repo.  To prevent git from noticing that you've changed the file (so that you don't inadvertently commit the file and push it to the public repo thereby exposing the passwords) use:
+* The config.js file specifies several passwords and tokens that are used during testing.  You'll have to set these values appropriately in your cloned repo.  The jwt_secret shouldn't matter, but the github values do.  Once you've substituted your values, stop git from noticing that you've changed the file (so that you don't inadvertently commit the file and push it to the public repo thereby exposing the passwords):
 
 `git update-index --skip-worktree config.js`
 
@@ -189,11 +189,11 @@ Of course, if the githooks that check tests and code coverage themselves passed,
 
 Results of the travis build are here:
 
-`https://travis-ci.org/jchartrand/CWRC-Git` 
+`https://travis-ci.org/cwrc/CWRC-Git` 
 
 The Travis build also publishes the code coverage statistics to codecov.io where the coverage can be viewed:
 
-`https://codecov.io/gh/jchartrand/CWRC-Git/`
+`https://codecov.io/gh/cwrc/CWRC-Git/`
 
  codecov.io also provides us with the code coverage badge at the top of this README.
 
