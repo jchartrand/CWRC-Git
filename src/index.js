@@ -96,6 +96,7 @@ function getDoc(theDetails) {
 // returns the chained result object
 
 function createRepoForDoc(theDetails) {
+
     return createRepo(theDetails)
         .then(getMasterBranchSHAs)
         .then(createTree)
@@ -116,6 +117,7 @@ function createRepo(chainedResult){
     return github.repos.create(createParams)
         .then(githubResponse=>{
             chainedResult.owner = githubResponse.owner.login;
+            chainedResult.repo = githubResponse.name;
             return chainedResult;
         }
 

@@ -13,6 +13,34 @@ cwrcGit.authenticate(config.personal_oath_for_testing);
 // above.)  See https://github.com/node-nock/nock for full details.
    //  nock.recorder.rec();
 
+/* could also use "tape-nock" to simplify recording and use of fixtures.  Here are
+some of the scripts that could be used, although I'm not sure that the nyc stuff works.
+Would probably just want to continue using Istanbul as-is, but use tape-nock instead of
+just straight nock:
+
+"test": "nyc tape test/index.js",
+    "test:record": "NOCK_BACK_MODE=record npm test",
+    "test:wild": "NOCK_BACK_MODE=wild npm test",
+    "test:lockdown": "NOCK_BACK_MODE=lockdown npm test",
+    "test:overwrite": "rm test/fixtures/*.json & npm run test",
+    "check-coverage": "nyc check-coverage --branches 100 --functions 100 --lines 100",
+    "publish-coverage": "codecov --token=bfcccbea-ae1e-4b76-bfa1-83be70525b9a",
+    "report-coverage": "nyc report --reporter=text-lcov > coverage.lcov"
+
+and here is how it would be used in this test file:
+
+const tape = require('tape')
+var tapeNock = require('tape-nock')
+
+
+var test = tapeNock(tape, {
+  //  mode: 'record', //wild, dryrun, record, lockdown
+})
+
+and then just proceed with tests as-is, so that no need to setup
+nocks in the beforeEach:  tape-nock will take care of it all.
+ */
+
 describe("cwrcGit", function() {
 
   describe(".getDoc", function() {

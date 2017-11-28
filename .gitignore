@@ -38,3 +38,5 @@ jspm_packages
 
 # private config data
 config.js
+
+.idea
