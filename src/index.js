@@ -111,6 +111,12 @@ function createRepoForDoc(theDetails) {
         .catch(logError)
 }
 
+function createEmptyRepo(theDetails) {
+	return createRepo(theDetails)
+		.then(getMasterBranchSHAs)
+        .catch(logError)
+}
+
 function createRepo(chainedResult){
     var createParams = {
         name: chainedResult.repo,   
@@ -496,6 +502,7 @@ module.exports = {
 	saveDoc: saveDoc,
 	getDoc: getDoc,
     createRepoForDoc: createRepoForDoc,
+    createEmptyRepo: createEmptyRepo,
     getAnnotations: getAnnotations,
     getTemplates: getTemplates,
     getTemplate: getTemplate,

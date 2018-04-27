@@ -85,6 +85,8 @@ describe("cwrcGit", function() {
         })
     })
 
+
+
 	describe(".getRepoContentsByDrillDown", function() {
 		beforeEach(function() {
 			var getRepoContentsByDrillDownBranchNock = mocks.getRepoContentsByDrillDownBranchNock()
@@ -194,6 +196,31 @@ describe(".getReposForAuthenticatedUser", function() {
 ;
 
   });
+
+	describe(".createEmptyRepo", function() {
+		beforeEach(function() {
+			var createGithubRepoNock = mocks.getCreateGithubRepoNock();
+			var getMasterBranchFromGithubNock = mocks.getMasterBranchFromGithubNock();
+		})
+
+		it ("returns correctly", function(done) {
+			cwrcGit.createEmptyRepo(
+				{
+					repo: fixtures.testRepo,
+					isPrivate: fixtures.isPrivate,
+					description: fixtures.testRepoDescription
+				})
+				.then(
+					result=>{
+						expect(result.baseTreeSHA).to.be.a('string');
+						expect(result.parentCommitSHA).to.be.a('string');
+						expect(result.owner).to.equal(fixtures.owner);
+						expect(result.repo).to.equal(fixtures.testRepo);
+						done()
+					}
+				)
+		}).timeout(9000);
+	})
 
 describe(".getDetailsForAuthenticatedUser", function() {
     
