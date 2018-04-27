@@ -9,6 +9,7 @@
     "report-coverage": "cat ./coverage/lcov.info | codecov",
     "test": "mocha spec -w",
     "test:single": "istanbul cover -x *.test.js _mocha -- -R spec spec",
+    "test:debug": "mocha spec",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "repository": {
@@ -28,7 +29,7 @@
   },
   "homepage": "https://github.com/cwrc/CWRC-Git#readme",
   "dependencies": {
-    "github": "8.1.1",
+    "@octokit/rest": "^15.2.6",
     "xmldom": "0.1.27"
   },
   "devDependencies": {

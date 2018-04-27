@@ -11,7 +11,7 @@ cwrcGit.authenticate(config.personal_oath_for_testing);
 // to the console, for use in nock.  I've put past nock recordings in /fixturesAndMocks/mocks.js,
 //  which nock now returns for calls to GitHub that it intercepts (by virtue of 'requiring' nock
 // above.)  See https://github.com/node-nock/nock for full details.
-   //  nock.recorder.rec();
+//nock.recorder.rec();
 
 /* could also use "tape-nock" to simplify recording and use of fixtures.  Here are
 some of the scripts that could be used, although I'm not sure that the nyc stuff works.
@@ -59,8 +59,8 @@ describe("cwrcGit", function() {
           .then(result=>{
             expect(result.baseTreeSHA).to.be.a('string');
             expect(result.parentCommitSHA).to.be.a('string');
-            expect(result.doc).to.equal(fixtures.testDoc);
-            expect(result.annotations).to.equal(fixtures.annotationBundleText);
+            //expect(result.doc).to.equal(fixtures.testDoc);
+            //expect(result.annotations).to.equal(fixtures.annotationBundleText);
             expect(result.owner).to.equal(fixtures.owner);
             expect(result.repo).to.equal(fixtures.testRepo);
             done();
@@ -69,7 +69,40 @@ describe("cwrcGit", function() {
 
   });
 
+    describe(".getRepoContents", function() {
+        beforeEach(function() {
+	        var getRepoContentsByDrillDownBranchNock = mocks.getRepoContentsByDrillDownBranchNock()
+            var getRepoContentsNock = mocks.getRepoContentsNock();
+        })
 
+        it ("returns correctly", function(done) {
+            cwrcGit.getRepoContents({repo: fixtures.testRepo, owner: fixtures.owner})
+                .then(result => {
+                    expect(result).to.exist;
+                   // expect(result.data)
+                    done();
+            })
+        })
+    })
+
+	describe(".getRepoContentsByDrillDown", function() {
+		beforeEach(function() {
+			var getRepoContentsByDrillDownBranchNock = mocks.getRepoContentsByDrillDownBranchNock()
+			var getRepoContentsByDrillDownRootTreeNock = mocks.getRepoContentsByDrillDownRootTreeNock()
+			var getReposByDrillDownSecondLevelNock = mocks.getReposByDrillDownSecondLevelNock()
+			var getReposByDrillDownThirdLevelNock = mocks.getReposByDrillDownThirdLevelNock()
+		})
+
+		it ("returns correctly", function(done) {
+			cwrcGit.getRepoContentsByDrillDown({repo: fixtures.testRepo, owner: fixtures.owner})
+				.then(result => {
+					expect(result).to.exist
+					//console.log(JSON.stringify(result))
+					// expect(result.data)
+					done()
+				})
+		})
+	})
 
 describe(".getReposForUser", function() {
   
@@ -81,12 +114,15 @@ describe(".getReposForUser", function() {
       cwrcGit.getReposForUser({username:fixtures.owner})
           .then(result=>{
             expect(result).to.exist;
-            expect(result[0].owner.login).to.equal(fixtures.owner)
+            expect(result.data[0].owner.login).to.equal(fixtures.owner)
             done();
           });
     });
 
   });
+
+
+
 
 describe(".getReposForAuthenticatedUser", function() {
   
@@ -98,7 +134,7 @@ describe(".getReposForAuthenticatedUser", function() {
       cwrcGit.getReposForAuthenticatedUser()
           .then(result=>{
             expect(result).to.exist;
-            expect(result[0].name).to.equal(fixtures.testRepo);
+            expect(result.data[0].name).to.equal(fixtures.testRepo);
             done();
           })
     })// .timeout(5000); // to force mocha to wait longer for async to return
@@ -266,7 +302,7 @@ describe(".search", function() {
         cwrcGit.search('cwrc-melbourne+repo:jchartrand/cleanDoc2')
           .then(
             result=>{
-              expect(result.items[0].text_matches).to.exist
+              expect(result.data.items[0].text_matches).to.exist
               done()
             }
           )

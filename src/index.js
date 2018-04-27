@@ -1,4 +1,9 @@
-var GitHubApi = require("github");
+var github = require("@octokit/rest")({
+	headers: {
+		"user-agent": "My-Cool-GitHub-App",
+		"Accept": "application/vnd.github.v3.text-match+json"
+	}
+});
 var DOMParser = require('xmldom').DOMParser;
 var XMLSerializer = require('xmldom').XMLSerializer;
 var serializer = new XMLSerializer();
@@ -14,17 +19,17 @@ var cwrcAppName = "CWRC-GitWriter" + "-web-app";
 // The document and annotations are new because we rewrite all the annotations to use
 // new raw github URIs for the newly saved document and annotation files.
 
-var github = new GitHubApi({
+/*var github = new GitHubApi({
     // optional
     debug: false,
     protocol: "https",
-    host: "api.github.com", 
+    host: "api.github.com",
     headers: {
         "user-agent": "My-Cool-GitHub-App",
         "Accept": "application/vnd.github.v3.text-match+json"
     },
     timeout: 5000
-});
+});*/
 
 function authenticate(gitHubOAuthToken) {
    return github.authenticate({type: "oauth",token: gitHubOAuthToken})
@@ -64,7 +69,7 @@ function getTemplate(theDetails){
         }
     ).then(
         result=>{
-            return Buffer.from(result.content, 'base64').toString('utf8');
+            return Buffer.from(result.data.content, 'base64').toString('utf8');
         }
     )
 }
@@ -81,7 +86,6 @@ function getDoc(theDetails) {
         .then(getAnnotations, logError)
         .then(getMasterBranchSHAs, logError)
 }
-
 
 // expects in theDetails argument: 
 // {
@@ -116,8 +120,8 @@ function createRepo(chainedResult){
     }
     return github.repos.create(createParams)
         .then(githubResponse=>{
-            chainedResult.owner = githubResponse.owner.login;
-            chainedResult.repo = githubResponse.name;
+            chainedResult.owner = githubResponse.data.owner.login;
+            chainedResult.repo = githubResponse.data.name;
             return chainedResult;
         }
 
@@ -162,7 +166,7 @@ function getMainText(chainedResult) {
         }
     ).then(
         result=>{
-            chainedResult.doc = Buffer.from(result.content, 'base64').toString('utf8');
+            chainedResult.doc = Buffer.from(result.data.content, 'base64').toString('utf8');
             return chainedResult;
         }
     )
@@ -178,7 +182,7 @@ function getAnnotations(chainedResult) {
         }
     ).then(
         result=>{
-            chainedResult.annotations = Buffer.from(result.content, 'base64').toString('utf8');
+            chainedResult.annotations = Buffer.from(result.data.content, 'base64').toString('utf8');
             return chainedResult
         }
     )
@@ -283,12 +287,74 @@ function getMasterBranchSHAs(chainedResult) {
         }
     ).then(
         githubResponse=>{
-            chainedResult.baseTreeSHA = githubResponse.commit.commit.tree.sha;
-            chainedResult.parentCommitSHA = githubResponse.commit.sha;
+            chainedResult.baseTreeSHA = githubResponse.data.commit.commit.tree.sha;
+            chainedResult.parentCommitSHA = githubResponse.data.commit.sha;
             return chainedResult;
         }
     )
 }
+
+function getTreeContentsRecursively(chainedResult) {
+    return github.gitdata.getTree(
+        {
+            owner: chainedResult.owner,
+            repo: chainedResult.repo,
+            sha: chainedResult.baseTreeSHA,
+            recursive: true
+        }
+    ).then(
+        githubResponse=>{
+            chainedResult.contents = githubResponse.data.tree
+            chainedResult.truncated = githubResponse.data.truncated
+            return chainedResult
+        }
+    )
+}
+
+function getTreeContentsByDrillDown(chainedResult) {
+	let basePath = ''
+	return getTreeContents(
+		{
+			owner: chainedResult.owner,
+			repo: chainedResult.repo,
+			sha: chainedResult.baseTreeSHA
+		},
+		basePath
+	)
+}
+
+function getTreeContents(treeDetails, basePath) {
+	return github.gitdata.getTree(treeDetails
+	).then(
+		githubResponse=>{
+			let promises = githubResponse.data.tree.map(entry=>{
+			    let path = basePath + '/' + entry.path
+			    if (entry.type === 'tree') {
+				    return getTreeContents(
+					    {
+						    owner: treeDetails.owner,
+						    repo: treeDetails.repo,
+						    sha: entry.sha
+					    },
+                        path
+                    ).then(folderContents => ({
+                                type: 'folder',
+					            path: path,
+                                contents: folderContents
+                        }))
+
+                } else {
+			        return Promise.resolve({type: 'file', path: path})
+                }
+            })
+
+            return Promise.all(promises).then(results => {
+                return results;
+            })
+		}
+	)
+}
+
 
 // expect chainedResult.baseTreeSHA
 // expects chainedResult.owner
@@ -309,7 +375,7 @@ function createTree(chainedResult) {
     )
     .then(
         githubResponse=> {
-            chainedResult.newTreeSHA = githubResponse.sha;
+            chainedResult.newTreeSHA = githubResponse.data.sha;
             return chainedResult
         }
     )
@@ -332,7 +398,7 @@ function createCommit(chainedResult) {
     )
     .then(
         githubResponse=>{
-            chainedResult.newCommitSHA = githubResponse.sha; 
+            chainedResult.newCommitSHA = githubResponse.data.sha;
             return chainedResult
         }
     )
@@ -398,9 +464,28 @@ function updateMasterBranch(chainedResult) {
     ).then(githubResponse=>chainedResult)
 }
 
-
 function search(query) {
     return github.search.code({q: query});
+}
+
+// expects in theDetails argument:
+// {
+//    repo: repo,
+//    owner: owner
+// }
+function getRepoContents(theDetails) {
+	return getMasterBranchSHAs(theDetails)
+        .then(getTreeContentsRecursively)
+}
+
+// expects in theDetails argument:
+// {
+//    repo: repo,
+//    owner: owner
+// }
+function getRepoContentsByDrillDown(theDetails) {
+	return getMasterBranchSHAs(theDetails)
+		.then(getTreeContentsByDrillDown)
 }
 
 module.exports = {
@@ -414,5 +499,7 @@ module.exports = {
     getAnnotations: getAnnotations,
     getTemplates: getTemplates,
     getTemplate: getTemplate,
-    search: search
+    search: search,
+    getRepoContents: getRepoContents,
+	getRepoContentsByDrillDown: getRepoContentsByDrillDown
 };
