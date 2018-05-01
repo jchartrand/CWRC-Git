@@ -366,7 +366,7 @@ function getSearchNock() {
 function getRepoContentsByDrillDownBranchNock() {
 	return nock('https://api.github.com:443', {"encodedQueryParams":true})
 		.get('/repos/jchartrand/aTest/branches/master')
-		.query({"access_token":"c760d90fa3973b955a8f86cd1a22191385c824dd"})
+		.query({"access_token":config.personal_oath_for_testing})
 		.reply(200, ["1f8b0800000000000003ed574d6fdb300cfd2b81cf696d27fe88030c1bb0dbcedd654311d03265ab736c4f92d37541fefb48c7f972b12e0eb05b734a24f1f1f1891499ad53c11a9da5b30663513b5347d4ebb5b2ce72eb980268238a16be0409b888023f0c64ec05e92c8d441c43262109234c7c9fd62e4ca1b545ad19a487ff425ecce47301da6aa8323a8c6b5025e13f897b7158fe94f3e23d51a00319582636f3fcc59d17dccda2073f587ac9729e7c7376079eccf97f7a21d60672e601593691aac489acf5c4a2b1aaca89a5d548bb07b11289999cc75ee6037a62e1853126de3c8a803edecc8f534c6298792119b69aa32fac","6dccd275a151f7b9b2459b72f4aec6a636eed35118171ec8a34b275c7668dcab1d9152b77ada678271476600567625eab6a21cf2a6ce06b5924a805575c53aed7f63e62c259406a78e4630bce5b4955179453b5387bf806d35295bb56539751a78296b2023feb9bb31a61be229ecba5c5dea77764bafee67efe106c1ccc0c975e9303620970de87a0c497caad0b2ce15eb7f8a86b615691d06b11f8574740316f49061b768e67dd6b606b5a82b4be85d02b7eedefae3e6434070b9ee4118d7f957f633d879f6d3f96b2f828ecaba2ceb67421832be2cb1a113f76877c4a00abf0983ecb66e6d0b24d128941d0ba08c1d4ba8b3d952d11bbb5219a318925c633692546f45949e2b62b3ed5e970eae4d8dd0aae1da1c4beec296b06a9d43a57e77753e168b6c3925bb476f646c9d0dd9e286f37aa4f1de68eb365a6d40bcb0241a05aa0d497c13e0c09af0ec4bc3cde32ba5010bae2cae205b73bd75cfdfb08fbdd762371ebcd7e25bc3c1ab97ebbd16a9e10c7a063d7217957c552d36a0bbf6b8fc7e18e8c270011904b3d84f7d4f641946722e17a11fc4c97ce62f602e122f0b9398e06f19b30e1d7c849b6b3b613f32f623c9d50e768ff426ad4a55fd201948052ce5e83135a51a16054da9c73f154cfa0ce6ad198ae7db83215169746d51d8b381b15fe9e749ac202d2fc6c99fade21e495dcfb666453cc43e14ac687217c803d0aaa4e79d09d552d2cd7583cbafeede1f79b83c7978bba1fc654a1f844feda50b8109effe00b953669e700d0000"], [ 'Server',
 			'GitHub.com',
 			'Date',
@@ -425,7 +425,7 @@ function getRepoContentsByDrillDownBranchNock() {
 function getRepoContentsByDrillDownRootTreeNock() {
 	return nock('https://api.github.com:443', {"encodedQueryParams":true})
 		.get('/repos/jchartrand/aTest/git/trees/9fedf370d1ae0c8057e90366aaaa0217be97a205')
-		.query({"access_token":"c760d90fa3973b955a8f86cd1a22191385c824dd"})
+		.query({"access_token":config.personal_oath_for_testing})
 		.reply(200, ["1f8b0800000000000003a5933f6fdc300cc5bf8be6c0a26c59b26e2b908c5d826c41078aa26a0767cbb07440fee0be7b752d7ac9e8f6b811e2c3d30f7cfc10794471102e72889d85a0908106e82d3be88cc15ad02aebd9596ca11777e2b41dab602c65cd0729719d9a9f53194fbea134cb8dd794e50b8db8950d9720f18973917542968d39cb7f30ba08c4e1f943ac58c66af9f8f0edfefb433387fa893985fa261480d1baf6e56dbdf4fe987cedfe3059dd32921982b73174d645e5836a6b696bc0ebe87ae523","f2459ea7f72ab7ff0f7731ce72b7e3f9ee4a85cb920a96292db979c969d90907d178660250601c906d4939d0410fa809886cd4446880ae70cadc4ab7dbf20b5d48749a7929cdeb7cdc49e6180724ea40b504d698d6101be09acee0b42315502bcb71b892e9dec1ad6cbb4dbfb0e534f3fdb47d6281865a9f69fc1de0bf69ecea3aa2456d628f36586b7beda06d91425d58648fa4d9d57bab82db2e6cb7d1f947bd9bedb410160ee210f198f9fc0b3876de0111040000"], [ 'Server',
 			'GitHub.com',
 			'Date',
@@ -486,7 +486,7 @@ function getRepoContentsByDrillDownRootTreeNock() {
 function getReposByDrillDownSecondLevelNock() {
 	return nock('https://api.github.com:443', {"encodedQueryParams":true})
 		.get('/repos/jchartrand/aTest/git/trees/3ca6f7a46f5a7d777549022acd4c0febac4e96aa')
-		.query({"access_token":"c760d90fa3973b955a8f86cd1a22191385c824dd"})
+		.query({"access_token":config.personal_oath_for_testing})
 		.reply(200, ["1f8b0800000000000003a5913d6fc3201086ff0b7314ce7006db73d5a963b7aac30147edca892d2055db28ffbd24559bb51fb7bd82472f0f771479243108edc9444b68624b36586b5bec4129f2013d4476e4917b432436e290e60a8ca5ac799092d669fb3495f1e0b67ed9c9c4eb92e5b31f299544fb20e99e7391f5862c8939cb5f149d01313c1cc54a65ac95743bcdbc2dafa53e62b7847a261a00835873795bcfd9cd8babe9d3497154c6b26a5d30de9006700ead6603e8a057ce1076add217607aaf78a3ff","6e776ecef2c795a7cdb75666bfecc31dbff07c33a5ab1b20d4b9ba5dbee3cb2d605ba7e9b54202e6d0296b4137da5ab4bd6182d879eca2a9c0fff6f5e3a2d363dd423aec3d150e628834673e7d0072e710e25f020000"], [ 'Server',
 			'GitHub.com',
 			'Date',
@@ -547,7 +547,7 @@ function getReposByDrillDownSecondLevelNock() {
 function getReposByDrillDownThirdLevelNock() {
 	return nock('https://api.github.com:443', {"encodedQueryParams":true})
 		.get('/repos/jchartrand/aTest/git/trees/d4555519324a0eed82770313774796ea0f8c48f6')
-		.query({"access_token":"c760d90fa3973b955a8f86cd1a22191385c824dd"})
+		.query({"access_token":config.personal_oath_for_testing})
 		.reply(200, ["1f8b08000000000000039d8f416ec3201045efc2ba326008d83e40565d76177531c0503b720c021ca98d72f78ed50bb49ddd97fed3fbf360750636b1a04f747254bd06811886de5aa1a4b256dbd1208838783d44c35ed85e5602e6d6729d3887bc741f4b9b77d7f974e30573aafcea6728adc01638bc616d9c1abc15c4caff203a00365d1e2c439b4959d1a72dbce21dd7f3b26277ad69a33db714a8c6a410466bcaed331fd9adc951fa79af970e7aef2c686185544a19d451f51ec0fa53746a30ce8f9674042c5f","842bf1ff470f73e5bf563edf6973d9370f0d039b22ac159fdff769a44098010000"], [ 'Server',
 			'GitHub.com',
 			'Date',
@@ -609,7 +609,7 @@ function getReposByDrillDownThirdLevelNock() {
 function getRepoContentsNock() {
 	return nock('https://api.github.com:443', {"encodedQueryParams":true})
 		.get('/repos/jchartrand/aTest/git/trees/9fedf370d1ae0c8057e90366aaaa0217be97a205')
-		.query({"access_token":"c760d90fa3973b955a8f86cd1a22191385c824dd","recursive":"true"})
+		.query({"access_token":config.personal_oath_for_testing,"recursive":"true"})
 		.reply(200, ["1f8b0800000000000003a594cd6edb301084df45e7405afe882bfa5620e9a9bd14bd153d2c97cbd8812519125da40dfceea56dd431d00255e2bd11e262f46166f852cd6baa56954f129341888a04b88316c583718eca805618c4236968abbb6a3f6dcbc23ae7ddbc6a1ada6deac74d5eef43cd63df4cb21be7e689d734e58986d8d0579973536e347912999b37081d17aad5b7976a47795d24bf3c7cb8fffc50f7b1fc443fc6f2ad5200ceda72ce3f77c773d88ea19cce4c68b510bb2e064cd1a04f2a44a5cb58","74106cf2ad0a89e4b83e6f7e95757c3fdc51786e162b1eee2e54340c63a6bc1987b97e9ac761211c241744184081f3c0a85979b0d17664199831596672c01738e56ea55b2c79451747def732e4fab9df2e24f3421d311b509a019dd38ec5819474466f3dab4856a1a4ee42665b0fb7b22d16bd629bc75eee37d32b165828f39ac65380ffa4d1143b129275a9258c88d85a0f5a13c7625892406cc597be9585db1ab658e86f94863e6eb652e7e7bcd02b2d493b14dd86e8d8910108c1a2297ed9005e0747b66bb53975f2543165de8f77eed862c97fe0cdc2e3103fc90fd92e372edab68cf2465b0291d8694430ca205af44e0852c7b64bee66e3160bfd97acb9023d39fa868745ab409a43492a2028638c139b8c6622e43605d3b9c01ecfc13e596a6e2edf62c9c3f7f2d24ffb81294bac5689b6b31c7e03c37c2174c3060000"], [ 'Server',
 			'GitHub.com',
 			'Date',
@@ -666,6 +666,121 @@ function getRepoContentsNock() {
 			'0412:2B62:1E14688:42453A1:5AE329C5' ]);
 }
 
+function getCreateFileNock() {
+	return nock('https://api.github.com:443', {"encodedQueryParams":true})
+		.put('/repos/jchartrand/aTest/contents/curt/qurt/test1.txt', {"message":"some commit message","content":"PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPFRFSSB4bWxucz0iaHR0cDovL3d3dy50ZWktYy5vcmcvbnMvMS4wIiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiIHhtbG5zOmN3PSJodHRwOi8vY3dyYy5jYS9ucy9jdyMiIHhtbG5zOnc9Imh0dHA6Ly9jd3JjdGMuYXJ0c3JuLnVhbGJlcnRhLmNhLyMiPgogIDx0ZWlIZWFkZXI+CiAgICA8ZmlsZURlc2M+CiAgICAgIDx0aXRsZVN0bXQ+CiAgICAgICAgPHRpdGxlPlNhbXBsZSBEb2N1bWVudCBUaXRsZSB0ZXN0IHVuZGVmaW5lZDwvdGl0bGU+CiAgICAgIDwvdGl0bGVTdG10PgogICAgICA8cHVibGljYXRpb25TdG10PgogICAgICAgIDxwPjwvcD4KICAgICAgPC9wdWJsaWNhdGlvblN0bXQ+CiAgICAgIDxzb3VyY2VEZXNjIHNhbWVBcz0iaHR0cDovL3d3dy5jd3JjLmNhIj4KICAgICAgICA8cD5DcmVhdGVkIGZyb20gb3JpZ2luYWwgcmVzZWFyY2ggYnkgbWVtYmVycyBvZiBDV1JDL0NTw4lDIHVubGVzcyBvdGhlcndpc2Ugbm90ZWQuPC9wPgogICAgICA8L3NvdXJjZURlc2M+CiAgICA8L2ZpbGVEZXNjPgogIDwvdGVpSGVhZGVyPgogIDx0ZXh0PgogICAgPGJvZHk+CiAgICAgIDxkaXYgdHlwZT0ibGV0dGVyIj4KICAgICAgICA8aGVhZD4KICAgICAgICAgIDx0aXRsZT5TYW1wbGUgTGV0dGVyIC0gQmVydHJhbmQgUnVzc2VsbCB0byA8cGVyc05hbWUgYW5ub3RhdGlvbklkPSJlbnRfNzMiIGNlcnQ9InByb2JhYmxlIiByZWY9IjI3OTM5OTM5OSI+UGF0cmljaWEgU3BlbmNlPC9wZXJzTmFtZT4gLSBPY3RvYmVyIDIxLCAxOTM1PC90aXRsZT4KICAgICAgICA8L2hlYWQ+CiAgICAgICAgPG9wZW5lcj4KICAgICAgICAgIDxub3RlPgogICAgICAgICAgICA8cD5CYWQgd3JpdGluZyBkdWUgdG8gc2hha3kgdHJhaW48L3A+PHA+SW4gdHJhaW48L3A+PHA+CiAgICAgICAgICAgICAgPHBsYWNlTmFtZSBhbm5vdGF0aW9uSWQ9ImVudF8xNDMiIGNlcnQ9ImRlZmluaXRlIiByZWY9Imh0dHA6Ly93d3cuZ2VvbmFtZXMub3JnLzY0NTMzNjYiPk9zbG88L3BsYWNlTmFtZT4gdG8gQmVyZ2VuPC9wPgogICAgICAgICAgPC9ub3RlPgogICAgICAgICAgPGRhdGVsaW5lPgogICAgICAgICAgICA8ZGF0ZSBhbm5vdGF0aW9uSWQ9ImVudF82OSIgY2VydD0iZGVmaW5pdGUiIHdoZW49IjE5MzUtMTAtMjEiPjIxLjEwLjM1PC9kYXRlPgogICAgICAgICAgPC9kYXRlbGluZT4KICAgICAgICAgIDxzYWx1dGU+RGVhcmVzdCAtPC9zYWx1dGU+CiAgICAgICAgPC9vcGVuZXI+PHA+SSBoYXZlIGhhZCBubzxub3RlIGFubm90YXRpb25JZD0iZW50XzE5MCIgdHlwZT0icmVzZWFyY2hOb3RlIj4KICAgICAgICAgICAgICAgIDxwIHhtbG5zPSJodHRwOi8vd3d3LnRlaS1jLm9yZy9ucy8xLjAiPlNvbWUga2luZCBvZiBub3RlPC9wPgogICAgICAgICAgICA8L25vdGU+IGxldHRlciBmcm9tIHlvdSBzaW5jZSBJIGxlZnQgPHBsYWNlTmFtZSBhbm5vdGF0aW9uSWQ9ImVudF8xNDUiIG9mZnNldElkPSJlbnRfMTQ1IiBjZXJ0PSJkZWZpbml0ZSIgcmVmPSJodHRwOi8vd3d3Lmdlb25hbWVzLm9yZy8yNjczNzIyIj5TdG9ja2hvbG08L3BsYWNlTmFtZT4sIGJ1dCBJIGhhZCBhIG5pY2Ugb25lIGZyb20gSm9obiBpbiBhbiBlbnZlbG9wZSB5b3UgaGFkIHNlbnQgaGltLiBJIGhhZCBzZW50IGhpbSBvbmUgYWRkcmVzc2VkIHRvIENvcGVuaGFnZW4gYnV0IGhlIGhhZG4ndCB1c2VkIGl0LjwvcD48cD5XaGVuIEkgcmVhY2hlZCBPc2xvIHllc3RlcmRheSBldmVuaW5nLCBCcnluanVsZiBCdWxsIHNob3VsZCBoYXZlIGJlZW4gdGhlcmUgdG8gbWVldCBtZSwgYnV0IHdhc24ndC4gSGUgaXMgbm90IG9uIHRoZSB0ZWxlcGhvbmUsIHNvIEkgdG9vayBhIHRheGkgdG8gaGlzIGFkZHJlc3MsIHdoaWNoIHR1cm5lZCBvdXQgdG8gYmUgYSBzdHVkZW50cycgY2x1YiB3aXRoIG5vIG9uZSBhYm91dCBvbiBTdW5kYXlzLCBzbyBJIHdlbnQgdG8gYSBob3RlbCBmZWVsaW5nIHJhdGhlciBub24tcGx1c3NlZC4gQnV0IHByZXNlbnRseSBoZSB0dXJuZWQgdXAuIEhlIGhhZCBnb3QgdGhlIDxwYiBuPSIyIj48L3BiPiB0aW1lIG9mIG15IGFycml2YWwgd3JvbmcsIGFuZCAKICAgICAgICAgICAgPGNob2ljZSBhbm5vdGF0aW9uSWQ9ImVudF82NSI+PHNpYyBhbm5vdGF0aW9uSWQ9ImVudF82NSI+d2hlbjwvc2ljPjxjb3JyIGFubm90YXRpb25JZD0iZW50XzY1Ij53aGVuPC9jb3JyPjwvY2hvaWNlPgogICAgICAgICAgaGUgaGFkIGZvdW5kIGhlIGhhZCBtaXNzZWQgbWUgaGUgcGhvbmVkIHRvIGV2ZXJ5IGhvdGVsIGluIE9zbG8gdGlsbCBoZSBoaXQgb24gdGhlIHJpZ2h0IG9uZS4gSGUgbGVmdCBtZSBhdCAxMCwgYW5kIHRoZW4gSSBoYWQgdG8gZG8gYSBTdW5kYXkgUmVmZXJlZSBhcnRpY2xlLiBUb2RheSBteSBqb3VybmV5IGxhc3RzIGZyb20gOSB0aWxsIDkgLSBmb3J0dW5hdGVseSBvbmUgb2YgdGhlIG1vc3QgYmVhdXRpZnVsIHJhaWx3YXkgam91cm5leXMgaW4gdGhlIHdvcmxkLiBUb21vcnJvdyBJIGxlY3R1cmUgYXQgPHBsYWNlTmFtZSBhbm5vdGF0aW9uSWQ9ImVudF8xNDQiIGNlcnQ9ImRlZmluaXRlIiByZWY9Imh0dHA6Ly93d3cuZ2VvbmFtZXMub3JnLzY1NDg1MjgiPkJlcmdlbjwvcGxhY2VOYW1lPiB0byB0aGUgQW5nbG8tTm9yd2VnaWFuIFNvY2lldHkuIE5leHQgZGF5IEkgZ28gYmFjayB0byBPc2xvLCBsZWN0dXJlIHRoZXJlIEZyaS4gYW5kIFNhdC4gYW5kIHRoZW4gc3RhcnQgZm9yIGhvbWUgdmlhIEJlcmdlbi48L3A+CiAgICAgICAgPHBiIG49IjMiPjwvcGI+CiAgICAgICAgPHA+QnVsbCBpcyBhIG5pY2UgeW91bmcgbWFuIGJ1dCBpbmNvbXBldGVudCAtIGNhbid0IHF1aXRlIHN0YW5kIHRoZSBjb21tdW5pc3RzLCBidXQgZmluZHMgdGhlIHNvY2lhbGlzdHMgdG9vIG1pbGQuPC9wPjxwPkkgYW0gdW5oYXBwaWx5IHdvbmRlcmluZyB3aGF0IHlvdSBhcmUgZmVlbGluZyBhYm91dCBtZS48L3A+CiAgICAgICAgPGNsb3Nlcj4KICAgICAgICAgIDxzYWx1dGU+SSBsb3ZlIHlvdSB2ZXJ5IG11Y2ggLTwvc2FsdXRlPgogICAgICAgICAgPHNpZ25lZD4KICAgICAgICAgICAgPHBlcnNOYW1lIHNhbWVBcz0iaHR0cDovL3d3dy5mcmVlYmFzZS5jb20vdmlldy9lbi9iZXJ0cmFuZF9ydXNzZWxsIj4KICAgICAgICAgICAgICA8cGVyc05hbWUgYW5ub3RhdGlvbklkPSJlbnRfMTA5IiBjZXJ0PSJkZWZpbml0ZSIgdHlwZT0icmVhbCIgcmVmPSJodHRwOi8vdmlhZi5vcmcvdmlhZi8zNjkyNDEzNyI+QjwvcGVyc05hbWU+CiAgICAgICAgICAgIDwvcGVyc05hbWU+CiAgICAgICAgICA8L3NpZ25lZD4KICAgICAgICA8L2Nsb3Nlcj4KICAgICAgPC9kaXY+CiAgICA8L2JvZHk+CiAgPC90ZXh0Pgo8L1RFST4K","branch":"master"})
+		.query({"access_token":config.personal_oath_for_testing})
+		.reply(201, {"content":{"name":"test1.txt","path":"curt/qurt/test1.txt","sha":"9fa3ec5f93e21b52d9d7fda29dfc4b3d43932400","size":3384,"url":"https://api.github.com/repos/jchartrand/aTest/contents/curt/qurt/test1.txt?ref=master","html_url":"https://github.com/jchartrand/aTest/blob/master/curt/qurt/test1.txt","git_url":"https://api.github.com/repos/jchartrand/aTest/git/blobs/9fa3ec5f93e21b52d9d7fda29dfc4b3d43932400","download_url":"https://raw.githubusercontent.com/jchartrand/aTest/master/curt/qurt/test1.txt","type":"file","_links":{"self":"https://api.github.com/repos/jchartrand/aTest/contents/curt/qurt/test1.txt?ref=master","git":"https://api.github.com/repos/jchartrand/aTest/git/blobs/9fa3ec5f93e21b52d9d7fda29dfc4b3d43932400","html":"https://github.com/jchartrand/aTest/blob/master/curt/qurt/test1.txt"}},"commit":{"sha":"33b587b58b9577e7a7b4810e4103927809626e12","url":"https://api.github.com/repos/jchartrand/aTest/git/commits/33b587b58b9577e7a7b4810e4103927809626e12","html_url":"https://github.com/jchartrand/aTest/commit/33b587b58b9577e7a7b4810e4103927809626e12","author":{"name":"James Chartrand","email":"jc.chartrand@gmail.com","date":"2018-05-01T13:05:48Z"},"committer":{"name":"James Chartrand","email":"jc.chartrand@gmail.com","date":"2018-05-01T13:05:48Z"},"tree":{"sha":"80a38e2f60b912464a4bb14549dd1c6af1f0f46a","url":"https://api.github.com/repos/jchartrand/aTest/git/trees/80a38e2f60b912464a4bb14549dd1c6af1f0f46a"},"message":"some commit message","parents":[{"sha":"a480ac4d99c3130285e940b56700e5152969a7f9","url":"https://api.github.com/repos/jchartrand/aTest/git/commits/a480ac4d99c3130285e940b56700e5152969a7f9","html_url":"https://github.com/jchartrand/aTest/commit/a480ac4d99c3130285e940b56700e5152969a7f9"}],"verification":{"verified":false,"reason":"unsigned","signature":null,"payload":null}}}, [ 'Server',
+			'GitHub.com',
+			'Date',
+			'Tue, 01 May 2018 13:05:48 GMT',
+			'Content-Type',
+			'application/json; charset=utf-8',
+			'Content-Length',
+			'1816',
+			'Connection',
+			'close',
+			'Status',
+			'201 Created',
+			'X-RateLimit-Limit',
+			'5000',
+			'X-RateLimit-Remaining',
+			'4997',
+			'X-RateLimit-Reset',
+			'1525183284',
+			'Cache-Control',
+			'private, max-age=60, s-maxage=60',
+			'Vary',
+			'Accept, Authorization, Cookie, X-GitHub-OTP',
+			'ETag',
+			'"e64876760e52b560c8e5a7a428b3a7ae"',
+			'X-OAuth-Scopes',
+			'repo',
+			'X-Accepted-OAuth-Scopes',
+			'',
+			'X-GitHub-Media-Type',
+			'github.v3; format=json',
+			'Access-Control-Expose-Headers',
+			'ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval',
+			'Access-Control-Allow-Origin',
+			'*',
+			'Strict-Transport-Security',
+			'max-age=31536000; includeSubdomains; preload',
+			'X-Frame-Options',
+			'deny',
+			'X-Content-Type-Options',
+			'nosniff',
+			'X-XSS-Protection',
+			'1; mode=block',
+			'Referrer-Policy',
+			'origin-when-cross-origin, strict-origin-when-cross-origin',
+			'Content-Security-Policy',
+			'default-src \'none\'',
+			'X-Runtime-rack',
+			'0.715000',
+			'X-GitHub-Request-Id',
+			'0E4D:27B0:54429DE:A4416A6:5AE8662B' ]);
+
+}
+
+function getUpdateFileNock() {
+	return nock('https://api.github.com:443', {"encodedQueryParams":true})
+		.put('/repos/jchartrand/aTest/contents/curt/qurt/test.txt', {"message":"another commit message on the update","content":"PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPFRFSSB4bWxucz0iaHR0cDovL3d3dy50ZWktYy5vcmcvbnMvMS4wIiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiIHhtbG5zOmN3PSJodHRwOi8vY3dyYy5jYS9ucy9jdyMiIHhtbG5zOnc9Imh0dHA6Ly9jd3JjdGMuYXJ0c3JuLnVhbGJlcnRhLmNhLyMiPgogIDx0ZWlIZWFkZXI+CiAgICA8ZmlsZURlc2M+CiAgICAgIDx0aXRsZVN0bXQ+CiAgICAgICAgPHRpdGxlPlNhbXBsZSBEb2N1bWVudCBUaXRsZSB0ZXN0IHVuZGVmaW5lZDwvdGl0bGU+CiAgICAgIDwvdGl0bGVTdG10PgogICAgICA8cHVibGljYXRpb25TdG10PgogICAgICAgIDxwPjwvcD4KICAgICAgPC9wdWJsaWNhdGlvblN0bXQ+CiAgICAgIDxzb3VyY2VEZXNjIHNhbWVBcz0iaHR0cDovL3d3dy5jd3JjLmNhIj4KICAgICAgICA8cD5DcmVhdGVkIGZyb20gb3JpZ2luYWwgcmVzZWFyY2ggYnkgbWVtYmVycyBvZiBDV1JDL0NTw4lDIHVubGVzcyBvdGhlcndpc2Ugbm90ZWQuPC9wPgogICAgICA8L3NvdXJjZURlc2M+CiAgICA8L2ZpbGVEZXNjPgogIDwvdGVpSGVhZGVyPgogIDx0ZXh0PgogICAgPGJvZHk+CiAgICAgIDxkaXYgdHlwZT0ibGV0dGVyIj4KICAgICAgICA8aGVhZD4KICAgICAgICAgIDx0aXRsZT5TYW1wbGUgTGV0dGVyIC0gQmVydHJhbmQgUnVzc2VsbCB0byA8cGVyc05hbWUgYW5ub3RhdGlvbklkPSJlbnRfNzMiIGNlcnQ9InByb2JhYmxlIiByZWY9IjI3OTM5OTM5OSI+UGF0cmljaWEgU3BlbmNlPC9wZXJzTmFtZT4gLSBPY3RvYmVyIDIxLCAxOTM1PC90aXRsZT4KICAgICAgICA8L2hlYWQ+CiAgICAgICAgPG9wZW5lcj4KICAgICAgICAgIDxub3RlPgogICAgICAgICAgICA8cD5CYWQgd3JpdGluZyBkdWUgdG8gc2hha3kgdHJhaW48L3A+PHA+SW4gdHJhaW48L3A+PHA+CiAgICAgICAgICAgICAgPHBsYWNlTmFtZSBhbm5vdGF0aW9uSWQ9ImVudF8xNDMiIGNlcnQ9ImRlZmluaXRlIiByZWY9Imh0dHA6Ly93d3cuZ2VvbmFtZXMub3JnLzY0NTMzNjYiPk9zbG88L3BsYWNlTmFtZT4gdG8gQmVyZ2VuPC9wPgogICAgICAgICAgPC9ub3RlPgogICAgICAgICAgPGRhdGVsaW5lPgogICAgICAgICAgICA8ZGF0ZSBhbm5vdGF0aW9uSWQ9ImVudF82OSIgY2VydD0iZGVmaW5pdGUiIHdoZW49IjE5MzUtMTAtMjEiPjIxLjEwLjM1PC9kYXRlPgogICAgICAgICAgPC9kYXRlbGluZT4KICAgICAgICAgIDxzYWx1dGU+RGVhcmVzdCAtPC9zYWx1dGU+CiAgICAgICAgPC9vcGVuZXI+PHA+SSBoYXZlIGhhZCBubzxub3RlIGFubm90YXRpb25JZD0iZW50XzE5MCIgdHlwZT0icmVzZWFyY2hOb3RlIj4KICAgICAgICAgICAgICAgIDxwIHhtbG5zPSJodHRwOi8vd3d3LnRlaS1jLm9yZy9ucy8xLjAiPlNvbWUga2luZCBvZiBub3RlPC9wPgogICAgICAgICAgICA8L25vdGU+IGxldHRlciBmcm9tIHlvdSBzaW5jZSBJIGxlZnQgPHBsYWNlTmFtZSBhbm5vdGF0aW9uSWQ9ImVudF8xNDUiIG9mZnNldElkPSJlbnRfMTQ1IiBjZXJ0PSJkZWZpbml0ZSIgcmVmPSJodHRwOi8vd3d3Lmdlb25hbWVzLm9yZy8yNjczNzIyIj5TdG9ja2hvbG08L3BsYWNlTmFtZT4sIGJ1dCBJIGhhZCBhIG5pY2Ugb25lIGZyb20gSm9obiBpbiBhbiBlbnZlbG9wZSB5b3UgaGFkIHNlbnQgaGltLiBJIGhhZCBzZW50IGhpbSBvbmUgYWRkcmVzc2VkIHRvIENvcGVuaGFnZW4gYnV0IGhlIGhhZG4ndCB1c2VkIGl0LjwvcD48cD5XaGVuIEkgcmVhY2hlZCBPc2xvIHllc3RlcmRheSBldmVuaW5nLCBCcnluanVsZiBCdWxsIHNob3VsZCBoYXZlIGJlZW4gdGhlcmUgdG8gbWVldCBtZSwgYnV0IHdhc24ndC4gSGUgaXMgbm90IG9uIHRoZSB0ZWxlcGhvbmUsIHNvIEkgdG9vayBhIHRheGkgdG8gaGlzIGFkZHJlc3MsIHdoaWNoIHR1cm5lZCBvdXQgdG8gYmUgYSBzdHVkZW50cycgY2x1YiB3aXRoIG5vIG9uZSBhYm91dCBvbiBTdW5kYXlzLCBzbyBJIHdlbnQgdG8gYSBob3RlbCBmZWVsaW5nIHJhdGhlciBub24tcGx1c3NlZC4gQnV0IHByZXNlbnRseSBoZSB0dXJuZWQgdXAuIEhlIGhhZCBnb3QgdGhlIDxwYiBuPSIyIj48L3BiPiB0aW1lIG9mIG15IGFycml2YWwgd3JvbmcsIGFuZCAKICAgICAgICAgICAgPGNob2ljZSBhbm5vdGF0aW9uSWQ9ImVudF82NSI+PHNpYyBhbm5vdGF0aW9uSWQ9ImVudF82NSI+d2hlbjwvc2ljPjxjb3JyIGFubm90YXRpb25JZD0iZW50XzY1Ij53aGVuPC9jb3JyPjwvY2hvaWNlPgogICAgICAgICAgaGUgaGFkIGZvdW5kIGhlIGhhZCBtaXNzZWQgbWUgaGUgcGhvbmVkIHRvIGV2ZXJ5IGhvdGVsIGluIE9zbG8gdGlsbCBoZSBoaXQgb24gdGhlIHJpZ2h0IG9uZS4gSGUgbGVmdCBtZSBhdCAxMCwgYW5kIHRoZW4gSSBoYWQgdG8gZG8gYSBTdW5kYXkgUmVmZXJlZSBhcnRpY2xlLiBUb2RheSBteSBqb3VybmV5IGxhc3RzIGZyb20gOSB0aWxsIDkgLSBmb3J0dW5hdGVseSBvbmUgb2YgdGhlIG1vc3QgYmVhdXRpZnVsIHJhaWx3YXkgam91cm5leXMgaW4gdGhlIHdvcmxkLiBUb21vcnJvdyBJIGxlY3R1cmUgYXQgPHBsYWNlTmFtZSBhbm5vdGF0aW9uSWQ9ImVudF8xNDQiIGNlcnQ9ImRlZmluaXRlIiByZWY9Imh0dHA6Ly93d3cuZ2VvbmFtZXMub3JnLzY1NDg1MjgiPkJlcmdlbjwvcGxhY2VOYW1lPiB0byB0aGUgQW5nbG8tTm9yd2VnaWFuIFNvY2lldHkuIE5leHQgZGF5IEkgZ28gYmFjayB0byBPc2xvLCBsZWN0dXJlIHRoZXJlIEZyaS4gYW5kIFNhdC4gYW5kIHRoZW4gc3RhcnQgZm9yIGhvbWUgdmlhIEJlcmdlbi48L3A+CiAgICAgICAgPHBiIG49IjMiPjwvcGI+CiAgICAgICAgPHA+QnVsbCBpcyBhIG5pY2UgeW91bmcgbWFuIGJ1dCBpbmNvbXBldGVudCAtIGNhbid0IHF1aXRlIHN0YW5kIHRoZSBjb21tdW5pc3RzLCBidXQgZmluZHMgdGhlIHNvY2lhbGlzdHMgdG9vIG1pbGQuPC9wPjxwPkkgYW0gdW5oYXBwaWx5IHdvbmRlcmluZyB3aGF0IHlvdSBhcmUgZmVlbGluZyBhYm91dCBtZS48L3A+CiAgICAgICAgPGNsb3Nlcj4KICAgICAgICAgIDxzYWx1dGU+SSBsb3ZlIHlvdSB2ZXJ5IG11Y2ggLTwvc2FsdXRlPgogICAgICAgICAgPHNpZ25lZD4KICAgICAgICAgICAgPHBlcnNOYW1lIHNhbWVBcz0iaHR0cDovL3d3dy5mcmVlYmFzZS5jb20vdmlldy9lbi9iZXJ0cmFuZF9ydXNzZWxsIj4KICAgICAgICAgICAgICA8cGVyc05hbWUgYW5ub3RhdGlvbklkPSJlbnRfMTA5IiBjZXJ0PSJkZWZpbml0ZSIgdHlwZT0icmVhbCIgcmVmPSJodHRwOi8vdmlhZi5vcmcvdmlhZi8zNjkyNDEzNyI+QjwvcGVyc05hbWU+CiAgICAgICAgICAgIDwvcGVyc05hbWU+CiAgICAgICAgICA8L3NpZ25lZD4KICAgICAgICA8L2Nsb3Nlcj4KICAgICAgPC9kaXY+CiAgICA8L2JvZHk+CiAgPC90ZXh0Pgo8L1RFST4K","branch":"master","sha":"6f715c0deeb9012272c04a50e1fc09bc3fe4bdb7"})
+		.query({"access_token":config.personal_oath_for_testing})
+		.reply(200, ["1f8b0800000000000003b555db8ed33010fd95cacfddfa928bed4a0824de78de27105a4d62a7c99238c576589655ff9d712f4bd922d476e12195e289cf99396766fa44ead145eb22593e110783254b126d888bf83d923959436cf1a49e7ca45fd3cf512cb48021dd4066eba2d19915bc2a84d146360684364d9d5799c9339d899c31040bdd0f84cf3295cfc9e47bbcdcc6b80e4b4a61dd2d565d6ca76a518f03f5763d067a5fb7e0a3076728dc624a749f69a0a7e9bcf5b679334088d623511b87feee778623f413dcaa1f2bbabbfc0768c4c3cb2fe0ce4b18efd1041ee8052a99f1c1f52398178c1e1ef6124dc1fabd145bb54eea","f95b29f1719d2c6ebade6261777de7be84647db07df3ff0c41212e06bf4abce4fc11d32b5cdf6ce6381ac390324779b6bdce8b4ceb526a6ce1b204551646436e0bada011463055e4595d8291a8ec35fd9d2ade51067a01d585ddbe63b88400a6d88efe68417cc03d1166ef0fe389e5da01ba24fc7dbd789eda77ab74985a143f301053df09c6d50d2b6e18bfe5d992b325931fc9b3d2697a7fada17fcf12bdc5240e6eaac6a8bc36a51285e65ae4204b2105571cfd64a6e12ccf4b55c9b4b9ae753311067a36110a81c2065825a9c08db1b57eb6f36bb60fcc4637c3e3d9b4de2a9a36b4c7ed8d33fce9505796558592f854ba90d24a9055ae38b33967991652315d8ad272f18aba0e5d7a01d5755d7a36c1e6f39c7cb3be6bba1a6237ba64f3eedd1ab26ca00f764ebc8590426472a15b398ca43fa59583387994dc4d7d9f047d4ceb77f7bad96c7e02de72b6ff22070000"], [ 'Server',
+			'GitHub.com',
+			'Date',
+			'Tue, 01 May 2018 13:10:08 GMT',
+			'Content-Type',
+			'application/json; charset=utf-8',
+			'Transfer-Encoding',
+			'chunked',
+			'Connection',
+			'close',
+			'Status',
+			'200 OK',
+			'X-RateLimit-Limit',
+			'5000',
+			'X-RateLimit-Remaining',
+			'4996',
+			'X-RateLimit-Reset',
+			'1525183284',
+			'Cache-Control',
+			'private, max-age=60, s-maxage=60',
+			'Vary',
+			'Accept, Authorization, Cookie, X-GitHub-OTP',
+			'ETag',
+			'W/"04a0d4ce65d0cf6452d11c563ce525db"',
+			'X-OAuth-Scopes',
+			'repo',
+			'X-Accepted-OAuth-Scopes',
+			'',
+			'X-GitHub-Media-Type',
+			'github.v3; format=json',
+			'Access-Control-Expose-Headers',
+			'ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval',
+			'Access-Control-Allow-Origin',
+			'*',
+			'Strict-Transport-Security',
+			'max-age=31536000; includeSubdomains; preload',
+			'X-Frame-Options',
+			'deny',
+			'X-Content-Type-Options',
+			'nosniff',
+			'X-XSS-Protection',
+			'1; mode=block',
+			'Referrer-Policy',
+			'origin-when-cross-origin, strict-origin-when-cross-origin',
+			'Content-Security-Policy',
+			'default-src \'none\'',
+			'X-Runtime-rack',
+			'0.702730',
+			'Content-Encoding',
+			'gzip',
+			'X-GitHub-Request-Id',
+			'6397:27B0:544BC8B:A453FC3:5AE8672F' ]);
+}
+
 module.exports = {
   getDetailsForAuthenticatedUserNock: getDetailsForAuthenticatedUserNock,
   getGithubCommitNock: getGithubCommitNock,
@@ -687,5 +802,7 @@ module.exports = {
 	getRepoContentsByDrillDownRootTreeNock: getRepoContentsByDrillDownRootTreeNock,
 	getReposByDrillDownSecondLevelNock: getReposByDrillDownSecondLevelNock,
 	getReposByDrillDownThirdLevelNock: getReposByDrillDownThirdLevelNock,
-	getRepoContentsNock: getRepoContentsNock
+	getRepoContentsNock: getRepoContentsNock,
+	getCreateFileNock: getCreateFileNock,
+	getUpdateFileNock: getUpdateFileNock
 }

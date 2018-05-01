@@ -103,7 +103,7 @@ function createRepoForDoc(theDetails) {
 
     return createRepo(theDetails)
         .then(getMasterBranchSHAs)
-        .then(createTree)
+        .then(createFullTree)
         .then(createCommit)
         .then(updateMasterBranch)
         .then(createCWRCVersionTag)
@@ -146,7 +146,7 @@ function createRepo(chainedResult){
 // }
 // returns the chained result object for passing to further promise based calls.
 
-function saveDoc(theDetails) {
+function saveDocOLD(theDetails) {
     return createTree(theDetails)
             .then(createCommit)
             .then(updateMasterBranch)
@@ -155,6 +155,41 @@ function saveDoc(theDetails) {
             .catch(logError)
 }
 
+function encodeContent(content) {
+	return Buffer.from(content).toString('base64')
+}
+// expects in theDetails:
+// {
+//      owner: owner,
+//      repo: repo,
+//      path: path,
+//      message:  the commit message
+//      content: the doc,
+//      branch: branch (default master)
+//      sha: oldFileSHA
+// }
+// returns the chained result object for passing to further promise based calls.
+function updateFile(theDetails) {
+	//probably want to write in the cwrc-git /// application tag, but that could go in from the cwrc-writer I guess, before sending.
+	return github.repos.updateFile({...theDetails, content: encodeContent(theDetails.content)})
+		.then(result=>({...theDetails, sha: result.data.content.sha}))
+
+}
+
+// expects in theDetails:
+// {
+//      owner: owner,
+//      repo: repo,
+//      path: path,
+//      message:  the commit message
+//      content: the doc,
+//      branch: branch (default master)
+// }
+// returns the chained result object for passing to further promise based calls.
+function createFile(theDetails) {
+	return github.repos.createFile({...theDetails, content: encodeContent(theDetails.content)})
+		.then(result=>({...theDetails, sha: result.data.content.sha}))
+}
 
 function logError(error) {
     console.error("oh no!");
@@ -368,24 +403,47 @@ function getTreeContents(treeDetails, basePath) {
 // adds chainedResult.newTreeSHA
 // 
 // returns: chainedResult
+
+
+// expect chainedResult.baseTreeSHA
+// expects chainedResult.owner
+// expects chainedResult.repo
+// adds chainedResult.newTree
+// where newTree is an array, like:
+/*[
+	{
+		"path": "document.xml",
+		"mode": "100644",
+		"type": "blob",
+		"content": newDoc
+	},
+	{
+		"path": "annotations.json",
+		"mode": "100644",
+		"type": "blob",
+		"content": newAnnotations
+	}
+]*/
+// returns: chainedResult
 function createTree(chainedResult) {
-    buildNewTree(chainedResult);
-  
-    return github.gitdata.createTree(
-        {
-            owner: chainedResult.owner,
-            repo: chainedResult.repo,
-            base_tree: chainedResult.baseTreeSHA,
-            tree: chainedResult.newTree
-        }
-    )
-    .then(
-        githubResponse=> {
-            chainedResult.newTreeSHA = githubResponse.data.sha;
-            return chainedResult
-        }
-    )
+	buildNewTree(chainedResult);
+	return github.gitdata.createTree(
+		{
+			owner: chainedResult.owner,
+			repo: chainedResult.repo,
+			base_tree: chainedResult.baseTreeSHA,
+			tree: chainedResult.newTree
+		}
+	)
+		.then(
+			githubResponse=> {
+				chainedResult.newTreeSHA = githubResponse.data.sha;
+				return chainedResult
+			}
+		)
 }
+
+
 
 // expects chainedResult.parentCommitSHA, chainedResult.newTreeSHA, chainedResult.owner, chainedResult.repo
 // adds chainedResult.newCommitSHA
@@ -499,10 +557,11 @@ module.exports = {
     getDetailsForAuthenticatedUser: getDetailsForAuthenticatedUser,
     getReposForAuthenticatedUser: getReposForAuthenticatedUser,
     getReposForUser: getReposForUser,
-	saveDoc: saveDoc,
+	createFile: createFile,
+    updateFile: updateFile,
 	getDoc: getDoc,
+	createEmptyRepo: createEmptyRepo,
     createRepoForDoc: createRepoForDoc,
-    createEmptyRepo: createEmptyRepo,
     getAnnotations: getAnnotations,
     getTemplates: getTemplates,
     getTemplate: getTemplate,
