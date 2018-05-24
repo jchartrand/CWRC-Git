@@ -4,8 +4,9 @@ var expect = require('chai').expect;
 var config = require('../config.js');
 var fixtures = require('../fixturesAndMocks/fixtures.js');
 var mocks = require('../fixturesAndMocks/mocks.js');
+var request = require('request')
 
-// uncomment this line to use actual authentication with a real github personal token
+// uncomment this next line to use actual authentication with a real github personal token
 cwrcGit.authenticate(config.personal_oath_for_testing);
 
 // uncomment the line below to let calls through to Github, and have nock output the results
@@ -47,19 +48,18 @@ describe("cwrcGit", function () {
 	describe(".getDoc", function () {
 
 		beforeEach(function () {
-
-			var getDocumentFromGithubNock = mocks.getDocumentFromGithubNock();
-			var getAnnotationsFromGithubNock = mocks.getAnnotationsFromGithubNock();
-			var getBranchInfoFromGithubNock = mocks.getBranchInfoFromGithubNock();
+			mocks.getDoc()
+			//var getDocumentFromGithubNock = mocks.getDocumentFromGithubNock();
+			//var getAnnotationsFromGithubNock = mocks.getAnnotationsFromGithubNock();
+			//var getBranchInfoFromGithubNock = mocks.getBranchInfoFromGithubNock();
 
 		});
 
 		it("returns correctly", function (done) {
 
-			cwrcGit.getDoc({owner: fixtures.owner, repo: fixtures.testRepo})
+			cwrcGit.getDoc({owner: fixtures.owner, repo: fixtures.testRepo, branch: 'jchartrand', path: 'curt/qurt/test.txt'})
 				.then(result => {
-					expect(result.baseTreeSHA).to.be.a('string');
-					expect(result.parentCommitSHA).to.be.a('string');
+					expect(result.sha).to.be.a('string');
 					//expect(result.doc).to.equal(fixtures.testDoc);
 					//expect(result.annotations).to.equal(fixtures.annotationBundleText);
 					expect(result.owner).to.equal(fixtures.owner);
@@ -142,14 +142,14 @@ describe("cwrcGit", function () {
 	});
 
 
-	describe(".createEmptyRepo", function () {
+	describe(".createRepo", function () {
 		beforeEach(function () {
 			var createGithubRepoNock = mocks.getCreateGithubRepoNock();
 			var getMasterBranchFromGithubNock = mocks.getMasterBranchFromGithubNock();
 		})
 
 		it("returns correctly", function (done) {
-			cwrcGit.createEmptyRepo(
+			cwrcGit.createRepo(
 				{
 					repo: fixtures.testRepo,
 					isPrivate: fixtures.isPrivate,
@@ -165,6 +165,103 @@ describe("cwrcGit", function () {
 					}
 				)
 		}).timeout(9000);
+	})
+
+	describe(".createBranchFromMaster", function() {
+
+		beforeEach(function () {
+			mocks.createBranchFromMasterGetMaster()
+			mocks.createBranchFromMasterCreateBranch()
+		})
+
+		it("returns valid url for new ref if created", function(done){
+			cwrcGit.createBranchFromMaster(
+				{
+					"owner": fixtures.owner,
+					"repo": fixtures.testRepo,
+					"branch": 'test83'
+				})
+				.then(
+					result=> {
+						expect(result.refURL).to.exist
+						expect(request.head('http://www.google.com', (error, response)=>(!error && response.statusCode == 200)))
+						done()
+					}
+				)
+		})
+	})
+
+	describe(".checkForPullRequest", function () {
+
+		beforeEach(function () {
+			mocks.findExistingPRNock()
+			mocks.missingPRNock()
+		})
+
+		it("returns true if pr exists", function (done) {
+			cwrcGit.checkForPullRequest(
+				{
+					"repo":fixtures.testRepo,
+					"owner": fixtures.owner,
+					"branch": 'jchartrand'
+				})
+				.then(
+					result => {
+						expect(result).to.be.true
+						done()
+					}
+				)
+		})
+		it("returns false if pr doesn't exist", function (done) {
+			cwrcGit.checkForPullRequest(
+				{
+					"repo":fixtures.testRepo,
+					"owner": fixtures.owner,
+					"branch": 'hote'
+				})
+				.then(
+					result => {
+						expect(result).to.be.false
+						done()
+					}
+				)
+		})
+	})
+
+	describe(".checkForBranch", function () {
+		beforeEach(function () {
+			mocks.getUserBranchHeadNock()
+			mocks.missingBranchNock()
+		})
+
+		it("returns true if branch exists", function (done) {
+			cwrcGit.checkForBranch(
+				{
+					"repo":fixtures.testRepo,
+					"owner": fixtures.owner,
+					"branch": 'jchartrand'
+				})
+				.then(
+					result => {
+						expect(result).to.be.true
+						done()
+					}
+				)
+		})
+		it("returns false if branch doesn't exist", function (done) {
+			cwrcGit.checkForBranch(
+				{
+					"repo":fixtures.testRepo,
+					"owner": fixtures.owner,
+					"branch": 'hote'
+				})
+				.then(
+					result => {
+						expect(result).to.be.false
+						done()
+					}
+				)
+		})
 	})
 
 	describe(".createFile", function () {
@@ -223,20 +320,95 @@ describe("cwrcGit", function () {
 		}).timeout(9000);
 	})
 
-	describe(".saveAsPullRequest", function () {
+	describe(".getLatestFileSHA", function () {
 		beforeEach(function () {
-			var createFileNock = mocks.getCreateFileNock();
+			mocks.getLatestFileSHANock()
+			mocks.missingSHANock()
 		})
 
-		it("returns correctly", function (done) {
-			cwrcGit.createFile(
+		it("returns a string for existing sha", function (done) {
+			cwrcGit.getLatestFileSHA(
 				{
 					owner: fixtures.owner,
 					repo: fixtures.testRepo,
-					path: 'curt/qurt/test1.txt',
+					branch: 'jchartrand',
+					path: 'curt/qurt/testq339.txt'
+
+				})
+				.then(
+					result => {
+						expect(result.sha).to.be.a('string');
+						expect(result.owner).to.equal(fixtures.owner);
+						expect(result.repo).to.equal(fixtures.testRepo);
+						done()
+					},
+					error => {
+						console.log(error)
+					}
+				)
+		}).timeout(9000);
+
+		it("returns null for no sha", function (done) {
+			cwrcGit.getLatestFileSHA(
+				{
+					owner: fixtures.owner,
+					repo: fixtures.testRepo,
+					branch: 'master',
+					path: 'curt/qurt/tesddt.txt'
+
+				})
+				.then(
+					result => {
+						expect(result.sha).to.equal(null)
+						expect(result.owner).to.equal(fixtures.owner);
+						expect(result.repo).to.equal(fixtures.testRepo);
+						done()
+					},
+					error => {
+						console.log(error)
+					}
+				)
+		}).timeout(9000);
+	})
+	describe(".saveAsPullRequest", function () {
+		beforeEach(function () {
+				mocks.getUserBranchHeadNock()
+				mocks.getLatestFileSHANock()
+				mocks.saveExistingFileNock()
+				mocks.findExistingPRNock()
+				mocks.saveNewFileNock()
+			mocks.getLatestFileSHANockForNew()
+		})
+		it("returns correctly for existing file", function (done) {
+			cwrcGit.saveAsPullRequest(
+				{
+					owner: fixtures.owner,
+					repo: fixtures.testRepo,
+					title: 'glorious title for PR',
+					branch: 'jchartrand',
+					path: 'curt/qurt/testq339.txt',
 					message: 'some commit message',
-					content: fixtures.testDoc,
-					branch: 'master'
+					content: fixtures.testDoc
+				})
+				.then(
+					result => {
+						expect(result.sha).to.be.a('string');
+						expect(result.owner).to.equal(fixtures.owner);
+						expect(result.repo).to.equal(fixtures.testRepo);
+						done()
+					}
+				)
+		}).timeout(9000);
+		it("returns correctly for new file", function (done) {
+			cwrcGit.saveAsPullRequest(
+				{
+					owner: fixtures.owner,
+					repo: fixtures.testRepo,
+					title: 'glorious title for PR',
+					branch: 'jchartrand',
+					path: 'curt/qurt/testuufy.txt',
+					message: 'some commit message',
+					content: fixtures.testDoc
 				})
 				.then(
 					result => {
