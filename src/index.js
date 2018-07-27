@@ -1,8 +1,8 @@
 var github = require("@octokit/rest")({
 	headers: {
-		"user-agent": "My-Cool-GitHub-App",
-		"Accept": "application/vnd.github.v3.text-match+json"
-	}
+		accept: 'application/vnd.github.v3.text-match+json',
+		'user-agent': 'octokit/rest.js v1.2.3' // v1.2.3 will be current version
+	},
 });
 var DOMParser = require('xmldom').DOMParser;
 var XMLSerializer = require('xmldom').XMLSerializer;
@@ -28,8 +28,12 @@ function getDetailsForAuthenticatedUser() {
     return github.users.get({})
 }
 
-function getReposForAuthenticatedUser(){
-    return github.repos.getAll({})
+// options can be as described here:
+// https://octokit.github.io/rest.js/#api-Repos-getAll
+function getReposForAuthenticatedUser(options){
+    return github.repos.getAll(options).then((result)=>{
+	    return result
+    })
 }
 
 function getReposForUser(theDetails) {
@@ -98,8 +102,9 @@ function createRepo(chainedResult){
 	            repo: githubResponse.data.name
             }
         })
-	    .then(getMasterBranchSHAs)
 	    .catch(logError)
+
+	// .then(getMasterBranchSHAs)
 }
 
 function encodeContent(content) {
@@ -136,15 +141,15 @@ branch: the branch in which to save, i.e., the github username for the person su
 content: the file content to save
  */
 async function saveAsPullRequest(chainedResult) {
-	const {owner, repo, title, branch, path, message, originalFileSHA, content} = chainedResult
-	//probably want to write in the cwrc-git /// application tag, but that could go in from the cwrc-writer I guess, before sending.
+	const {owner, repo, title, branch, message} = chainedResult
+	//probably want to write in the cwrc-git /// application tag,
 	const doesBranchExist = await checkForBranch({owner, repo, branch});
 	if (! doesBranchExist) {
 		await createBranchFromMaster({owner, repo, branch})
 	}
 	const resultOfSave = await saveDoc(chainedResult)
 	const doesPullRequestExist = await checkForPullRequest({owner, repo, branch})
-	// there can, I believe only be one PR per branch */
+	// there can be only one PR per branch */
 	if (! doesPullRequestExist) {
 		const prArgs = {
 			owner,
@@ -298,7 +303,7 @@ function getTreeContentsByDrillDown(chainedResult) {
 		{
 			owner: chainedResult.owner,
 			repo: chainedResult.repo,
-			sha: chainedResult.baseTreeSHA
+			tree_sha: chainedResult.baseTreeSHA
 		},
 		basePath
 	).then(
@@ -325,7 +330,7 @@ function getTreeContents(treeDetails, basePath) {
 					    {
 						    owner: treeDetails.owner,
 						    repo: treeDetails.repo,
-						    sha: entry.sha
+						    tree_sha: entry.sha
 					    },
                         path + '/'
                     ).then(folderContents => ({
@@ -385,8 +390,18 @@ function unflattenContents(flatContents) {
 		return result
 }
 
-function search(query) {
-    return github.search.code({q: query});
+function search(query, page, per_page) {
+    return github.search.code(
+    	{
+		    q: query,
+		    page,
+		    per_page
+        }
+    ).then(
+	    (result)=>{
+		    return result
+	    }
+    );
 }
 
 // expects in theDetails argument:
@@ -404,8 +419,8 @@ function getTreeContentsRecursively(chainedResult) {
 		{
 			owner: chainedResult.owner,
 			repo: chainedResult.repo,
-			sha: chainedResult.baseTreeSHA,
-			recursive: true
+			tree_sha: chainedResult.baseTreeSHA,
+			recursive: 1
 		}
 	).then(
 		githubResponse=>({
@@ -446,6 +461,7 @@ function checkForBranch(theDetails) {
 		}
 	})
 }
+
 
 module.exports = {
     authenticate: authenticate,

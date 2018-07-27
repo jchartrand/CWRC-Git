@@ -304,17 +304,12 @@ function getTemplateNock() {
   '173530fed4bbeb1e264b2ed22e8b5c20',
   'X-GitHub-Request-Id',
   'C6FB:DCFF:81252EB:A51FB15:58C76386' ]);
-
-
-
 }
 
-
- 
 function getSearchNock() {
   return nock('https://api.github.com:443', {"encodedQueryParams":true})
-  .get('/search/code')
-  .query({"q":"cwrc-melbourne+repo%3Ajchartrand%2FcleanDoc2","access_token":config.personal_oath_for_testing})
+  .get((uri)=>uri.includes('search/code'))
+  .query({"q":"cwrc-melbourne+repo%3Ajchartrand%2FcleanDoc2", "page":"undefined","per_page":"undefined","access_token":config.personal_oath_for_testing})
   .reply(200, {"total_count":1,"incomplete_results":false,"items":[{"name":"cwrc-categories","path":"cwrc-categories","sha":"50e94e0bb7c307caab2c791775d63e544ae64bc6","url":"https://api.github.com/repositories/84259758/contents/cwrc-categories?ref=aab4b2d3c14c0121e2d604900711896b1ac8b83c","git_url":"https://api.github.com/repositories/84259758/git/blobs/50e94e0bb7c307caab2c791775d63e544ae64bc6","html_url":"https://github.com/jchartrand/cleanDoc2/blob/aab4b2d3c14c0121e2d604900711896b1ac8b83c/cwrc-categories","repository":{"id":84259758,"name":"cleanDoc2","full_name":"jchartrand/cleanDoc2","owner":{"login":"jchartrand","id":547165,"avatar_url":"https://avatars0.githubusercontent.com/u/547165?v=3","gravatar_id":"","url":"https://api.github.com/users/jchartrand","html_url":"https://github.com/jchartrand","followers_url":"https://api.github.com/users/jchartrand/followers","following_url":"https://api.github.com/users/jchartrand/following{/other_user}","gists_url":"https://api.github.com/users/jchartrand/gists{/gist_id}","starred_url":"https://api.github.com/users/jchartrand/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/jchartrand/subscriptions","organizations_url":"https://api.github.com/users/jchartrand/orgs","repos_url":"https://api.github.com/users/jchartrand/repos","events_url":"https://api.github.com/users/jchartrand/events{/privacy}","received_events_url":"https://api.github.com/users/jchartrand/received_events","type":"User","site_admin":false},"private":false,"html_url":"https://github.com/jchartrand/cleanDoc2","description":"a clean cwrc doc","fork":false,"url":"https://api.github.com/repos/jchartrand/cleanDoc2","forks_url":"https://api.github.com/repos/jchartrand/cleanDoc2/forks","keys_url":"https://api.github.com/repos/jchartrand/cleanDoc2/keys{/key_id}","collaborators_url":"https://api.github.com/repos/jchartrand/cleanDoc2/collaborators{/collaborator}","teams_url":"https://api.github.com/repos/jchartrand/cleanDoc2/teams","hooks_url":"https://api.github.com/repos/jchartrand/cleanDoc2/hooks","issue_events_url":"https://api.github.com/repos/jchartrand/cleanDoc2/issues/events{/number}","events_url":"https://api.github.com/repos/jchartrand/cleanDoc2/events","assignees_url":"https://api.github.com/repos/jchartrand/cleanDoc2/assignees{/user}","branches_url":"https://api.github.com/repos/jchartrand/cleanDoc2/branches{/branch}","tags_url":"https://api.github.com/repos/jchartrand/cleanDoc2/tags","blobs_url":"https://api.github.com/repos/jchartrand/cleanDoc2/git/blobs{/sha}","git_tags_url":"https://api.github.com/repos/jchartrand/cleanDoc2/git/tags{/sha}","git_refs_url":"https://api.github.com/repos/jchartrand/cleanDoc2/git/refs{/sha}","trees_url":"https://api.github.com/repos/jchartrand/cleanDoc2/git/trees{/sha}","statuses_url":"https://api.github.com/repos/jchartrand/cleanDoc2/statuses/{sha}","languages_url":"https://api.github.com/repos/jchartrand/cleanDoc2/languages","stargazers_url":"https://api.github.com/repos/jchartrand/cleanDoc2/stargazers","contributors_url":"https://api.github.com/repos/jchartrand/cleanDoc2/contributors","subscribers_url":"https://api.github.com/repos/jchartrand/cleanDoc2/subscribers","subscription_url":"https://api.github.com/repos/jchartrand/cleanDoc2/subscription","commits_url":"https://api.github.com/repos/jchartrand/cleanDoc2/commits{/sha}","git_commits_url":"https://api.github.com/repos/jchartrand/cleanDoc2/git/commits{/sha}","comments_url":"https://api.github.com/repos/jchartrand/cleanDoc2/comments{/number}","issue_comment_url":"https://api.github.com/repos/jchartrand/cleanDoc2/issues/comments{/number}","contents_url":"https://api.github.com/repos/jchartrand/cleanDoc2/contents/{+path}","compare_url":"https://api.github.com/repos/jchartrand/cleanDoc2/compare/{base}...{head}","merges_url":"https://api.github.com/repos/jchartrand/cleanDoc2/merges","archive_url":"https://api.github.com/repos/jchartrand/cleanDoc2/{archive_format}{/ref}","downloads_url":"https://api.github.com/repos/jchartrand/cleanDoc2/downloads","issues_url":"https://api.github.com/repos/jchartrand/cleanDoc2/issues{/number}","pulls_url":"https://api.github.com/repos/jchartrand/cleanDoc2/pulls{/number}","milestones_url":"https://api.github.com/repos/jchartrand/cleanDoc2/milestones{/number}","notifications_url":"https://api.github.com/repos/jchartrand/cleanDoc2/notifications{?since,all,participating}","labels_url":"https://api.github.com/repos/jchartrand/cleanDoc2/labels{/name}","releases_url":"https://api.github.com/repos/jchartrand/cleanDoc2/releases{/id}","deployments_url":"https://api.github.com/repos/jchartrand/cleanDoc2/deployments"},"score":11.488182,"text_matches":[{"object_url":"https://api.github.com/repositories/84259758/contents//cwrc-categories?ref=aab4b2d3c14c0121e2d604900711896b1ac8b83c","object_type":"FileContent","property":"content","fragment":"cwrc-melbourne\n","matches":[{"text":"cwrc-melbourne","indices":[0,14]}]}]}]}, [ 'Server',
   'GitHub.com',
   'Date',
@@ -1468,6 +1463,126 @@ function getDoc() {
 			'8B13:3F8D:A8DD55:1558ACE:5B071A1E' ]);
 
 }
+
+function getRepoContentsTree() {
+	return nock('https://api.github.com:443', {"encodedQueryParams":true})
+		.get((uri)=>uri.includes('git/trees'))
+		.query({"access_token":config.personal_oath_for_testing,"recursive":"1"})
+		.reply(200, ["1f8b0800000000000003dd594d6f1b3710fd2f3a07da2139fcf2ad40d2537b297a2b7a1892c34a86a495b5eb3676e0ffde59397104c14869efa1c0f246ac88c787375f7cfab21a36b4ba59855062d1503070f54a55971d59af958390a25345be193289571f56f7a79d1cd88ce371b8e93a3a6ed77f6dc7cd7d5ae77edf9df8d80fdd6dded0693cd1a174f43b0f6327bfe8c613f3d0bd01683ab0baf9e3cbea48e346207ffbf4d3c75f3fadf7452eb1ef8b7c5b2900","8728fbf1e138edd3ae4fb27be6e4513365174af2b5181fab4a456959e81d24acd1aa5489a7e3c3f6518efbf7939b8087ae19f1e9c30b2b3a1cfa91c66d7f18d6b7437f682407d525e60ca0c045c85e671501453fc20c39fb8a399383fc424eb9b9ec9a212fd8e5fbd3f89d1120c8fa2ed759e16f7219678b46575c54852013d812a18854420c98c8689f6c744e0ecc0bc166a02b1e5d6a2703beca8d232a63729c6e6e3c2a4694e4623098a3b2199ee59947a619e83532dd28c9b91e3f5f48f4c38c8a950c675ba361ad92d5523324b548c752332653d00857d1f825e88c09f87eb99e93aa19f49a6159925c139965cb75d72e9753925b3140243036c402b2b5b626473aa1411d30d6407a7eb76a06ba8ebd89ccf2e53a33548b2d200fed11d95c86df5f0d9fe7a766a0eb889cc82c36224b9feff77c18d79ff7bbc6012a3205cad980d219bc73da6576c0d5f812316699415079aee1a597a18df07ef5bef6b256d00bf56efb030f8d33147acf3144ed6370520e59dbe4549051a3a09f1a3793b316f4fc19aa19e89a48f7cfa6a737c82417a78c187c091963f22654a3bc077239a86a855fc829a4ef23870215e6cad40cfa2a3bb36c7a7777cbe6f79622d21c28df9e98ff7f748ec3b0ecfc7b7ca44567e030f4b4dc187d68ec74ec5d2af2b4b6a582f434240ba8a32e3969aa861d875ac54898dfe99a81ae7bc1c3d4eaee9629d5f1d42813e4043e5831aa48ba378a3c95d129ae3189c7638db14c18aa9e6dea34035dc8743c2d761a19fa3d7fdcb6aa64c42aac9ed0554bbe78ef2d46d09a721133b17292098ca3239aad5233d0854a5fa974f4f376c76f786b6aaedaf969042e939b6d0052422fa5013041d4621660b0da9cfde2b3fdabccdcb9b119f2157a03e7fe507ee1bf79d72e5c412b4b4dae1b0173095a4663a38cf7e8a363822a5373a8f3ab6033d07f32eb2e889e157d83e92da623e99c2452c18358abc63156a3339197c74d32c1a51cfdb3a77c96d4cc7eb135433efd29ff429cee0f99462eab9b4abb819ffe05f5f3b2da5f190000"], [ 'Server',
+			'GitHub.com',
+			'Date',
+			'Thu, 26 Jul 2018 12:47:10 GMT',
+			'Content-Type',
+			'application/json; charset=utf-8',
+			'Transfer-Encoding',
+			'chunked',
+			'Connection',
+			'close',
+			'Status',
+			'200 OK',
+			'X-RateLimit-Limit',
+			'5000',
+			'X-RateLimit-Remaining',
+			'4933',
+			'X-RateLimit-Reset',
+			'1532610663',
+			'Cache-Control',
+			'private, max-age=60, s-maxage=60',
+			'Vary',
+			'Accept, Authorization, Cookie, X-GitHub-OTP',
+			'ETag',
+			'W/"8da5cafeee33318d132e660c3c3bb235"',
+			'Last-Modified',
+			'Mon, 23 Jul 2018 13:16:03 GMT',
+			'X-OAuth-Scopes',
+			'repo',
+			'X-Accepted-OAuth-Scopes',
+			'',
+			'X-GitHub-Media-Type',
+			'github.v3; param=text-match; format=json',
+			'Access-Control-Expose-Headers',
+			'ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval',
+			'Access-Control-Allow-Origin',
+			'*',
+			'Strict-Transport-Security',
+			'max-age=31536000; includeSubdomains; preload',
+			'X-Frame-Options',
+			'deny',
+			'X-Content-Type-Options',
+			'nosniff',
+			'X-XSS-Protection',
+			'1; mode=block',
+			'Referrer-Policy',
+			'origin-when-cross-origin, strict-origin-when-cross-origin',
+			'Content-Security-Policy',
+			'default-src \'none\'',
+			'X-Runtime-rack',
+			'0.051997',
+			'Content-Encoding',
+			'gzip',
+			'X-GitHub-Request-Id',
+			'B257:6064:1F88F83:3E6535E:5B59C2CE' ]);
+
+}
+
+function createBranchGeneric() {
+	return nock('https://api.github.com:443', {"encodedQueryParams":true})
+		.post((uri)=>uri.includes('git/refs'))
+		.query({"access_token":config.personal_oath_for_testing})
+		.reply(201, {"ref":"refs/heads/test84","node_id":"MDM6UmVmMTI5OTQxNzczOnRlc3Q4NA==","url":"https://api.github.com/repos/jchartrand/aTest/git/refs/heads/test84","object":{"sha":"248a708af7d740518bb7340be5eb1c3074dd5376","type":"commit","url":"https://api.github.com/repos/jchartrand/aTest/git/commits/248a708af7d740518bb7340be5eb1c3074dd5376"}}, [ 'Server',
+			'GitHub.com',
+			'Date',
+			'Thu, 26 Jul 2018 13:30:13 GMT',
+			'Content-Type',
+			'application/json; charset=utf-8',
+			'Content-Length',
+			'331',
+			'Connection',
+			'close',
+			'Status',
+			'201 Created',
+			'X-RateLimit-Limit',
+			'5000',
+			'X-RateLimit-Remaining',
+			'4996',
+			'X-RateLimit-Reset',
+			'1532615376',
+			'Cache-Control',
+			'private, max-age=60, s-maxage=60',
+			'Vary',
+			'Accept, Authorization, Cookie, X-GitHub-OTP',
+			'ETag',
+			'"09ce11196dcb7d0e8c1a40b8c4758799"',
+			'X-OAuth-Scopes',
+			'repo',
+			'X-Accepted-OAuth-Scopes',
+			'repo',
+			'Location',
+			'https://api.github.com/repos/jchartrand/aTest/git/refs/heads/test84',
+			'X-GitHub-Media-Type',
+			'github.v3; param=text-match; format=json',
+			'Access-Control-Expose-Headers',
+			'ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval',
+			'Access-Control-Allow-Origin',
+			'*',
+			'Strict-Transport-Security',
+			'max-age=31536000; includeSubdomains; preload',
+			'X-Frame-Options',
+			'deny',
+			'X-Content-Type-Options',
+			'nosniff',
+			'X-XSS-Protection',
+			'1; mode=block',
+			'Referrer-Policy',
+			'origin-when-cross-origin, strict-origin-when-cross-origin',
+			'Content-Security-Policy',
+			'default-src \'none\'',
+			'X-Runtime-rack',
+			'0.489495',
+			'X-GitHub-Request-Id',
+			'93FC:6064:1FE5B22:3F20356:5B59CCE5' ]);
+
+}
 module.exports = {
   getDetailsForAuthenticatedUserNock: getDetailsForAuthenticatedUserNock,
   getGithubCommitNock: getGithubCommitNock,
@@ -1503,5 +1618,7 @@ module.exports = {
 	missingPRNock: missingPRNock,
 	createBranchFromMasterGetMaster: createBranchFromMasterGetMaster,
 	createBranchFromMasterCreateBranch: createBranchFromMasterCreateBranch,
-	getDoc: getDoc
+	getDoc: getDoc,
+	getRepoContentsTree: getRepoContentsTree,
+	createBranchGeneric: createBranchGeneric
 }

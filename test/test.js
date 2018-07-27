@@ -74,6 +74,7 @@ describe("cwrcGit", function () {
 		beforeEach(function () {
 			var getRepoContentsByDrillDownBranchNock = mocks.getRepoContentsByDrillDownBranchNock()
 			var getRepoContentsNock = mocks.getRepoContentsNock();
+			var getRepoContentsTree = mocks.getRepoContentsTree()
 		})
 
 		it("returns correctly", function (done) {
@@ -157,8 +158,6 @@ describe("cwrcGit", function () {
 				})
 				.then(
 					result => {
-						expect(result.baseTreeSHA).to.be.a('string');
-						expect(result.parentCommitSHA).to.be.a('string');
 						expect(result.owner).to.equal(fixtures.owner);
 						expect(result.repo).to.equal(fixtures.testRepo);
 						done()
@@ -172,6 +171,7 @@ describe("cwrcGit", function () {
 		beforeEach(function () {
 			mocks.createBranchFromMasterGetMaster()
 			mocks.createBranchFromMasterCreateBranch()
+			mocks.createBranchGeneric()
 		})
 
 		it("returns valid url for new ref if created", function(done){
@@ -179,7 +179,7 @@ describe("cwrcGit", function () {
 				{
 					"owner": fixtures.owner,
 					"repo": fixtures.testRepo,
-					"branch": 'test83'
+					"branch": 'test84'
 				})
 				.then(
 					result=> {
