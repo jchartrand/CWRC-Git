@@ -122,6 +122,8 @@ var parentCommitSHA = 'parentCommitSHAForTesting';
 var newTreeSHA = 'newTreeSHAForTesting';
 var newCommitSHA = 'newCommitSHAForTesting';
 
+var fileSHA = 'SHAForTesting';
+
 var commitMessage = 'saving cwrc draft';
 
 //var cwrcJWTTokenContainingGithubOathToken = jwt.sign(config.personal_oath_for_testing, config.jwt_secret);

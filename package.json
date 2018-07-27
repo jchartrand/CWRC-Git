@@ -5,11 +5,12 @@
   "main": "src/index.js",
   "scripts": {
     "cm": "git-cz",
-    "check-coverage": "istanbul check-coverage --statements 100 --branches 100 --functions 100 --lines 100",
+    "check-coverage": "nyc check-coverage",
     "report-coverage": "cat ./coverage/lcov.info | codecov",
-    "test": "mocha spec -w",
-    "test:single": "istanbul cover -x *.test.js _mocha -- -R spec spec",
-    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
+    "test": "nyc mocha",
+    "test:debug": "mocha spec",
+    "semantic-release": "semantic-release",
+    "travis-deploy-once": "travis-deploy-once"
   },
   "repository": {
     "type": "git",
@@ -28,26 +29,48 @@
   },
   "homepage": "https://github.com/cwrc/CWRC-Git#readme",
   "dependencies": {
-    "github": "8.1.1",
+    "@octokit/rest": "^15.9.4",
     "xmldom": "0.1.27"
   },
   "devDependencies": {
-    "chai": "3.5.0",
-    "codecov.io": "0.1.6",
-    "commitizen": "2.9.5",
-    "cz-conventional-changelog": "1.2.0",
-    "ghooks": "2.0.0",
-    "istanbul": "0.4.5",
-    "mocha": "3.2.0",
-    "nock": "9.0.2",
-    "semantic-release": "^6.3.2"
+    "chai": "^4.1.2",
+    "codecov.io": "^0.1.6",
+    "commitizen": "^2.9.6",
+    "cz-conventional-changelog": "^2.1.0",
+    "ghooks": "^2.0.4",
+    "istanbul": "^0.4.5",
+    "mocha": "^5.1.1",
+    "nock": "^9.2.5",
+    "nyc": "^11.7.1",
+    "semantic-release": "^15.8.1",
+    "travis-deploy-once": "^5.0.1"
   },
   "config": {
     "ghooks": {
-      "pre-commit": "npm run test:single && npm run check-coverage"
+      "pre-commit": "npm run test && npm run check-coverage"
     },
     "commitizen": {
       "path": "node_modules/cz-conventional-changelog"
     }
+  },
+  "nyc": {
+    "check-coverage": true,
+    "per-file": true,
+    "lines": 100,
+    "exclude": [
+      "coverage/**",
+      "fixturesAndMocks/**",
+      "spec/**",
+      "node_modules/**"
+    ],
+    "include": [
+      "spec/**"
+    ],
+    "statements": 100,
+    "functions": 100,
+    "branches": 100,
+    "reporter": [
+      "lcov"
+    ]
   }
 }
