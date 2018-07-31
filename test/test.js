@@ -4,6 +4,7 @@ var expect = require('chai').expect;
 var config = require('../config.js');
 var fixtures = require('../fixturesAndMocks/fixtures.js');
 var mocks = require('../fixturesAndMocks/mocks.js');
+let templateMocks = require('../fixturesAndMocks/templateMocks.js')
 var request = require('request')
 
 // uncomment this next line to use actual authentication with a real github personal token
@@ -442,7 +443,7 @@ describe("cwrcGit", function () {
 	describe(".getTemplates", function () {
 
 		beforeEach(function () {
-			var getTemplatesNock = mocks.getTemplatesNock();
+			templateMocks();
 		});
 
 		it("returns correctly", function (done) {
@@ -470,11 +471,11 @@ describe("cwrcGit", function () {
 	describe(".getTemplate", function () {
 
 		beforeEach(function () {
-			var getTemplateNock = mocks.getTemplateNock();
+			templateMocks();
 		});
 
 		it("returns correctly", function (done) {
-			cwrcGit.getTemplate({owner: 'cwrc', repo: 'CWRC-Writer-Templates', path: 'letter.xml', ref: 'master'})
+			cwrcGit.getTemplate({owner: 'cwrc', repo: 'CWRC-Writer-Templates', path: 'Sample TEI letter.xml', ref: 'master'})
 				.then(
 					result => {
 						expect(result).to.exist;
@@ -494,11 +495,11 @@ describe("cwrcGit", function () {
 		})
 
 		it("returns the decoded document", function (done) {
-			cwrcGit.getTemplate({owner: 'cwrc', repo: 'CWRC-Writer-Templates', path: 'letter.xml', ref: 'master'})
+			cwrcGit.getTemplate({owner: 'cwrc', repo: 'CWRC-Writer-Templates', path: 'Sample TEI letter.xml', ref: 'master'})
 				.then(
 					result => {
 						expect(result).to.contain(`<?xml version="1.0" encoding="UTF-8"?>`)
-						expect(result).to.contain(`<title>Sample Letter Title</title>`)
+						expect(result).to.contain(`<title>`)
 						done()
 					}
 				)

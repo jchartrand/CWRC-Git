@@ -45,19 +45,19 @@ function getTemplates(theDetails){
         {
             owner: theDetails.owner || 'cwrc', 
             repo: theDetails.repo || 'CWRC-Writer-Templates', 
-            ref: theDetails.branch || 'master', 
+            ref: theDetails.ref || 'master',
             path: theDetails.path || 'templates'
         }
     )
 }
 
 function getTemplate(theDetails){
-    let path = 'templates/' + (theDetails.path || 'letter.xml');
+    let path = 'templates/' + (theDetails.path || 'Sample TEI letter.xml');
     return github.repos.getContent(
         {
             owner: theDetails.owner || 'cwrc', 
             repo: theDetails.repo || 'CWRC-Writer-Templates', 
-            ref: theDetails.branch || 'master', 
+            ref: theDetails.ref || 'master',
             path: path
         }
     ).then(
