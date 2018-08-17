@@ -87,7 +87,12 @@ function getDoc(chainedResult) {
 }
 
 function createRepo(chainedResult){
-	const {repo, isPrivate, description} = chainedResult
+	let {repo, isPrivate = false, description} = chainedResult
+	if (isPrivate === 'true') {
+		isPrivate = true;
+	} else if (isPrivate === 'false') {
+		isPrivate = false;
+	}
     const createParams = {
         name: repo,
         auto_init: true, 
@@ -185,7 +190,9 @@ async function getLatestFileSHA(chainedResult) {
 				}
 			}
 		}`
-	})
+	}).catch(function(error) {
+		console.log(error);
+	});
 	const sha = result ? result.oid : null
 	return {...chainedResult, sha}
 }
