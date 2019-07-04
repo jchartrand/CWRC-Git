@@ -40,6 +40,12 @@ function getReposForUser(theDetails) {
     return github.repos.getForUser(theDetails)
 }
 
+function getPermissionsForUser(owner, repo, username) {
+	return github.repos.getCollaboratorPermissionLevel({
+		owner, repo, username
+	})
+}
+
 function getTemplates(theDetails){
     return github.repos.getContent(
         {
@@ -474,7 +480,8 @@ module.exports = {
     authenticate: authenticate,
     getDetailsForAuthenticatedUser: getDetailsForAuthenticatedUser,
     getReposForAuthenticatedUser: getReposForAuthenticatedUser,
-    getReposForUser: getReposForUser,
+	getReposForUser: getReposForUser,
+	getPermissionsForUser: getPermissionsForUser,
 	saveAsPullRequest: saveAsPullRequest,
 	saveDoc: saveDoc,
 	getDoc: getDoc,
