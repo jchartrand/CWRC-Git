@@ -249,7 +249,7 @@ function updateFile(chainedResult) {
 function logError(error) {
     console.error("oh no!");
     console.log(error);
-    return Promise.reject(new Error(`Failed to call the GitHub API:  ${error}`));
+    return Promise.reject(error);
 }
 
 function addAppInfoTag(docString) {
