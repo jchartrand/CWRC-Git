@@ -28,6 +28,10 @@ function getDetailsForAuthenticatedUser() {
     return github.users.get({})
 }
 
+function getDetailsForUser(theDetails) {
+	return github.users.getByUsername(theDetails)
+}
+
 // options can be as described here:
 // https://octokit.github.io/rest.js/#api-Repos-getAll
 function getReposForAuthenticatedUser(options){
@@ -38,6 +42,10 @@ function getReposForAuthenticatedUser(options){
 
 function getReposForUser(theDetails) {
     return github.repos.getForUser(theDetails)
+}
+
+function getDetailsForOrg(theDetails) {
+	return github.orgs.get(theDetails)
 }
 
 function getPermissionsForUser(owner, repo, username) {
@@ -116,6 +124,31 @@ function createRepo(chainedResult){
 	    .catch(logError)
 
 	// .then(getMasterBranchSHAs)
+}
+
+function createOrgRepo(theDetails){
+	let {org, repo, isPrivate = false, description} = theDetails
+	if (isPrivate === 'true') {
+		isPrivate = true;
+	} else if (isPrivate === 'false') {
+		isPrivate = false;
+	}
+    const createParams = {
+		org,
+        name: repo,
+        auto_init: true, 
+        private: isPrivate,
+        description: description
+    }
+    return github.repos.createForOrg(createParams)
+        .then(githubResponse=>{
+            return {
+	            ...theDetails,
+	            owner: githubResponse.data.owner.login,
+	            repo: githubResponse.data.name
+            }
+        })
+	    .catch(logError)
 }
 
 function encodeContent(content) {
@@ -478,7 +511,9 @@ function checkForBranch(theDetails) {
 
 module.exports = {
     authenticate: authenticate,
-    getDetailsForAuthenticatedUser: getDetailsForAuthenticatedUser,
+	getDetailsForAuthenticatedUser: getDetailsForAuthenticatedUser,
+	getDetailsForUser: getDetailsForUser,
+	getDetailsForOrg: getDetailsForOrg,
     getReposForAuthenticatedUser: getReposForAuthenticatedUser,
 	getReposForUser: getReposForUser,
 	getPermissionsForUser: getPermissionsForUser,
@@ -486,6 +521,7 @@ module.exports = {
 	saveDoc: saveDoc,
 	getDoc: getDoc,
 	createRepo: createRepo,
+	createOrgRepo: createOrgRepo,
     getTemplates: getTemplates,
     getTemplate: getTemplate,
     search: search,
