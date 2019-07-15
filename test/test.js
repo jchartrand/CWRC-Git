@@ -509,14 +509,14 @@ describe("cwrcGit", function () {
 	});
 
 
-	describe(".search", function () {
+	describe(".searchCode", function () {
 
 		beforeEach(function () {
 			var getSearchNock = mocks.getSearchNock();
 		});
 
 		it("returns correctly", function (done) {
-			cwrcGit.search('cwrc-melbourne+repo:jchartrand/cleanDoc2')
+			cwrcGit.searchCode('cwrc-melbourne+repo:jchartrand/cleanDoc2')
 				.then(
 					result => {
 						expect(result).to.exist
@@ -526,7 +526,7 @@ describe("cwrcGit", function () {
 		})//.timeout(5000); // to force mocha to wait longer for async to return
 
 		it("returns highlighting", function (done) {
-			cwrcGit.search('cwrc-melbourne+repo:jchartrand/cleanDoc2')
+			cwrcGit.searchCode('cwrc-melbourne+repo:jchartrand/cleanDoc2')
 				.then(
 					result => {
 						expect(result.data.items[0].text_matches).to.exist

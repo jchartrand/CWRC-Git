@@ -436,8 +436,22 @@ function unflattenContents(flatContents) {
 		return result
 }
 
-function search(query, page, per_page) {
+function searchCode(query, page, per_page) {
     return github.search.code(
+    	{
+		    q: query,
+		    page,
+		    per_page
+        }
+    ).then(
+	    (result)=>{
+		    return result
+	    }
+    );
+}
+
+function searchRepos(query, page, per_page) {
+    return github.search.repos(
     	{
 		    q: query,
 		    page,
@@ -524,7 +538,8 @@ module.exports = {
 	createOrgRepo: createOrgRepo,
     getTemplates: getTemplates,
     getTemplate: getTemplate,
-    search: search,
+	searchCode: searchCode,
+	searchRepos: searchRepos,
     getRepoContents: getRepoContents,
 	getRepoContentsByDrillDown: getRepoContentsByDrillDown,
 
