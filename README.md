@@ -53,64 +53,7 @@ The spec directory contains specifications (tests) that can help better understa
 
 ### API
 
-The methods exposed (API) by this package are:
-
-```
-authenticate(gitHubOAuthToken) - must first be called before any of the other methods
-
-getDetailsForAuthenticatedUser()
-
-getReposForAuthenticatedUser()
-
-getReposForUser({username:gitHubUserNameGoesHere})
-
-createRepoForDoc({
-		repo: the repository name,
-	    isPrivate: true/false, 
-	    doc:the XML document itself, 
-	    description: description of the repo/doc,
-	    annotations: bundle of oa annotations as single string of rdf,
-	    versionTimestamp: timestamp which acts as the version number
-    })
-
-saveDoc({
-		owner: github username,
-	    repo: repository name,
-	    doc:the XML document itself, 
-	    baseTreeSHA: baseTreeSHA, 
-	    parentCommitSHA: parentCommitSHA,
-	    annotations: bundle of oa annotations as single string of rdf,
-	    versionTimestamp: timestamp which acts as the version number
-    })
-
-getDoc({
-		owner: github username, 
-		repo: github repository name
-	})
-
-getAnnotations({
-		owner: github username, 
-		repo: github repository name
-	})
-
-getTemplates({
-		owner: github username, 
-		repo: github repository name,
-		ref: the branch
-		path: path to template files
-	})
-
-getTemplate(download_url_from_getTemplates_call)
-
-search({
-		user: github username (optional)
-		topics: array of github topics (optional),
-		query: query terms (required)
-	})
-
-```
-
-
+[View the full API here](API.md)
 
 ### Development
 
