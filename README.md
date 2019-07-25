@@ -16,12 +16,12 @@
 1. [Installation](#installation)
 1. [Use](#use)
 1. [API](#api)
+1. [License](#license)
 <!---
 1. [Development](#development)
 1. [Contributing](#contributing)
 1. [FAQ](#faq)
 -->
-1. [License](#license)
 
 ### Overview
 
