@@ -20,88 +20,134 @@ var cwrcAppName = "CWRC-GitWriter" + "-web-app";
 // The document and annotations are new because we rewrite all the annotations to use
 // new raw github URIs for the newly saved document and annotation files.
 
+
+function _encodeContent(content) {
+	return Buffer.from(content).toString('base64')
+}
+function _decodeContent(content) {
+	return Buffer.from(content, 'base64').toString('utf8')
+}
+
+
+/**
+ * Authenticate the user for making calls to GitHub, using their OAuth token.
+ * See {@link https://developer.github.com/v3/#authentication}
+ * @param {String} gitHubOAuthToken The OAuth token from GitHub
+ * @returns {Promise}
+ */
 function authenticate(gitHubOAuthToken) {
    return github.authenticate({type: "oauth",token: gitHubOAuthToken})
 }
 
+/**
+ * Get the details associated with the currently authenticated user.
+ * See {@link https://developer.github.com/v3/users/#get-the-authenticated-user}
+ * @returns {Promise}
+ */
 function getDetailsForAuthenticatedUser() {
     return github.users.get({})
 }
 
-function getDetailsForUser(theDetails) {
-	return github.users.getByUsername(theDetails)
+/**
+ * Get the details for a specific user.
+ * See {@link https://developer.github.com/v3/users/#get-a-single-user}
+ * @param {String} username 
+ * @returns {Promise}
+ */
+function getDetailsForUser(username) {
+	return github.users.getByUsername({username})
 }
 
-// options can be as described here:
-// https://octokit.github.io/rest.js/#api-Repos-getAll
-function getReposForAuthenticatedUser(options){
-    return github.repos.getAll(options).then((result)=>{
+/**
+ * Get the repos the user has explicit permission to access.
+ * See {@link https://developer.github.com/v3/repos/#list-your-repositories}
+ * @param {String} affiliation User's relation to the repo
+ * @param {Integer} page The page number
+ * @param {Integer} per_page Repos per page
+ * @returns {Promise}
+ */
+function getReposForAuthenticatedUser(affiliation, page, per_page) {
+    return github.repos.getAll({page, per_page, affiliation}).then((result)=>{
 	    return result
     })
 }
 
-function getReposForUser(theDetails) {
-    return github.repos.getForUser(theDetails)
+/**
+ * Get the repos for a specific user.
+ * See {@link https://developer.github.com/v3/repos/#list-user-repositories}
+ * @param {String} username The username
+ * @param {Integer} page The page number
+ * @param {Integer} per_page Repos per page
+ * @returns {Promise}
+ */
+function getReposForUser(username, page, per_page) {
+    return github.repos.getForUser({username, page, per_page})
 }
 
-function getDetailsForOrg(theDetails) {
-	return github.orgs.get(theDetails)
+/**
+ * Get the repos for a specific org.
+ * See {@link https://developer.github.com/v3/repos/#list-organization-repositories}
+ * @param {String} org The org name
+ * @returns {Promise}
+ */
+function getDetailsForOrg(org) {
+	return github.orgs.get({org})
 }
 
+/**
+ * Get the permissions for a specific user and repo.
+ * See {@link https://developer.github.com/v3/repos/collaborators/#review-a-users-permission-level}
+ * @param {String} owner The repo owner
+ * @param {String} repo The repo
+ * @param {String} username The username
+ * @returns {Promise}
+ */
 function getPermissionsForUser(owner, repo, username) {
 	return github.repos.getCollaboratorPermissionLevel({
 		owner, repo, username
 	})
 }
 
-function getTemplates(theDetails){
-    return github.repos.getContent(
-        {
-            owner: theDetails.owner || 'cwrc', 
-            repo: theDetails.repo || 'CWRC-Writer-Templates', 
-            ref: theDetails.ref || 'master',
-            path: theDetails.path || 'templates'
-        }
-    )
+/**
+ * Get the CWRC Writer templates.
+ * Default location is {@link https://github.com/cwrc/CWRC-Writer-Templates/tree/master/templates}
+ * @param {String} owner The owner
+ * @param {String} repo The repo
+ * @param {String} ref The branch/tag
+ * @param {String} path The path
+ * @returns {Promise}
+ */
+function getTemplates(owner, repo, ref, path) {
+    return github.repos.getContent({owner, repo, ref, path})
 }
 
-function getTemplate(theDetails){
-    let path = 'templates/' + (theDetails.path || 'Sample TEI letter.xml');
-    return github.repos.getContent(
-        {
-            owner: theDetails.owner || 'cwrc', 
-            repo: theDetails.repo || 'CWRC-Writer-Templates', 
-            ref: theDetails.ref || 'master',
-            path: path
-        }
-    ).then(
-        result=>{
-            return Buffer.from(result.data.content, 'base64').toString('utf8');
-        }
-    )
-}
-
-
-function getDoc(chainedResult) {
-
-	const {owner, repo, branch, path} = chainedResult
-	return github.repos.getContent(
-		{
-			owner: owner,
-			repo: repo,
-			ref: branch,
-			path: path
-		}
-	).then(result => ({
-			...chainedResult,
-			doc: Buffer.from(result.data.content, 'base64').toString('utf8'),
+/**
+ * Get a document from GitHub.
+ * See {@link https://developer.github.com/v3/repos/contents/#get-contents}
+ * @param {String} owner The owner
+ * @param {String} repo The repo
+ * @param {String} ref The branch/tag
+ * @param {String} path The path
+ * @returns {Promise}
+ */
+function getDoc(owner, repo, ref, path) {
+	return github.repos.getContent({owner, repo, ref, path}).then(result => ({
+			owner, repo, ref, path,
+			doc: _decodeContent(result.data.content),
 			sha: result.data.sha
 		})
 	)
 }
 
-function createRepo(chainedResult){
-	let {repo, isPrivate = false, description} = chainedResult
+/**
+ * Create a new repo for the authenticated user.
+ * See {@link https://developer.github.com/v3/repos/#create}
+ * @param {String} repo The repo
+ * @param {String} description The repo description
+ * @param {String|Boolean} isPrivate Is the repo private
+ * @returns {Promise}
+ */
+function createRepo(repo, description, isPrivate) {
 	if (isPrivate === 'true') {
 		isPrivate = true;
 	} else if (isPrivate === 'false') {
@@ -116,18 +162,26 @@ function createRepo(chainedResult){
     return github.repos.create(createParams)
         .then(githubResponse=>{
             return {
-	            ...chainedResult,
+	            description, isPrivate,
 	            owner: githubResponse.data.owner.login,
 	            repo: githubResponse.data.name
             }
         })
 	    .catch(logError)
 
-	// .then(getMasterBranchSHAs)
+	// .then(_getMasterBranchSHAs)
 }
 
-function createOrgRepo(theDetails){
-	let {org, repo, isPrivate = false, description} = theDetails
+/**
+ * Create a new repo for a specific org.
+ * See {@link https://developer.github.com/v3/repos/#create}
+ * @param {String} org The org
+ * @param {String} repo The repo
+ * @param {String} description The description
+ * @param {String|Boolean} isPrivate Is the repo private
+ * @returns {Promise}
+ */
+function createOrgRepo(org, repo, description, isPrivate) {
 	if (isPrivate === 'true') {
 		isPrivate = true;
 	} else if (isPrivate === 'false') {
@@ -143,7 +197,7 @@ function createOrgRepo(theDetails){
     return github.repos.createForOrg(createParams)
         .then(githubResponse=>{
             return {
-	            ...theDetails,
+	            org, description, isPrivate,
 	            owner: githubResponse.data.owner.login,
 	            repo: githubResponse.data.name
             }
@@ -151,19 +205,38 @@ function createOrgRepo(theDetails){
 	    .catch(logError)
 }
 
-function encodeContent(content) {
-	return Buffer.from(content).toString('base64')
+/**
+ * Save (i.e. create or update) a document.
+ * See {@link https://developer.github.com/v3/repos/contents/#create-or-update-a-file}
+ * @param {String} owner The owner
+ * @param {String} repo The repo
+ * @param {String} path The path
+ * @param {String} content The content
+ * @param {String} branch The branch
+ * @param {String} message The commit message
+ * @param {String} [sha] The SHA
+ * @returns {Promise}
+ */
+async function saveDoc(owner, repo, path, content, branch, message, sha) {
+	if (sha === undefined) {
+		// try to get the sha
+		sha = await _getLatestFileSHA({owner, repo, branch, path})
+	}
+	if (sha) {
+		return _updateFile({owner, repo, path, content, branch, message, sha})
+	} else {
+		return _createFile({owner, repo, path, content, branch, message})
+	}
 }
-
 
 /* the Details must contain:
 owner: the owner of the repo
 repo: repoName
 branch: the branch name
  */
-function createBranchFromMaster(theDetails) {
+function _createBranchFromMaster(theDetails) {
 	const {owner, repo, branch} = theDetails
-	return getMasterBranchSHAs(theDetails)
+	return _getMasterBranchSHAs(theDetails)
 		.then(result => ({
 			owner,
 			repo,
@@ -175,24 +248,32 @@ function createBranchFromMaster(theDetails) {
 		.catch(logError)
 }
 
-/* the Details must contain:
-owner: repoownwer
-repo: repoName
-path: path
-title:  title for pull request
-message:  message for commit
-branch: the branch in which to save, i.e., the github username for the person submitting
-content: the file content to save
+function _checkForPullRequest({owner, repo, branch}) {
+	return github.search.issues({q: `state:open type:pr repo:${owner}/${repo} head:${branch}`}).then(
+		result=>result.data.total_count > 0
+	)
+}
+
+/**
+ * Save (i.e. create) a document as a pull request.
+ * See {@link https://developer.github.com/v3/pulls/#create-a-pull-request}
+ * @param {String} owner The owner
+ * @param {String} repo The repo
+ * @param {String} path The path
+ * @param {String} content The content
+ * @param {String} branch The branch
+ * @param {String} message The commit message
+ * @param {String} title The title of the pull request
+ * @param {String} [sha] The SHA
+ * @returns {Promise}
  */
-async function saveAsPullRequest(chainedResult) {
-	const {owner, repo, title, branch, message} = chainedResult
-	//probably want to write in the cwrc-git /// application tag,
-	const doesBranchExist = await checkForBranch({owner, repo, branch});
-	if (! doesBranchExist) {
-		await createBranchFromMaster({owner, repo, branch})
+async function saveAsPullRequest(owner, repo, path, content, branch, message, title, sha) {
+	const doesBranchExist = await _checkForBranch({owner, repo, branch});
+	if (!doesBranchExist) {
+		await _createBranchFromMaster({owner, repo, branch})
 	}
-	const resultOfSave = await saveDoc(chainedResult)
-	const doesPullRequestExist = await checkForPullRequest({owner, repo, branch})
+	const resultOfSave = await saveDoc(owner, repo, path, content, branch, message, sha)
+	const doesPullRequestExist = await _checkForPullRequest({owner, repo, branch})
 	// there can be only one PR per branch */
 	if (! doesPullRequestExist) {
 		const prArgs = {
@@ -206,16 +287,10 @@ async function saveAsPullRequest(chainedResult) {
 		const prResult = await github.pullRequests.create(prArgs)
 	}
 
-	return {...chainedResult, sha: resultOfSave.sha}
+	return {owner, repo, path, content, branch, message, title, sha: resultOfSave.sha}
 }
 
-function checkForPullRequest({owner, repo, branch}) {
-	return github.search.issues({q: `state:open type:pr repo:${owner}/${repo} head:${branch}`}).then(
-		result=>result.data.total_count > 0
-	)
-}
-
-async function getLatestFileSHA(chainedResult) {
+async function _getLatestFileSHA(chainedResult) {
 	const {owner, repo, branch, path} = chainedResult
 	const {data: {data: {repository: {object: result}}}} = await github.request({
 		method: 'POST',
@@ -233,20 +308,9 @@ async function getLatestFileSHA(chainedResult) {
 		console.log(error);
 	});
 	const sha = result ? result.oid : null
-	return {...chainedResult, sha}
+	return sha
 }
 
-async function saveDoc(chainedResult) {
-	const {owner, repo, branch, path, sha: originalFileSHA} = chainedResult
-	let sha
-	if (originalFileSHA) {
-		sha = originalFileSHA
-	} else {
-		const {sha: latestSHA} = await getLatestFileSHA({owner, repo, branch, path})
-		sha = latestSHA
-	}
-	return sha ? updateFile({...chainedResult, sha}) : createFile(chainedResult)
-}
 // expects in theDetails:
 // {
 //      owner: owner,
@@ -257,11 +321,12 @@ async function saveDoc(chainedResult) {
 //      branch: branch (default master)
 // }
 // returns the chained result object for passing to further promise based calls.
-function createFile(chainedResult) {
+function _createFile(chainedResult) {
 	const {owner, repo, path, message, content, branch} = chainedResult
-	return github.repos.createFile({owner, repo, path, message, branch, content: encodeContent(content)})
+	return github.repos.createFile({owner, repo, path, message, branch, content: _encodeContent(content)})
 		.then(result=>({...chainedResult, sha: result.data.content.sha}))
 }
+
 // expects in theDetails:
 // {
 //      owner: owner,
@@ -273,59 +338,20 @@ function createFile(chainedResult) {
 //      sha: oldFileSHA
 // }
 // returns the chained result object for passing to further promise based calls.
-function updateFile(chainedResult) {
+function _updateFile(chainedResult) {
 	const {owner, repo, path, message, content, sha, branch} = chainedResult
 	//probably want to write in the cwrc-git /// application tag, but that could go in from the cwrc-writer I guess, before sending.
-	return github.repos.updateFile({owner, repo, path, message, sha, branch, content: encodeContent(content)})
+	return github.repos.updateFile({owner, repo, path, message, sha, branch, content: _encodeContent(content)})
 		.then(result=>({...chainedResult, sha: result.data.content.sha}))
 }
+
 function logError(error) {
     console.error("oh no!");
     console.log(error);
     return Promise.reject(error);
 }
 
-function addAppInfoTag(docString) {
-	let doc = new DOMParser().parseFromString(docString)
-
-	let header = doc.documentElement.getElementsByTagName('teiHeader')[0]
-	let encodingDesc = header.getElementsByTagName('encodingDesc')
-	if (!encodingDesc.length) {
-		encodingDesc = doc.createElement('encodingDesc')
-		header.appendChild(encodingDesc)
-	} else {
-		encodingDesc = encodingDesc[0]
-	}
-	let appInfo = encodingDesc.getElementsByTagName('appInfo');
-	if (!appInfo.length) {
-		appInfo = doc.createElement('appInfo')
-		encodingDesc.appendChild(appInfo)
-	} else {
-		appInfo = appInfo[0]
-	}
-	let application = appInfo.getElementsByTagName('application')
-	if (!application.length) {
-		application = doc.createElement('application')
-		appInfo.appendChild(application)
-	} else {
-		application = application[0]
-	}
-
-	application.setAttribute('version', '1.0')
-	application.setAttribute('ident', cwrcAppName)
-	application.setAttribute('notAfter', (new Date()).toISOString())
-	let applicationLabel = application.getElementsByTagName('label')
-	if (!applicationLabel.length) {
-		applicationLabel = doc.createElement('label')
-		applicationLabel.appendChild(doc.createTextNode(cwrcAppName))
-		application.appendChild(applicationLabel)
-	}
-
-	let newDoc = serializer.serializeToString(doc)
-
-}
-
-function getMasterBranchSHAs(chainedResult) {
+function _getMasterBranchSHAs(chainedResult) {
     return github.repos.getBranch(
         {
             owner: chainedResult.owner, 
@@ -341,11 +367,9 @@ function getMasterBranchSHAs(chainedResult) {
     )
 }
 
-
-
-function getTreeContentsByDrillDown(chainedResult) {
+function _getTreeContentsByDrillDown(chainedResult) {
 	let basePath = ''
-	return getTreeContents(
+	return _getTreeContents(
 		{
 			owner: chainedResult.owner,
 			repo: chainedResult.repo,
@@ -365,14 +389,14 @@ function getTreeContentsByDrillDown(chainedResult) {
 	)
 }
 
-function getTreeContents(treeDetails, basePath) {
+function _getTreeContents(treeDetails, basePath) {
 	return github.gitdata.getTree(treeDetails
 	).then(
 		githubResponse=>{
 			let promises = githubResponse.data.tree.map(entry=>{
 			    let path = basePath + entry.path
 			    if (entry.type === 'tree') {
-				    return getTreeContents(
+				    return _getTreeContents(
 					    {
 						    owner: treeDetails.owner,
 						    repo: treeDetails.repo,
@@ -398,7 +422,7 @@ function getTreeContents(treeDetails, basePath) {
 	)
 }
 
-function unflattenContents(flatContents) {
+function _unflattenContents(flatContents) {
 		const files = flatContents.filter(file=>file.type==='blob')
 		var result = {type: 'folder', name: '', path: '', contents: []}
 		const findSubFolder = (parentFolder, folderNameToFind) => {
@@ -436,6 +460,14 @@ function unflattenContents(flatContents) {
 		return result
 }
 
+/**
+ * Search for files based on a specific query.
+ * See {@link https://developer.github.com/v3/search/#search-code}
+ * @param {String} query The query
+ * @param {String} page The page number
+ * @param {String} per_page Results per page
+ * @returns {Promise}
+ */
 function searchCode(query, page, per_page) {
     return github.search.code(
     	{
@@ -450,6 +482,14 @@ function searchCode(query, page, per_page) {
     );
 }
 
+/**
+ * Search for repos based on a specific query.
+ * See {@link https://developer.github.com/v3/search/#search-repositories}
+ * @param {String} query The query
+ * @param {String} page The page number
+ * @param {String} per_page Results per page
+ * @returns {Promise}
+ */
 function searchRepos(query, page, per_page) {
     return github.search.repos(
     	{
@@ -464,17 +504,19 @@ function searchRepos(query, page, per_page) {
     );
 }
 
-// expects in theDetails argument:
-// {
-//    repo: repo,
-//    owner: owner
-// }
-function getRepoContents(theDetails) {
-	return getMasterBranchSHAs(theDetails)
-        .then(getTreeContentsRecursively)
+/**
+ * Gets the contents (i.e. file structure) of a repo using the GitHub recursive tree method.
+ * See {@link https://developer.github.com/v3/git/trees/#get-a-tree-recursively}
+ * @param {String} owner The owner
+ * @param {String} repo The repo
+ * @returns {Promise}
+ */
+function getRepoContents(owner, repo) {
+	return _getMasterBranchSHAs({owner, repo})
+        .then(_getTreeContentsRecursively)
 }
 
-function getTreeContentsRecursively(chainedResult) {
+function _getTreeContentsRecursively(chainedResult) {
 	return github.gitdata.getTree(
 		{
 			owner: chainedResult.owner,
@@ -485,22 +527,25 @@ function getTreeContentsRecursively(chainedResult) {
 	).then(
 		githubResponse=>({
 			...chainedResult,
-			contents: unflattenContents(githubResponse.data.tree),
+			contents: _unflattenContents(githubResponse.data.tree),
 			truncated: githubResponse.data.truncated
 		})
 	)
 }
-// expects in theDetails argument:
-// {
-//    repo: repo,
-//    owner: owner
-// }
-function getRepoContentsByDrillDown(theDetails) {
-	return getMasterBranchSHAs(theDetails)
-		.then(getTreeContentsByDrillDown)
+
+/**
+ * Gets the contents (i.e. file structure) of a repo by manually recursing.
+ * Intended to be used if the github recursive option didn't work because the repository is too big.
+ * @param {String} owner The owner
+ * @param {String} repo The repo
+ * @returns {Promise}
+ */
+function getRepoContentsByDrillDown(owner, repo) {
+	return _getMasterBranchSHAs({owner, repo})
+		.then(_getTreeContentsByDrillDown)
 }
 
-function checkForBranch(theDetails) {
+function _checkForBranch(theDetails) {
 	return github.gitdata.getReference(
 		{
 			owner: theDetails.owner,
@@ -537,16 +582,8 @@ module.exports = {
 	createRepo: createRepo,
 	createOrgRepo: createOrgRepo,
     getTemplates: getTemplates,
-    getTemplate: getTemplate,
 	searchCode: searchCode,
 	searchRepos: searchRepos,
     getRepoContents: getRepoContents,
-	getRepoContentsByDrillDown: getRepoContentsByDrillDown,
-
-	checkForBranch: checkForBranch,
-	checkForPullRequest: checkForPullRequest,
-	createBranchFromMaster: createBranchFromMaster,
-	getLatestFileSHA: getLatestFileSHA,
-	createFile: createFile,
-	updateFile: updateFile
+	getRepoContentsByDrillDown: getRepoContentsByDrillDown
 };

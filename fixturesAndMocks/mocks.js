@@ -17,7 +17,7 @@ function getDetailsForAuthenticatedUserNock() {
 function getReposForAuthenticatedUserNock() {
   return nock('https://api.github.com:443', {"encodedQueryParams":true})
   .get('/user/repos')
-  .query({"access_token":config.personal_oath_for_testing})
+  .query({"access_token":config.personal_oath_for_testing,"page":1,"per_page":10,"affiliation":"owner"})
   .reply(200, [{"id":19289649,"name":fixtures.testRepo}]);
 
 }
@@ -170,7 +170,7 @@ function getReposForGithubUserNock() {
 
   return nock('https://api.github.com:443', {"encodedQueryParams":true})
         .get(`/users/${fixtures.owner}/repos`)
-        .query({"access_token":config.personal_oath_for_testing})
+        .query({"access_token":config.personal_oath_for_testing,"page":1,"per_page":10})
         .reply(200, [{
           "id": 76067525,
           "name": "aTest",

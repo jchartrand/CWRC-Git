@@ -58,7 +58,7 @@ describe("cwrcGit", function () {
 
 		it("returns correctly", function (done) {
 
-			cwrcGit.getDoc({owner: fixtures.owner, repo: fixtures.testRepo, branch: 'jchartrand', path: 'curt/qurt/test.txt'})
+			cwrcGit.getDoc(fixtures.owner, fixtures.testRepo, 'jchartrand', 'curt/qurt/test.txt')
 				.then(result => {
 					expect(result.sha).to.be.a('string');
 					//expect(result.doc).to.equal(fixtures.testDoc);
@@ -79,7 +79,7 @@ describe("cwrcGit", function () {
 		})
 
 		it("returns correctly", function (done) {
-			cwrcGit.getRepoContents({repo: fixtures.testRepo, owner: fixtures.owner})
+			cwrcGit.getRepoContents(fixtures.owner, fixtures.testRepo)
 				.then(result => {
 					expect(result).to.exist;
 					// expect(result.data)
@@ -98,7 +98,7 @@ describe("cwrcGit", function () {
 		})
 
 		it("returns correctly", function (done) {
-			cwrcGit.getRepoContentsByDrillDown({repo: fixtures.testRepo, owner: fixtures.owner})
+			cwrcGit.getRepoContentsByDrillDown(fixtures.owner, fixtures.testRepo)
 				.then(result => {
 					expect(result).to.exist
 					//console.log(JSON.stringify(result))
@@ -115,13 +115,13 @@ describe("cwrcGit", function () {
 		});
 
 		it("returns correctly", function (done) {
-			cwrcGit.getReposForUser({username: fixtures.owner})
+			cwrcGit.getReposForUser(fixtures.owner, 1, 10)
 				.then(result => {
 					expect(result).to.exist;
 					expect(result.data[0].owner.login).to.equal(fixtures.owner)
 					done();
 				});
-		});
+		})
 
 	});
 
@@ -133,13 +133,13 @@ describe("cwrcGit", function () {
 		});
 
 		it("returns correctly", function (done) {
-			cwrcGit.getReposForAuthenticatedUser()
+			cwrcGit.getReposForAuthenticatedUser('owner', 1, 10)
 				.then(result => {
 					expect(result).to.exist;
 					expect(result.data[0].name).to.equal(fixtures.testRepo);
 					done();
 				})
-		})// .timeout(5000); // to force mocha to wait longer for async to return
+		})//.timeout(5000); // to force mocha to wait longer for async to return
 
 	});
 
@@ -151,12 +151,7 @@ describe("cwrcGit", function () {
 		})
 
 		it("returns correctly", function (done) {
-			cwrcGit.createRepo(
-				{
-					repo: fixtures.testRepo,
-					isPrivate: fixtures.isPrivate,
-					description: fixtures.testRepoDescription
-				})
+			cwrcGit.createRepo(fixtures.testRepo, fixtures.testRepoDescription, fixtures.isPrivate)
 				.then(
 					result => {
 						expect(result.owner).to.equal(fixtures.owner);
@@ -164,213 +159,214 @@ describe("cwrcGit", function () {
 						done()
 					}
 				)
-		}).timeout(9000);
+		}).timeout(5000);
 	})
 
-	describe(".createBranchFromMaster", function() {
+	// describe(".createBranchFromMaster", function() {
 
-		beforeEach(function () {
-			mocks.createBranchFromMasterGetMaster()
-			mocks.createBranchFromMasterCreateBranch()
-			mocks.createBranchGeneric()
-		})
+	// 	beforeEach(function () {
+	// 		mocks.createBranchFromMasterGetMaster()
+	// 		mocks.createBranchFromMasterCreateBranch()
+	// 		mocks.createBranchGeneric()
+	// 	})
 
-		it("returns valid url for new ref if created", function(done){
-			cwrcGit.createBranchFromMaster(
-				{
-					"owner": fixtures.owner,
-					"repo": fixtures.testRepo,
-					"branch": 'test84'
-				})
-				.then(
-					result=> {
-						expect(result.refURL).to.exist
-						expect(request.head('http://www.google.com', (error, response)=>(!error && response.statusCode == 200)))
-						done()
-					}
-				)
-		})
-	})
+	// 	it("returns valid url for new ref if created", function(done){
+	// 		cwrcGit.createBranchFromMaster(
+	// 			{
+	// 				"owner": fixtures.owner,
+	// 				"repo": fixtures.testRepo,
+	// 				"branch": 'test84'
+	// 			})
+	// 			.then(
+	// 				result=> {
+	// 					expect(result.refURL).to.exist
+	// 					expect(request.head('http://www.google.com', (error, response)=>(!error && response.statusCode == 200)))
+	// 					done()
+	// 				}
+	// 			)
+	// 	})
+	// })
 
-	describe(".checkForPullRequest", function () {
+	// describe(".checkForPullRequest", function () {
 
-		beforeEach(function () {
-			mocks.findExistingPRNock()
-			mocks.missingPRNock()
-		})
+	// 	beforeEach(function () {
+	// 		mocks.findExistingPRNock()
+	// 		mocks.missingPRNock()
+	// 	})
 
-		it("returns true if pr exists", function (done) {
-			cwrcGit.checkForPullRequest(
-				{
-					"repo":fixtures.testRepo,
-					"owner": fixtures.owner,
-					"branch": 'jchartrand'
-				})
-				.then(
-					result => {
-						expect(result).to.be.true
-						done()
-					}
-				)
-		})
-		it("returns false if pr doesn't exist", function (done) {
-			cwrcGit.checkForPullRequest(
-				{
-					"repo":fixtures.testRepo,
-					"owner": fixtures.owner,
-					"branch": 'hote'
-				})
-				.then(
-					result => {
-						expect(result).to.be.false
-						done()
-					}
-				)
-		})
-	})
+	// 	it("returns true if pr exists", function (done) {
+	// 		cwrcGit.checkForPullRequest(
+	// 			{
+	// 				"repo":fixtures.testRepo,
+	// 				"owner": fixtures.owner,
+	// 				"branch": 'jchartrand'
+	// 			})
+	// 			.then(
+	// 				result => {
+	// 					expect(result).to.be.true
+	// 					done()
+	// 				}
+	// 			)
+	// 	})
+	// 	it("returns false if pr doesn't exist", function (done) {
+	// 		cwrcGit.checkForPullRequest(
+	// 			{
+	// 				"repo":fixtures.testRepo,
+	// 				"owner": fixtures.owner,
+	// 				"branch": 'hote'
+	// 			})
+	// 			.then(
+	// 				result => {
+	// 					expect(result).to.be.false
+	// 					done()
+	// 				}
+	// 			)
+	// 	})
+	// })
 
-	describe(".checkForBranch", function () {
-		beforeEach(function () {
-			mocks.getUserBranchHeadNock()
-			mocks.missingBranchNock()
-		})
+	// describe(".checkForBranch", function () {
+	// 	beforeEach(function () {
+	// 		mocks.getUserBranchHeadNock()
+	// 		mocks.missingBranchNock()
+	// 	})
 
-		it("returns true if branch exists", function (done) {
-			cwrcGit.checkForBranch(
-				{
-					"repo":fixtures.testRepo,
-					"owner": fixtures.owner,
-					"branch": 'jchartrand'
-				})
-				.then(
-					result => {
-						expect(result).to.be.true
-						done()
-					}
-				)
-		})
-		it("returns false if branch doesn't exist", function (done) {
-			cwrcGit.checkForBranch(
-				{
-					"repo":fixtures.testRepo,
-					"owner": fixtures.owner,
-					"branch": 'hote'
-				})
-				.then(
-					result => {
-						expect(result).to.be.false
-						done()
-					}
-				)
-		})
-	})
+	// 	it("returns true if branch exists", function (done) {
+	// 		cwrcGit.checkForBranch(
+	// 			{
+	// 				"repo":fixtures.testRepo,
+	// 				"owner": fixtures.owner,
+	// 				"branch": 'jchartrand'
+	// 			})
+	// 			.then(
+	// 				result => {
+	// 					expect(result).to.be.true
+	// 					done()
+	// 				}
+	// 			)
+	// 	})
+	// 	it("returns false if branch doesn't exist", function (done) {
+	// 		cwrcGit.checkForBranch(
+	// 			{
+	// 				"repo":fixtures.testRepo,
+	// 				"owner": fixtures.owner,
+	// 				"branch": 'hote'
+	// 			})
+	// 			.then(
+	// 				result => {
+	// 					expect(result).to.be.false
+	// 					done()
+	// 				}
+	// 			)
+	// 	})
+	// })
 
-	describe(".createFile", function () {
-		beforeEach(function () {
-			var createFileNock = mocks.getCreateFileNock();
-		})
+	// describe(".createFile", function () {
+	// 	beforeEach(function () {
+	// 		var createFileNock = mocks.getCreateFileNock();
+	// 	})
 
-		it("returns correctly", function (done) {
-			cwrcGit.createFile(
-				{
-					owner: fixtures.owner,
-					repo: fixtures.testRepo,
-					path: 'curt/qurt/test1.txt',
-					message: 'some commit message',
-					content: fixtures.testDoc,
-					branch: 'master'
-				})
-				.then(
-					result => {
-						expect(result.sha).to.be.a('string');
-						expect(result.owner).to.equal(fixtures.owner);
-						expect(result.repo).to.equal(fixtures.testRepo);
-						done()
-					}
-				)
-		}).timeout(9000);
-	})
+	// 	it("returns correctly", function (done) {
+	// 		cwrcGit.createFile(
+	// 			{
+	// 				owner: fixtures.owner,
+	// 				repo: fixtures.testRepo,
+	// 				path: 'curt/qurt/test1.txt',
+	// 				message: 'some commit message',
+	// 				content: fixtures.testDoc,
+	// 				branch: 'master'
+	// 			})
+	// 			.then(
+	// 				result => {
+	// 					expect(result.sha).to.be.a('string');
+	// 					expect(result.owner).to.equal(fixtures.owner);
+	// 					expect(result.repo).to.equal(fixtures.testRepo);
+	// 					done()
+	// 				}
+	// 			)
+	// 	}).timeout(9000);
+	// })
 
-	describe(".updateFile", function () {
-		beforeEach(function () {
-			var updateFileNock = mocks.getUpdateFileNock();
-		})
+	// describe(".updateFile", function () {
+	// 	beforeEach(function () {
+	// 		var updateFileNock = mocks.getUpdateFileNock();
+	// 	})
 
-		it("returns correctly", function (done) {
-			cwrcGit.updateFile(
-				{
-					owner: fixtures.owner,
-					repo: fixtures.testRepo,
-					path: 'curt/qurt/test.txt',
-					message: 'another commit message on the update',
-					content: fixtures.testDoc,
-					branch: 'master',
-					sha: '6f715c0deeb9012272c04a50e1fc09bc3fe4bdb7'
-				})
-				.then(
-					result => {
-						expect(result.sha).to.be.a('string');
-						expect(result.owner).to.equal(fixtures.owner);
-						expect(result.repo).to.equal(fixtures.testRepo);
-						done()
-					},
-					error => {
-						console.log(error)
-					}
-				)
-		}).timeout(9000);
-	})
+	// 	it("returns correctly", function (done) {
+	// 		cwrcGit.updateFile(
+	// 			{
+	// 				owner: fixtures.owner,
+	// 				repo: fixtures.testRepo,
+	// 				path: 'curt/qurt/test.txt',
+	// 				message: 'another commit message on the update',
+	// 				content: fixtures.testDoc,
+	// 				branch: 'master',
+	// 				sha: '6f715c0deeb9012272c04a50e1fc09bc3fe4bdb7'
+	// 			})
+	// 			.then(
+	// 				result => {
+	// 					expect(result.sha).to.be.a('string');
+	// 					expect(result.owner).to.equal(fixtures.owner);
+	// 					expect(result.repo).to.equal(fixtures.testRepo);
+	// 					done()
+	// 				},
+	// 				error => {
+	// 					console.log(error)
+	// 				}
+	// 			)
+	// 	}).timeout(9000);
+	// })
 
-	describe(".getLatestFileSHA", function () {
-		beforeEach(function () {
-			mocks.getLatestFileSHANock()
-			mocks.missingSHANock()
-		})
+	// describe(".getLatestFileSHA", function () {
+	// 	beforeEach(function () {
+	// 		mocks.getLatestFileSHANock()
+	// 		mocks.missingSHANock()
+	// 	})
 
-		it("returns a string for existing sha", function (done) {
-			cwrcGit.getLatestFileSHA(
-				{
-					owner: fixtures.owner,
-					repo: fixtures.testRepo,
-					branch: 'jchartrand',
-					path: 'curt/qurt/testq339.txt'
+	// 	it("returns a string for existing sha", function (done) {
+	// 		cwrcGit.getLatestFileSHA(
+	// 			{
+	// 				owner: fixtures.owner,
+	// 				repo: fixtures.testRepo,
+	// 				branch: 'jchartrand',
+	// 				path: 'curt/qurt/testq339.txt'
 
-				})
-				.then(
-					result => {
-						expect(result.sha).to.be.a('string');
-						expect(result.owner).to.equal(fixtures.owner);
-						expect(result.repo).to.equal(fixtures.testRepo);
-						done()
-					},
-					error => {
-						console.log(error)
-					}
-				)
-		}).timeout(9000);
+	// 			})
+	// 			.then(
+	// 				result => {
+	// 					expect(result.sha).to.be.a('string');
+	// 					expect(result.owner).to.equal(fixtures.owner);
+	// 					expect(result.repo).to.equal(fixtures.testRepo);
+	// 					done()
+	// 				},
+	// 				error => {
+	// 					console.log(error)
+	// 				}
+	// 			)
+	// 	}).timeout(9000);
 
-		it("returns null for no sha", function (done) {
-			cwrcGit.getLatestFileSHA(
-				{
-					owner: fixtures.owner,
-					repo: fixtures.testRepo,
-					branch: 'master',
-					path: 'curt/qurt/tesddt.txt'
+	// 	it("returns null for no sha", function (done) {
+	// 		cwrcGit.getLatestFileSHA(
+	// 			{
+	// 				owner: fixtures.owner,
+	// 				repo: fixtures.testRepo,
+	// 				branch: 'master',
+	// 				path: 'curt/qurt/tesddt.txt'
 
-				})
-				.then(
-					result => {
-						expect(result.sha).to.equal(null)
-						expect(result.owner).to.equal(fixtures.owner);
-						expect(result.repo).to.equal(fixtures.testRepo);
-						done()
-					},
-					error => {
-						console.log(error)
-					}
-				)
-		}).timeout(9000);
-	})
+	// 			})
+	// 			.then(
+	// 				result => {
+	// 					expect(result.sha).to.equal(null)
+	// 					expect(result.owner).to.equal(fixtures.owner);
+	// 					expect(result.repo).to.equal(fixtures.testRepo);
+	// 					done()
+	// 				},
+	// 				error => {
+	// 					console.log(error)
+	// 				}
+	// 			)
+	// 	}).timeout(9000);
+	// })
+
 	describe(".saveAsPullRequest", function () {
 		beforeEach(function () {
 				mocks.getUserBranchHeadNock()
@@ -382,15 +378,9 @@ describe("cwrcGit", function () {
 		})
 		it("returns correctly for existing file", function (done) {
 			cwrcGit.saveAsPullRequest(
-				{
-					owner: fixtures.owner,
-					repo: fixtures.testRepo,
-					title: 'glorious title for PR',
-					branch: 'jchartrand',
-					path: 'curt/qurt/testq339.txt',
-					message: 'some commit message',
-					content: fixtures.testDoc
-				})
+					fixtures.owner, fixtures.testRepo, 'curt/qurt/testq339.txt', fixtures.testDoc,
+					'jchartrand', 'some commit message', 'glorious title for PR'
+				)
 				.then(
 					result => {
 						expect(result.sha).to.be.a('string');
@@ -402,15 +392,9 @@ describe("cwrcGit", function () {
 		}).timeout(9000);
 		it("returns correctly for new file", function (done) {
 			cwrcGit.saveAsPullRequest(
-				{
-					owner: fixtures.owner,
-					repo: fixtures.testRepo,
-					title: 'glorious title for PR',
-					branch: 'jchartrand',
-					path: 'curt/qurt/testuufy.txt',
-					message: 'some commit message',
-					content: fixtures.testDoc
-				})
+					fixtures.owner, fixtures.testRepo, 'curt/qurt/testuufy.txt', fixtures.testDoc,
+					'jchartrand', 'some commit message', 'glorious title for PR'
+				)
 				.then(
 					result => {
 						expect(result.sha).to.be.a('string');
@@ -447,17 +431,7 @@ describe("cwrcGit", function () {
 		});
 
 		it("returns correctly", function (done) {
-			cwrcGit.getTemplates({owner: 'cwrc', repo: 'CWRC-Writer-Templates', path: 'templates', ref: 'master'})
-				.then(
-					result => {
-						expect(result).to.exist;
-						done()
-					}
-				)
-		}).timeout(5000);
-
-		it("returns correctly with defaults", function (done) {
-			cwrcGit.getTemplates({})
+			cwrcGit.getTemplates('cwrc', 'CWRC-Writer-Templates', 'master', 'templates')
 				.then(
 					result => {
 						expect(result).to.exist;
@@ -467,47 +441,6 @@ describe("cwrcGit", function () {
 		}).timeout(5000);
 
 	});
-
-	describe(".getTemplate", function () {
-
-		beforeEach(function () {
-			templateMocks();
-		});
-
-		it("returns correctly", function (done) {
-			cwrcGit.getTemplate({owner: 'cwrc', repo: 'CWRC-Writer-Templates', path: 'Sample TEI letter.xml', ref: 'master'})
-				.then(
-					result => {
-						expect(result).to.exist;
-						done()
-					}
-				)
-		})
-
-		it("returns correctly for defaults", function (done) {
-			cwrcGit.getTemplate({})
-				.then(
-					result => {
-						expect(result).to.exist;
-						done()
-					}
-				)
-		})
-
-		it("returns the decoded document", function (done) {
-			cwrcGit.getTemplate({owner: 'cwrc', repo: 'CWRC-Writer-Templates', path: 'Sample TEI letter.xml', ref: 'master'})
-				.then(
-					result => {
-						expect(result).to.contain(`<?xml version="1.0" encoding="UTF-8"?>`)
-						expect(result).to.contain(`<title>`)
-						done()
-					}
-				)
-
-		})
-
-	});
-
 
 	describe(".searchCode", function () {
 
