@@ -16,45 +16,42 @@
 1. [Installation](#installation)
 1. [Use](#use)
 1. [API](#api)
+<!---
 1. [Development](#development)
 1. [Contributing](#contributing)
 1. [FAQ](#faq)
+-->
 1. [License](#license)
 
 ### Overview
 
-NPM package for searching GitHub, and for creating and updating CWRC XML documents in GitHub, all through the GitHub API.  Used by the [CWRC-GitServer](https://github.com/cwrc/CWRC-GitServer), whose web API is in turn used by the [CWRC-GitWriter](https://github.com/cwrc/CWRC-GitWriter).
+A module for searching GitHub, and for creating and updating XML documents in GitHub. This is done through the GitHub API via [octokit/rest.js](https://github.com/octokit/rest.js).  Used by the [CWRC-GitServer](https://github.com/cwrc/CWRC-GitServer), whose web API is in turn used by the [CWRC-GitWriter](https://github.com/cwrc/CWRC-GitWriter).
 
 ### Demo 
 
-The [CWRC GitHub Sandbox](http://208.75.74.217) is a running instance of [CWRC-GitWriter](https://github.com/cwrc/CWRC-GitWriter), which used the NPM package published from this repository along with the code in [CWRC-WriterBase](https://github.com/cwrc/CWRC-WriterBase), [CWRC-GitServer](https://github.com/cwrc/CWRC-GitServer), [CWRC-GitDelegator](https://github.com/cwrc/CWRC-GitServer), and [CWRC-GitServerClient](https://github.com/cwrc/CWRC-GitServerClient). The same code is easily (for someone with modest development experience) installed on any server to run your own instance.  If you are looking to put together your own CWRC-Writer, [CWRC-GitWriter](https://github.com/cwrc/CWRC-GitWriter) is probably a good place to start.
+The [CWRC-GitWriter Sandbox](https://cwrc-writer.cwrc.ca) is running an instance of [CWRC-GitWriter](https://github.com/cwrc/CWRC-GitWriter), which uses the NPM package published from this repository along with the code in [CWRC-WriterBase](https://github.com/cwrc/CWRC-WriterBase), [CWRC-GitServer](https://github.com/cwrc/CWRC-GitServer), and [cwrc-git-dialogs](https://github.com/cwrc/cwrc-git-dialogs). The same code is easily (for someone with modest development experience) installed on any server to run your own instance.  If you are looking to put together your own CWRC-Writer, [CWRC-GitWriter](https://github.com/cwrc/CWRC-GitWriter) is a good place to start.
 
 ### Installation
 
-`npm install cwrcgit`   
-
-To simultaneously register as a dependency in your package.json:
-
-`npm install cwrcgit --save`   
-
-or in shortcut form:
-
-`npm i -S cwrcgit`
+`npm install cwrcgit`
 
 ### Use
 
-One example:
+A simple example:
 
+```
 var cwrcGit = require('cwrcgit');
 cwrcGit.authenticate(gitHubOAuthToken);
-var repos = cwrcGit.getReposForAuthenticatedUser();
-
-The spec directory contains specifications (tests) that can help better understand the API. Also see [CWRC-GitServer](https://github.com/cwrc/CWRC-GitServer) which fully uses the API.
+var repos = cwrcGit.getDetailsForAuthenticatedUser();
+```
 
 ### API
 
 [View the full API here](API.md)
 
+Also see [CWRC-GitServer](https://github.com/cwrc/CWRC-GitServer) which makes full use of this API.
+
+<!---
 ### Development
 
 * Fork or clone (depending on your role in the project) the repo to your local machine.
@@ -167,6 +164,7 @@ Please contact us if you'd like to contribute.  Standard pull requests, includin
 Who would use this?
 
 Anyone wanting to use the CWRC-Writer to author XML documents with RDF annotations, and save those documents to GitHub.
+-->
 
 ### License
 
