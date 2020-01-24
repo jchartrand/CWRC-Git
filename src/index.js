@@ -1,4 +1,4 @@
-var github = require("@octokit/rest")({
+var github = require('@octokit/rest')({
 	headers: {
 		accept: 'application/vnd.github.v3.text-match+json',
 		'user-agent': 'octokit/rest.js v1.2.3' // v1.2.3 will be current version
@@ -11,7 +11,7 @@ var serializer = new XMLSerializer();
 // we use the cwrcAppName to match CWRC GitHub repositories that are themselves documemnts,
 // but we don't match to match repositories that are code repositories,
 // so here we sneakily concatenate the full string to avoid matches on this code repo.
-var cwrcAppName = "CWRC-GitWriter" + "-web-app";
+var cwrcAppName = 'CWRC-GitWriter' + '-web-app';
 
 // We chain together the calls to github as a series of chained promises, and pass
 // the growing result as an object (strictly speaking, creating a copy of the object
@@ -36,7 +36,7 @@ function _decodeContent(content) {
  * @returns {Promise}
  */
 function authenticate(gitHubOAuthToken) {
-   return github.authenticate({type: "oauth",token: gitHubOAuthToken})
+   return github.authenticate({type: 'oauth',token: gitHubOAuthToken})
 }
 
 /**
@@ -249,7 +249,7 @@ function _createBranchFromMaster(theDetails) {
 }
 
 function _checkForPullRequest({owner, repo, branch}) {
-	return github.search.issues({q: `state:open type:pr repo:${owner}/${repo} head:${branch}`}).then(
+	return github.search.issuesAndPullRequests({q: `state:open type:pr repo:${owner}/${repo} head:${branch}`}).then(
 		result=>result.data.total_count > 0
 	)
 }
@@ -346,7 +346,7 @@ function _updateFile(chainedResult) {
 }
 
 function logError(error) {
-    console.error("oh no!");
+    console.error('oh no!');
     console.log(error);
     return Promise.reject(error);
 }
