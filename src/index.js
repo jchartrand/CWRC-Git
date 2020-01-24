@@ -45,7 +45,7 @@ function authenticate(gitHubOAuthToken) {
  * @returns {Promise}
  */
 function getDetailsForAuthenticatedUser() {
-    return github.users.get({})
+    return github.users.getAuthenticated({})
 }
 
 /**
@@ -67,7 +67,7 @@ function getDetailsForUser(username) {
  * @returns {Promise}
  */
 function getReposForAuthenticatedUser(affiliation, page, per_page) {
-    return github.repos.getAll({page, per_page, affiliation}).then((result)=>{
+    return github.repos.list({page, per_page, affiliation}).then((result)=>{
 	    return result
     })
 }
@@ -81,7 +81,7 @@ function getReposForAuthenticatedUser(affiliation, page, per_page) {
  * @returns {Promise}
  */
 function getReposForUser(username, page, per_page) {
-    return github.repos.getForUser({username, page, per_page})
+    return github.repos.listForUser({username, page, per_page})
 }
 
 /**
@@ -118,7 +118,7 @@ function getPermissionsForUser(owner, repo, username) {
  * @returns {Promise}
  */
 function getTemplates(owner, repo, ref, path) {
-    return github.repos.getContent({owner, repo, ref, path})
+    return github.repos.getContents({owner, repo, ref, path})
 }
 
 /**
@@ -131,7 +131,7 @@ function getTemplates(owner, repo, ref, path) {
  * @returns {Promise}
  */
 function getDoc(owner, repo, ref, path) {
-	return github.repos.getContent({owner, repo, ref, path}).then(result => ({
+	return github.repos.getContents({owner, repo, ref, path}).then(result => ({
 			owner, repo, ref, path,
 			doc: _decodeContent(result.data.content),
 			sha: result.data.sha
@@ -159,7 +159,7 @@ function createRepo(repo, description, isPrivate) {
         private: isPrivate,
         description: description
     }
-    return github.repos.create(createParams)
+    return github.repos.createForAuthenticatedUser(createParams)
         .then(githubResponse=>{
             return {
 	            description, isPrivate,
@@ -546,7 +546,7 @@ function getRepoContentsByDrillDown(owner, repo) {
 }
 
 function _checkForBranch(theDetails) {
-	return github.gitdata.getReference(
+	return github.gitdata.getRef(
 		{
 			owner: theDetails.owner,
 			repo: theDetails.repo,
