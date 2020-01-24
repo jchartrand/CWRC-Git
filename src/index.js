@@ -1,17 +1,17 @@
-var github = require('@octokit/rest')({
+const github = require('@octokit/rest')({
 	headers: {
 		accept: 'application/vnd.github.v3.text-match+json',
 		'user-agent': 'octokit/rest.js v1.2.3' // v1.2.3 will be current version
 	},
 });
-var DOMParser = require('xmldom').DOMParser;
-var XMLSerializer = require('xmldom').XMLSerializer;
-var serializer = new XMLSerializer();
+const DOMParser = require('xmldom').DOMParser;
+const XMLSerializer = require('xmldom').XMLSerializer;
+const serializer = new XMLSerializer();
 
 // we use the cwrcAppName to match CWRC GitHub repositories that are themselves documemnts,
 // but we don't match to match repositories that are code repositories,
 // so here we sneakily concatenate the full string to avoid matches on this code repo.
-var cwrcAppName = 'CWRC-GitWriter' + '-web-app';
+const cwrcAppName = 'CWRC-GitWriter' + '-web-app';
 
 // We chain together the calls to github as a series of chained promises, and pass
 // the growing result as an object (strictly speaking, creating a copy of the object
@@ -24,6 +24,7 @@ var cwrcAppName = 'CWRC-GitWriter' + '-web-app';
 function _encodeContent(content) {
 	return Buffer.from(content).toString('base64')
 }
+
 function _decodeContent(content) {
 	return Buffer.from(content, 'base64').toString('utf8')
 }
@@ -36,7 +37,10 @@ function _decodeContent(content) {
  * @returns {Promise}
  */
 function authenticate(gitHubOAuthToken) {
-   return github.authenticate({type: 'oauth',token: gitHubOAuthToken})
+	return github.authenticate({
+		type: 'oauth',
+		token: gitHubOAuthToken
+	})
 }
 
 /**
@@ -45,7 +49,7 @@ function authenticate(gitHubOAuthToken) {
  * @returns {Promise}
  */
 function getDetailsForAuthenticatedUser() {
-    return github.users.getAuthenticated({})
+	return github.users.getAuthenticated({})
 }
 
 /**
@@ -55,7 +59,9 @@ function getDetailsForAuthenticatedUser() {
  * @returns {Promise}
  */
 function getDetailsForUser(username) {
-	return github.users.getByUsername({username})
+	return github.users.getByUsername({
+		username
+	})
 }
 
 /**
@@ -67,9 +73,13 @@ function getDetailsForUser(username) {
  * @returns {Promise}
  */
 function getReposForAuthenticatedUser(affiliation, page, per_page) {
-    return github.repos.list({page, per_page, affiliation}).then((result)=>{
-	    return result
-    })
+	return github.repos.list({
+		page,
+		per_page,
+		affiliation
+	}).then((result) => {
+		return result
+	})
 }
 
 /**
@@ -81,7 +91,11 @@ function getReposForAuthenticatedUser(affiliation, page, per_page) {
  * @returns {Promise}
  */
 function getReposForUser(username, page, per_page) {
-    return github.repos.listForUser({username, page, per_page})
+	return github.repos.listForUser({
+		username,
+		page,
+		per_page
+	})
 }
 
 /**
@@ -91,7 +105,9 @@ function getReposForUser(username, page, per_page) {
  * @returns {Promise}
  */
 function getDetailsForOrg(org) {
-	return github.orgs.get({org})
+	return github.orgs.get({
+		org
+	})
 }
 
 /**
@@ -104,7 +120,9 @@ function getDetailsForOrg(org) {
  */
 function getPermissionsForUser(owner, repo, username) {
 	return github.repos.getCollaboratorPermissionLevel({
-		owner, repo, username
+		owner,
+		repo,
+		username
 	})
 }
 
@@ -118,7 +136,12 @@ function getPermissionsForUser(owner, repo, username) {
  * @returns {Promise}
  */
 function getTemplates(owner, repo, ref, path) {
-    return github.repos.getContents({owner, repo, ref, path})
+	return github.repos.getContents({
+		owner,
+		repo,
+		ref,
+		path
+	})
 }
 
 /**
@@ -131,12 +154,19 @@ function getTemplates(owner, repo, ref, path) {
  * @returns {Promise}
  */
 function getDoc(owner, repo, ref, path) {
-	return github.repos.getContents({owner, repo, ref, path}).then(result => ({
-			owner, repo, ref, path,
-			doc: _decodeContent(result.data.content),
-			sha: result.data.sha
-		})
-	)
+	return github.repos.getContents({
+		owner,
+		repo,
+		ref,
+		path
+	}).then(result => ({
+		owner,
+		repo,
+		ref,
+		path,
+		doc: _decodeContent(result.data.content),
+		sha: result.data.sha
+	}))
 }
 
 /**
@@ -153,21 +183,22 @@ function createRepo(repo, description, isPrivate) {
 	} else if (isPrivate === 'false') {
 		isPrivate = false;
 	}
-    const createParams = {
-        name: repo,
-        auto_init: true, 
-        private: isPrivate,
-        description: description
-    }
-    return github.repos.createForAuthenticatedUser(createParams)
-        .then(githubResponse=>{
-            return {
-	            description, isPrivate,
-	            owner: githubResponse.data.owner.login,
-	            repo: githubResponse.data.name
-            }
-        })
-	    .catch(logError)
+	const createParams = {
+		name: repo,
+		auto_init: true,
+		private: isPrivate,
+		description: description
+	}
+	return github.repos.createForAuthenticatedUser(createParams)
+		.then(githubResponse => {
+			return {
+				description,
+				isPrivate,
+				owner: githubResponse.data.owner.login,
+				repo: githubResponse.data.name
+			}
+		})
+		.catch(logError)
 
 	// .then(_getMasterBranchSHAs)
 }
@@ -187,22 +218,24 @@ function createOrgRepo(org, repo, description, isPrivate) {
 	} else if (isPrivate === 'false') {
 		isPrivate = false;
 	}
-    const createParams = {
+	const createParams = {
 		org,
-        name: repo,
-        auto_init: true, 
-        private: isPrivate,
-        description: description
-    }
-    return github.repos.createForOrg(createParams)
-        .then(githubResponse=>{
-            return {
-	            org, description, isPrivate,
-	            owner: githubResponse.data.owner.login,
-	            repo: githubResponse.data.name
-            }
-        })
-	    .catch(logError)
+		name: repo,
+		auto_init: true,
+		private: isPrivate,
+		description: description
+	}
+	return github.repos.createForOrg(createParams)
+		.then(githubResponse => {
+			return {
+				org,
+				description,
+				isPrivate,
+				owner: githubResponse.data.owner.login,
+				repo: githubResponse.data.name
+			}
+		})
+		.catch(logError)
 }
 
 /**
@@ -220,12 +253,32 @@ function createOrgRepo(org, repo, description, isPrivate) {
 async function saveDoc(owner, repo, path, content, branch, message, sha) {
 	if (sha === undefined) {
 		// try to get the sha
-		sha = await _getLatestFileSHA({owner, repo, branch, path})
+		sha = await _getLatestFileSHA({
+			owner,
+			repo,
+			branch,
+			path
+		})
 	}
 	if (sha) {
-		return _updateFile({owner, repo, path, content, branch, message, sha})
+		return _updateFile({
+			owner,
+			repo,
+			path,
+			content,
+			branch,
+			message,
+			sha
+		})
 	} else {
-		return _createFile({owner, repo, path, content, branch, message})
+		return _createFile({
+			owner,
+			repo,
+			path,
+			content,
+			branch,
+			message
+		})
 	}
 }
 
@@ -235,7 +288,11 @@ repo: repoName
 branch: the branch name
  */
 function _createBranchFromMaster(theDetails) {
-	const {owner, repo, branch} = theDetails
+	const {
+		owner,
+		repo,
+		branch
+	} = theDetails
 	return _getMasterBranchSHAs(theDetails)
 		.then(result => ({
 			owner,
@@ -244,13 +301,22 @@ function _createBranchFromMaster(theDetails) {
 			sha: result.parentCommitSHA
 		}))
 		.then(github.gitdata.createReference)
-		.then(githubResponse=>({...theDetails, refURL: githubResponse.data.url}))
+		.then(githubResponse => ({
+			...theDetails,
+			refURL: githubResponse.data.url
+		}))
 		.catch(logError)
 }
 
-function _checkForPullRequest({owner, repo, branch}) {
-	return github.search.issuesAndPullRequests({q: `state:open type:pr repo:${owner}/${repo} head:${branch}`}).then(
-		result=>result.data.total_count > 0
+function _checkForPullRequest({
+	owner,
+	repo,
+	branch
+}) {
+	return github.search.issuesAndPullRequests({
+		q: `state:open type:pr repo:${owner}/${repo} head:${branch}`
+	}).then(
+		result => result.data.total_count > 0
 	)
 }
 
@@ -268,14 +334,26 @@ function _checkForPullRequest({owner, repo, branch}) {
  * @returns {Promise}
  */
 async function saveAsPullRequest(owner, repo, path, content, branch, message, title, sha) {
-	const doesBranchExist = await _checkForBranch({owner, repo, branch});
+	const doesBranchExist = await _checkForBranch({
+		owner,
+		repo,
+		branch
+	});
 	if (!doesBranchExist) {
-		await _createBranchFromMaster({owner, repo, branch})
+		await _createBranchFromMaster({
+			owner,
+			repo,
+			branch
+		})
 	}
 	const resultOfSave = await saveDoc(owner, repo, path, content, branch, message, sha)
-	const doesPullRequestExist = await _checkForPullRequest({owner, repo, branch})
+	const doesPullRequestExist = await _checkForPullRequest({
+		owner,
+		repo,
+		branch
+	})
 	// there can be only one PR per branch */
-	if (! doesPullRequestExist) {
+	if (!doesPullRequestExist) {
 		const prArgs = {
 			owner,
 			repo,
@@ -287,12 +365,34 @@ async function saveAsPullRequest(owner, repo, path, content, branch, message, ti
 		const prResult = await github.pullRequests.create(prArgs)
 	}
 
-	return {owner, repo, path, content, branch, message, title, sha: resultOfSave.sha}
+	return {
+		owner,
+		repo,
+		path,
+		content,
+		branch,
+		message,
+		title,
+		sha: resultOfSave.sha
+	}
 }
 
 async function _getLatestFileSHA(chainedResult) {
-	const {owner, repo, branch, path} = chainedResult
-	const {data: {data: {repository: {object: result}}}} = await github.request({
+	const {
+		owner,
+		repo,
+		branch,
+		path
+	} = chainedResult
+	const {
+		data: {
+			data: {
+				repository: {
+					object: result
+				}
+			}
+		}
+	} = await github.request({
 		method: 'POST',
 		url: '/graphql',
 		query: `{
@@ -304,7 +404,7 @@ async function _getLatestFileSHA(chainedResult) {
 				}
 			}
 		}`
-	}).catch(function(error) {
+	}).catch(function (error) {
 		console.log(error);
 	});
 	const sha = result ? result.oid : null
@@ -322,9 +422,26 @@ async function _getLatestFileSHA(chainedResult) {
 // }
 // returns the chained result object for passing to further promise based calls.
 function _createFile(chainedResult) {
-	const {owner, repo, path, message, content, branch} = chainedResult
-	return github.repos.createFile({owner, repo, path, message, branch, content: _encodeContent(content)})
-		.then(result=>({...chainedResult, sha: result.data.content.sha}))
+	const {
+		owner,
+		repo,
+		path,
+		message,
+		content,
+		branch
+	} = chainedResult
+	return github.repos.createFile({
+			owner,
+			repo,
+			path,
+			message,
+			branch,
+			content: _encodeContent(content)
+		})
+		.then(result => ({
+			...chainedResult,
+			sha: result.data.content.sha
+		}))
 }
 
 // expects in theDetails:
@@ -339,38 +456,54 @@ function _createFile(chainedResult) {
 // }
 // returns the chained result object for passing to further promise based calls.
 function _updateFile(chainedResult) {
-	const {owner, repo, path, message, content, sha, branch} = chainedResult
+	const {
+		owner,
+		repo,
+		path,
+		message,
+		content,
+		sha,
+		branch
+	} = chainedResult
 	//probably want to write in the cwrc-git /// application tag, but that could go in from the cwrc-writer I guess, before sending.
-	return github.repos.updateFile({owner, repo, path, message, sha, branch, content: _encodeContent(content)})
-		.then(result=>({...chainedResult, sha: result.data.content.sha}))
+	return github.repos.updateFile({
+			owner,
+			repo,
+			path,
+			message,
+			sha,
+			branch,
+			content: _encodeContent(content)
+		})
+		.then(result => ({
+			...chainedResult,
+			sha: result.data.content.sha
+		}))
 }
 
 function logError(error) {
-    console.error('oh no!');
-    console.log(error);
-    return Promise.reject(error);
+	console.error('oh no!');
+	console.log(error);
+	return Promise.reject(error);
 }
 
 function _getMasterBranchSHAs(chainedResult) {
-    return github.repos.getBranch(
-        {
-            owner: chainedResult.owner, 
-            repo: chainedResult.repo, 
-            branch:'master'
-        }
-    ).then(
-        githubResponse=>({
-        	...chainedResult,
-            baseTreeSHA: githubResponse.data.commit.commit.tree.sha,
-            parentCommitSHA: githubResponse.data.commit.sha
-        })
-    )
+	return github.repos.getBranch({
+		owner: chainedResult.owner,
+		repo: chainedResult.repo,
+		branch: 'master'
+	}).then(
+		githubResponse => ({
+			...chainedResult,
+			baseTreeSHA: githubResponse.data.commit.commit.tree.sha,
+			parentCommitSHA: githubResponse.data.commit.sha
+		})
+	)
 }
 
 function _getTreeContentsByDrillDown(chainedResult) {
 	let basePath = ''
-	return _getTreeContents(
-		{
+	return _getTreeContents({
 			owner: chainedResult.owner,
 			repo: chainedResult.repo,
 			tree_sha: chainedResult.baseTreeSHA
@@ -390,74 +523,90 @@ function _getTreeContentsByDrillDown(chainedResult) {
 }
 
 function _getTreeContents(treeDetails, basePath) {
-	return github.gitdata.getTree(treeDetails
-	).then(
-		githubResponse=>{
-			let promises = githubResponse.data.tree.map(entry=>{
-			    let path = basePath + entry.path
-			    if (entry.type === 'tree') {
-				    return _getTreeContents(
-					    {
-						    owner: treeDetails.owner,
-						    repo: treeDetails.repo,
-						    tree_sha: entry.sha
-					    },
-                        path + '/'
-                    ).then(folderContents => ({
-                                type: 'folder',
-					            path: path,
-					            name: entry.path,
-                                contents: folderContents
-                        }))
+	return github.gitdata.getTree(treeDetails).then(
+		githubResponse => {
+			let promises = githubResponse.data.tree.map(entry => {
+				let path = basePath + entry.path
+				if (entry.type === 'tree') {
+					return _getTreeContents({
+							owner: treeDetails.owner,
+							repo: treeDetails.repo,
+							tree_sha: entry.sha
+						},
+						path + '/'
+					).then(folderContents => ({
+						type: 'folder',
+						path: path,
+						name: entry.path,
+						contents: folderContents
+					}))
 
-                } else {
-			        return Promise.resolve({type: 'file', path: path, name: entry.path})
-                }
-            })
+				} else {
+					return Promise.resolve({
+						type: 'file',
+						path: path,
+						name: entry.path
+					})
+				}
+			})
 
-            return Promise.all(promises).then(results => {
-                return results;
-            })
+			return Promise.all(promises).then(results => {
+				return results;
+			})
 		}
 	)
 }
 
 function _unflattenContents(flatContents) {
-		const files = flatContents.filter(file=>file.type==='blob')
-		var result = {type: 'folder', name: '', path: '', contents: []}
-		const findSubFolder = (parentFolder, folderNameToFind) => {
-			 const subfolder = parentFolder.contents.find(el => {
-			 	return el.type === 'folder' && el.name === folderNameToFind
-			 })
-			return subfolder;
-		}
-		const addSubFolder = (newFolderName, parentFolder) => {
-			const newSubFolder = {type: 'folder', name: newFolderName, path: `${parentFolder.path}/${newFolderName}`, contents:[]}
-			parentFolder.contents.push(newSubFolder)
-			return newSubFolder;
-		}
-		const addFile = (newFileName, parentFolder) => {
-			const newFile = {type: 'file', name: newFileName, path: `${parentFolder.path}/${newFileName}`}
-			parentFolder.contents.push(newFile)
-		}
-		const isFile = (pathSections, currentIndex) => {
-			return pathSections.length - 1 == currentIndex
-		}
-
-		files.forEach(file=>{
-			const pathSections = file.path.split('/')
-			pathSections.reduce(function(parentFolder, pathSection, pathSectionIndex) {
-				const subFolder = findSubFolder(parentFolder, pathSection)
-				if (subFolder) {
-					return subFolder
-				} else if (isFile(pathSections, pathSectionIndex)) {
-					return addFile(pathSection, parentFolder)
-				} else {
-					return addSubFolder(pathSection, parentFolder)
-				}
-			}, result)
+	const files = flatContents.filter(file => file.type === 'blob')
+	const result = {
+		type: 'folder',
+		name: '',
+		path: '',
+		contents: []
+	}
+	const findSubFolder = (parentFolder, folderNameToFind) => {
+		const subfolder = parentFolder.contents.find(el => {
+			return el.type === 'folder' && el.name === folderNameToFind
 		})
-		return result
+		return subfolder;
+	}
+	const addSubFolder = (newFolderName, parentFolder) => {
+		const newSubFolder = {
+			type: 'folder',
+			name: newFolderName,
+			path: `${parentFolder.path}/${newFolderName}`,
+			contents: []
+		}
+		parentFolder.contents.push(newSubFolder)
+		return newSubFolder;
+	}
+	const addFile = (newFileName, parentFolder) => {
+		const newFile = {
+			type: 'file',
+			name: newFileName,
+			path: `${parentFolder.path}/${newFileName}`
+		}
+		parentFolder.contents.push(newFile)
+	}
+	const isFile = (pathSections, currentIndex) => {
+		return pathSections.length - 1 == currentIndex
+	}
+
+	files.forEach(file => {
+		const pathSections = file.path.split('/')
+		pathSections.reduce(function (parentFolder, pathSection, pathSectionIndex) {
+			const subFolder = findSubFolder(parentFolder, pathSection)
+			if (subFolder) {
+				return subFolder
+			} else if (isFile(pathSections, pathSectionIndex)) {
+				return addFile(pathSection, parentFolder)
+			} else {
+				return addSubFolder(pathSection, parentFolder)
+			}
+		}, result)
+	})
+	return result
 }
 
 /**
@@ -469,17 +618,15 @@ function _unflattenContents(flatContents) {
  * @returns {Promise}
  */
 function searchCode(query, page, per_page) {
-    return github.search.code(
-    	{
-		    q: query,
-		    page,
-		    per_page
-        }
-    ).then(
-	    (result)=>{
-		    return result
-	    }
-    );
+	return github.search.code({
+		q: query,
+		page,
+		per_page
+	}).then(
+		(result) => {
+			return result
+		}
+	);
 }
 
 /**
@@ -491,17 +638,15 @@ function searchCode(query, page, per_page) {
  * @returns {Promise}
  */
 function searchRepos(query, page, per_page) {
-    return github.search.repos(
-    	{
-		    q: query,
-		    page,
-		    per_page
-        }
-    ).then(
-	    (result)=>{
-		    return result
-	    }
-    );
+	return github.search.repos({
+		q: query,
+		page,
+		per_page
+	}).then(
+		(result) => {
+			return result
+		}
+	);
 }
 
 /**
@@ -512,20 +657,21 @@ function searchRepos(query, page, per_page) {
  * @returns {Promise}
  */
 function getRepoContents(owner, repo) {
-	return _getMasterBranchSHAs({owner, repo})
-        .then(_getTreeContentsRecursively)
+	return _getMasterBranchSHAs({
+			owner,
+			repo
+		})
+		.then(_getTreeContentsRecursively)
 }
 
 function _getTreeContentsRecursively(chainedResult) {
-	return github.gitdata.getTree(
-		{
-			owner: chainedResult.owner,
-			repo: chainedResult.repo,
-			tree_sha: chainedResult.baseTreeSHA,
-			recursive: 1
-		}
-	).then(
-		githubResponse=>({
+	return github.gitdata.getTree({
+		owner: chainedResult.owner,
+		repo: chainedResult.repo,
+		tree_sha: chainedResult.baseTreeSHA,
+		recursive: 1
+	}).then(
+		githubResponse => ({
 			...chainedResult,
 			contents: _unflattenContents(githubResponse.data.tree),
 			truncated: githubResponse.data.truncated
@@ -541,18 +687,19 @@ function _getTreeContentsRecursively(chainedResult) {
  * @returns {Promise}
  */
 function getRepoContentsByDrillDown(owner, repo) {
-	return _getMasterBranchSHAs({owner, repo})
+	return _getMasterBranchSHAs({
+			owner,
+			repo
+		})
 		.then(_getTreeContentsByDrillDown)
 }
 
 function _checkForBranch(theDetails) {
-	return github.gitdata.getRef(
-		{
-			owner: theDetails.owner,
-			repo: theDetails.repo,
-			ref: `heads/${theDetails.branch}`
-		}
-	).then(
+	return github.gitdata.getRef({
+		owner: theDetails.owner,
+		repo: theDetails.repo,
+		ref: `heads/${theDetails.branch}`
+	}).then(
 		result => {
 			// this next check also handles the case where the branch name doesn't exist, but there are branches
 			// for which this name is a prefix, in which case the call returns an array of those 'matching' branches.
@@ -569,11 +716,11 @@ function _checkForBranch(theDetails) {
 
 
 module.exports = {
-    authenticate: authenticate,
+	authenticate: authenticate,
 	getDetailsForAuthenticatedUser: getDetailsForAuthenticatedUser,
 	getDetailsForUser: getDetailsForUser,
 	getDetailsForOrg: getDetailsForOrg,
-    getReposForAuthenticatedUser: getReposForAuthenticatedUser,
+	getReposForAuthenticatedUser: getReposForAuthenticatedUser,
 	getReposForUser: getReposForUser,
 	getPermissionsForUser: getPermissionsForUser,
 	saveAsPullRequest: saveAsPullRequest,
@@ -581,9 +728,9 @@ module.exports = {
 	getDoc: getDoc,
 	createRepo: createRepo,
 	createOrgRepo: createOrgRepo,
-    getTemplates: getTemplates,
+	getTemplates: getTemplates,
 	searchCode: searchCode,
 	searchRepos: searchRepos,
-    getRepoContents: getRepoContents,
+	getRepoContents: getRepoContents,
 	getRepoContentsByDrillDown: getRepoContentsByDrillDown
 };
