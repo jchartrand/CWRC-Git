@@ -1,5 +1,4 @@
 module.exports = {
-
     'jwt_secret': 'someSecret',
     'github_client_secret': 'putYourClientSecretHere',
     'github_client_id': 'putYourClientIdHere',
