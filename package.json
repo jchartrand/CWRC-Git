@@ -34,7 +34,7 @@
     "travis-deploy-once": "travis-deploy-once"
   },
   "dependencies": {
-    "@octokit/rest": "^16.41.0",
+    "@octokit/rest": "^16.43.1",
     "xmldom": "^0.2.1"
   },
   "devDependencies": {
