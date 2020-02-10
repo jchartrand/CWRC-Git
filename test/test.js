@@ -14,7 +14,7 @@ cwrcGit.authenticate(config.personal_oath_for_testing);
 // to the console, for use in nock.  I've put past nock recordings in /fixturesAndMocks/mocks.js,
 //  which nock now returns for calls to GitHub that it intercepts (by virtue of 'requiring' nock
 // above.)  See https://github.com/node-nock/nock for full details.
-//nock.recorder.rec();
+// nock.recorder.rec();
 
 /* could also use "tape-nock" to simplify recording and use of fixtures.  Here are
 some of the scripts that could be used, although I'm not sure that the nyc stuff works.
@@ -58,8 +58,11 @@ describe('cwrcGit', () => {
 		});
 
 		it('returns correctly', async () => {
+			const result = await cwrcGit.getDoc(fixtures.owner, fixtures.testRepo, 'master', 'text.txt')
+				.catch(err => {
+					console.log(err);
+				})
 
-			const result = await cwrcGit.getDoc(fixtures.owner, fixtures.testRepo, 'jchartrand', 'curt/qurt/test.txt')
 			expect(result.sha).to.be.a('string');
 
 			//expect(result.doc).to.equal(fixtures.testDoc);
@@ -117,7 +120,8 @@ describe('cwrcGit', () => {
 
 	describe('.getReposForAuthenticatedUser', () => {
 
-		beforeEach(() => {
+		beforeEach( () => {
+			mocks.getDetailsForAuthenticatedUserNock();
 			mocks.getReposForAuthenticatedUserNock();
 		});
 
@@ -125,7 +129,7 @@ describe('cwrcGit', () => {
 			const result = await cwrcGit.getReposForAuthenticatedUser('owner', 1, 10)
 			expect(result).to.exist;
 			expect(result.data[0].name).to.equal(fixtures.testRepo);
-		}) //.timeout(5000); // to force mocha to wait longer for async to return
+		}).timeout(5000); // to force mocha to wait longer for async to return
 
 	});
 
@@ -143,159 +147,159 @@ describe('cwrcGit', () => {
 		}).timeout(5000);
 	})
 
-	// describe('.createBranchFromMaster', () => {
+	// 	// describe('.createBranchFromMaster', () => {
 
-	// 	beforeEach( () => {
-	// 		mocks.createBranchFromMasterGetMaster()
-	// 		mocks.createBranchFromMasterCreateBranch()
-	// 		mocks.createBranchGeneric()
-	// 	})
+	// 	// 	beforeEach( () => {
+	// 	// 		mocks.createBranchFromMasterGetMaster()
+	// 	// 		mocks.createBranchFromMasterCreateBranch()
+	// 	// 		mocks.createBranchGeneric()
+	// 	// 	})
 
-	// 	it('returns valid url for new ref if created', async () => {
-	// 		const result = await cwrcGit.createBranchFromMaster({
-	// 			"owner": fixtures.owner,
-	// 			"repo": fixtures.testRepo,
-	// 			"branch": 'test84'
-	// 		})
+	// 	// 	it('returns valid url for new ref if created', async () => {
+	// 	// 		const result = await cwrcGit.createBranchFromMaster({
+	// 	// 			'owner': fixtures.owner,
+	// 	// 			'repo': fixtures.testRepo,
+	// 	// 			'branch': 'test84'
+	// 	// 		})
 
-	// 		expect(result.refURL).to.exist
-	// 		expect(request.head('http://www.google.com', (error, response)=>(!error && response.statusCode == 200)))
-	// 	})
-	// })
+	// 	// 		expect(result.refURL).to.exist
+	// 	// 		expect(request.head('http://www.google.com', (error, response)=>(!error && response.statusCode == 200)))
+	// 	// 	})
+	// 	// })
 
-	// describe('.checkForPullRequest', () => {
+	// 	// describe('.checkForPullRequest', () => {
 
-	// 	beforeEach( () => {
-	// 		mocks.findExistingPRNock()
-	// 		mocks.missingPRNock()
-	// 	})
+	// 	// 	beforeEach( () => {
+	// 	// 		mocks.findExistingPRNock()
+	// 	// 		mocks.missingPRNock()
+	// 	// 	})
 
-	// 	it('returns true if pr exists', async () => {
-	// 		const result = await cwrcGit.checkForPullRequest({
-	// 			"repo":fixtures.testRepo,
-	// 			"owner": fixtures.owner,
-	// 			"branch": 'jchartrand'
-	// 		})
+	// 	// 	it('returns true if pr exists', async () => {
+	// 	// 		const result = await cwrcGit.checkForPullRequest({
+	// 	// 			'repo':fixtures.testRepo,
+	// 	// 			'owner': fixtures.owner,
+	// 	// 			'branch': 'jchartrand'
+	// 	// 		})
 
-	// 		expect(result).to.be.true;
-	// 	})
+	// 	// 		expect(result).to.be.true;
+	// 	// 	})
 
-	// 	it('returns false if pr doesn\'t exist', async () => {
-	// 		const result = await cwrcGit.checkForPullRequest({
-	// 			"repo":fixtures.testRepo,
-	// 			"owner": fixtures.owner,
-	// 			"branch": 'hote'
-	// 		})
+	// 	// 	it('returns false if pr doesn\'t exist', async () => {
+	// 	// 		const result = await cwrcGit.checkForPullRequest({
+	// 	// 			'repo':fixtures.testRepo,
+	// 	// 			'owner': fixtures.owner,
+	// 	// 			'branch': 'hote'
+	// 	// 		})
 
-	// 		expect(result).to.be.false
-	// 	})
-	// })
+	// 	// 		expect(result).to.be.false
+	// 	// 	})
+	// 	// })
 
-	// describe('.checkForBranch', () => {
-	// 	beforeEach(function () {
-	// 		mocks.getUserBranchHeadNock()
-	// 		mocks.missingBranchNock()
-	// 	})
+	// // describe('.checkForBranch', () => {
+	// // 	beforeEach(function () {
+	// // 		mocks.getUserBranchHeadNock()
+	// // 		mocks.missingBranchNock()
+	// // 	})
 
-	// 	it('returns true if branch exists', async () => {
-	// 		const result = await cwrcGit.checkForBranch({
-	// 			"repo":fixtures.testRepo,
-	// 			"owner": fixtures.owner,
-	// 			"branch": 'jchartrand'
-	// 		})
+	// // 	it('returns true if branch exists', async () => {
+	// // 		const result = await cwrcGit.checkForBranch({
+	// // 			'repo':fixtures.testRepo,
+	// // 			'owner': fixtures.owner,
+	// // 			'branch': 'jchartrand'
+	// // 		})
 
-	// 		expect(result).to.be.true
-	// 	})
+	// // 		expect(result).to.be.true
+	// // 	})
 
-	// 	it('returns false if branch doesn\'t exist', async () => {
-	// 		const result = await cwrcGit.checkForBranch({
-	// 			"repo":fixtures.testRepo,
-	// 			"owner": fixtures.owner,
-	// 			"branch": 'hote'
-	// 		})
+	// // 	it('returns false if branch doesn\'t exist', async () => {
+	// // 		const result = await cwrcGit.checkForBranch({
+	// // 			'repo':fixtures.testRepo,
+	// // 			'owner': fixtures.owner,
+	// // 			'branch': 'hote'
+	// // 		})
 
-	// 		expect(result).to.be.false;
-	// 	})
-	// })
+	// // 		expect(result).to.be.false;
+	// // 	})
+	// // })
 
-	// describe('.createFile', () => {
-	// 	beforeEach( () => {
-	// 		mocks.getCreateFileNock();
-	// 	})
+	// // describe('.createFile', () => {
+	// // 	beforeEach( () => {
+	// // 		mocks.getCreateFileNock();
+	// // 	})
 
-	// 	it('returns correctly', async () => {
-	// 		const result = await cwrcGit.createFile({
-	// 			owner: fixtures.owner,
-	// 			repo: fixtures.testRepo,
-	// 			path: 'curt/qurt/test1.txt',
-	// 			message: 'some commit message',
-	// 			content: fixtures.testDoc,
-	// 			branch: 'master'
-	// 		})
+	// // 	it('returns correctly', async () => {
+	// // 		const result = await cwrcGit.createFile({
+	// // 			owner: fixtures.owner,
+	// // 			repo: fixtures.testRepo,
+	// // 			path: 'curt/qurt/test1.txt',
+	// // 			message: 'some commit message',
+	// // 			content: fixtures.testDoc,
+	// // 			branch: 'master'
+	// // 		})
 
-	// 		expect(result.sha).to.be.a('string');
-	// 		expect(result.owner).to.equal(fixtures.owner);
-	// 		expect(result.repo).to.equal(fixtures.testRepo);
-	// 	}).timeout(9000);
-	// })
+	// // 		expect(result.sha).to.be.a('string');
+	// // 		expect(result.owner).to.equal(fixtures.owner);
+	// // 		expect(result.repo).to.equal(fixtures.testRepo);
+	// // 	}).timeout(9000);
+	// // })
 
-	// describe('.updateFile', () => {
-	// 	beforeEach( () => {
-	// 		mocks.getUpdateFileNock();
-	// 	})
+	// // describe('.updateFile', () => {
+	// // 	beforeEach( () => {
+	// // 		mocks.getUpdateFileNock();
+	// // 	})
 
-	// 	it('returns correctly', async () => {
-	// 		const result = await cwrcGit.updateFile({
-	// 			owner: fixtures.owner,
-	// 			repo: fixtures.testRepo,
-	// 			path: 'curt/qurt/test.txt',
-	// 			message: 'another commit message on the update',
-	// 			content: fixtures.testDoc,
-	// 			branch: 'master',
-	// 			sha: '6f715c0deeb9012272c04a50e1fc09bc3fe4bdb7'
-	// 		})
+	// // 	it('returns correctly', async () => {
+	// // 		const result = await cwrcGit.updateFile({
+	// // 			owner: fixtures.owner,
+	// // 			repo: fixtures.testRepo,
+	// // 			path: 'curt/qurt/test.txt',
+	// // 			message: 'another commit message on the update',
+	// // 			content: fixtures.testDoc,
+	// // 			branch: 'master',
+	// // 			sha: '6f715c0deeb9012272c04a50e1fc09bc3fe4bdb7'
+	// // 		})
 
-	// 		expect(result.sha).to.be.a('string');
-	// 		expect(result.owner).to.equal(fixtures.owner);
-	// 		expect(result.repo).to.equal(fixtures.testRepo);
+	// // 		expect(result.sha).to.be.a('string');
+	// // 		expect(result.owner).to.equal(fixtures.owner);
+	// // 		expect(result.repo).to.equal(fixtures.testRepo);
 
-	// 	}).timeout(9000);
-	// })
+	// // 	}).timeout(9000);
+	// // })
 
-	// describe('.getLatestFileSHA', () => {
-	// 	beforeEach( () => {
-	// 		mocks.getLatestFileSHANock()
-	// 		mocks.missingSHANock()
-	// 	})
+	// // describe('.getLatestFileSHA', () => {
+	// // 	beforeEach( () => {
+	// // 		mocks.getLatestFileSHANock()
+	// // 		mocks.missingSHANock()
+	// // 	})
 
-	// 	it('returns a string for existing sha', async () => {
-	// 		const result = await cwrcGit.getLatestFileSHA({
-	// 			owner: fixtures.owner,
-	// 			repo: fixtures.testRepo,
-	// 			branch: 'jchartrand',
-	// 			path: 'curt/qurt/testq339.txt'
+	// // 	it('returns a string for existing sha', async () => {
+	// // 		const result = await cwrcGit.getLatestFileSHA({
+	// // 			owner: fixtures.owner,
+	// // 			repo: fixtures.testRepo,
+	// // 			branch: 'jchartrand',
+	// // 			path: 'curt/qurt/testq339.txt'
 
-	// 		})
-	// 		expect(result.sha).to.be.a('string');
-	// 		expect(result.owner).to.equal(fixtures.owner);
-	// 		expect(result.repo).to.equal(fixtures.testRepo);
+	// // 		})
+	// // 		expect(result.sha).to.be.a('string');
+	// // 		expect(result.owner).to.equal(fixtures.owner);
+	// // 		expect(result.repo).to.equal(fixtures.testRepo);
 
-	// 	}).timeout(9000);
+	// // 	}).timeout(9000);
 
-	// 	it('returns null for no sha', async () => {
-	// 		const result = await cwrcGit.getLatestFileSHA({
-	// 			owner: fixtures.owner,
-	// 			repo: fixtures.testRepo,
-	// 			branch: 'master',
-	// 			path: 'curt/qurt/tesddt.txt'
+	// // 	it('returns null for no sha', async () => {
+	// // 		const result = await cwrcGit.getLatestFileSHA({
+	// // 			owner: fixtures.owner,
+	// // 			repo: fixtures.testRepo,
+	// // 			branch: 'master',
+	// // 			path: 'curt/qurt/tesddt.txt'
 
-	// 		})
-	// 		expect(result.sha).to.equal(null)
-	// 		expect(result.owner).to.equal(fixtures.owner);
-	// 		expect(result.repo).to.equal(fixtures.testRepo);
+	// // 		})
+	// // 		expect(result.sha).to.equal(null)
+	// // 		expect(result.owner).to.equal(fixtures.owner);
+	// // 		expect(result.repo).to.equal(fixtures.testRepo);
 
-	// 	}).timeout(9000);
-	// })
+	// // 	}).timeout(9000);
+	// // })
 
 	describe('.saveAsPullRequest', () => {
 		beforeEach(() => {
@@ -303,31 +307,31 @@ describe('cwrcGit', () => {
 			mocks.getLatestFileSHANock()
 			mocks.saveExistingFileNock()
 			mocks.findExistingPRNock()
-			mocks.saveNewFileNock()
-			mocks.getLatestFileSHANockForNew()
+			// mocks.saveNewFileNock()
+			// mocks.getLatestFileSHANockForNew()
 		})
 
 		it('returns correctly for existing file', async () => {
 			const result = await cwrcGit.saveAsPullRequest(
-				fixtures.owner, fixtures.testRepo, 'curt/qurt/testq339.txt', fixtures.testDoc,
-				'jchartrand', 'some commit message', 'glorious title for PR'
-			)
+				fixtures.owner, fixtures.testRepo, 'text.txt', 'test',
+				'dev', 'some commit message', 'glorious title for PR'
+			);
 
 			expect(result.sha).to.be.a('string');
 			expect(result.owner).to.equal(fixtures.owner);
 			expect(result.repo).to.equal(fixtures.testRepo);
 		}).timeout(9000);
 
-		it('returns correctly for new file', async () => {
-			const result = await cwrcGit.saveAsPullRequest(
-				fixtures.owner, fixtures.testRepo, 'curt/qurt/testuufy.txt', fixtures.testDoc,
-				'jchartrand', 'some commit message', 'glorious title for PR'
-			)
+		// it('returns correctly for new file', async () => {
+		// 	const result = await cwrcGit.saveAsPullRequest(
+		// 		fixtures.owner, fixtures.testRepo, 'text12.txt', fixtures.testDoc,
+		// 		'dev', 'some commit message', 'glorious title for PR'
+		// 	)
 
-			expect(result.sha).to.be.a('string');
-			expect(result.owner).to.equal(fixtures.owner);
-			expect(result.repo).to.equal(fixtures.testRepo);
-		}).timeout(9000);
+		// 	expect(result.sha).to.be.a('string');
+		// 	expect(result.owner).to.equal(fixtures.owner);
+		// 	expect(result.repo).to.equal(fixtures.testRepo);
+		// }).timeout(9000);
 	})
 
 	describe('.getDetailsForAuthenticatedUser', () => {
@@ -363,12 +367,12 @@ describe('cwrcGit', () => {
 		});
 
 		it('returns correctly', async () => {
-			const result = await cwrcGit.searchCode('cwrc-melbourne+repo:jchartrand/cleanDoc2')
+			const result = await cwrcGit.searchCode('test+repo:lucaju/misc')
 			expect(result).to.exist
 		}) //.timeout(5000); // to force mocha to wait longer for async to return
 
 		it('returns highlighting', async () => {
-			const result = await cwrcGit.searchCode('cwrc-melbourne+repo:jchartrand/cleanDoc2')
+			const result = await cwrcGit.searchCode('test+repo:lucaju/misc')
 			expect(result.data.items[0].text_matches).to.exist
 		})
 

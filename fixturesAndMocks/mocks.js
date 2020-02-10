@@ -8,55 +8,124 @@ const fixtures = require('./fixtures.js');
 // so here we sneakily concatenate the full string to avoid matches on this code repo.
 const cwrcAppName = 'CWRC-GitWriter' + '-web-app';
 
+// function authenticate(gitHubOAuthToken) {
+// 	return github.auth({
+// 		type: 'oauth',
+// 		token: gitHubOAuthToken
+// 	})
+// }
+
 function getDetailsForAuthenticatedUserNock() {
+
 	return nock('https://api.github.com:443', {
 			"encodedQueryParams": true
 		})
 		.get('/user')
-		.query({
-			"access_token": config.personal_oath_for_testing
-		})
-		.reply(200, {
-			"login": fixtures.owner,
-			"id": 547165,
-			"avatar_url": "https://avatars.githubusercontent.com/u/547165?v=3",
-			"gravatar_id": "",
-			"url": "https://api.github.com/users/jchartrand",
-			"html_url": "https://github.com/jchartrand",
-			"followers_url": "https://api.github.com/users/jchartrand/followers",
-			"following_url": "https://api.github.com/users/jchartrand/following{/other_user}",
-			"gists_url": "https://api.github.com/users/jchartrand/gists{/gist_id}",
-			"starred_url": "https://api.github.com/users/jchartrand/starred{/owner}{/repo}",
-			"subscriptions_url": "https://api.github.com/users/jchartrand/subscriptions",
-			"organizations_url": "https://api.github.com/users/jchartrand/orgs",
-			"repos_url": "https://api.github.com/users/jchartrand/repos",
-			"events_url": "https://api.github.com/users/jchartrand/events{/privacy}",
-			"received_events_url": "https://api.github.com/users/jchartrand/received_events",
-			"type": "User",
-			"site_admin": false,
-			"name": null,
-			"company": null,
-			"blog": null,
-			"location": null,
-			"email": null,
-			"hireable": null,
-			"bio": null,
-			"public_repos": 13,
-			"public_gists": 0,
-			"followers": 3,
-			"following": 1,
-			"created_at": "2011-01-04T15:50:51Z",
-			"updated_at": "2017-01-31T21:24:53Z"
-		});
+		.reply(200, ["1f8b080000000000000395545d6f9b3014fd2b919f0906275d1b4b552b75dbd35a295236557d898c71c09db1913fe812d4ffbe6ba05117690f3c61aece39f7f8720f3d52a6921a51a40267af0125489688e6e46a7dbdda24489b52ec63053d7edd7ef9f5fca4f8ebb7e3d36ebb7a3cfdbe0534eb9867761fac024ced7deb28c663d191b492be0e4570c272a3bdd03ee5a6c1014ffa77dded1a342a3ba90c8da070a1d6ca496864839ac367bbb56fd445fbb1eb003ec3", "0e4629f306cc4babff17c7670e581acf5257b3f9c0e9b1f1b5802981f5f77861e9fc1c2303bec7f1011f232a3818ba15e50c331303acbc6970d1632b5a334885c2712b5b2f8d9e63ea1f1ee8185b312d4f6cae0ef01cd0a39d39ed073cf044076b358738127adc5ad9317e8c23b0820bd9c138678b5d3041cb1f5b015bfc133e751caef462cfca2646ecc094131029d644c08fc025d366f1ddcad34958066058d896e923a23a2895a002a239063302d3830a7f4ccaac4f8ba8ac0c1f461da309d9b282a964b17d48160f4cb332ca8986c998ca3103f78d8889807a2d015c283031f591e6e3d8864249be1f674bf39b044d956103e1bff011040812bcad3ee50251b2862b80b48741320f8d4996e7cb9c2cf36c475634bba157d90bf40f6df91943b265962fc9f58e104a3674bd7941ef7f0143a0a5ad97040000"], [
+			'Server',
+			'GitHub.com',
+			'Date',
+			'Tue, 28 Jan 2020 04:53:49 GMT',
+			'Content-Type',
+			'application/json; charset=utf-8',
+			'Transfer-Encoding',
+			'chunked',
+			'Connection',
+			'close',
+			'Status',
+			'200 OK',
+			'X-RateLimit-Limit',
+			'5000',
+			'X-RateLimit-Remaining',
+			'4993',
+			'X-RateLimit-Reset',
+			'1580190208',
+			'Cache-Control',
+			'private, max-age=60, s-maxage=60',
+			'Vary',
+			'Accept, Authorization, Cookie, X-GitHub-OTP',
+			'ETag',
+			'W/"06944ef5f451daea4a01f60d064b3a0d"',
+			'Last-Modified',
+			'Mon, 27 Jan 2020 22:29:49 GMT',
+			'X-OAuth-Scopes',
+			'admin:repo_hook, repo',
+			'X-Accepted-OAuth-Scopes',
+			'',
+			'X-GitHub-Media-Type',
+			'github.v3; format=json',
+			'Access-Control-Expose-Headers',
+			'ETag, Link, Location, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval, X-GitHub-Media-Type',
+			'Access-Control-Allow-Origin',
+			'*',
+			'Strict-Transport-Security',
+			'max-age=31536000; includeSubdomains; preload',
+			'X-Frame-Options',
+			'deny',
+			'X-Content-Type-Options',
+			'nosniff',
+			'X-XSS-Protection',
+			'1; mode=block',
+			'Referrer-Policy',
+			'origin-when-cross-origin, strict-origin-when-cross-origin',
+			'Content-Security-Policy',
+			"default-src 'none'",
+			'Content-Encoding',
+			'gzip',
+			'X-GitHub-Request-Id',
+			'B526:6A01:A65F:13283:5E2FBE5D'
+		]);
+
+
+
+	// nock('https://api.github.com:443', {
+	// 		"encodedQueryParams": true
+	// 	})
+	// 	.get('/user')
+	// 	.query({
+	// 		"access_token": config.personal_oath_for_testing
+	// 	})
+	// 	.reply(200, {
+	// 		"login": fixtures.owner,
+	// 		"id": 547165,
+	// 		"avatar_url": "https://avatars.githubusercontent.com/u/547165?v=3",
+	// 		"gravatar_id": "",
+	// 		"url": "https://api.github.com/users/jchartrand",
+	// 		"html_url": "https://github.com/jchartrand",
+	// 		"followers_url": "https://api.github.com/users/jchartrand/followers",
+	// 		"following_url": "https://api.github.com/users/jchartrand/following{/other_user}",
+	// 		"gists_url": "https://api.github.com/users/jchartrand/gists{/gist_id}",
+	// 		"starred_url": "https://api.github.com/users/jchartrand/starred{/owner}{/repo}",
+	// 		"subscriptions_url": "https://api.github.com/users/jchartrand/subscriptions",
+	// 		"organizations_url": "https://api.github.com/users/jchartrand/orgs",
+	// 		"repos_url": "https://api.github.com/users/jchartrand/repos",
+	// 		"events_url": "https://api.github.com/users/jchartrand/events{/privacy}",
+	// 		"received_events_url": "https://api.github.com/users/jchartrand/received_events",
+	// 		"type": "User",
+	// 		"site_admin": false,
+	// 		"name": null,
+	// 		"company": null,
+	// 		"blog": null,
+	// 		"location": null,
+	// 		"email": null,
+	// 		"hireable": null,
+	// 		"bio": null,
+	// 		"public_repos": 13,
+	// 		"public_gists": 0,
+	// 		"followers": 3,
+	// 		"following": 1,
+	// 		"created_at": "2011-01-04T15:50:51Z",
+	// 		"updated_at": "2017-01-31T21:24:53Z"
+	// 	});
 }
 
 function getReposForAuthenticatedUserNock() {
+
 	return nock('https://api.github.com:443', {
 			"encodedQueryParams": true
 		})
 		.get('/user/repos')
 		.query({
-			"access_token": config.personal_oath_for_testing,
 			"page": 1,
 			"per_page": 10,
 			"affiliation": "owner"
@@ -189,8 +258,7 @@ function getGithubTreeNock() {
 }
 
 function getCreateGithubRepoNock() {
-	// NOTE:  I put in more in the reply than necessary. I  put it in
-	// to help explain what's going on.
+
 	return nock('https://api.github.com:443', {
 			"encodedQueryParams": true
 		})
@@ -200,15 +268,13 @@ function getCreateGithubRepoNock() {
 			"private": fixtures.isPrivate,
 			"auto_init": true
 		})
-		.query({
-			"access_token": config.personal_oath_for_testing
-		})
 		.reply(201, {
 			"owner": {
 				"login": fixtures.owner
 			},
 			"name": fixtures.testRepo
-		});
+		})
+
 }
 
 function getMasterBranchFromGithubNock() {
@@ -288,31 +354,90 @@ function getReposForGithubUserNock() {
 	return nock('https://api.github.com:443', {
 			"encodedQueryParams": true
 		})
-		.get(`/users/${fixtures.owner}/repos`)
+		.get('/users/lucaju/repos')
 		.query({
-			"access_token": config.personal_oath_for_testing,
-			"page": 1,
-			"per_page": 10
+			"page": "1",
+			"per_page": "10"
 		})
-		.reply(200, [{
-			"id": 76067525,
-			"name": "aTest",
-			"full_name": fixtures.ownerAndRepo,
-			"owner": {
-				"login": fixtures.owner
-			},
-			"private": false,
-			"description": "a description of the repo"
-		}, {
-			"id": 75946742,
-			"name": "aTest",
-			"full_name": fixtures.owner + '/someOtherRepo',
-			"owner": {
-				"login": fixtures.owner
-			},
-			"private": true,
-			"default_branch": "master"
-		}]);
+		.reply(200, ["1f8b0800000000000003ed9df173e2361680ff158e5f2f041b7000cfecf4762e3bbd76366cf74a7b6d6f6e32c638e0c4606a9bb081d9fffd9e6461642181915eda66c63337bdc4d1fb24db926c7ffb64ff77d70ca74d77d01f761dcbb96a2ee369704fb634ef6e3f6c3e45df47feb7c3adf7cbbf9ffde5536fb47dda8ec6efed2614f4160194fa6798051f83650a5b1ed65174cf36476bdf7b5cb7b9bfae92f0d9cb20e4c18bd2e0aa196f9641d27477", "cd289e854b20e521c021b5db1da7d7ef0ecbedf97cf3f32fa3c87ffcf0321a7feede6d9fde41690fa85e72bf4e2260ccb36c95baed76be31ed5ccfc26cbe9eacd320f1e365162cb36b3f5eb4d76dc6ffe6f95d0f18b38451e88ec30681b60a19288f065ada2e9a3bcf1691507d5e2b2d5c147b88a328de40a4d85435bc5dc490a34be3c3e5ece27888d9b5e36c1ec05182a67f253b1ca6d9250da1e5776df27fd039082185839e04d30b1ac322a029e4cc7fddb593601553d47a92fa49b8cac2787949a34a71c0899399b70cb7dea51c8823dd9734e792ea6979880b9ea15b5d129807ecda7444f82fe41024811f84cf70382f860991c0ca5e566460fe04a79a1c5c189ff7de744186181d795faf60949cefb1fcd09d06c5f969ba4b18e5a437264fc5503e395ae86162c3808712c299a3260d85410181b0674fc18b563c89dbb5e1bfac27fb30b0bc499c78597c6e70ca1b5402ecdafcafe4dc6681b7d06a280d04c03c8ef58e140d044098a6eba052d792ef208d4fdbfb7ebb5c2f26f93452a5b7ca917924b4cd4bd370b60c02ad235404efdafb996d92784b7fae87dbc7eedaf94ff4ec7933ada69138089f44f1442b1e2e216d1abc6ba7732f9fb3b37bddd6101a892dc192e041bb6924b6806589e6f9a3cd22c1050a2e12199c4aad76ed63db3b76c4226f395b7b333d5a114c2651b8d8cdbcedd98bb7bcaf1fa201456e439270b2d69f6c0ef1a465f9b513c6a3de213b841f60f4427cfac2aed851ee424e7775b108cf5d19e524165aeaae0638d2cf4424f9fdfc855bdd3c12bb6b1fe6c27c9265549da3c766d97dbb7836bb77d53ac5fbd8f6eeef2b2f9b939904aa587949a0d34816dade4d3cb895b8bebedecd038fde102e824473a4e59180f0127f0e77413aeddaed63e1ee60e165f4eef281346b0a779b51ec4db58e5d110ca0fcf4e8b42d8fe4cfe70aeea1b41a440379d2228c82348b977a73dc219a672ee32c7c08fd2af7d1f2e15102ecbe49c3a51f5c7970db08bd2e0bfd10fa213c9390b303375e81de91c823a1d9f0189adf4147017449ada39a0479ecae9d3fdb4c835514bf68cf0e5c38196c49008fbdd37b2f839bf28e65775b56b7653b63ebc6ed76dd9ef31b9459afa6a532c396d569759cb13d702ddbb52d5266b54ee71ca6478a585d82717aaed52745609a63fd137e82a7e0a3c7d0e2fe9b3cce42409ace0f01ff38147785c77756dc8fa0a30923e07c1dcfe2b5441d024d9ac78b6005d7ecfd83461a6ee1676760dff44bd7613f5e2fe1885a57cd8d97c10d1f5cff0e9bf6d76e38e2ef7d7235fb913e5f12bc97dee7e3b1e966c91a3c04d9b24ae2c7c0cf527edb61ec730537e153580a247717c57350fe48c39ad18129314c9298a989fcb189cd52601998059986a9378982c38678152c590bf91d0a7d702cc541c91f815ca8822b5e3a18f49769f0e0ada3ec3ebf9b8583b1f0d20c9e0abf5ee5d2c7ee771c67d8ef0ece689f2fa3ed77f668fc04ca65f60e0e22733c53b8d38671dc7a08b309ed4e12017454a6d640b50622e2a8d6406f43031d0de0920c6a8ee761da48823420335bc35b4e1bf47a07536e834daa0d2f5c04d3461637822f70594d82c63cde34c04636e09ae7d110f24b44f457230da287569678fe134c2c242048c200ee1e1a30a946d3c62468c0c32185cd02908870d16cc013d033ccfe10de20f77e69237ec8c9701b08d15ec48c20d492c4ebd9bce1cfa1113128dfd5fce5aa91c275647a459bf11ca66b3064d76426d3d35b4707eb52c95506e8aa2e818225bc042cb2f612e8baf24bc0182a30818627c204b0910e135838524c8022a831f104eb093281429eec8d359984692acb2448236526e1198b338189a2cf04a6b1443b6e23137130496baa3401c953c823919650139b89a1d5e44c2ae7e8", "ce5f2ad78ef69b020c159ba45f2288364953b1749b80c6956e47eda6ffe49c1aa9b72326757718024e201b683881842ae304b69192939e7c1331270071f49c785e0ac58721e904f82baa3aa1260461271071b49dd8bf0eee8fccb282bce3c49cdd771d6add8ee59d6db73a0322ef1cdb753a1279376cf1457ac36af2aedcd28a0a4f1a544de44943d30a3aaf1c0887e820f568860ea849e80de9f543b4fe125f8313be9e24ed7dd006327698526a93eb31f57f9dbe3300a1c5fd3b5c55fff73d64f6fc09f60f1afbdaf60faa30b37fcea037e8f686bdb3f66f3cb33eddde599fc69f39fb975bbf16c917230fccc7b95fe502b5f7abbd5fedfd484ee4dbf07ee5d18b9701264c1b17268171d1ba728c476099319e89acc578b4ae13e31986428c47e1d9309e6aa4c278108e07e3890812ac743af50c188f40d15f22d0d47d893c23f125c28cad170f44515e3cd0d87709ad33965d3c0fc574951a88a1b924407dc755de5d0cc125f63f04bb2536124b6df15c5caf25f62263a9251c022ca3c5630d74168f4175593cd848641d9f6a138bc5d3701456e944a0fa2b9efc8af28aaf06c15cf1381c6d55ea4a279dd580ca267b6c75214dcced2812ce98901abaa0adba37a79c555ea457cd5971cdac28ac8e23aad9aae3b82aaa8a8b2a79aa3c5d2b974f20486af1b45ff403d96ea6e2a9dbeff5fb9dce39efb41d6d3f7721f3ec65f4fe1de79de6eb85b76ca52487d48b5a8bf83920899a7205a52c5bdba8da46d536eaedd828e540c61353ca2a2ecde19283747595828665ae14786489a5a845d7672970866a4b41c5b35c8a0a8c84978289e3be1470040da6206b2e9a54d050e4d809b6a9273b8136526627b8c6f64cc14611690ab6b15353703196652ad028a64dc1e612d4c83f8f734b2e2f589b769aadefdf145c519ac1c884c52d9726b029e064988b1590df2f5cdca9a0ef49bc5fa19704ba035087f951c77575cafd40c84553b2d172d2143518c83c0511d5eb29ea30527c0a66de594c6c9f028c23fe1470dc85a68a4a5e51072a6a4430830a328e2454c04f2f50755ad60d59a06ac30255dbed2972dc4a0b54a9531416a8f65bd6a0d5e98c6dc7ed3aae438b90793f7f590cfc245da02a6f7145757832b89a453c89a82214e500a55bbce9c13baefe9a76315f1e5b5ad3fa16b2da06e4c5619db34b5a3fddfe648db6772f9f4a72315c3e052db87b7b0812b2ecacb50926e4054a72bba82e5cebc55a2fd67af1ede845f548c6f38bea3a2e158c0a92ae6154e1b014a38a8fec1855d5e84a4615cfd032aab0789a515583916754417144a38a8e601a55684dd5a8c2a1b8c6537053d9788a6d641b4f818d75a30a8ee21b557063e1a802631847151b4539aae028cef10c5c5f3aaac0a214d4b38e2a3a927654e131bda3aa0e5cf1a8aa05e505746a389a7a545561e01e554854f9a8aac4c83eaaa0e6fa5145c6f18f2a3aae8054d5f28a06525525828254a1711ca48a7e5a42c2ebede07f03f27a3bdb726d9a90282eb48502b01e3717954358222a9190b4887d33b61cb7d7059d594d422a9a5cd1429e8eaea6214f33aa784805412922079deecd5fd544b277e5fd012a7247de2a4e5e94b78a5a9d6b0b8e167bd7dd5dbc0de135e18d1fd69328f41b1ff3f7f135f232e96afa857d33e1878f2ceee43bd101415ee797b6b97ab8ef2ef837e36fa3c7dffee36c7f1b7fb0e0757df47d540899979d8e33ec75067dfbcc92df97bbc79f9cd1ed77f0bd870f5ceae5224c7db90a657fa9bd67ed3d6beff976bc271bb67892733f435cb8ac9784e9ea4b1a8be52a290c594c52a6ae85a4c186ca9132f0fc22c519c9444ac031871485a009f393a4b72097c6a208c082646afb0a9091da3b34c7f41b0d948422ed28c9d8d0eddb63bcbe968250dc5bde248c15", "b53c49dfaab13dc358435bf423d1c869a4e915cdc25a354b81b826ace814c6eb64f77b8bb54096f20c84168d47b5579468a4aab813689216473138122a3fcaa8cb5e29f215f512e523b824cac1114779cf38b9b415dc0e7c04a137b687b066d5edd0f7a80996a863b52c58fe0adf5ba07968b6e4756c62918a9688b4afa212e28a56f33f3cbbc20bd74871a5d9b1b55e9c962f80fde33e97f00652cbc83732fb37c2372915dfc8dcfeea70f2083ec21066f1da9fb77ef692304ed60bb946b99316acad4a6d556aabf276ac8a7c14e3491639ffd22c32094557c1c850584646c6461634b22a747d8d8c65a86f64483c9b23a31bc91d1910c7f5c8c808ea4786d5cc0e93a150c4900a6cea89545c236da4821a6783c9c02852490636764c32284606988c8b62a0646094ccaf13607d3f25838a7e492fe34b4646caf692a13133bd647c5cb725ab0125c34b0e46cbee92e10d44980c87eac5641518693219d03c9b4b46c5916832326e1697ac8657546cb2ea108c9b0c8b23e064e4d3595bdcb74d9da16b51d726666d09df36a5ef913b5a3a0a5aaf4bdf58d7b5dceea05ad696a4b915f59c3ab29aad53c757c9d492442b5d5e173ed9a995a5f5a77d06f50d78bd8e35e83a76cf82fc37f2350396c9757b64f65eee6e67db116464ddddfeca65452d830cbe1c28177ac5df6a87573bbcdae1bd1d87570cdcf2e74e4741b681dca6c6cff453a1eccba264e8eb7d2ff430755c98309507eafa3a168da5e8180ed9ca31aaae8863e186ee8d51f0741b031a1936c6c0916a0c86e0d1f6274c2f898a45a3d8328e652ac838949113e39b649a4cc55828e68bb18c65d7a14dc629550c85a2b4f6cdc248ab2ab3f4c555b17f18a9555cbf12e597467215d734acf42a86c495505c17314eb13aec33569215231ad8254640154a8c69e4904a27d324d98a81704cd1fe78a3265c31e82bfa205603820262241cebb3ef276712afc8babaeeb8032f08ebb98e25173df9370520f1caeeb9162d23889efd7730f3221dbaca8f38fbd3ef08cb5b58d1ed940a57d339657e85f4ab3c40296d06837e574bdafc6b7cf79150bdf43e9f3f9b6efe522eb26595c48f819fc1aab0c3b6c3e0e6366ec2a7b014e8cd0288fae316d5e5a964484bd8ec61d7b206e7d3b0be7c1adf6d40d874478f4f9cac8997fedc83377bc9750df7d75ad8d4c2a616366f47d87043172fd38a9f2d2e3434fb505d4753c463599a0288ec690aaeaea9290086aea6e0e0d99a0269e46b0a0a8eb1297008cee670f2f4ac4d118fe26d4a345373538219b99b72b34ced4d4143f13705cdd8e0f0ed327638050cc5e21c9a86e171449abec9e1f612c3e594fa1982cd29350fcbe714505ca353ea30c64e87df732cab53300dbc4ec140353b05d5c8ed0827d6c4ee14281cbf7338f2a886a7c0bea2e329ea40b03c050bc7f31c7acd39d37343bf1e69bb207b1cd9dbe0f3f57316bcea1d96e1f5e10392c7a6a754043e3059f1eb91fb3656743d42f16ab647aca382efd987288d8fddef3b5ac6e77befd9fbd14fc215f9a061ed7d82045e7eb46b86d32628c4a1d5b71cebdcf2bb2fa3dba7cd68fbdebebbe5bdcf2af4b330965b9fe26fb5f3a99d4fed7cde8ef329066e3949e7fdb2112efd689d86cf4163112ec3d6cc5b040d10d00dfa758eb4e12da78ddfd75e1ab6f20d7f2313835e0acf6162b95010e581ba7a884563c921864356438caa2b8658b8a11662143c29c480464a88317084108321e8a0fd09d393412c1a4505712c5311c4a18c3410df245309c458280a88b18c05d0a14dc6fa87a150e4cfbe5918eaa7ccd2173fc5fe61681fae5f21481fae6958ca872171850fd7458c75cf619fb1640f231aa81e4640153d8c69a4794a27d344f230108ee2d91f6f54c1c3a0afa877580d0872879170d4cebe", "9f9c143b03fa6aecfed882fc9d0e5b6475bc562b5f88453e05e8b816cdcf394ee1a16bb558918a62276f6145ad532a5c4dea94f915944e1e50123acd7996ade023859bcde69a3c403026ccd16d289786dba0e9de740776bf363d38193efffb3f7e5b10c58cbc0000"], [
+			'Server',
+			'GitHub.com',
+			'Date',
+			'Mon, 27 Jan 2020 20:17:47 GMT',
+			'Content-Type',
+			'application/json; charset=utf-8',
+			'Transfer-Encoding',
+			'chunked',
+			'Connection',
+			'close',
+			'Status',
+			'200 OK',
+			'X-RateLimit-Limit',
+			'60',
+			'X-RateLimit-Remaining',
+			'53',
+			'X-RateLimit-Reset',
+			'1580158422',
+			'Cache-Control',
+			'public, max-age=60, s-maxage=60',
+			'Vary',
+			'Accept',
+			'ETag',
+			'W/"ed4c0862d3d37cffcc33307e8ff7b8bb"',
+			'X-GitHub-Media-Type',
+			'github.v3; format=json',
+			'Link',
+			'<https://api.github.com/user/1254739/repos?page=2&per_page=10>; rel="next", <https://api.github.com/user/1254739/repos?page=2&per_page=10>; rel="last"',
+			'Access-Control-Expose-Headers',
+			'ETag, Link, Location, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval, X-GitHub-Media-Type',
+			'Access-Control-Allow-Origin',
+			'*',
+			'Strict-Transport-Security',
+			'max-age=31536000; includeSubdomains; preload',
+			'X-Frame-Options',
+			'deny',
+			'X-Content-Type-Options',
+			'nosniff',
+			'X-XSS-Protection',
+			'1; mode=block',
+			'Referrer-Policy',
+			'origin-when-cross-origin, strict-origin-when-cross-origin',
+			'Content-Security-Policy',
+			"default-src 'none'",
+			'Content-Encoding',
+			'gzip',
+			'X-GitHub-Request-Id',
+			'9039:77C2:93349:F963E:5E2F456B'
+		]);
+
+	// return nock('https://api.github.com:443', {
+	// 		"encodedQueryParams": true
+	// 	})
+	// 	.get(`/users/${fixtures.owner}/repos`)
+	// 	.query({
+	// 		"access_token": config.personal_oath_for_testing,
+	// 		"page": 1,
+	// 		"per_page": 10
+	// 	})
+	// 	.reply(200, [{
+	// 		"id": 76067525,
+	// 		"name": "aTest",
+	// 		"full_name": fixtures.ownerAndRepo,
+	// 		"owner": {
+	// 			"login": fixtures.owner
+	// 		},
+	// 		"private": false,
+	// 		"description": "a description of the repo"
+	// 	}, {
+	// 		"id": 75946742,
+	// 		"name": "aTest",
+	// 		"full_name": fixtures.owner + '/someOtherRepo',
+	// 		"owner": {
+	// 			"login": fixtures.owner
+	// 		},
+	// 		"private": true,
+	// 		"default_branch": "master"
+	// 	}]);
 }
 
 function getTemplatesNock(repoDetails) {
@@ -642,108 +767,21 @@ function getSearchNock() {
 	return nock('https://api.github.com:443', {
 			"encodedQueryParams": true
 		})
-		.get((uri) => uri.includes('search/code'))
+		.get('/search/code')
 		.query({
-			"q": "cwrc-melbourne+repo%3Ajchartrand%2FcleanDoc2",
+			"q": "test%20repo%3Alucaju%2Fmisc",
 			"page": "undefined",
-			"per_page": "undefined",
-			"access_token": config.personal_oath_for_testing
+			"per_page": "undefined"
 		})
-		.reply(200, {
-			"total_count": 1,
-			"incomplete_results": false,
-			"items": [{
-				"name": "cwrc-categories",
-				"path": "cwrc-categories",
-				"sha": "50e94e0bb7c307caab2c791775d63e544ae64bc6",
-				"url": "https://api.github.com/repositories/84259758/contents/cwrc-categories?ref=aab4b2d3c14c0121e2d604900711896b1ac8b83c",
-				"git_url": "https://api.github.com/repositories/84259758/git/blobs/50e94e0bb7c307caab2c791775d63e544ae64bc6",
-				"html_url": "https://github.com/jchartrand/cleanDoc2/blob/aab4b2d3c14c0121e2d604900711896b1ac8b83c/cwrc-categories",
-				"repository": {
-					"id": 84259758,
-					"name": "cleanDoc2",
-					"full_name": "jchartrand/cleanDoc2",
-					"owner": {
-						"login": "jchartrand",
-						"id": 547165,
-						"avatar_url": "https://avatars0.githubusercontent.com/u/547165?v=3",
-						"gravatar_id": "",
-						"url": "https://api.github.com/users/jchartrand",
-						"html_url": "https://github.com/jchartrand",
-						"followers_url": "https://api.github.com/users/jchartrand/followers",
-						"following_url": "https://api.github.com/users/jchartrand/following{/other_user}",
-						"gists_url": "https://api.github.com/users/jchartrand/gists{/gist_id}",
-						"starred_url": "https://api.github.com/users/jchartrand/starred{/owner}{/repo}",
-						"subscriptions_url": "https://api.github.com/users/jchartrand/subscriptions",
-						"organizations_url": "https://api.github.com/users/jchartrand/orgs",
-						"repos_url": "https://api.github.com/users/jchartrand/repos",
-						"events_url": "https://api.github.com/users/jchartrand/events{/privacy}",
-						"received_events_url": "https://api.github.com/users/jchartrand/received_events",
-						"type": "User",
-						"site_admin": false
-					},
-					"private": false,
-					"html_url": "https://github.com/jchartrand/cleanDoc2",
-					"description": "a clean cwrc doc",
-					"fork": false,
-					"url": "https://api.github.com/repos/jchartrand/cleanDoc2",
-					"forks_url": "https://api.github.com/repos/jchartrand/cleanDoc2/forks",
-					"keys_url": "https://api.github.com/repos/jchartrand/cleanDoc2/keys{/key_id}",
-					"collaborators_url": "https://api.github.com/repos/jchartrand/cleanDoc2/collaborators{/collaborator}",
-					"teams_url": "https://api.github.com/repos/jchartrand/cleanDoc2/teams",
-					"hooks_url": "https://api.github.com/repos/jchartrand/cleanDoc2/hooks",
-					"issue_events_url": "https://api.github.com/repos/jchartrand/cleanDoc2/issues/events{/number}",
-					"events_url": "https://api.github.com/repos/jchartrand/cleanDoc2/events",
-					"assignees_url": "https://api.github.com/repos/jchartrand/cleanDoc2/assignees{/user}",
-					"branches_url": "https://api.github.com/repos/jchartrand/cleanDoc2/branches{/branch}",
-					"tags_url": "https://api.github.com/repos/jchartrand/cleanDoc2/tags",
-					"blobs_url": "https://api.github.com/repos/jchartrand/cleanDoc2/git/blobs{/sha}",
-					"git_tags_url": "https://api.github.com/repos/jchartrand/cleanDoc2/git/tags{/sha}",
-					"git_refs_url": "https://api.github.com/repos/jchartrand/cleanDoc2/git/refs{/sha}",
-					"trees_url": "https://api.github.com/repos/jchartrand/cleanDoc2/git/trees{/sha}",
-					"statuses_url": "https://api.github.com/repos/jchartrand/cleanDoc2/statuses/{sha}",
-					"languages_url": "https://api.github.com/repos/jchartrand/cleanDoc2/languages",
-					"stargazers_url": "https://api.github.com/repos/jchartrand/cleanDoc2/stargazers",
-					"contributors_url": "https://api.github.com/repos/jchartrand/cleanDoc2/contributors",
-					"subscribers_url": "https://api.github.com/repos/jchartrand/cleanDoc2/subscribers",
-					"subscription_url": "https://api.github.com/repos/jchartrand/cleanDoc2/subscription",
-					"commits_url": "https://api.github.com/repos/jchartrand/cleanDoc2/commits{/sha}",
-					"git_commits_url": "https://api.github.com/repos/jchartrand/cleanDoc2/git/commits{/sha}",
-					"comments_url": "https://api.github.com/repos/jchartrand/cleanDoc2/comments{/number}",
-					"issue_comment_url": "https://api.github.com/repos/jchartrand/cleanDoc2/issues/comments{/number}",
-					"contents_url": "https://api.github.com/repos/jchartrand/cleanDoc2/contents/{+path}",
-					"compare_url": "https://api.github.com/repos/jchartrand/cleanDoc2/compare/{base}...{head}",
-					"merges_url": "https://api.github.com/repos/jchartrand/cleanDoc2/merges",
-					"archive_url": "https://api.github.com/repos/jchartrand/cleanDoc2/{archive_format}{/ref}",
-					"downloads_url": "https://api.github.com/repos/jchartrand/cleanDoc2/downloads",
-					"issues_url": "https://api.github.com/repos/jchartrand/cleanDoc2/issues{/number}",
-					"pulls_url": "https://api.github.com/repos/jchartrand/cleanDoc2/pulls{/number}",
-					"milestones_url": "https://api.github.com/repos/jchartrand/cleanDoc2/milestones{/number}",
-					"notifications_url": "https://api.github.com/repos/jchartrand/cleanDoc2/notifications{?since,all,participating}",
-					"labels_url": "https://api.github.com/repos/jchartrand/cleanDoc2/labels{/name}",
-					"releases_url": "https://api.github.com/repos/jchartrand/cleanDoc2/releases{/id}",
-					"deployments_url": "https://api.github.com/repos/jchartrand/cleanDoc2/deployments"
-				},
-				"score": 11.488182,
-				"text_matches": [{
-					"object_url": "https://api.github.com/repositories/84259758/contents//cwrc-categories?ref=aab4b2d3c14c0121e2d604900711896b1ac8b83c",
-					"object_type": "FileContent",
-					"property": "content",
-					"fragment": "cwrc-melbourne\n",
-					"matches": [{
-						"text": "cwrc-melbourne",
-						"indices": [0, 14]
-					}]
-				}]
-			}]
-		}, ['Server',
+		.reply(200, ["1f8b08000000000000039d986d6fdb3610c7bf4aa1b733ccc896e3d84090176b366c4032746887025b6150d4d9622291024925b1857cf7dd51b26cc745621a2d9a5ad1efcfe33df1e82672daf1622174ad5c348f079154429755010e16066c5d381bcd97bcb080bf7250e2a77f9b48f112a279e4e0c50ddd8b8b0651c55d7ef8c4e61c1fcc2ed2a54827f1c5e5c588f338e63019f364940910f115f0f16c996657f801256a5320903b57d93963bc92c39574799d0ed12066a0d2563a6d2458361a4d66c9e86a1a33a19503e52cdb9a726360799da6130197a35824cb249d5c4e47b344a4d96c9a26179359ba4c05ccaec4a5005c1497589cb330722c2d746a59c00e7357166f56dbdb62510bfe50b3525ae1a5d9a9dbe8378ffbe9fdb48ee64d24b368de3b6b10299dc1829e45779f6f9fff2afe2cc4efb30dfffef793508febbb876f93fbcf7f24f79bdb6b54ea624ce6e0a7655d148beed1", "9ea11479239fb8c374e8b2443f2b30b478a15752e15aedebf826ad1c8f26c9743c3bb4e5cbe53fdfef0bf170bbbefffa657cb779a4f539aa72f33638fea11d75a9515b305d0af82ca959a77ff3749d50744da7e2378d0fde0d35a959d69b7b4ab4c833ba28f433926f4d3d4ce07d71d6333d2fd52a9847a661dae5805e42d35f69c3d2ba1043fcfb0da31f9818a460d1bf06b200633a024da1c8bf36be56bd549d5a6164e5a45621461d70a8a3cd8a2bb9e1a13ac859c47d4904ecc7bf8f1c3c516709005ba061be22c49a5c6040807c4277068bbd2151cbad2b6abadf30d4e45cecc60b9e955462bef25e07d83b4fec2fc867d0c7269a2bac6eca64f3d897f1bb95e25dd4558a6f582848f407de3ac2b0101042f811d6c12c310dc37fbbcc1558883cd586e329112c76003778aeecb4288e0e7819ace9218473adc33de32184a5b5359c943ec7def5ac65dbbc547599b66de2946c3c966b29b4895b2b570a20d8233dd8b06dc74a0d57220f97da720d6bffe7a3c457c1261183a83fcbdfaff56387f44340c370da69fbaf5b9c63052911772084a3cc592611d70b3973469cbc3904f632d8e41d862cd89e2dc79ace430557ab9aafc2957a10a34547ce8a6f3e3c748f43b6235186460723d3fabc86b163c9a2f6acc3fa0a77d10edd09f94333341ff70f4ebfbdb2941f9d60c72eeab083543c538af2e8ad1c7dfef860fdb959c4356cd7c7dae6d829867aabeb8e5b7bf675b7d78a50c9fe3ad2fc421722ea08285f7103e14a1e634dcaf1681f0e874d0edc0f68259833aaa7a510e746e4389184dad36c393cb14beefc94b72473329cfa0acdb3e0b4ef41146943116a534bedc7adc23926d8100fedab94b200ebb40aef513b725f4f692797529c32bf1ea7fd01dcdc58bc9fc380e3b886e9e1a4909867780fa048e0f003e1bb6f293417aff4edc45a00a65cb0170db45cc3da7b440655a1d76755fa1e1ae1546b853638f88e87c974361dc7639ac65edc02b390e606ff7d844e1f409c7791ef4bf6ecaf10bac5bbf1fc374c9e5fdb6f25302695d115188797717fd860ffc2874bc357e418fabe2497f613fee59f1ca6dc7f8aea7b6f5fb4517a0b7f4755a23229fc8ee38b419cfc786dfffc0f668a07d0c4110000"], [
+			'Server',
 			'GitHub.com',
 			'Date',
-			'Sun, 02 Apr 2017 22:28:42 GMT',
+			'Tue, 28 Jan 2020 05:30:54 GMT',
 			'Content-Type',
 			'application/json; charset=utf-8',
-			'Content-Length',
-			'4935',
+			'Transfer-Encoding',
+			'chunked',
 			'Connection',
 			'close',
 			'Status',
@@ -753,78 +791,17 @@ function getSearchNock() {
 			'X-RateLimit-Remaining',
 			'29',
 			'X-RateLimit-Reset',
-			'1491172182',
+			'1580189514',
 			'Cache-Control',
 			'no-cache',
 			'X-OAuth-Scopes',
-			'',
+			'admin:repo_hook, repo',
 			'X-Accepted-OAuth-Scopes',
 			'',
 			'X-GitHub-Media-Type',
-			'github.v3; param=text-match; format=json',
+			'github.v3; param=text-match',
 			'Access-Control-Expose-Headers',
-			'ETag, Link, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval',
-			'Access-Control-Allow-Origin',
-			'*',
-			'Content-Security-Policy',
-			'default-src \'none\'',
-			'Strict-Transport-Security',
-			'max-age=31536000; includeSubdomains; preload',
-			'X-Content-Type-Options',
-			'nosniff',
-			'X-Frame-Options',
-			'deny',
-			'X-XSS-Protection',
-			'1; mode=block',
-			'Vary',
-			'Accept-Encoding',
-			'X-Served-By',
-			'b535085e7f4d6e3423e016e684de0829',
-			'X-GitHub-Request-Id',
-			'E4A0:257B:3CD9208:4ACDF0A:58E17B19'
-		]);
-}
-
-function getRepoContentsByDrillDownBranchNock() {
-	return nock('https://api.github.com:443', {
-			"encodedQueryParams": true
-		})
-		.get('/repos/jchartrand/aTest/branches/master')
-		.query({
-			"access_token": config.personal_oath_for_testing
-		})
-		.reply(200, ["1f8b0800000000000003ed574d6fdb300cfd2b81cf696d27fe88030c1bb0dbcedd654311d03265ab736c4f92d37541fefb48c7f972b12e0eb05b734a24f1f1f1891499ad53c11a9da5b30663513b5347d4ebb5b2ce72eb980268238a16be0409b888023f0c64ec05e92c8d441c43262109234c7c9fd62e4ca1b545ad19a487ff425ecce47301da6aa8323a8c6b5025e13f897b7158fe94f3e23d51a00319582636f3fcc59d17dccda2073f587ac9729e7c7376079eccf97f7a21d60672e601593691aac489acf5c4a2b1aaca89a5d548bb07b11289999cc75ee6037a62e1853126de3c8a803edecc8f534c6298792119b69aa32fac", "6dccd275a151f7b9b2459b72f4aec6a636eed35118171ec8a34b275c7668dcab1d9152b77ada678271476600567625eab6a21cf2a6ce06b5924a805575c53aed7f63e62c259406a78e4630bce5b4955179453b5387bf806d35295bb56539751a78296b2023feb9bb31a61be229ecba5c5dea77764bafee67efe106c1ccc0c975e9303620970de87a0c497caad0b2ce15eb7f8a86b615691d06b11f8574740316f49061b768e67dd6b606b5a82b4be85d02b7eedefae3e6434070b9ee4118d7f957f633d879f6d3f96b2f828ecaba2ceb67421832be2cb1a113f76877c4a00abf0983ecb66e6d0b24d128941d0ba08c1d4ba8b3d952d11bbb5219a318925c633692546f45949e2b62b3ed5e970eae4d8dd0aae1da1c4beec296b06a9d43a57e77753e168b6c3925bb476f646c9d0dd9e286f37aa4f1de68eb365a6d40bcb0241a05aa0d497c13e0c09af0ec4bc3cde32ba5010bae2cae205b73bd75cfdfb08fbdd762371ebcd7e25bc3c1ab97ebbd16a9e10c7a063d7217957c552d36a0bbf6b8fc7e18e8c270011904b3d84f7d4f641946722e17a11fc4c97ce62f602e122f0b9398e06f19b30e1d7c849b6b3b613f32f623c9d50e768ff426ad4a55fd201948052ce5e83135a51a16054da9c73f154cfa0ce6ad198ae7db83215169746d51d8b381b15fe9e749ac202d2fc6c99fade21e495dcfb666453cc43e14ac687217c803d0aaa4e79d09d552d2cd7583cbafeede1f79b83c7978bba1fc654a1f844feda50b8109effe00b953669e700d0000"], ['Server',
-			'GitHub.com',
-			'Date',
-			'Fri, 27 Apr 2018 13:19:26 GMT',
-			'Content-Type',
-			'application/json; charset=utf-8',
-			'Transfer-Encoding',
-			'chunked',
-			'Connection',
-			'close',
-			'Status',
-			'200 OK',
-			'X-RateLimit-Limit',
-			'5000',
-			'X-RateLimit-Remaining',
-			'4970',
-			'X-RateLimit-Reset',
-			'1524837201',
-			'Cache-Control',
-			'private, max-age=60, s-maxage=60',
-			'Vary',
-			'Accept, Authorization, Cookie, X-GitHub-OTP',
-			'ETag',
-			'W/"cc5b2ec31609cc9a0a1be66ef570e41c"',
-			'X-OAuth-Scopes',
-			'repo',
-			'X-Accepted-OAuth-Scopes',
-			'',
-			'X-GitHub-Media-Type',
-			'github.v3; format=json',
-			'Access-Control-Expose-Headers',
-			'ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval',
+			'ETag, Link, Location, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval, X-GitHub-Media-Type',
 			'Access-Control-Allow-Origin',
 			'*',
 			'Strict-Transport-Security',
@@ -838,13 +815,217 @@ function getRepoContentsByDrillDownBranchNock() {
 			'Referrer-Policy',
 			'origin-when-cross-origin, strict-origin-when-cross-origin',
 			'Content-Security-Policy',
-			'default-src \'none\'',
-			'X-Runtime-rack',
-			'0.052916',
+			"default-src 'none'",
 			'Content-Encoding',
 			'gzip',
 			'X-GitHub-Request-Id',
-			'4F65:2B63:296904C:50BBB52:5AE3235E'
+			'939E:2EA6:219F4:59107:5E2FC70D'
+		]);
+
+
+
+
+
+
+
+	// nock('https://api.github.com:443', {
+	// 		"encodedQueryParams": true
+	// 	})
+	// 	.get((uri) => uri.includes('search/code'))
+	// 	.query({
+	// 		"q": "cwrc-melbourne+repo%3Ajchartrand%2FcleanDoc2",
+	// 		"page": "undefined",
+	// 		"per_page": "undefined",
+	// 		"access_token": config.personal_oath_for_testing
+	// 	})
+	// 	.reply(200, {
+	// 		"total_count": 1,
+	// 		"incomplete_results": false,
+	// 		"items": [{
+	// 			"name": "cwrc-categories",
+	// 			"path": "cwrc-categories",
+	// 			"sha": "50e94e0bb7c307caab2c791775d63e544ae64bc6",
+	// 			"url": "https://api.github.com/repositories/84259758/contents/cwrc-categories?ref=aab4b2d3c14c0121e2d604900711896b1ac8b83c",
+	// 			"git_url": "https://api.github.com/repositories/84259758/git/blobs/50e94e0bb7c307caab2c791775d63e544ae64bc6",
+	// 			"html_url": "https://github.com/jchartrand/cleanDoc2/blob/aab4b2d3c14c0121e2d604900711896b1ac8b83c/cwrc-categories",
+	// 			"repository": {
+	// 				"id": 84259758,
+	// 				"name": "cleanDoc2",
+	// 				"full_name": "jchartrand/cleanDoc2",
+	// 				"owner": {
+	// 					"login": "jchartrand",
+	// 					"id": 547165,
+	// 					"avatar_url": "https://avatars0.githubusercontent.com/u/547165?v=3",
+	// 					"gravatar_id": "",
+	// 					"url": "https://api.github.com/users/jchartrand",
+	// 					"html_url": "https://github.com/jchartrand",
+	// 					"followers_url": "https://api.github.com/users/jchartrand/followers",
+	// 					"following_url": "https://api.github.com/users/jchartrand/following{/other_user}",
+	// 					"gists_url": "https://api.github.com/users/jchartrand/gists{/gist_id}",
+	// 					"starred_url": "https://api.github.com/users/jchartrand/starred{/owner}{/repo}",
+	// 					"subscriptions_url": "https://api.github.com/users/jchartrand/subscriptions",
+	// 					"organizations_url": "https://api.github.com/users/jchartrand/orgs",
+	// 					"repos_url": "https://api.github.com/users/jchartrand/repos",
+	// 					"events_url": "https://api.github.com/users/jchartrand/events{/privacy}",
+	// 					"received_events_url": "https://api.github.com/users/jchartrand/received_events",
+	// 					"type": "User",
+	// 					"site_admin": false
+	// 				},
+	// 				"private": false,
+	// 				"html_url": "https://github.com/jchartrand/cleanDoc2",
+	// 				"description": "a clean cwrc doc",
+	// 				"fork": false,
+	// 				"url": "https://api.github.com/repos/jchartrand/cleanDoc2",
+	// 				"forks_url": "https://api.github.com/repos/jchartrand/cleanDoc2/forks",
+	// 				"keys_url": "https://api.github.com/repos/jchartrand/cleanDoc2/keys{/key_id}",
+	// 				"collaborators_url": "https://api.github.com/repos/jchartrand/cleanDoc2/collaborators{/collaborator}",
+	// 				"teams_url": "https://api.github.com/repos/jchartrand/cleanDoc2/teams",
+	// 				"hooks_url": "https://api.github.com/repos/jchartrand/cleanDoc2/hooks",
+	// 				"issue_events_url": "https://api.github.com/repos/jchartrand/cleanDoc2/issues/events{/number}",
+	// 				"events_url": "https://api.github.com/repos/jchartrand/cleanDoc2/events",
+	// 				"assignees_url": "https://api.github.com/repos/jchartrand/cleanDoc2/assignees{/user}",
+	// 				"branches_url": "https://api.github.com/repos/jchartrand/cleanDoc2/branches{/branch}",
+	// 				"tags_url": "https://api.github.com/repos/jchartrand/cleanDoc2/tags",
+	// 				"blobs_url": "https://api.github.com/repos/jchartrand/cleanDoc2/git/blobs{/sha}",
+	// 				"git_tags_url": "https://api.github.com/repos/jchartrand/cleanDoc2/git/tags{/sha}",
+	// 				"git_refs_url": "https://api.github.com/repos/jchartrand/cleanDoc2/git/refs{/sha}",
+	// 				"trees_url": "https://api.github.com/repos/jchartrand/cleanDoc2/git/trees{/sha}",
+	// 				"statuses_url": "https://api.github.com/repos/jchartrand/cleanDoc2/statuses/{sha}",
+	// 				"languages_url": "https://api.github.com/repos/jchartrand/cleanDoc2/languages",
+	// 				"stargazers_url": "https://api.github.com/repos/jchartrand/cleanDoc2/stargazers",
+	// 				"contributors_url": "https://api.github.com/repos/jchartrand/cleanDoc2/contributors",
+	// 				"subscribers_url": "https://api.github.com/repos/jchartrand/cleanDoc2/subscribers",
+	// 				"subscription_url": "https://api.github.com/repos/jchartrand/cleanDoc2/subscription",
+	// 				"commits_url": "https://api.github.com/repos/jchartrand/cleanDoc2/commits{/sha}",
+	// 				"git_commits_url": "https://api.github.com/repos/jchartrand/cleanDoc2/git/commits{/sha}",
+	// 				"comments_url": "https://api.github.com/repos/jchartrand/cleanDoc2/comments{/number}",
+	// 				"issue_comment_url": "https://api.github.com/repos/jchartrand/cleanDoc2/issues/comments{/number}",
+	// 				"contents_url": "https://api.github.com/repos/jchartrand/cleanDoc2/contents/{+path}",
+	// 				"compare_url": "https://api.github.com/repos/jchartrand/cleanDoc2/compare/{base}...{head}",
+	// 				"merges_url": "https://api.github.com/repos/jchartrand/cleanDoc2/merges",
+	// 				"archive_url": "https://api.github.com/repos/jchartrand/cleanDoc2/{archive_format}{/ref}",
+	// 				"downloads_url": "https://api.github.com/repos/jchartrand/cleanDoc2/downloads",
+	// 				"issues_url": "https://api.github.com/repos/jchartrand/cleanDoc2/issues{/number}",
+	// 				"pulls_url": "https://api.github.com/repos/jchartrand/cleanDoc2/pulls{/number}",
+	// 				"milestones_url": "https://api.github.com/repos/jchartrand/cleanDoc2/milestones{/number}",
+	// 				"notifications_url": "https://api.github.com/repos/jchartrand/cleanDoc2/notifications{?since,all,participating}",
+	// 				"labels_url": "https://api.github.com/repos/jchartrand/cleanDoc2/labels{/name}",
+	// 				"releases_url": "https://api.github.com/repos/jchartrand/cleanDoc2/releases{/id}",
+	// 				"deployments_url": "https://api.github.com/repos/jchartrand/cleanDoc2/deployments"
+	// 			},
+	// 			"score": 11.488182,
+	// 			"text_matches": [{
+	// 				"object_url": "https://api.github.com/repositories/84259758/contents//cwrc-categories?ref=aab4b2d3c14c0121e2d604900711896b1ac8b83c",
+	// 				"object_type": "FileContent",
+	// 				"property": "content",
+	// 				"fragment": "cwrc-melbourne\n",
+	// 				"matches": [{
+	// 					"text": "cwrc-melbourne",
+	// 					"indices": [0, 14]
+	// 				}]
+	// 			}]
+	// 		}]
+	// 	}, ['Server',
+	// 		'GitHub.com',
+	// 		'Date',
+	// 		'Sun, 02 Apr 2017 22:28:42 GMT',
+	// 		'Content-Type',
+	// 		'application/json; charset=utf-8',
+	// 		'Content-Length',
+	// 		'4935',
+	// 		'Connection',
+	// 		'close',
+	// 		'Status',
+	// 		'200 OK',
+	// 		'X-RateLimit-Limit',
+	// 		'30',
+	// 		'X-RateLimit-Remaining',
+	// 		'29',
+	// 		'X-RateLimit-Reset',
+	// 		'1491172182',
+	// 		'Cache-Control',
+	// 		'no-cache',
+	// 		'X-OAuth-Scopes',
+	// 		'',
+	// 		'X-Accepted-OAuth-Scopes',
+	// 		'',
+	// 		'X-GitHub-Media-Type',
+	// 		'github.v3; param=text-match; format=json',
+	// 		'Access-Control-Expose-Headers',
+	// 		'ETag, Link, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval',
+	// 		'Access-Control-Allow-Origin',
+	// 		'*',
+	// 		'Content-Security-Policy',
+	// 		'default-src \'none\'',
+	// 		'Strict-Transport-Security',
+	// 		'max-age=31536000; includeSubdomains; preload',
+	// 		'X-Content-Type-Options',
+	// 		'nosniff',
+	// 		'X-Frame-Options',
+	// 		'deny',
+	// 		'X-XSS-Protection',
+	// 		'1; mode=block',
+	// 		'Vary',
+	// 		'Accept-Encoding',
+	// 		'X-Served-By',
+	// 		'b535085e7f4d6e3423e016e684de0829',
+	// 		'X-GitHub-Request-Id',
+	// 		'E4A0:257B:3CD9208:4ACDF0A:58E17B19'
+	// 	]);
+}
+
+function getRepoContentsByDrillDownBranchNock() {
+	return nock('https://api.github.com:443', {
+			"encodedQueryParams": true
+		})
+		.get('/repos/lucaju/misc/branches/master')
+		.reply(200, ["1f8b0800000000000003ad576b57e23a14fd2b2cbeaad3774b5de3bd5304792854e4255c66b9d234a5c536c536058acbff7e938288cc8c439df18b8b267b679fe4ec7392e72206012a9e1703101314154f8b300c028f14cf9f8bb10be880e6e816521dc15100eff0bac2ab8e66db1274e87fc94148e555cd818a43a138b4d183675350ab32523ba24eaca1cfb7660dc1ec7552b30257e6cc0ecc61d36f07a3d57836705bb5d1d2ecf597f4b734ae75d62371248e67703d0e067e7b66886dfaab3d1c5dbcd30512e2861153b8d57e93400fe0b0701579eb358a009d8d02e0f954889f40304bbe05e80b8d8b7eb70161d18abcc89ff1c299a8f478e55c52ce057e5c7c790d9e6dc41b7bcd23f5c4dae3c46184e67efa6dea1137b18e230e501c83295bba3f671a0a04adc817b222949744880ebceeb7e8400d8802e2054193d512ef48bae248a204119454190abc0478", "5db3150a4c2216a24bc83c3ee73830f7bebc49e2a8c630e636f1738117438e0e726cad983b7a0dba259f5864934231972375180461f200c304d3e4e34f8b0b14798e0701f142cc7667f31bd1ec2251824e8b1102311b292e804f73eeb4187b530c4812b14d3e637fe56aadd12edcd66e0bdd46ad6df4fa77d5ecfb044ff0322ec3b261942f0da353ee34d1b56e9a9777e56bcd9dc9e6428a1a4bc3b0eb8d865111bb8f6eaaa9ba118632e61bc38656936fc2091ed4ad3eb0977ab565969ef486c97943a33e1d35bd0486772d636ac86aaa00602eb8596d70a321b278ace0206d38574f5a5b5b38137cef744be3c660908a46cb4d1b0b6b51e9724d8c6acb95660daffafdfbcaddd3bcbff6439beba657d075cab3d913b83aa972c274386e4f70a3dbbdac988996cec66a140c2a507db4b59ed8bdbfc1e3c7b297cae3a17535b86cdc998e8b4746a5df37bda4ecc274a549fcbad39960f76aac4acda95c4748e3d3f004d446a5d9ad0b2fe7e6d0f22c222ecd7a72c395e2909f065552f23571707322f0b3d0f12b9783d5043787d3be29d7a2e46625376bada053afc90e08cbd7b765a9eab79f6ad67d5399734a0cec9edbe7783ae571d83fe9b9d7a53a19762e26f8229c9b6082b3b3a9b62b3f3d317abe7390fa2160d5852571e1d81c9ee03988686a15345d85250195f892a04024ea22809a6653475902efe82524c9128f14871ecca6c0140ecb4ae1ebbb6af24f4150345d977845e00b67bcc2f313bcc97c5a3f0a9baa51f8fa63b1f8196e820fcbc24b7eeb7dc2762e09fc87f70edf2b21fbc56343fe094bc707fcbf2d5379c3e0b6b523a639f2d61afc70eab1eab089810eb1be24888aac49fafb4ed55107f76d1fceaa69bbd7915aeb47d66dc00210101d4acf3ec6e2b6cc26318a6088094d2ed604b884dbf2ffbbb89029c734dab2642df177f59ab1bdd66b3af79893a1d39cd0f7c325451e4a7ddf0cf6c9b91d6687f7f034379e629eb990b888ee1295fec202f66292474836ff99f6a598d06b036388e9fe46c8ce21668ba0529698aa78cefa5e469558318cbc39eb1f7944bdc3519e309a02ecadb33e948787e25846666d38473cd97c8a430b9a5679801bc033378fbc058029db820841e42de876e6263b40522e92ceb3db0b3d6ab6b91e410fc00e98c51ce0c7e8f0eef46abf25b2ce1c9aa1149319502fa9b22c6bbf70a06256467cbbd291e8f48f1c28fdda81db05fec0827b923f36e1dec45c367cc57dde88070c7f62c51dd51f9971c7f2f7ecf846b96fe4cf1872c794d7923b607e53eea07fc7967b4ade59fa28636eee3f71f1fcbfdd9beec8ab10a5cf79fddf35efe357f8d8643fbb831ccbfdf29d96a507dfc38f34781a3bf29d3cef252b0218baf4b9b47b1b33a97b0cbfb82ab1ebe92b860a9847214190b0974b562a775fb60f1b8481e5ef8d46e829f15813a45e2249fc4025c04d00083b610451f650f26962312da1c35eded9356445d8197f6737c7ed9a74858f5bcf8f8fc483a0693bc9d433ad2fff038c359ac42d100000"], [
+			'Server',
+			'GitHub.com',
+			'Date',
+			'Mon, 27 Jan 2020 20:00:55 GMT',
+			'Content-Type',
+			'application/json; charset=utf-8',
+			'Transfer-Encoding',
+			'chunked',
+			'Connection',
+			'close',
+			'Status',
+			'200 OK',
+			'X-RateLimit-Limit',
+			'60',
+			'X-RateLimit-Remaining',
+			'56',
+			'X-RateLimit-Reset',
+			'1580158422',
+			'Cache-Control',
+			'public, max-age=60, s-maxage=60',
+			'Vary',
+			'Accept',
+			'ETag',
+			'W/"806b48ad0781aaf30246fb3dd0f798c5"',
+			'X-GitHub-Media-Type',
+			'github.v3; format=json',
+			'Access-Control-Expose-Headers',
+			'ETag, Link, Location, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval, X-GitHub-Media-Type',
+			'Access-Control-Allow-Origin',
+			'*',
+			'Strict-Transport-Security',
+			'max-age=31536000; includeSubdomains; preload',
+			'X-Frame-Options',
+			'deny',
+			'X-Content-Type-Options',
+			'nosniff',
+			'X-XSS-Protection',
+			'1; mode=block',
+			'Referrer-Policy',
+			'origin-when-cross-origin, strict-origin-when-cross-origin',
+			'Content-Security-Policy',
+			"default-src 'none'",
+			'Content-Encoding',
+			'gzip',
+			'X-GitHub-Request-Id',
+			'9433:179B:7120B:C049D:5E2F4177'
 		]);
 
 }
@@ -853,14 +1034,12 @@ function getRepoContentsByDrillDownRootTreeNock() {
 	return nock('https://api.github.com:443', {
 			"encodedQueryParams": true
 		})
-		.get('/repos/jchartrand/aTest/git/trees/9fedf370d1ae0c8057e90366aaaa0217be97a205')
-		.query({
-			"access_token": config.personal_oath_for_testing
-		})
-		.reply(200, ["1f8b0800000000000003a5933f6fdc300cc5bf8be6c0a26c59b26e2b908c5d826c41078aa26a0767cbb07440fee0be7b752d7ac9e8f6b811e2c3d30f7cfc10794471102e72889d85a0908106e82d3be88cc15ad02aebd9596ca11777e2b41dab602c65cd0729719d9a9f53194fbea134cb8dd794e50b8db8950d9720f18973917542968d39cb7f30ba08c4e1f943ac58c66af9f8f0edfefb433387fa893985fa261480d1baf6e56dbdf4fe987cedfe3059dd32921982b73174d645e5836a6b696bc0ebe87ae523", "f2459ea7f72ab7ff0f7731ce72b7e3f9ee4a85cb920a96292db979c969d90907d178660250601c906d4939d0410fa809886cd4446880ae70cadc4ab7dbf20b5d48749a7929cdeb7cdc49e6180724ea40b504d698d6101be09acee0b42315502bcb71b892e9dec1ad6cbb4dbfb0e534f3fdb47d6281865a9f69fc1de0bf69ecea3aa2456d628f36586b7beda06d91425d58648fa4d9d57bab82db2e6cb7d1f947bd9bedb410160ee210f198f9fc0b3876de0111040000"], ['Server',
+		.get('/repos/lucaju/misc/git/trees/2fc7a21e01174680f395f323cec364c103a097d5')
+		.reply(200, ["1f8b0800000000000003a5944d8bdb301086ff8bce5b5bd2e833b7c2ee712fbd961e349a51e3c5ae4d2c43da25ffbd0a94d0b217a741170dc3cba38711f32ed6631207a14bf6492b964a79e3822c106d010d99333893958424a3272b9ec4761a5be058ebb21efa3e2d43f77da8c70dbb3c4ffd899779edc72da7b7ad9f8635f7add9d713f3dadfc1b806c4e1ebbb58523d36da9797cfcfaf2fdd448d3fcdd47a4249e98c6975fdb95c6b1c676cd51f1da5adb3edbd902145321a2950bb17870610c124696cb6fa1a187eb5b8fb2faf2bb379ed855d9e6e4295874f34e7ee3c8d3b950cab441689d0151bda515ac9864ec1470590325acbd1aa9b12488007ac76f33e5ae93bb4a2ca8e404a8b8e31bae4bdcd9abdf70e922bdac498d8199d6f5a51", "69ff80d66ede472db843cba2549e3c9ae88261042d734160229db2892606238d062e7f69b947b476f3fed13ad7ae9eebce0f183563697b8002ba040ca4a23321b409e5481494b758c83abe2929fbc89cf6d22edfda0a386d3f72aa4ce250d2b8f2e537e8c2cc8ad7040000"], [
+			'Server',
 			'GitHub.com',
 			'Date',
-			'Fri, 27 Apr 2018 13:19:26 GMT',
+			'Mon, 27 Jan 2020 20:00:55 GMT',
 			'Content-Type',
 			'application/json; charset=utf-8',
 			'Transfer-Encoding',
@@ -870,27 +1049,23 @@ function getRepoContentsByDrillDownRootTreeNock() {
 			'Status',
 			'200 OK',
 			'X-RateLimit-Limit',
-			'5000',
+			'60',
 			'X-RateLimit-Remaining',
-			'4969',
+			'55',
 			'X-RateLimit-Reset',
-			'1524837201',
+			'1580158422',
 			'Cache-Control',
-			'private, max-age=60, s-maxage=60',
+			'public, max-age=60, s-maxage=60',
 			'Vary',
-			'Accept, Authorization, Cookie, X-GitHub-OTP',
+			'Accept',
 			'ETag',
-			'W/"4cd04f71fec918606214f45784dcc323"',
+			'W/"55dedfe8210eeb22a951b65760f44b00"',
 			'Last-Modified',
-			'Thu, 26 Apr 2018 14:09:46 GMT',
-			'X-OAuth-Scopes',
-			'repo',
-			'X-Accepted-OAuth-Scopes',
-			'',
+			'Sat, 25 Jan 2020 05:35:12 GMT',
 			'X-GitHub-Media-Type',
 			'github.v3; format=json',
 			'Access-Control-Expose-Headers',
-			'ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval',
+			'ETag, Link, Location, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval, X-GitHub-Media-Type',
 			'Access-Control-Allow-Origin',
 			'*',
 			'Strict-Transport-Security',
@@ -904,13 +1079,11 @@ function getRepoContentsByDrillDownRootTreeNock() {
 			'Referrer-Policy',
 			'origin-when-cross-origin, strict-origin-when-cross-origin',
 			'Content-Security-Policy',
-			'default-src \'none\'',
-			'X-Runtime-rack',
-			'0.038646',
+			"default-src 'none'",
 			'Content-Encoding',
 			'gzip',
 			'X-GitHub-Request-Id',
-			'56E0:2B63:2969064:50BBB91:5AE3235E'
+			'8C1A:4A6B:15556:2B5D5:5E2F4177'
 		]);
 
 }
@@ -1048,19 +1221,85 @@ function getReposByDrillDownThirdLevelNock() {
 
 }
 
+// function getRepoContentsNock() {
+// 	return nock('https://api.github.com:443', {
+// 			"encodedQueryParams": true
+// 		})
+// 		.get('/repos/jchartrand/aTest/git/trees/9fedf370d1ae0c8057e90366aaaa0217be97a205')
+// 		.query({
+// 			"access_token": config.personal_oath_for_testing,
+// 			"recursive": "true"
+// 		})
+// 		.reply(200, ["1f8b0800000000000003a594cd6edb301084df45e7405afe882bfa5620e9a9bd14bd153d2c97cbd8812519125da40dfceea56dd431d00255e2bd11e262f46166f852cd6baa56954f129341888a04b88316c583718eca805618c4236968abbb6a3f6dcbc23ae7ddbc6a1ada6deac74d5eef43cd63df4cb21be7e689d734e58986d8d0579973536e347912999b37081d17aad5b7976a47795d24bf3c7cb8fffc50f7b1fc443fc6f2ad5200ceda72ce3f77c773d88ea19cce4c68b510bb2e064cd1a04f2a44a5cb58", "74106cf2ad0a89e4b83e6f7e95757c3fdc51786e162b1eee2e54340c63a6bc1987b97e9ac761211c241744184081f3c0a85979b0d17664199831596672c01738e56ea55b2c79451747def732e4fab9df2e24f3421d311b509a019dd38ec5819474466f3dab4856a1a4ee42665b0fb7b22d16bd629bc75eee37d32b165828f39ac65380ffa4d1143b129275a9258c88d85a0f5a13c7625892406cc597be9585db1ab658e86f94863e6eb652e7e7bcd02b2d493b14dd86e8d8910108c1a2297ed9005e0747b66bb53975f2543165de8f77eed862c97fe0cdc2e3103fc90fd92e372edab68cf2465b0291d8694430ca205af44e0852c7b64bee66e3160bfd97acb9023d39fa868745ab409a43492a2028638c139b8c6622e43605d3b9c01ecfc13e596a6e2edf62c9c3f7f2d24ffb81294bac5689b6b31c7e03c37c2174c3060000"], ['Server',
+// 			'GitHub.com',
+// 			'Date',
+// 			'Fri, 27 Apr 2018 13:46:45 GMT',
+// 			'Content-Type',
+// 			'application/json; charset=utf-8',
+// 			'Transfer-Encoding',
+// 			'chunked',
+// 			'Connection',
+// 			'close',
+// 			'Status',
+// 			'200 OK',
+// 			'X-RateLimit-Limit',
+// 			'5000',
+// 			'X-RateLimit-Remaining',
+// 			'4965',
+// 			'X-RateLimit-Reset',
+// 			'1524837201',
+// 			'Cache-Control',
+// 			'private, max-age=60, s-maxage=60',
+// 			'Vary',
+// 			'Accept, Authorization, Cookie, X-GitHub-OTP',
+// 			'ETag',
+// 			'W/"6badd72a8f9e3059a18eab89285118d0"',
+// 			'Last-Modified',
+// 			'Thu, 26 Apr 2018 14:09:46 GMT',
+// 			'X-OAuth-Scopes',
+// 			'repo',
+// 			'X-Accepted-OAuth-Scopes',
+// 			'',
+// 			'X-GitHub-Media-Type',
+// 			'github.v3; format=json',
+// 			'Access-Control-Expose-Headers',
+// 			'ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval',
+// 			'Access-Control-Allow-Origin',
+// 			'*',
+// 			'Strict-Transport-Security',
+// 			'max-age=31536000; includeSubdomains; preload',
+// 			'X-Frame-Options',
+// 			'deny',
+// 			'X-Content-Type-Options',
+// 			'nosniff',
+// 			'X-XSS-Protection',
+// 			'1; mode=block',
+// 			'Referrer-Policy',
+// 			'origin-when-cross-origin, strict-origin-when-cross-origin',
+// 			'Content-Security-Policy',
+// 			'default-src \'none\'',
+// 			'X-Runtime-rack',
+// 			'0.047910',
+// 			'Content-Encoding',
+// 			'gzip',
+// 			'X-GitHub-Request-Id',
+// 			'0412:2B62:1E14688:42453A1:5AE329C5'
+// 		]);
+// }
+
 function getRepoContentsNock() {
 	return nock('https://api.github.com:443', {
 			"encodedQueryParams": true
 		})
-		.get('/repos/jchartrand/aTest/git/trees/9fedf370d1ae0c8057e90366aaaa0217be97a205')
+		.get('/repos/lucaju/misc/git/trees/2fc7a21e01174680f395f323cec364c103a097d5')
 		.query({
-			"access_token": config.personal_oath_for_testing,
-			"recursive": "true"
+			"recursive": "1"
 		})
-		.reply(200, ["1f8b0800000000000003a594cd6edb301084df45e7405afe882bfa5620e9a9bd14bd153d2c97cbd8812519125da40dfceea56dd431d00255e2bd11e262f46166f852cd6baa56954f129341888a04b88316c583718eca805618c4236968abbb6a3f6dcbc23ae7ddbc6a1ada6deac74d5eef43cd63df4cb21be7e689d734e58986d8d0579973536e347912999b37081d17aad5b7976a47795d24bf3c7cb8fffc50f7b1fc443fc6f2ad5200ceda72ce3f77c773d88ea19cce4c68b510bb2e064cd1a04f2a44a5cb58", "74106cf2ad0a89e4b83e6f7e95757c3fdc51786e162b1eee2e54340c63a6bc1987b97e9ac761211c241744184081f3c0a85979b0d17664199831596672c01738e56ea55b2c79451747def732e4fab9df2e24f3421d311b509a019dd38ec5819474466f3dab4856a1a4ee42665b0fb7b22d16bd629bc75eee37d32b165828f39ac65380ffa4d1143b129275a9258c88d85a0f5a13c7625892406cc597be9585db1ab658e86f94863e6eb652e7e7bcd02b2d493b14dd86e8d8910108c1a2297ed9005e0747b66bb53975f2543165de8f77eed862c97fe0cdc2e3103fc90fd92e372edab68cf2465b0291d8694430ca205af44e0852c7b64bee66e3160bfd97acb9023d39fa868745ab409a43492a2028638c139b8c6622e43605d3b9c01ecfc13e596a6e2edf62c9c3f7f2d24ffb81294bac5689b6b31c7e03c37c2174c3060000"], ['Server',
+		.reply(200, ["1f8b0800000000000003a5944d8bdb301086ff8bce5b5bd2e833b7c2ee712fbd961e349a51e3c5ae4d2c43da25ffbd0a94d0b217a741170dc3cba38711f32ed6631207a14bf6492b964a79e3822c106d010d99333893958424a3272b9ec4761a5be058ebb21efa3e2d43f77da8c70dbb3c4ffd899779edc72da7b7ad9f8635f7add9d713f3dadfc1b806c4e1ebbb58523d36da9797cfcfaf2fdd448d3fcdd47a4249e98c6975fdb95c6b1c676cd51f1da5adb3edbd902145321a2950bb17870610c124696cb6fa1a187eb5b8fb2faf2bb379ed855d9e6e4295874f34e7ee3c8d3b950cab441689d0151bda515ac9864ec1470590325acbd1aa9b12488007ac76f33e5ae93bb4a2ca8e404a8b8e31bae4bdcd9abdf70e922bdac498d8199d6f5a", "5169ff80d66ede472db843cba2549e3c9ae88261042d734160229db2892606238d062e7f69b947b476f3fed13ad7ae9eebce0f183563697b8002ba040ca4a23321b409e5481494b758c83abe2929fbc89cf6d22edfda0a386d3f72aa4ce250d2b8f2e537e8c2cc8ad7040000"], [
+			'Server',
 			'GitHub.com',
 			'Date',
-			'Fri, 27 Apr 2018 13:46:45 GMT',
+			'Sat, 25 Jan 2020 06:07:42 GMT',
 			'Content-Type',
 			'application/json; charset=utf-8',
 			'Transfer-Encoding',
@@ -1070,27 +1309,23 @@ function getRepoContentsNock() {
 			'Status',
 			'200 OK',
 			'X-RateLimit-Limit',
-			'5000',
+			'60',
 			'X-RateLimit-Remaining',
-			'4965',
+			'24',
 			'X-RateLimit-Reset',
-			'1524837201',
+			'1579933721',
 			'Cache-Control',
-			'private, max-age=60, s-maxage=60',
+			'public, max-age=60, s-maxage=60',
 			'Vary',
-			'Accept, Authorization, Cookie, X-GitHub-OTP',
+			'Accept',
 			'ETag',
-			'W/"6badd72a8f9e3059a18eab89285118d0"',
+			'W/"55dedfe8210eeb22a951b65760f44b00"',
 			'Last-Modified',
-			'Thu, 26 Apr 2018 14:09:46 GMT',
-			'X-OAuth-Scopes',
-			'repo',
-			'X-Accepted-OAuth-Scopes',
-			'',
+			'Sat, 25 Jan 2020 05:35:12 GMT',
 			'X-GitHub-Media-Type',
 			'github.v3; format=json',
 			'Access-Control-Expose-Headers',
-			'ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval',
+			'ETag, Link, Location, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval, X-GitHub-Media-Type',
 			'Access-Control-Allow-Origin',
 			'*',
 			'Strict-Transport-Security',
@@ -1104,68 +1339,65 @@ function getRepoContentsNock() {
 			'Referrer-Policy',
 			'origin-when-cross-origin, strict-origin-when-cross-origin',
 			'Content-Security-Policy',
-			'default-src \'none\'',
-			'X-Runtime-rack',
-			'0.047910',
+			"default-src 'none'",
 			'Content-Encoding',
 			'gzip',
 			'X-GitHub-Request-Id',
-			'0412:2B62:1E14688:42453A1:5AE329C5'
+			'A637:5522:7C531:153D6A:5E2BDB2E'
 		]);
+
 }
 
 function getCreateFileNock() {
 	return nock('https://api.github.com:443', {
 			"encodedQueryParams": true
 		})
-		.put('/repos/jchartrand/aTest/contents/curt/qurt/test1.txt', {
+		.put('/repos/lucaju/misc/contents/text10.txt', {
 			"message": "some commit message",
-			"content": "PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPFRFSSB4bWxucz0iaHR0cDovL3d3dy50ZWktYy5vcmcvbnMvMS4wIiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiIHhtbG5zOmN3PSJodHRwOi8vY3dyYy5jYS9ucy9jdyMiIHhtbG5zOnc9Imh0dHA6Ly9jd3JjdGMuYXJ0c3JuLnVhbGJlcnRhLmNhLyMiPgogIDx0ZWlIZWFkZXI+CiAgICA8ZmlsZURlc2M+CiAgICAgIDx0aXRsZVN0bXQ+CiAgICAgICAgPHRpdGxlPlNhbXBsZSBEb2N1bWVudCBUaXRsZSB0ZXN0IHVuZGVmaW5lZDwvdGl0bGU+CiAgICAgIDwvdGl0bGVTdG10PgogICAgICA8cHVibGljYXRpb25TdG10PgogICAgICAgIDxwPjwvcD4KICAgICAgPC9wdWJsaWNhdGlvblN0bXQ+CiAgICAgIDxzb3VyY2VEZXNjIHNhbWVBcz0iaHR0cDovL3d3dy5jd3JjLmNhIj4KICAgICAgICA8cD5DcmVhdGVkIGZyb20gb3JpZ2luYWwgcmVzZWFyY2ggYnkgbWVtYmVycyBvZiBDV1JDL0NTw4lDIHVubGVzcyBvdGhlcndpc2Ugbm90ZWQuPC9wPgogICAgICA8L3NvdXJjZURlc2M+CiAgICA8L2ZpbGVEZXNjPgogIDwvdGVpSGVhZGVyPgogIDx0ZXh0PgogICAgPGJvZHk+CiAgICAgIDxkaXYgdHlwZT0ibGV0dGVyIj4KICAgICAgICA8aGVhZD4KICAgICAgICAgIDx0aXRsZT5TYW1wbGUgTGV0dGVyIC0gQmVydHJhbmQgUnVzc2VsbCB0byA8cGVyc05hbWUgYW5ub3RhdGlvbklkPSJlbnRfNzMiIGNlcnQ9InByb2JhYmxlIiByZWY9IjI3OTM5OTM5OSI+UGF0cmljaWEgU3BlbmNlPC9wZXJzTmFtZT4gLSBPY3RvYmVyIDIxLCAxOTM1PC90aXRsZT4KICAgICAgICA8L2hlYWQ+CiAgICAgICAgPG9wZW5lcj4KICAgICAgICAgIDxub3RlPgogICAgICAgICAgICA8cD5CYWQgd3JpdGluZyBkdWUgdG8gc2hha3kgdHJhaW48L3A+PHA+SW4gdHJhaW48L3A+PHA+CiAgICAgICAgICAgICAgPHBsYWNlTmFtZSBhbm5vdGF0aW9uSWQ9ImVudF8xNDMiIGNlcnQ9ImRlZmluaXRlIiByZWY9Imh0dHA6Ly93d3cuZ2VvbmFtZXMub3JnLzY0NTMzNjYiPk9zbG88L3BsYWNlTmFtZT4gdG8gQmVyZ2VuPC9wPgogICAgICAgICAgPC9ub3RlPgogICAgICAgICAgPGRhdGVsaW5lPgogICAgICAgICAgICA8ZGF0ZSBhbm5vdGF0aW9uSWQ9ImVudF82OSIgY2VydD0iZGVmaW5pdGUiIHdoZW49IjE5MzUtMTAtMjEiPjIxLjEwLjM1PC9kYXRlPgogICAgICAgICAgPC9kYXRlbGluZT4KICAgICAgICAgIDxzYWx1dGU+RGVhcmVzdCAtPC9zYWx1dGU+CiAgICAgICAgPC9vcGVuZXI+PHA+SSBoYXZlIGhhZCBubzxub3RlIGFubm90YXRpb25JZD0iZW50XzE5MCIgdHlwZT0icmVzZWFyY2hOb3RlIj4KICAgICAgICAgICAgICAgIDxwIHhtbG5zPSJodHRwOi8vd3d3LnRlaS1jLm9yZy9ucy8xLjAiPlNvbWUga2luZCBvZiBub3RlPC9wPgogICAgICAgICAgICA8L25vdGU+IGxldHRlciBmcm9tIHlvdSBzaW5jZSBJIGxlZnQgPHBsYWNlTmFtZSBhbm5vdGF0aW9uSWQ9ImVudF8xNDUiIG9mZnNldElkPSJlbnRfMTQ1IiBjZXJ0PSJkZWZpbml0ZSIgcmVmPSJodHRwOi8vd3d3Lmdlb25hbWVzLm9yZy8yNjczNzIyIj5TdG9ja2hvbG08L3BsYWNlTmFtZT4sIGJ1dCBJIGhhZCBhIG5pY2Ugb25lIGZyb20gSm9obiBpbiBhbiBlbnZlbG9wZSB5b3UgaGFkIHNlbnQgaGltLiBJIGhhZCBzZW50IGhpbSBvbmUgYWRkcmVzc2VkIHRvIENvcGVuaGFnZW4gYnV0IGhlIGhhZG4ndCB1c2VkIGl0LjwvcD48cD5XaGVuIEkgcmVhY2hlZCBPc2xvIHllc3RlcmRheSBldmVuaW5nLCBCcnluanVsZiBCdWxsIHNob3VsZCBoYXZlIGJlZW4gdGhlcmUgdG8gbWVldCBtZSwgYnV0IHdhc24ndC4gSGUgaXMgbm90IG9uIHRoZSB0ZWxlcGhvbmUsIHNvIEkgdG9vayBhIHRheGkgdG8gaGlzIGFkZHJlc3MsIHdoaWNoIHR1cm5lZCBvdXQgdG8gYmUgYSBzdHVkZW50cycgY2x1YiB3aXRoIG5vIG9uZSBhYm91dCBvbiBTdW5kYXlzLCBzbyBJIHdlbnQgdG8gYSBob3RlbCBmZWVsaW5nIHJhdGhlciBub24tcGx1c3NlZC4gQnV0IHByZXNlbnRseSBoZSB0dXJuZWQgdXAuIEhlIGhhZCBnb3QgdGhlIDxwYiBuPSIyIj48L3BiPiB0aW1lIG9mIG15IGFycml2YWwgd3JvbmcsIGFuZCAKICAgICAgICAgICAgPGNob2ljZSBhbm5vdGF0aW9uSWQ9ImVudF82NSI+PHNpYyBhbm5vdGF0aW9uSWQ9ImVudF82NSI+d2hlbjwvc2ljPjxjb3JyIGFubm90YXRpb25JZD0iZW50XzY1Ij53aGVuPC9jb3JyPjwvY2hvaWNlPgogICAgICAgICAgaGUgaGFkIGZvdW5kIGhlIGhhZCBtaXNzZWQgbWUgaGUgcGhvbmVkIHRvIGV2ZXJ5IGhvdGVsIGluIE9zbG8gdGlsbCBoZSBoaXQgb24gdGhlIHJpZ2h0IG9uZS4gSGUgbGVmdCBtZSBhdCAxMCwgYW5kIHRoZW4gSSBoYWQgdG8gZG8gYSBTdW5kYXkgUmVmZXJlZSBhcnRpY2xlLiBUb2RheSBteSBqb3VybmV5IGxhc3RzIGZyb20gOSB0aWxsIDkgLSBmb3J0dW5hdGVseSBvbmUgb2YgdGhlIG1vc3QgYmVhdXRpZnVsIHJhaWx3YXkgam91cm5leXMgaW4gdGhlIHdvcmxkLiBUb21vcnJvdyBJIGxlY3R1cmUgYXQgPHBsYWNlTmFtZSBhbm5vdGF0aW9uSWQ9ImVudF8xNDQiIGNlcnQ9ImRlZmluaXRlIiByZWY9Imh0dHA6Ly93d3cuZ2VvbmFtZXMub3JnLzY1NDg1MjgiPkJlcmdlbjwvcGxhY2VOYW1lPiB0byB0aGUgQW5nbG8tTm9yd2VnaWFuIFNvY2lldHkuIE5leHQgZGF5IEkgZ28gYmFjayB0byBPc2xvLCBsZWN0dXJlIHRoZXJlIEZyaS4gYW5kIFNhdC4gYW5kIHRoZW4gc3RhcnQgZm9yIGhvbWUgdmlhIEJlcmdlbi48L3A+CiAgICAgICAgPHBiIG49IjMiPjwvcGI+CiAgICAgICAgPHA+QnVsbCBpcyBhIG5pY2UgeW91bmcgbWFuIGJ1dCBpbmNvbXBldGVudCAtIGNhbid0IHF1aXRlIHN0YW5kIHRoZSBjb21tdW5pc3RzLCBidXQgZmluZHMgdGhlIHNvY2lhbGlzdHMgdG9vIG1pbGQuPC9wPjxwPkkgYW0gdW5oYXBwaWx5IHdvbmRlcmluZyB3aGF0IHlvdSBhcmUgZmVlbGluZyBhYm91dCBtZS48L3A+CiAgICAgICAgPGNsb3Nlcj4KICAgICAgICAgIDxzYWx1dGU+SSBsb3ZlIHlvdSB2ZXJ5IG11Y2ggLTwvc2FsdXRlPgogICAgICAgICAgPHNpZ25lZD4KICAgICAgICAgICAgPHBlcnNOYW1lIHNhbWVBcz0iaHR0cDovL3d3dy5mcmVlYmFzZS5jb20vdmlldy9lbi9iZXJ0cmFuZF9ydXNzZWxsIj4KICAgICAgICAgICAgICA8cGVyc05hbWUgYW5ub3RhdGlvbklkPSJlbnRfMTA5IiBjZXJ0PSJkZWZpbml0ZSIgdHlwZT0icmVhbCIgcmVmPSJodHRwOi8vdmlhZi5vcmcvdmlhZi8zNjkyNDEzNyI+QjwvcGVyc05hbWU+CiAgICAgICAgICAgIDwvcGVyc05hbWU+CiAgICAgICAgICA8L3NpZ25lZD4KICAgICAgICA8L2Nsb3Nlcj4KICAgICAgPC9kaXY+CiAgICA8L2JvZHk+CiAgPC90ZXh0Pgo8L1RFST4K",
-			"branch": "master"
-		})
-		.query({
-			"access_token": config.personal_oath_for_testing
+			"branch": "dev",
+			"content": "PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPFRFSSB4bWxucz0iaHR0cDovL3d3dy50ZWktYy5vcmcvbnMvMS4wIiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiIHhtbG5zOmN3PSJodHRwOi8vY3dyYy5jYS9ucy9jdyMiIHhtbG5zOnc9Imh0dHA6Ly9jd3JjdGMuYXJ0c3JuLnVhbGJlcnRhLmNhLyMiPgoJPHRlaUhlYWRlcj4KCQk8ZmlsZURlc2M+CgkJCTx0aXRsZVN0bXQ+CgkJCQk8dGl0bGU+U2FtcGxlIERvY3VtZW50IFRpdGxlIHRlc3QgMTU4MDQ4MzUwNDwvdGl0bGU+CgkJCTwvdGl0bGVTdG10PgoJCQk8cHVibGljYXRpb25TdG10PgoJCQkJPHA+PC9wPgoJCQk8L3B1YmxpY2F0aW9uU3RtdD4KCQkJPHNvdXJjZURlc2Mgc2FtZUFzPSJodHRwOi8vd3d3LmN3cmMuY2EiPgoJCQkJPHA+Q3JlYXRlZCBmcm9tIG9yaWdpbmFsIHJlc2VhcmNoIGJ5IG1lbWJlcnMgb2YgQ1dSQy9DU8OJQyB1bmxlc3Mgb3RoZXJ3aXNlIG5vdGVkLjwvcD4KCQkJPC9zb3VyY2VEZXNjPgoJCTwvZmlsZURlc2M+Cgk8L3RlaUhlYWRlcj4KCTx0ZXh0PgoJCTxib2R5PgoJCQk8ZGl2IHR5cGU9ImxldHRlciI+CgkJCQk8aGVhZD4KCQkJCQk8dGl0bGU+U2FtcGxlIExldHRlciAtIEJlcnRyYW5kIFJ1c3NlbGwgdG8gPHBlcnNOYW1lIGFubm90YXRpb25JZD0iZW50XzczIiBjZXJ0PSJwcm9iYWJsZSIgcmVmPSIyNzkzOTkzOTkiPlBhdHJpY2lhIFNwZW5jZTwvcGVyc05hbWU+IC0gT2N0b2JlciAyMSwgMTkzNTwvdGl0bGU+CgkJCQk8L2hlYWQ+CgkJCQk8b3BlbmVyPgoJCQkJCTxub3RlPgoJCQkJCQk8cD5CYWQgd3JpdGluZyBkdWUgdG8gc2hha3kgdHJhaW48L3A+PHA+SW4gdHJhaW48L3A+PHA+CgkJCQkJCQk8cGxhY2VOYW1lIGFubm90YXRpb25JZD0iZW50XzE0MyIgY2VydD0iZGVmaW5pdGUiIHJlZj0iaHR0cDovL3d3dy5nZW9uYW1lcy5vcmcvNjQ1MzM2NiI+T3NsbzwvcGxhY2VOYW1lPiB0byBCZXJnZW48L3A+CgkJCQkJPC9ub3RlPgoJCQkJCTxkYXRlbGluZT4KCQkJCQkJPGRhdGUgYW5ub3RhdGlvbklkPSJlbnRfNjkiIGNlcnQ9ImRlZmluaXRlIiB3aGVuPSIxOTM1LTEwLTIxIj4yMS4xMC4zNTwvZGF0ZT4KCQkJCQk8L2RhdGVsaW5lPgoJCQkJCTxzYWx1dGU+RGVhcmVzdCAtPC9zYWx1dGU+CgkJCQk8L29wZW5lcj48cD5JIGhhdmUgaGFkIG5vPG5vdGUgYW5ub3RhdGlvbklkPSJlbnRfMTkwIiB0eXBlPSJyZXNlYXJjaE5vdGUiPgoJCQkJCQkJCTxwIHhtbG5zPSJodHRwOi8vd3d3LnRlaS1jLm9yZy9ucy8xLjAiPlNvbWUga2luZCBvZiBub3RlPC9wPgoJCQkJCQk8L25vdGU+IGxldHRlciBmcm9tIHlvdSBzaW5jZSBJIGxlZnQgPHBsYWNlTmFtZSBhbm5vdGF0aW9uSWQ9ImVudF8xNDUiIG9mZnNldElkPSJlbnRfMTQ1IiBjZXJ0PSJkZWZpbml0ZSIgcmVmPSJodHRwOi8vd3d3Lmdlb25hbWVzLm9yZy8yNjczNzIyIj5TdG9ja2hvbG08L3BsYWNlTmFtZT4sIGJ1dCBJIGhhZCBhIG5pY2Ugb25lIGZyb20gSm9obiBpbiBhbiBlbnZlbG9wZSB5b3UgaGFkIHNlbnQgaGltLiBJIGhhZCBzZW50IGhpbSBvbmUgYWRkcmVzc2VkIHRvIENvcGVuaGFnZW4gYnV0IGhlIGhhZG4ndCB1c2VkIGl0LjwvcD48cD5XaGVuIEkgcmVhY2hlZCBPc2xvIHllc3RlcmRheSBldmVuaW5nLCBCcnluanVsZiBCdWxsIHNob3VsZCBoYXZlIGJlZW4gdGhlcmUgdG8gbWVldCBtZSwgYnV0IHdhc24ndC4gSGUgaXMgbm90IG9uIHRoZSB0ZWxlcGhvbmUsIHNvIEkgdG9vayBhIHRheGkgdG8gaGlzIGFkZHJlc3MsIHdoaWNoIHR1cm5lZCBvdXQgdG8gYmUgYSBzdHVkZW50cycgY2x1YiB3aXRoIG5vIG9uZSBhYm91dCBvbiBTdW5kYXlzLCBzbyBJIHdlbnQgdG8gYSBob3RlbCBmZWVsaW5nIHJhdGhlciBub24tcGx1c3NlZC4gQnV0IHByZXNlbnRseSBoZSB0dXJuZWQgdXAuIEhlIGhhZCBnb3QgdGhlIDxwYiBuPSIyIj48L3BiPiB0aW1lIG9mIG15IGFycml2YWwgd3JvbmcsIGFuZCAKCQkJCQkJPGNob2ljZSBhbm5vdGF0aW9uSWQ9ImVudF82NSI+PHNpYyBhbm5vdGF0aW9uSWQ9ImVudF82NSI+d2hlbjwvc2ljPjxjb3JyIGFubm90YXRpb25JZD0iZW50XzY1Ij53aGVuPC9jb3JyPjwvY2hvaWNlPgoJCQkJCWhlIGhhZCBmb3VuZCBoZSBoYWQgbWlzc2VkIG1lIGhlIHBob25lZCB0byBldmVyeSBob3RlbCBpbiBPc2xvIHRpbGwgaGUgaGl0IG9uIHRoZSByaWdodCBvbmUuIEhlIGxlZnQgbWUgYXQgMTAsIGFuZCB0aGVuIEkgaGFkIHRvIGRvIGEgU3VuZGF5IFJlZmVyZWUgYXJ0aWNsZS4gVG9kYXkgbXkgam91cm5leSBsYXN0cyBmcm9tIDkgdGlsbCA5IC0gZm9ydHVuYXRlbHkgb25lIG9mIHRoZSBtb3N0IGJlYXV0aWZ1bCByYWlsd2F5IGpvdXJuZXlzIGluIHRoZSB3b3JsZC4gVG9tb3Jyb3cgSSBsZWN0dXJlIGF0IDxwbGFjZU5hbWUgYW5ub3RhdGlvbklkPSJlbnRfMTQ0IiBjZXJ0PSJkZWZpbml0ZSIgcmVmPSJodHRwOi8vd3d3Lmdlb25hbWVzLm9yZy82NTQ4NTI4Ij5CZXJnZW48L3BsYWNlTmFtZT4gdG8gdGhlIEFuZ2xvLU5vcndlZ2lhbiBTb2NpZXR5LiBOZXh0IGRheSBJIGdvIGJhY2sgdG8gT3NsbywgbGVjdHVyZSB0aGVyZSBGcmkuIGFuZCBTYXQuIGFuZCB0aGVuIHN0YXJ0IGZvciBob21lIHZpYSBCZXJnZW4uPC9wPgoJCQkJPHBiIG49IjMiPjwvcGI+CgkJCQk8cD5CdWxsIGlzIGEgbmljZSB5b3VuZyBtYW4gYnV0IGluY29tcGV0ZW50IC0gY2FuJ3QgcXVpdGUgc3RhbmQgdGhlIGNvbW11bmlzdHMsIGJ1dCBmaW5kcyB0aGUgc29jaWFsaXN0cyB0b28gbWlsZC48L3A+PHA+SSBhbSB1bmhhcHBpbHkgd29uZGVyaW5nIHdoYXQgeW91IGFyZSBmZWVsaW5nIGFib3V0IG1lLjwvcD4KCQkJCTxjbG9zZXI+CgkJCQkJPHNhbHV0ZT5JIGxvdmUgeW91IHZlcnkgbXVjaCAtPC9zYWx1dGU+CgkJCQkJPHNpZ25lZD4KCQkJCQkJPHBlcnNOYW1lIHNhbWVBcz0iaHR0cDovL3d3dy5mcmVlYmFzZS5jb20vdmlldy9lbi9iZXJ0cmFuZF9ydXNzZWxsIj4KCQkJCQkJCTxwZXJzTmFtZSBhbm5vdGF0aW9uSWQ9ImVudF8xMDkiIGNlcnQ9ImRlZmluaXRlIiB0eXBlPSJyZWFsIiByZWY9Imh0dHA6Ly92aWFmLm9yZy92aWFmLzM2OTI0MTM3Ij5CPC9wZXJzTmFtZT4KCQkJCQkJPC9wZXJzTmFtZT4KCQkJCQk8L3NpZ25lZD4KCQkJCTwvY2xvc2VyPgoJCQk8L2Rpdj4KCQk8L2JvZHk+Cgk8L3RleHQ+CjwvVEVJPgo="
 		})
 		.reply(201, {
 			"content": {
-				"name": "test1.txt",
-				"path": "curt/qurt/test1.txt",
-				"sha": "9fa3ec5f93e21b52d9d7fda29dfc4b3d43932400",
-				"size": 3384,
-				"url": "https://api.github.com/repos/jchartrand/aTest/contents/curt/qurt/test1.txt?ref=master",
-				"html_url": "https://github.com/jchartrand/aTest/blob/master/curt/qurt/test1.txt",
-				"git_url": "https://api.github.com/repos/jchartrand/aTest/git/blobs/9fa3ec5f93e21b52d9d7fda29dfc4b3d43932400",
-				"download_url": "https://raw.githubusercontent.com/jchartrand/aTest/master/curt/qurt/test1.txt",
+				"name": "text10.txt",
+				"path": "text10.txt",
+				"sha": "e5f345781ca3c2fd6df65bdedba803966cec0435",
+				"size": 3197,
+				"url": "https://api.github.com/repos/lucaju/misc/contents/text10.txt?ref=dev",
+				"html_url": "https://github.com/lucaju/misc/blob/dev/text10.txt",
+				"git_url": "https://api.github.com/repos/lucaju/misc/git/blobs/e5f345781ca3c2fd6df65bdedba803966cec0435",
+				"download_url": "https://raw.githubusercontent.com/lucaju/misc/dev/text10.txt",
 				"type": "file",
 				"_links": {
-					"self": "https://api.github.com/repos/jchartrand/aTest/contents/curt/qurt/test1.txt?ref=master",
-					"git": "https://api.github.com/repos/jchartrand/aTest/git/blobs/9fa3ec5f93e21b52d9d7fda29dfc4b3d43932400",
-					"html": "https://github.com/jchartrand/aTest/blob/master/curt/qurt/test1.txt"
+					"self": "https://api.github.com/repos/lucaju/misc/contents/text10.txt?ref=dev",
+					"git": "https://api.github.com/repos/lucaju/misc/git/blobs/e5f345781ca3c2fd6df65bdedba803966cec0435",
+					"html": "https://github.com/lucaju/misc/blob/dev/text10.txt"
 				}
 			},
 			"commit": {
-				"sha": "33b587b58b9577e7a7b4810e4103927809626e12",
-				"url": "https://api.github.com/repos/jchartrand/aTest/git/commits/33b587b58b9577e7a7b4810e4103927809626e12",
-				"html_url": "https://github.com/jchartrand/aTest/commit/33b587b58b9577e7a7b4810e4103927809626e12",
+				"sha": "fd14548139ed6994432d5b772ef4a8df597e9ee4",
+				"node_id": "MDY6Q29tbWl0MjI1OTQyODcxOmZkMTQ1NDgxMzllZDY5OTQ0MzJkNWI3NzJlZjRhOGRmNTk3ZTllZTQ=",
+				"url": "https://api.github.com/repos/lucaju/misc/git/commits/fd14548139ed6994432d5b772ef4a8df597e9ee4",
+				"html_url": "https://github.com/lucaju/misc/commit/fd14548139ed6994432d5b772ef4a8df597e9ee4",
 				"author": {
-					"name": "James Chartrand",
-					"email": "jc.chartrand@gmail.com",
-					"date": "2018-05-01T13:05:48Z"
+					"name": "Luciano Frizzera",
+					"email": "lucaju@me.com",
+					"date": "2020-01-31T15:11:48Z"
 				},
 				"committer": {
-					"name": "James Chartrand",
-					"email": "jc.chartrand@gmail.com",
-					"date": "2018-05-01T13:05:48Z"
+					"name": "Luciano Frizzera",
+					"email": "lucaju@me.com",
+					"date": "2020-01-31T15:11:48Z"
 				},
 				"tree": {
-					"sha": "80a38e2f60b912464a4bb14549dd1c6af1f0f46a",
-					"url": "https://api.github.com/repos/jchartrand/aTest/git/trees/80a38e2f60b912464a4bb14549dd1c6af1f0f46a"
+					"sha": "c3edc1bc1a7cf84d09247f477b7a95a71da2707e",
+					"url": "https://api.github.com/repos/lucaju/misc/git/trees/c3edc1bc1a7cf84d09247f477b7a95a71da2707e"
 				},
 				"message": "some commit message",
 				"parents": [{
-					"sha": "a480ac4d99c3130285e940b56700e5152969a7f9",
-					"url": "https://api.github.com/repos/jchartrand/aTest/git/commits/a480ac4d99c3130285e940b56700e5152969a7f9",
-					"html_url": "https://github.com/jchartrand/aTest/commit/a480ac4d99c3130285e940b56700e5152969a7f9"
+					"sha": "aa6a597fbcee6a4787d4f7c0a466d9fb6a47edca",
+					"url": "https://api.github.com/repos/lucaju/misc/git/commits/aa6a597fbcee6a4787d4f7c0a466d9fb6a47edca",
+					"html_url": "https://github.com/lucaju/misc/commit/aa6a597fbcee6a4787d4f7c0a466d9fb6a47edca"
 				}],
 				"verification": {
 					"verified": false,
@@ -1174,14 +1406,15 @@ function getCreateFileNock() {
 					"payload": null
 				}
 			}
-		}, ['Server',
+		}, [
+			'Server',
 			'GitHub.com',
 			'Date',
-			'Tue, 01 May 2018 13:05:48 GMT',
+			'Fri, 31 Jan 2020 15:11:49 GMT',
 			'Content-Type',
 			'application/json; charset=utf-8',
 			'Content-Length',
-			'1816',
+			'1765',
 			'Connection',
 			'close',
 			'Status',
@@ -1189,23 +1422,23 @@ function getCreateFileNock() {
 			'X-RateLimit-Limit',
 			'5000',
 			'X-RateLimit-Remaining',
-			'4997',
+			'4998',
 			'X-RateLimit-Reset',
-			'1525183284',
+			'1580487107',
 			'Cache-Control',
 			'private, max-age=60, s-maxage=60',
 			'Vary',
 			'Accept, Authorization, Cookie, X-GitHub-OTP',
 			'ETag',
-			'"e64876760e52b560c8e5a7a428b3a7ae"',
+			'"80c76e597cc526c3dd705affbef9f952"',
 			'X-OAuth-Scopes',
-			'repo',
+			'admin:repo_hook, repo',
 			'X-Accepted-OAuth-Scopes',
 			'',
 			'X-GitHub-Media-Type',
 			'github.v3; format=json',
 			'Access-Control-Expose-Headers',
-			'ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval',
+			'ETag, Link, Location, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval, X-GitHub-Media-Type',
 			'Access-Control-Allow-Origin',
 			'*',
 			'Strict-Transport-Security',
@@ -1219,12 +1452,126 @@ function getCreateFileNock() {
 			'Referrer-Policy',
 			'origin-when-cross-origin, strict-origin-when-cross-origin',
 			'Content-Security-Policy',
-			'default-src \'none\'',
-			'X-Runtime-rack',
-			'0.715000',
+			"default-src 'none'",
 			'X-GitHub-Request-Id',
-			'0E4D:27B0:54429DE:A4416A6:5AE8662B'
+			'A909:0AB2:6A2E89:FDF7F1:5E3443B4'
 		]);
+
+
+
+
+
+
+	// nock('https://api.github.com:443', {
+	// 		"encodedQueryParams": true
+	// 	})
+	// 	.put('/repos/jchartrand/aTest/contents/curt/qurt/test1.txt', {
+	// 		"message": "some commit message",
+	// 		"content": "PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPFRFSSB4bWxucz0iaHR0cDovL3d3dy50ZWktYy5vcmcvbnMvMS4wIiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiIHhtbG5zOmN3PSJodHRwOi8vY3dyYy5jYS9ucy9jdyMiIHhtbG5zOnc9Imh0dHA6Ly9jd3JjdGMuYXJ0c3JuLnVhbGJlcnRhLmNhLyMiPgogIDx0ZWlIZWFkZXI+CiAgICA8ZmlsZURlc2M+CiAgICAgIDx0aXRsZVN0bXQ+CiAgICAgICAgPHRpdGxlPlNhbXBsZSBEb2N1bWVudCBUaXRsZSB0ZXN0IHVuZGVmaW5lZDwvdGl0bGU+CiAgICAgIDwvdGl0bGVTdG10PgogICAgICA8cHVibGljYXRpb25TdG10PgogICAgICAgIDxwPjwvcD4KICAgICAgPC9wdWJsaWNhdGlvblN0bXQ+CiAgICAgIDxzb3VyY2VEZXNjIHNhbWVBcz0iaHR0cDovL3d3dy5jd3JjLmNhIj4KICAgICAgICA8cD5DcmVhdGVkIGZyb20gb3JpZ2luYWwgcmVzZWFyY2ggYnkgbWVtYmVycyBvZiBDV1JDL0NTw4lDIHVubGVzcyBvdGhlcndpc2Ugbm90ZWQuPC9wPgogICAgICA8L3NvdXJjZURlc2M+CiAgICA8L2ZpbGVEZXNjPgogIDwvdGVpSGVhZGVyPgogIDx0ZXh0PgogICAgPGJvZHk+CiAgICAgIDxkaXYgdHlwZT0ibGV0dGVyIj4KICAgICAgICA8aGVhZD4KICAgICAgICAgIDx0aXRsZT5TYW1wbGUgTGV0dGVyIC0gQmVydHJhbmQgUnVzc2VsbCB0byA8cGVyc05hbWUgYW5ub3RhdGlvbklkPSJlbnRfNzMiIGNlcnQ9InByb2JhYmxlIiByZWY9IjI3OTM5OTM5OSI+UGF0cmljaWEgU3BlbmNlPC9wZXJzTmFtZT4gLSBPY3RvYmVyIDIxLCAxOTM1PC90aXRsZT4KICAgICAgICA8L2hlYWQ+CiAgICAgICAgPG9wZW5lcj4KICAgICAgICAgIDxub3RlPgogICAgICAgICAgICA8cD5CYWQgd3JpdGluZyBkdWUgdG8gc2hha3kgdHJhaW48L3A+PHA+SW4gdHJhaW48L3A+PHA+CiAgICAgICAgICAgICAgPHBsYWNlTmFtZSBhbm5vdGF0aW9uSWQ9ImVudF8xNDMiIGNlcnQ9ImRlZmluaXRlIiByZWY9Imh0dHA6Ly93d3cuZ2VvbmFtZXMub3JnLzY0NTMzNjYiPk9zbG88L3BsYWNlTmFtZT4gdG8gQmVyZ2VuPC9wPgogICAgICAgICAgPC9ub3RlPgogICAgICAgICAgPGRhdGVsaW5lPgogICAgICAgICAgICA8ZGF0ZSBhbm5vdGF0aW9uSWQ9ImVudF82OSIgY2VydD0iZGVmaW5pdGUiIHdoZW49IjE5MzUtMTAtMjEiPjIxLjEwLjM1PC9kYXRlPgogICAgICAgICAgPC9kYXRlbGluZT4KICAgICAgICAgIDxzYWx1dGU+RGVhcmVzdCAtPC9zYWx1dGU+CiAgICAgICAgPC9vcGVuZXI+PHA+SSBoYXZlIGhhZCBubzxub3RlIGFubm90YXRpb25JZD0iZW50XzE5MCIgdHlwZT0icmVzZWFyY2hOb3RlIj4KICAgICAgICAgICAgICAgIDxwIHhtbG5zPSJodHRwOi8vd3d3LnRlaS1jLm9yZy9ucy8xLjAiPlNvbWUga2luZCBvZiBub3RlPC9wPgogICAgICAgICAgICA8L25vdGU+IGxldHRlciBmcm9tIHlvdSBzaW5jZSBJIGxlZnQgPHBsYWNlTmFtZSBhbm5vdGF0aW9uSWQ9ImVudF8xNDUiIG9mZnNldElkPSJlbnRfMTQ1IiBjZXJ0PSJkZWZpbml0ZSIgcmVmPSJodHRwOi8vd3d3Lmdlb25hbWVzLm9yZy8yNjczNzIyIj5TdG9ja2hvbG08L3BsYWNlTmFtZT4sIGJ1dCBJIGhhZCBhIG5pY2Ugb25lIGZyb20gSm9obiBpbiBhbiBlbnZlbG9wZSB5b3UgaGFkIHNlbnQgaGltLiBJIGhhZCBzZW50IGhpbSBvbmUgYWRkcmVzc2VkIHRvIENvcGVuaGFnZW4gYnV0IGhlIGhhZG4ndCB1c2VkIGl0LjwvcD48cD5XaGVuIEkgcmVhY2hlZCBPc2xvIHllc3RlcmRheSBldmVuaW5nLCBCcnluanVsZiBCdWxsIHNob3VsZCBoYXZlIGJlZW4gdGhlcmUgdG8gbWVldCBtZSwgYnV0IHdhc24ndC4gSGUgaXMgbm90IG9uIHRoZSB0ZWxlcGhvbmUsIHNvIEkgdG9vayBhIHRheGkgdG8gaGlzIGFkZHJlc3MsIHdoaWNoIHR1cm5lZCBvdXQgdG8gYmUgYSBzdHVkZW50cycgY2x1YiB3aXRoIG5vIG9uZSBhYm91dCBvbiBTdW5kYXlzLCBzbyBJIHdlbnQgdG8gYSBob3RlbCBmZWVsaW5nIHJhdGhlciBub24tcGx1c3NlZC4gQnV0IHByZXNlbnRseSBoZSB0dXJuZWQgdXAuIEhlIGhhZCBnb3QgdGhlIDxwYiBuPSIyIj48L3BiPiB0aW1lIG9mIG15IGFycml2YWwgd3JvbmcsIGFuZCAKICAgICAgICAgICAgPGNob2ljZSBhbm5vdGF0aW9uSWQ9ImVudF82NSI+PHNpYyBhbm5vdGF0aW9uSWQ9ImVudF82NSI+d2hlbjwvc2ljPjxjb3JyIGFubm90YXRpb25JZD0iZW50XzY1Ij53aGVuPC9jb3JyPjwvY2hvaWNlPgogICAgICAgICAgaGUgaGFkIGZvdW5kIGhlIGhhZCBtaXNzZWQgbWUgaGUgcGhvbmVkIHRvIGV2ZXJ5IGhvdGVsIGluIE9zbG8gdGlsbCBoZSBoaXQgb24gdGhlIHJpZ2h0IG9uZS4gSGUgbGVmdCBtZSBhdCAxMCwgYW5kIHRoZW4gSSBoYWQgdG8gZG8gYSBTdW5kYXkgUmVmZXJlZSBhcnRpY2xlLiBUb2RheSBteSBqb3VybmV5IGxhc3RzIGZyb20gOSB0aWxsIDkgLSBmb3J0dW5hdGVseSBvbmUgb2YgdGhlIG1vc3QgYmVhdXRpZnVsIHJhaWx3YXkgam91cm5leXMgaW4gdGhlIHdvcmxkLiBUb21vcnJvdyBJIGxlY3R1cmUgYXQgPHBsYWNlTmFtZSBhbm5vdGF0aW9uSWQ9ImVudF8xNDQiIGNlcnQ9ImRlZmluaXRlIiByZWY9Imh0dHA6Ly93d3cuZ2VvbmFtZXMub3JnLzY1NDg1MjgiPkJlcmdlbjwvcGxhY2VOYW1lPiB0byB0aGUgQW5nbG8tTm9yd2VnaWFuIFNvY2lldHkuIE5leHQgZGF5IEkgZ28gYmFjayB0byBPc2xvLCBsZWN0dXJlIHRoZXJlIEZyaS4gYW5kIFNhdC4gYW5kIHRoZW4gc3RhcnQgZm9yIGhvbWUgdmlhIEJlcmdlbi48L3A+CiAgICAgICAgPHBiIG49IjMiPjwvcGI+CiAgICAgICAgPHA+QnVsbCBpcyBhIG5pY2UgeW91bmcgbWFuIGJ1dCBpbmNvbXBldGVudCAtIGNhbid0IHF1aXRlIHN0YW5kIHRoZSBjb21tdW5pc3RzLCBidXQgZmluZHMgdGhlIHNvY2lhbGlzdHMgdG9vIG1pbGQuPC9wPjxwPkkgYW0gdW5oYXBwaWx5IHdvbmRlcmluZyB3aGF0IHlvdSBhcmUgZmVlbGluZyBhYm91dCBtZS48L3A+CiAgICAgICAgPGNsb3Nlcj4KICAgICAgICAgIDxzYWx1dGU+SSBsb3ZlIHlvdSB2ZXJ5IG11Y2ggLTwvc2FsdXRlPgogICAgICAgICAgPHNpZ25lZD4KICAgICAgICAgICAgPHBlcnNOYW1lIHNhbWVBcz0iaHR0cDovL3d3dy5mcmVlYmFzZS5jb20vdmlldy9lbi9iZXJ0cmFuZF9ydXNzZWxsIj4KICAgICAgICAgICAgICA8cGVyc05hbWUgYW5ub3RhdGlvbklkPSJlbnRfMTA5IiBjZXJ0PSJkZWZpbml0ZSIgdHlwZT0icmVhbCIgcmVmPSJodHRwOi8vdmlhZi5vcmcvdmlhZi8zNjkyNDEzNyI+QjwvcGVyc05hbWU+CiAgICAgICAgICAgIDwvcGVyc05hbWU+CiAgICAgICAgICA8L3NpZ25lZD4KICAgICAgICA8L2Nsb3Nlcj4KICAgICAgPC9kaXY+CiAgICA8L2JvZHk+CiAgPC90ZXh0Pgo8L1RFST4K",
+	// 		"branch": "master"
+	// 	})
+	// 	.query({
+	// 		"access_token": config.personal_oath_for_testing
+	// 	})
+	// 	.reply(201, {
+	// 		"content": {
+	// 			"name": "test1.txt",
+	// 			"path": "curt/qurt/test1.txt",
+	// 			"sha": "9fa3ec5f93e21b52d9d7fda29dfc4b3d43932400",
+	// 			"size": 3384,
+	// 			"url": "https://api.github.com/repos/jchartrand/aTest/contents/curt/qurt/test1.txt?ref=master",
+	// 			"html_url": "https://github.com/jchartrand/aTest/blob/master/curt/qurt/test1.txt",
+	// 			"git_url": "https://api.github.com/repos/jchartrand/aTest/git/blobs/9fa3ec5f93e21b52d9d7fda29dfc4b3d43932400",
+	// 			"download_url": "https://raw.githubusercontent.com/jchartrand/aTest/master/curt/qurt/test1.txt",
+	// 			"type": "file",
+	// 			"_links": {
+	// 				"self": "https://api.github.com/repos/jchartrand/aTest/contents/curt/qurt/test1.txt?ref=master",
+	// 				"git": "https://api.github.com/repos/jchartrand/aTest/git/blobs/9fa3ec5f93e21b52d9d7fda29dfc4b3d43932400",
+	// 				"html": "https://github.com/jchartrand/aTest/blob/master/curt/qurt/test1.txt"
+	// 			}
+	// 		},
+	// 		"commit": {
+	// 			"sha": "33b587b58b9577e7a7b4810e4103927809626e12",
+	// 			"url": "https://api.github.com/repos/jchartrand/aTest/git/commits/33b587b58b9577e7a7b4810e4103927809626e12",
+	// 			"html_url": "https://github.com/jchartrand/aTest/commit/33b587b58b9577e7a7b4810e4103927809626e12",
+	// 			"author": {
+	// 				"name": "James Chartrand",
+	// 				"email": "jc.chartrand@gmail.com",
+	// 				"date": "2018-05-01T13:05:48Z"
+	// 			},
+	// 			"committer": {
+	// 				"name": "James Chartrand",
+	// 				"email": "jc.chartrand@gmail.com",
+	// 				"date": "2018-05-01T13:05:48Z"
+	// 			},
+	// 			"tree": {
+	// 				"sha": "80a38e2f60b912464a4bb14549dd1c6af1f0f46a",
+	// 				"url": "https://api.github.com/repos/jchartrand/aTest/git/trees/80a38e2f60b912464a4bb14549dd1c6af1f0f46a"
+	// 			},
+	// 			"message": "some commit message",
+	// 			"parents": [{
+	// 				"sha": "a480ac4d99c3130285e940b56700e5152969a7f9",
+	// 				"url": "https://api.github.com/repos/jchartrand/aTest/git/commits/a480ac4d99c3130285e940b56700e5152969a7f9",
+	// 				"html_url": "https://github.com/jchartrand/aTest/commit/a480ac4d99c3130285e940b56700e5152969a7f9"
+	// 			}],
+	// 			"verification": {
+	// 				"verified": false,
+	// 				"reason": "unsigned",
+	// 				"signature": null,
+	// 				"payload": null
+	// 			}
+	// 		}
+	// 	}, ['Server',
+	// 		'GitHub.com',
+	// 		'Date',
+	// 		'Tue, 01 May 2018 13:05:48 GMT',
+	// 		'Content-Type',
+	// 		'application/json; charset=utf-8',
+	// 		'Content-Length',
+	// 		'1816',
+	// 		'Connection',
+	// 		'close',
+	// 		'Status',
+	// 		'201 Created',
+	// 		'X-RateLimit-Limit',
+	// 		'5000',
+	// 		'X-RateLimit-Remaining',
+	// 		'4997',
+	// 		'X-RateLimit-Reset',
+	// 		'1525183284',
+	// 		'Cache-Control',
+	// 		'private, max-age=60, s-maxage=60',
+	// 		'Vary',
+	// 		'Accept, Authorization, Cookie, X-GitHub-OTP',
+	// 		'ETag',
+	// 		'"e64876760e52b560c8e5a7a428b3a7ae"',
+	// 		'X-OAuth-Scopes',
+	// 		'repo',
+	// 		'X-Accepted-OAuth-Scopes',
+	// 		'',
+	// 		'X-GitHub-Media-Type',
+	// 		'github.v3; format=json',
+	// 		'Access-Control-Expose-Headers',
+	// 		'ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval',
+	// 		'Access-Control-Allow-Origin',
+	// 		'*',
+	// 		'Strict-Transport-Security',
+	// 		'max-age=31536000; includeSubdomains; preload',
+	// 		'X-Frame-Options',
+	// 		'deny',
+	// 		'X-Content-Type-Options',
+	// 		'nosniff',
+	// 		'X-XSS-Protection',
+	// 		'1; mode=block',
+	// 		'Referrer-Policy',
+	// 		'origin-when-cross-origin, strict-origin-when-cross-origin',
+	// 		'Content-Security-Policy',
+	// 		'default-src \'none\'',
+	// 		'X-Runtime-rack',
+	// 		'0.715000',
+	// 		'X-GitHub-Request-Id',
+	// 		'0E4D:27B0:54429DE:A4416A6:5AE8662B'
+	// 	]);
 
 }
 
@@ -1232,19 +1579,17 @@ function getUpdateFileNock() {
 	return nock('https://api.github.com:443', {
 			"encodedQueryParams": true
 		})
-		.put('/repos/jchartrand/aTest/contents/curt/qurt/test.txt', {
-			"message": "another commit message on the update",
-			"content": "PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPFRFSSB4bWxucz0iaHR0cDovL3d3dy50ZWktYy5vcmcvbnMvMS4wIiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiIHhtbG5zOmN3PSJodHRwOi8vY3dyYy5jYS9ucy9jdyMiIHhtbG5zOnc9Imh0dHA6Ly9jd3JjdGMuYXJ0c3JuLnVhbGJlcnRhLmNhLyMiPgogIDx0ZWlIZWFkZXI+CiAgICA8ZmlsZURlc2M+CiAgICAgIDx0aXRsZVN0bXQ+CiAgICAgICAgPHRpdGxlPlNhbXBsZSBEb2N1bWVudCBUaXRsZSB0ZXN0IHVuZGVmaW5lZDwvdGl0bGU+CiAgICAgIDwvdGl0bGVTdG10PgogICAgICA8cHVibGljYXRpb25TdG10PgogICAgICAgIDxwPjwvcD4KICAgICAgPC9wdWJsaWNhdGlvblN0bXQ+CiAgICAgIDxzb3VyY2VEZXNjIHNhbWVBcz0iaHR0cDovL3d3dy5jd3JjLmNhIj4KICAgICAgICA8cD5DcmVhdGVkIGZyb20gb3JpZ2luYWwgcmVzZWFyY2ggYnkgbWVtYmVycyBvZiBDV1JDL0NTw4lDIHVubGVzcyBvdGhlcndpc2Ugbm90ZWQuPC9wPgogICAgICA8L3NvdXJjZURlc2M+CiAgICA8L2ZpbGVEZXNjPgogIDwvdGVpSGVhZGVyPgogIDx0ZXh0PgogICAgPGJvZHk+CiAgICAgIDxkaXYgdHlwZT0ibGV0dGVyIj4KICAgICAgICA8aGVhZD4KICAgICAgICAgIDx0aXRsZT5TYW1wbGUgTGV0dGVyIC0gQmVydHJhbmQgUnVzc2VsbCB0byA8cGVyc05hbWUgYW5ub3RhdGlvbklkPSJlbnRfNzMiIGNlcnQ9InByb2JhYmxlIiByZWY9IjI3OTM5OTM5OSI+UGF0cmljaWEgU3BlbmNlPC9wZXJzTmFtZT4gLSBPY3RvYmVyIDIxLCAxOTM1PC90aXRsZT4KICAgICAgICA8L2hlYWQ+CiAgICAgICAgPG9wZW5lcj4KICAgICAgICAgIDxub3RlPgogICAgICAgICAgICA8cD5CYWQgd3JpdGluZyBkdWUgdG8gc2hha3kgdHJhaW48L3A+PHA+SW4gdHJhaW48L3A+PHA+CiAgICAgICAgICAgICAgPHBsYWNlTmFtZSBhbm5vdGF0aW9uSWQ9ImVudF8xNDMiIGNlcnQ9ImRlZmluaXRlIiByZWY9Imh0dHA6Ly93d3cuZ2VvbmFtZXMub3JnLzY0NTMzNjYiPk9zbG88L3BsYWNlTmFtZT4gdG8gQmVyZ2VuPC9wPgogICAgICAgICAgPC9ub3RlPgogICAgICAgICAgPGRhdGVsaW5lPgogICAgICAgICAgICA8ZGF0ZSBhbm5vdGF0aW9uSWQ9ImVudF82OSIgY2VydD0iZGVmaW5pdGUiIHdoZW49IjE5MzUtMTAtMjEiPjIxLjEwLjM1PC9kYXRlPgogICAgICAgICAgPC9kYXRlbGluZT4KICAgICAgICAgIDxzYWx1dGU+RGVhcmVzdCAtPC9zYWx1dGU+CiAgICAgICAgPC9vcGVuZXI+PHA+SSBoYXZlIGhhZCBubzxub3RlIGFubm90YXRpb25JZD0iZW50XzE5MCIgdHlwZT0icmVzZWFyY2hOb3RlIj4KICAgICAgICAgICAgICAgIDxwIHhtbG5zPSJodHRwOi8vd3d3LnRlaS1jLm9yZy9ucy8xLjAiPlNvbWUga2luZCBvZiBub3RlPC9wPgogICAgICAgICAgICA8L25vdGU+IGxldHRlciBmcm9tIHlvdSBzaW5jZSBJIGxlZnQgPHBsYWNlTmFtZSBhbm5vdGF0aW9uSWQ9ImVudF8xNDUiIG9mZnNldElkPSJlbnRfMTQ1IiBjZXJ0PSJkZWZpbml0ZSIgcmVmPSJodHRwOi8vd3d3Lmdlb25hbWVzLm9yZy8yNjczNzIyIj5TdG9ja2hvbG08L3BsYWNlTmFtZT4sIGJ1dCBJIGhhZCBhIG5pY2Ugb25lIGZyb20gSm9obiBpbiBhbiBlbnZlbG9wZSB5b3UgaGFkIHNlbnQgaGltLiBJIGhhZCBzZW50IGhpbSBvbmUgYWRkcmVzc2VkIHRvIENvcGVuaGFnZW4gYnV0IGhlIGhhZG4ndCB1c2VkIGl0LjwvcD48cD5XaGVuIEkgcmVhY2hlZCBPc2xvIHllc3RlcmRheSBldmVuaW5nLCBCcnluanVsZiBCdWxsIHNob3VsZCBoYXZlIGJlZW4gdGhlcmUgdG8gbWVldCBtZSwgYnV0IHdhc24ndC4gSGUgaXMgbm90IG9uIHRoZSB0ZWxlcGhvbmUsIHNvIEkgdG9vayBhIHRheGkgdG8gaGlzIGFkZHJlc3MsIHdoaWNoIHR1cm5lZCBvdXQgdG8gYmUgYSBzdHVkZW50cycgY2x1YiB3aXRoIG5vIG9uZSBhYm91dCBvbiBTdW5kYXlzLCBzbyBJIHdlbnQgdG8gYSBob3RlbCBmZWVsaW5nIHJhdGhlciBub24tcGx1c3NlZC4gQnV0IHByZXNlbnRseSBoZSB0dXJuZWQgdXAuIEhlIGhhZCBnb3QgdGhlIDxwYiBuPSIyIj48L3BiPiB0aW1lIG9mIG15IGFycml2YWwgd3JvbmcsIGFuZCAKICAgICAgICAgICAgPGNob2ljZSBhbm5vdGF0aW9uSWQ9ImVudF82NSI+PHNpYyBhbm5vdGF0aW9uSWQ9ImVudF82NSI+d2hlbjwvc2ljPjxjb3JyIGFubm90YXRpb25JZD0iZW50XzY1Ij53aGVuPC9jb3JyPjwvY2hvaWNlPgogICAgICAgICAgaGUgaGFkIGZvdW5kIGhlIGhhZCBtaXNzZWQgbWUgaGUgcGhvbmVkIHRvIGV2ZXJ5IGhvdGVsIGluIE9zbG8gdGlsbCBoZSBoaXQgb24gdGhlIHJpZ2h0IG9uZS4gSGUgbGVmdCBtZSBhdCAxMCwgYW5kIHRoZW4gSSBoYWQgdG8gZG8gYSBTdW5kYXkgUmVmZXJlZSBhcnRpY2xlLiBUb2RheSBteSBqb3VybmV5IGxhc3RzIGZyb20gOSB0aWxsIDkgLSBmb3J0dW5hdGVseSBvbmUgb2YgdGhlIG1vc3QgYmVhdXRpZnVsIHJhaWx3YXkgam91cm5leXMgaW4gdGhlIHdvcmxkLiBUb21vcnJvdyBJIGxlY3R1cmUgYXQgPHBsYWNlTmFtZSBhbm5vdGF0aW9uSWQ9ImVudF8xNDQiIGNlcnQ9ImRlZmluaXRlIiByZWY9Imh0dHA6Ly93d3cuZ2VvbmFtZXMub3JnLzY1NDg1MjgiPkJlcmdlbjwvcGxhY2VOYW1lPiB0byB0aGUgQW5nbG8tTm9yd2VnaWFuIFNvY2lldHkuIE5leHQgZGF5IEkgZ28gYmFjayB0byBPc2xvLCBsZWN0dXJlIHRoZXJlIEZyaS4gYW5kIFNhdC4gYW5kIHRoZW4gc3RhcnQgZm9yIGhvbWUgdmlhIEJlcmdlbi48L3A+CiAgICAgICAgPHBiIG49IjMiPjwvcGI+CiAgICAgICAgPHA+QnVsbCBpcyBhIG5pY2UgeW91bmcgbWFuIGJ1dCBpbmNvbXBldGVudCAtIGNhbid0IHF1aXRlIHN0YW5kIHRoZSBjb21tdW5pc3RzLCBidXQgZmluZHMgdGhlIHNvY2lhbGlzdHMgdG9vIG1pbGQuPC9wPjxwPkkgYW0gdW5oYXBwaWx5IHdvbmRlcmluZyB3aGF0IHlvdSBhcmUgZmVlbGluZyBhYm91dCBtZS48L3A+CiAgICAgICAgPGNsb3Nlcj4KICAgICAgICAgIDxzYWx1dGU+SSBsb3ZlIHlvdSB2ZXJ5IG11Y2ggLTwvc2FsdXRlPgogICAgICAgICAgPHNpZ25lZD4KICAgICAgICAgICAgPHBlcnNOYW1lIHNhbWVBcz0iaHR0cDovL3d3dy5mcmVlYmFzZS5jb20vdmlldy9lbi9iZXJ0cmFuZF9ydXNzZWxsIj4KICAgICAgICAgICAgICA8cGVyc05hbWUgYW5ub3RhdGlvbklkPSJlbnRfMTA5IiBjZXJ0PSJkZWZpbml0ZSIgdHlwZT0icmVhbCIgcmVmPSJodHRwOi8vdmlhZi5vcmcvdmlhZi8zNjkyNDEzNyI+QjwvcGVyc05hbWU+CiAgICAgICAgICAgIDwvcGVyc05hbWU+CiAgICAgICAgICA8L3NpZ25lZD4KICAgICAgICA8L2Nsb3Nlcj4KICAgICAgPC9kaXY+CiAgICA8L2JvZHk+CiAgPC90ZXh0Pgo8L1RFST4K",
-			"branch": "master",
-			"sha": "6f715c0deeb9012272c04a50e1fc09bc3fe4bdb7"
+		.put('/repos/lucaju/misc/contents/text.txt', {
+			"message": "some commit message",
+			"sha": "30d74d258442c7c65512eafab474568dd706c430",
+			"branch": "dev",
+			"content": "dGVzdA=="
 		})
-		.query({
-			"access_token": config.personal_oath_for_testing
-		})
-		.reply(200, ["1f8b0800000000000003b555db8ed33010fd95cacfddfa928bed4a0824de78de27105a4d62a7c99238c576589655ff9d712f4bd922d476e12195e289cf99396766fa44ead145eb22593e110783254b126d888bf83d923959436cf1a49e7ca45fd3cf512cb48021dd4066eba2d19915bc2a84d146360684364d9d5799c9339d899c31040bdd0f84cf3295cfc9e47bbcdcc6b80e4b4a61dd2d565d6ca76a518f03f5763d067a5fb7e0a3076728dc624a749f69a0a7e9bcf5b679334088d623511b87feee778623f413dcaa1f2bbabbfc0768c4c3cb2fe0ce4b18efd1041ee8052a99f1c1f52398178c1e1ef6124dc1fabd145bb54eea", "f95b29f1719d2c6ebade6261777de7be84647db07df3ff0c41212e06bf4abce4fc11d32b5cdf6ce6381ac390324779b6bdce8b4ceb526a6ce1b204551646436e0bada011463055e4595d8291a8ec35fd9d2ade51067a01d585ddbe63b88400a6d88efe68417cc03d1166ef0fe389e5da01ba24fc7dbd789eda77ab74985a143f301053df09c6d50d2b6e18bfe5d992b325931fc9b3d2697a7fada17fcf12bdc5240e6eaac6a8bc36a51285e65ae4204b2105571cfd64a6e12ccf4b55c9b4b9ae753311067a36110a81c2065825a9c08db1b57eb6f36bb60fcc4637c3e3d9b4de2a9a36b4c7ed8d33fce9505796558592f854ba90d24a9055ae38b33967991652315d8ad272f18aba0e5d7a01d5755d7a36c1e6f39c7cb3be6bba1a6237ba64f3eedd1ab26ca00f764ebc8590426472a15b398ca43fa59583387994dc4d7d9f047d4ceb77f7bad96c7e02de72b6ff22070000"], ['Server',
+		.reply(200, ["1f8b0800000000000003b5555b4fdb3014fe2b28cf85248e1d3795d0a6890d210daaa288299d26e4d8278dd35c2adbe152d4ff8e4d292abcac41dba3ed9cef9cef62e7c9e35d6ba035dee4c96b5903dec433f0604ecc83f146de8a99f2fd8e2e99dd880241b140648c31e294c784840858c1724c3189c742d020e6380a2c84966b0b8a475eaf6a5b591ab3d213df672b79b290a6ecf313de35be8255a7fdbae7aceafd466aeebfcea5fddd385f1414a702ee2c66699afaf63dde1ed63e4a5e77b96f8bde506cb5fdf443f15f87b125be83d2fe00e6a2bb6feb8e890fcd14bb7f65", "de6b50af345f44d81ffcc3cce671e5ac29640d96c16d2ddba5769669a88b7fa5aa253904ea539a38e7f69a1cecda6633b2496d1a37a265fd12c29814023322e238123c47982554105c70c219a23926406308c49859c1da4ec0ad14b6e8f22c8b672831f9af3ab8ac2ec2693a7b9c9ef187699585f3661664e9cdf2aacad6f3f32b79595d97d3542cafd2eb265bdf54597a1165d52c9ca71ccdd36fcbe9f9f7530b3e30d84eb72d15ed0fa07078e6b7e043b0596fca4eed3d013f7b2e59db1dfd5072bd06e52484864967dd36a45f1b7091b5fb8219974c14a0e038088fa3300dc904914980e6de9b6906fe0fba51609bef02c123103ccc79c8282fc6580409c2b4c094e6942584d150d86004d4dda04f78e67a69ffe01e967b035ab3855347770d1c6d7d39daedbad755d997d7dee3df3b06850831c1e3304a40c44982718404c92945506036160549282400f8730c76a91bd06570ea0ec6defc197977a064213933b26b9d8ddb35d87b5ab05ac3c853c0b43bf2fa56cb456b4fdc0f65d132d32bab6bdbd7b593f1d13db3dbe566b379068c1cc771d4060000"], [
+			'Server',
 			'GitHub.com',
 			'Date',
-			'Tue, 01 May 2018 13:10:08 GMT',
+			'Fri, 31 Jan 2020 15:25:02 GMT',
 			'Content-Type',
 			'application/json; charset=utf-8',
 			'Transfer-Encoding',
@@ -1258,21 +1603,21 @@ function getUpdateFileNock() {
 			'X-RateLimit-Remaining',
 			'4996',
 			'X-RateLimit-Reset',
-			'1525183284',
+			'1580487107',
 			'Cache-Control',
 			'private, max-age=60, s-maxage=60',
 			'Vary',
 			'Accept, Authorization, Cookie, X-GitHub-OTP',
 			'ETag',
-			'W/"04a0d4ce65d0cf6452d11c563ce525db"',
+			'W/"67bdb1970ced6e166242630c44de0242"',
 			'X-OAuth-Scopes',
-			'repo',
+			'admin:repo_hook, repo',
 			'X-Accepted-OAuth-Scopes',
 			'',
 			'X-GitHub-Media-Type',
 			'github.v3; format=json',
 			'Access-Control-Expose-Headers',
-			'ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval',
+			'ETag, Link, Location, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval, X-GitHub-Media-Type',
 			'Access-Control-Allow-Origin',
 			'*',
 			'Strict-Transport-Security',
@@ -1286,28 +1631,95 @@ function getUpdateFileNock() {
 			'Referrer-Policy',
 			'origin-when-cross-origin, strict-origin-when-cross-origin',
 			'Content-Security-Policy',
-			'default-src \'none\'',
-			'X-Runtime-rack',
-			'0.702730',
+			"default-src 'none'",
 			'Content-Encoding',
 			'gzip',
 			'X-GitHub-Request-Id',
-			'6397:27B0:544BC8B:A453FC3:5AE8672F'
+			'9A07:2207:68E982:F9BFFD:5E3446CD'
 		]);
+
+
+
+
+
+
+	// nock('https://api.github.com:443', {
+	// 		"encodedQueryParams": true
+	// 	})
+	// 	.put('/repos/jchartrand/aTest/contents/curt/qurt/test.txt', {
+	// 		"message": "another commit message on the update",
+	// 		"content": "PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPFRFSSB4bWxucz0iaHR0cDovL3d3dy50ZWktYy5vcmcvbnMvMS4wIiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiIHhtbG5zOmN3PSJodHRwOi8vY3dyYy5jYS9ucy9jdyMiIHhtbG5zOnc9Imh0dHA6Ly9jd3JjdGMuYXJ0c3JuLnVhbGJlcnRhLmNhLyMiPgogIDx0ZWlIZWFkZXI+CiAgICA8ZmlsZURlc2M+CiAgICAgIDx0aXRsZVN0bXQ+CiAgICAgICAgPHRpdGxlPlNhbXBsZSBEb2N1bWVudCBUaXRsZSB0ZXN0IHVuZGVmaW5lZDwvdGl0bGU+CiAgICAgIDwvdGl0bGVTdG10PgogICAgICA8cHVibGljYXRpb25TdG10PgogICAgICAgIDxwPjwvcD4KICAgICAgPC9wdWJsaWNhdGlvblN0bXQ+CiAgICAgIDxzb3VyY2VEZXNjIHNhbWVBcz0iaHR0cDovL3d3dy5jd3JjLmNhIj4KICAgICAgICA8cD5DcmVhdGVkIGZyb20gb3JpZ2luYWwgcmVzZWFyY2ggYnkgbWVtYmVycyBvZiBDV1JDL0NTw4lDIHVubGVzcyBvdGhlcndpc2Ugbm90ZWQuPC9wPgogICAgICA8L3NvdXJjZURlc2M+CiAgICA8L2ZpbGVEZXNjPgogIDwvdGVpSGVhZGVyPgogIDx0ZXh0PgogICAgPGJvZHk+CiAgICAgIDxkaXYgdHlwZT0ibGV0dGVyIj4KICAgICAgICA8aGVhZD4KICAgICAgICAgIDx0aXRsZT5TYW1wbGUgTGV0dGVyIC0gQmVydHJhbmQgUnVzc2VsbCB0byA8cGVyc05hbWUgYW5ub3RhdGlvbklkPSJlbnRfNzMiIGNlcnQ9InByb2JhYmxlIiByZWY9IjI3OTM5OTM5OSI+UGF0cmljaWEgU3BlbmNlPC9wZXJzTmFtZT4gLSBPY3RvYmVyIDIxLCAxOTM1PC90aXRsZT4KICAgICAgICA8L2hlYWQ+CiAgICAgICAgPG9wZW5lcj4KICAgICAgICAgIDxub3RlPgogICAgICAgICAgICA8cD5CYWQgd3JpdGluZyBkdWUgdG8gc2hha3kgdHJhaW48L3A+PHA+SW4gdHJhaW48L3A+PHA+CiAgICAgICAgICAgICAgPHBsYWNlTmFtZSBhbm5vdGF0aW9uSWQ9ImVudF8xNDMiIGNlcnQ9ImRlZmluaXRlIiByZWY9Imh0dHA6Ly93d3cuZ2VvbmFtZXMub3JnLzY0NTMzNjYiPk9zbG88L3BsYWNlTmFtZT4gdG8gQmVyZ2VuPC9wPgogICAgICAgICAgPC9ub3RlPgogICAgICAgICAgPGRhdGVsaW5lPgogICAgICAgICAgICA8ZGF0ZSBhbm5vdGF0aW9uSWQ9ImVudF82OSIgY2VydD0iZGVmaW5pdGUiIHdoZW49IjE5MzUtMTAtMjEiPjIxLjEwLjM1PC9kYXRlPgogICAgICAgICAgPC9kYXRlbGluZT4KICAgICAgICAgIDxzYWx1dGU+RGVhcmVzdCAtPC9zYWx1dGU+CiAgICAgICAgPC9vcGVuZXI+PHA+SSBoYXZlIGhhZCBubzxub3RlIGFubm90YXRpb25JZD0iZW50XzE5MCIgdHlwZT0icmVzZWFyY2hOb3RlIj4KICAgICAgICAgICAgICAgIDxwIHhtbG5zPSJodHRwOi8vd3d3LnRlaS1jLm9yZy9ucy8xLjAiPlNvbWUga2luZCBvZiBub3RlPC9wPgogICAgICAgICAgICA8L25vdGU+IGxldHRlciBmcm9tIHlvdSBzaW5jZSBJIGxlZnQgPHBsYWNlTmFtZSBhbm5vdGF0aW9uSWQ9ImVudF8xNDUiIG9mZnNldElkPSJlbnRfMTQ1IiBjZXJ0PSJkZWZpbml0ZSIgcmVmPSJodHRwOi8vd3d3Lmdlb25hbWVzLm9yZy8yNjczNzIyIj5TdG9ja2hvbG08L3BsYWNlTmFtZT4sIGJ1dCBJIGhhZCBhIG5pY2Ugb25lIGZyb20gSm9obiBpbiBhbiBlbnZlbG9wZSB5b3UgaGFkIHNlbnQgaGltLiBJIGhhZCBzZW50IGhpbSBvbmUgYWRkcmVzc2VkIHRvIENvcGVuaGFnZW4gYnV0IGhlIGhhZG4ndCB1c2VkIGl0LjwvcD48cD5XaGVuIEkgcmVhY2hlZCBPc2xvIHllc3RlcmRheSBldmVuaW5nLCBCcnluanVsZiBCdWxsIHNob3VsZCBoYXZlIGJlZW4gdGhlcmUgdG8gbWVldCBtZSwgYnV0IHdhc24ndC4gSGUgaXMgbm90IG9uIHRoZSB0ZWxlcGhvbmUsIHNvIEkgdG9vayBhIHRheGkgdG8gaGlzIGFkZHJlc3MsIHdoaWNoIHR1cm5lZCBvdXQgdG8gYmUgYSBzdHVkZW50cycgY2x1YiB3aXRoIG5vIG9uZSBhYm91dCBvbiBTdW5kYXlzLCBzbyBJIHdlbnQgdG8gYSBob3RlbCBmZWVsaW5nIHJhdGhlciBub24tcGx1c3NlZC4gQnV0IHByZXNlbnRseSBoZSB0dXJuZWQgdXAuIEhlIGhhZCBnb3QgdGhlIDxwYiBuPSIyIj48L3BiPiB0aW1lIG9mIG15IGFycml2YWwgd3JvbmcsIGFuZCAKICAgICAgICAgICAgPGNob2ljZSBhbm5vdGF0aW9uSWQ9ImVudF82NSI+PHNpYyBhbm5vdGF0aW9uSWQ9ImVudF82NSI+d2hlbjwvc2ljPjxjb3JyIGFubm90YXRpb25JZD0iZW50XzY1Ij53aGVuPC9jb3JyPjwvY2hvaWNlPgogICAgICAgICAgaGUgaGFkIGZvdW5kIGhlIGhhZCBtaXNzZWQgbWUgaGUgcGhvbmVkIHRvIGV2ZXJ5IGhvdGVsIGluIE9zbG8gdGlsbCBoZSBoaXQgb24gdGhlIHJpZ2h0IG9uZS4gSGUgbGVmdCBtZSBhdCAxMCwgYW5kIHRoZW4gSSBoYWQgdG8gZG8gYSBTdW5kYXkgUmVmZXJlZSBhcnRpY2xlLiBUb2RheSBteSBqb3VybmV5IGxhc3RzIGZyb20gOSB0aWxsIDkgLSBmb3J0dW5hdGVseSBvbmUgb2YgdGhlIG1vc3QgYmVhdXRpZnVsIHJhaWx3YXkgam91cm5leXMgaW4gdGhlIHdvcmxkLiBUb21vcnJvdyBJIGxlY3R1cmUgYXQgPHBsYWNlTmFtZSBhbm5vdGF0aW9uSWQ9ImVudF8xNDQiIGNlcnQ9ImRlZmluaXRlIiByZWY9Imh0dHA6Ly93d3cuZ2VvbmFtZXMub3JnLzY1NDg1MjgiPkJlcmdlbjwvcGxhY2VOYW1lPiB0byB0aGUgQW5nbG8tTm9yd2VnaWFuIFNvY2lldHkuIE5leHQgZGF5IEkgZ28gYmFjayB0byBPc2xvLCBsZWN0dXJlIHRoZXJlIEZyaS4gYW5kIFNhdC4gYW5kIHRoZW4gc3RhcnQgZm9yIGhvbWUgdmlhIEJlcmdlbi48L3A+CiAgICAgICAgPHBiIG49IjMiPjwvcGI+CiAgICAgICAgPHA+QnVsbCBpcyBhIG5pY2UgeW91bmcgbWFuIGJ1dCBpbmNvbXBldGVudCAtIGNhbid0IHF1aXRlIHN0YW5kIHRoZSBjb21tdW5pc3RzLCBidXQgZmluZHMgdGhlIHNvY2lhbGlzdHMgdG9vIG1pbGQuPC9wPjxwPkkgYW0gdW5oYXBwaWx5IHdvbmRlcmluZyB3aGF0IHlvdSBhcmUgZmVlbGluZyBhYm91dCBtZS48L3A+CiAgICAgICAgPGNsb3Nlcj4KICAgICAgICAgIDxzYWx1dGU+SSBsb3ZlIHlvdSB2ZXJ5IG11Y2ggLTwvc2FsdXRlPgogICAgICAgICAgPHNpZ25lZD4KICAgICAgICAgICAgPHBlcnNOYW1lIHNhbWVBcz0iaHR0cDovL3d3dy5mcmVlYmFzZS5jb20vdmlldy9lbi9iZXJ0cmFuZF9ydXNzZWxsIj4KICAgICAgICAgICAgICA8cGVyc05hbWUgYW5ub3RhdGlvbklkPSJlbnRfMTA5IiBjZXJ0PSJkZWZpbml0ZSIgdHlwZT0icmVhbCIgcmVmPSJodHRwOi8vdmlhZi5vcmcvdmlhZi8zNjkyNDEzNyI+QjwvcGVyc05hbWU+CiAgICAgICAgICAgIDwvcGVyc05hbWU+CiAgICAgICAgICA8L3NpZ25lZD4KICAgICAgICA8L2Nsb3Nlcj4KICAgICAgPC9kaXY+CiAgICA8L2JvZHk+CiAgPC90ZXh0Pgo8L1RFST4K",
+	// 		"branch": "master",
+	// 		"sha": "6f715c0deeb9012272c04a50e1fc09bc3fe4bdb7"
+	// 	})
+	// 	.query({
+	// 		"access_token": config.personal_oath_for_testing
+	// 	})
+	// 	.reply(200, ["1f8b0800000000000003b555db8ed33010fd95cacfddfa928bed4a0824de78de27105a4d62a7c99238c576589655ff9d712f4bd922d476e12195e289cf99396766fa44ead145eb22593e110783254b126d888bf83d923959436cf1a49e7ca45fd3cf512cb48021dd4066eba2d19915bc2a84d146360684364d9d5799c9339d899c31040bdd0f84cf3295cfc9e47bbcdcc6b80e4b4a61dd2d565d6ca76a518f03f5763d067a5fb7e0a3076728dc624a749f69a0a7e9bcf5b679334088d623511b87feee778623f413dcaa1f2bbabbfc0768c4c3cb2fe0ce4b18efd1041ee8052a99f1c1f52398178c1e1ef6124dc1fabd145bb54eea", "f95b29f1719d2c6ebade6261777de7be84647db07df3ff0c41212e06bf4abce4fc11d32b5cdf6ce6381ac390324779b6bdce8b4ceb526a6ce1b204551646436e0bada011463055e4595d8291a8ec35fd9d2ade51067a01d585ddbe63b88400a6d88efe68417cc03d1166ef0fe389e5da01ba24fc7dbd789eda77ab74985a143f301053df09c6d50d2b6e18bfe5d992b325931fc9b3d2697a7fada17fcf12bdc5240e6eaac6a8bc36a51285e65ae4204b2105571cfd64a6e12ccf4b55c9b4b9ae753311067a36110a81c2065825a9c08db1b57eb6f36bb60fcc4637c3e3d9b4de2a9a36b4c7ed8d33fce9505796558592f854ba90d24a9055ae38b33967991652315d8ad272f18aba0e5d7a01d5755d7a36c1e6f39c7cb3be6bba1a6237ba64f3eedd1ab26ca00f764ebc8590426472a15b398ca43fa59583387994dc4d7d9f047d4ceb77f7bad96c7e02de72b6ff22070000"], ['Server',
+	// 		'GitHub.com',
+	// 		'Date',
+	// 		'Tue, 01 May 2018 13:10:08 GMT',
+	// 		'Content-Type',
+	// 		'application/json; charset=utf-8',
+	// 		'Transfer-Encoding',
+	// 		'chunked',
+	// 		'Connection',
+	// 		'close',
+	// 		'Status',
+	// 		'200 OK',
+	// 		'X-RateLimit-Limit',
+	// 		'5000',
+	// 		'X-RateLimit-Remaining',
+	// 		'4996',
+	// 		'X-RateLimit-Reset',
+	// 		'1525183284',
+	// 		'Cache-Control',
+	// 		'private, max-age=60, s-maxage=60',
+	// 		'Vary',
+	// 		'Accept, Authorization, Cookie, X-GitHub-OTP',
+	// 		'ETag',
+	// 		'W/"04a0d4ce65d0cf6452d11c563ce525db"',
+	// 		'X-OAuth-Scopes',
+	// 		'repo',
+	// 		'X-Accepted-OAuth-Scopes',
+	// 		'',
+	// 		'X-GitHub-Media-Type',
+	// 		'github.v3; format=json',
+	// 		'Access-Control-Expose-Headers',
+	// 		'ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval',
+	// 		'Access-Control-Allow-Origin',
+	// 		'*',
+	// 		'Strict-Transport-Security',
+	// 		'max-age=31536000; includeSubdomains; preload',
+	// 		'X-Frame-Options',
+	// 		'deny',
+	// 		'X-Content-Type-Options',
+	// 		'nosniff',
+	// 		'X-XSS-Protection',
+	// 		'1; mode=block',
+	// 		'Referrer-Policy',
+	// 		'origin-when-cross-origin, strict-origin-when-cross-origin',
+	// 		'Content-Security-Policy',
+	// 		'default-src \'none\'',
+	// 		'X-Runtime-rack',
+	// 		'0.702730',
+	// 		'Content-Encoding',
+	// 		'gzip',
+	// 		'X-GitHub-Request-Id',
+	// 		'6397:27B0:544BC8B:A453FC3:5AE8672F'
+	// 	]);
 }
 
 function getUserBranchHeadNock() {
 	return nock('https://api.github.com:443', {
 			"encodedQueryParams": true
 		})
-		.get('/repos/jchartrand/aTest/git/refs/heads/jchartrand')
-		.query({
-			"access_token": config.personal_oath_for_testing
-		})
-		.reply(200, ["1f8b0800000000000003a58ebd0ec2300c84df2533aa1b5afaf71cbc80e318d28ad228710754f5dd316261604062f1e0bbfbee3693f86286d7cd10187d868902264978f7e660d674533588c43c00601c8beb286175052d33248ecba71ff0cc59401d2a7de72d6e6212336c2607543297dc759ea9ac8fb66e7d4be8aaf6d4f7642be6da3648faea1aab53e41159135a3c8ff2c7b43720c3cfd5fbfe04b1ca08d426010000"], ['Server',
+		.get('/repos/lucaju/misc/git/ref/heads/dev')
+		.reply(200, ["1f8b08000000000000039d8ebb0e82301486dfa5b3f180d47249d8581c08d1a8ab815ea0840aa1c54808efee316e4ec6e51fce7ff9ce4246a948f2560b8d2c8505211f6443eebd90372dd0cab39c5dccd5e4edc12fcec7b9c8f8b330a74ed4698ac169ec30d43837d804a01cf4b6d6ae99aa2def0d8c72e82d74132fdb098cb61cd0c4eb17acaf5ac91d4916629b12d758e4ef8338f269402346", "bd58fa3ca454a830605cecb808a9a7581829c4bb7990d84098d1eebf773e5d0b3f53d7f505e21da67737010000"], [
+			'Server',
 			'GitHub.com',
 			'Date',
-			'Thu, 24 May 2018 19:05:31 GMT',
+			'Fri, 31 Jan 2020 15:57:52 GMT',
 			'Content-Type',
 			'application/json; charset=utf-8',
 			'Transfer-Encoding',
@@ -1319,27 +1731,27 @@ function getUserBranchHeadNock() {
 			'X-RateLimit-Limit',
 			'5000',
 			'X-RateLimit-Remaining',
-			'4999',
+			'4993',
 			'X-RateLimit-Reset',
-			'1527192331',
+			'1580487107',
 			'Cache-Control',
 			'private, max-age=60, s-maxage=60',
 			'Vary',
 			'Accept, Authorization, Cookie, X-GitHub-OTP',
 			'ETag',
-			'W/"1d95c72cb540f004ea6d427e1fcf6da5"',
+			'W/"0cd9392be056c9f637c3fffa41349a97"',
 			'Last-Modified',
-			'Tue, 01 May 2018 13:10:09 GMT',
+			'Tue, 28 Jan 2020 04:57:45 GMT',
 			'X-Poll-Interval',
 			'300',
 			'X-OAuth-Scopes',
-			'repo',
+			'admin:repo_hook, repo',
 			'X-Accepted-OAuth-Scopes',
 			'repo',
 			'X-GitHub-Media-Type',
 			'github.v3; format=json',
 			'Access-Control-Expose-Headers',
-			'ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval',
+			'ETag, Link, Location, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval, X-GitHub-Media-Type',
 			'Access-Control-Allow-Origin',
 			'*',
 			'Strict-Transport-Security',
@@ -1353,14 +1765,78 @@ function getUserBranchHeadNock() {
 			'Referrer-Policy',
 			'origin-when-cross-origin, strict-origin-when-cross-origin',
 			'Content-Security-Policy',
-			'default-src \'none\'',
-			'X-Runtime-rack',
-			'0.061844',
+			"default-src 'none'",
 			'Content-Encoding',
 			'gzip',
 			'X-GitHub-Request-Id',
-			'82ED:3F8D:A23941:14815BF:5B070CFB'
+			'9448:0BFA:29AF01:61AC06:5E344E80'
 		]);
+
+
+	// nock('https://api.github.com:443', {
+	// 		"encodedQueryParams": true
+	// 	})
+	// 	.get('/repos/jchartrand/aTest/git/refs/heads/jchartrand')
+	// 	.query({
+	// 		"access_token": config.personal_oath_for_testing
+	// 	})
+	// 	.reply(200, ["1f8b0800000000000003a58ebd0ec2300c84df2533aa1b5afaf71cbc80e318d28ad228710754f5dd316261604062f1e0bbfbee3693f86286d7cd10187d868902264978f7e660d674533588c43c00601c8beb286175052d33248ecba71ff0cc59401d2a7de72d6e6212336c2607543297dc759ea9ac8fb66e7d4be8aaf6d4f7642be6da3648faea1aab53e41159135a3c8ff2c7b43720c3cfd5fbfe04b1ca08d426010000"], ['Server',
+	// 		'GitHub.com',
+	// 		'Date',
+	// 		'Thu, 24 May 2018 19:05:31 GMT',
+	// 		'Content-Type',
+	// 		'application/json; charset=utf-8',
+	// 		'Transfer-Encoding',
+	// 		'chunked',
+	// 		'Connection',
+	// 		'close',
+	// 		'Status',
+	// 		'200 OK',
+	// 		'X-RateLimit-Limit',
+	// 		'5000',
+	// 		'X-RateLimit-Remaining',
+	// 		'4999',
+	// 		'X-RateLimit-Reset',
+	// 		'1527192331',
+	// 		'Cache-Control',
+	// 		'private, max-age=60, s-maxage=60',
+	// 		'Vary',
+	// 		'Accept, Authorization, Cookie, X-GitHub-OTP',
+	// 		'ETag',
+	// 		'W/"1d95c72cb540f004ea6d427e1fcf6da5"',
+	// 		'Last-Modified',
+	// 		'Tue, 01 May 2018 13:10:09 GMT',
+	// 		'X-Poll-Interval',
+	// 		'300',
+	// 		'X-OAuth-Scopes',
+	// 		'repo',
+	// 		'X-Accepted-OAuth-Scopes',
+	// 		'repo',
+	// 		'X-GitHub-Media-Type',
+	// 		'github.v3; format=json',
+	// 		'Access-Control-Expose-Headers',
+	// 		'ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval',
+	// 		'Access-Control-Allow-Origin',
+	// 		'*',
+	// 		'Strict-Transport-Security',
+	// 		'max-age=31536000; includeSubdomains; preload',
+	// 		'X-Frame-Options',
+	// 		'deny',
+	// 		'X-Content-Type-Options',
+	// 		'nosniff',
+	// 		'X-XSS-Protection',
+	// 		'1; mode=block',
+	// 		'Referrer-Policy',
+	// 		'origin-when-cross-origin, strict-origin-when-cross-origin',
+	// 		'Content-Security-Policy',
+	// 		'default-src \'none\'',
+	// 		'X-Runtime-rack',
+	// 		'0.061844',
+	// 		'Content-Encoding',
+	// 		'gzip',
+	// 		'X-GitHub-Request-Id',
+	// 		'82ED:3F8D:A23941:14815BF:5B070CFB'
+	// 	]);
 
 }
 
@@ -1369,15 +1845,13 @@ function getLatestFileSHANock() {
 			"encodedQueryParams": true
 		})
 		.post('/graphql', {
-			"query": "{\n\t\t\trepository(owner: \"jchartrand\", name: \"aTest\") {\n\t\t\t\tobject(expression: \"jchartrand:curt/qurt/testq339.txt\") {\n\t\t\t\t\t... on Blob {\n\t\t\t\t\t\toid\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t}\n\t\t}"
+			"query": "{\n\t\t\trepository(owner: \"lucaju\", name: \"misc\") {\n\t\t\t\tobject(expression: \"dev:text.txt\") {\n\t\t\t\t\t... on Blob {\n\t\t\t\t\t\toid\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t}\n\t\t}"
 		})
-		.query({
-			"access_token": config.personal_oath_for_testing
-		})
-		.reply(200, ["1f8b08000000000000031dc74b0e80200c00d1bbf404d8624cb94da16d821b0cb231c4bbfb99d59b092a43204de876b4b38ed6afef5adead8c5f552101bb9095d5990c97bca2b26eae82ac5e62268dc4843104b8df1e44b3d74655000000"], ['Server',
+		.reply(200, ["1f8b08000000000000031dc74b0e80200c00d1bbf404082d25dca6b698e006836c0cf1ee7e66f56682c910c8137a39da5947ebd7776ddd8b8e5fd5204370c6689e12a257d648b4f8229bacc8483199b18b8ac1c1fdf600851e1c8555000000"], [
+			'Server',
 			'GitHub.com',
 			'Date',
-			'Thu, 24 May 2018 19:05:31 GMT',
+			'Fri, 31 Jan 2020 15:57:53 GMT',
 			'Content-Type',
 			'application/json; charset=utf-8',
 			'Transfer-Encoding',
@@ -1386,22 +1860,22 @@ function getLatestFileSHANock() {
 			'close',
 			'Status',
 			'200 OK',
-			'X-RateLimit-Limit',
-			'5000',
-			'X-RateLimit-Remaining',
-			'4999',
-			'X-RateLimit-Reset',
-			'1527192331',
 			'Cache-Control',
 			'no-cache',
 			'X-OAuth-Scopes',
-			'repo',
+			'admin:repo_hook, repo',
 			'X-Accepted-OAuth-Scopes',
 			'repo',
 			'X-GitHub-Media-Type',
 			'github.v3; format=json',
+			'X-RateLimit-Limit',
+			'5000',
+			'X-RateLimit-Remaining',
+			'4996',
+			'X-RateLimit-Reset',
+			'1580487107',
 			'Access-Control-Expose-Headers',
-			'ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval',
+			'ETag, Link, Location, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval, X-GitHub-Media-Type',
 			'Access-Control-Allow-Origin',
 			'*',
 			'Strict-Transport-Security',
@@ -1415,14 +1889,75 @@ function getLatestFileSHANock() {
 			'Referrer-Policy',
 			'origin-when-cross-origin, strict-origin-when-cross-origin',
 			'Content-Security-Policy',
-			'default-src \'none\'',
-			'X-Runtime-rack',
-			'0.081011',
+			"default-src 'none'",
 			'Content-Encoding',
 			'gzip',
 			'X-GitHub-Request-Id',
-			'A169:3F8C:70E6F2:F7503F:5B070CFB'
+			'926C:3BC0:789F6D:11E96A4:5E344E80'
 		]);
+
+
+
+
+
+	// nock('https://api.github.com:443', {
+	// 		"encodedQueryParams": true
+	// 	})
+	// 	.post('/graphql', {
+	// 		"query": "{\n\t\t\trepository(owner: \"jchartrand\", name: \"aTest\") {\n\t\t\t\tobject(expression: \"jchartrand:curt/qurt/testq339.txt\") {\n\t\t\t\t\t... on Blob {\n\t\t\t\t\t\toid\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t}\n\t\t}"
+	// 	})
+	// 	.query({
+	// 		"access_token": config.personal_oath_for_testing
+	// 	})
+	// 	.reply(200, ["1f8b08000000000000031dc74b0e80200c00d1bbf404d8624cb94da16d821b0cb231c4bbfb99d59b092a43204de876b4b38ed6afef5adead8c5f552101bb9095d5990c97bca2b26eae82ac5e62268dc4843104b8df1e44b3d74655000000"], ['Server',
+	// 		'GitHub.com',
+	// 		'Date',
+	// 		'Thu, 24 May 2018 19:05:31 GMT',
+	// 		'Content-Type',
+	// 		'application/json; charset=utf-8',
+	// 		'Transfer-Encoding',
+	// 		'chunked',
+	// 		'Connection',
+	// 		'close',
+	// 		'Status',
+	// 		'200 OK',
+	// 		'X-RateLimit-Limit',
+	// 		'5000',
+	// 		'X-RateLimit-Remaining',
+	// 		'4999',
+	// 		'X-RateLimit-Reset',
+	// 		'1527192331',
+	// 		'Cache-Control',
+	// 		'no-cache',
+	// 		'X-OAuth-Scopes',
+	// 		'repo',
+	// 		'X-Accepted-OAuth-Scopes',
+	// 		'repo',
+	// 		'X-GitHub-Media-Type',
+	// 		'github.v3; format=json',
+	// 		'Access-Control-Expose-Headers',
+	// 		'ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval',
+	// 		'Access-Control-Allow-Origin',
+	// 		'*',
+	// 		'Strict-Transport-Security',
+	// 		'max-age=31536000; includeSubdomains; preload',
+	// 		'X-Frame-Options',
+	// 		'deny',
+	// 		'X-Content-Type-Options',
+	// 		'nosniff',
+	// 		'X-XSS-Protection',
+	// 		'1; mode=block',
+	// 		'Referrer-Policy',
+	// 		'origin-when-cross-origin, strict-origin-when-cross-origin',
+	// 		'Content-Security-Policy',
+	// 		'default-src \'none\'',
+	// 		'X-Runtime-rack',
+	// 		'0.081011',
+	// 		'Content-Encoding',
+	// 		'gzip',
+	// 		'X-GitHub-Request-Id',
+	// 		'A169:3F8C:70E6F2:F7503F:5B070CFB'
+	// 	]);
 
 }
 
@@ -1430,19 +1965,17 @@ function saveExistingFileNock() {
 	return nock('https://api.github.com:443', {
 			"encodedQueryParams": true
 		})
-		.put('/repos/jchartrand/aTest/contents/curt/qurt/testq339.txt', {
+		.put('/repos/lucaju/misc/contents/text.txt', {
 			"message": "some commit message",
-			"sha": "9fa3ec5f93e21b52d9d7fda29dfc4b3d43932400",
-			"branch": "jchartrand",
-			"content": "PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPFRFSSB4bWxucz0iaHR0cDovL3d3dy50ZWktYy5vcmcvbnMvMS4wIiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiIHhtbG5zOmN3PSJodHRwOi8vY3dyYy5jYS9ucy9jdyMiIHhtbG5zOnc9Imh0dHA6Ly9jd3JjdGMuYXJ0c3JuLnVhbGJlcnRhLmNhLyMiPgogIDx0ZWlIZWFkZXI+CiAgICA8ZmlsZURlc2M+CiAgICAgIDx0aXRsZVN0bXQ+CiAgICAgICAgPHRpdGxlPlNhbXBsZSBEb2N1bWVudCBUaXRsZSB0ZXN0IHVuZGVmaW5lZDwvdGl0bGU+CiAgICAgIDwvdGl0bGVTdG10PgogICAgICA8cHVibGljYXRpb25TdG10PgogICAgICAgIDxwPjwvcD4KICAgICAgPC9wdWJsaWNhdGlvblN0bXQ+CiAgICAgIDxzb3VyY2VEZXNjIHNhbWVBcz0iaHR0cDovL3d3dy5jd3JjLmNhIj4KICAgICAgICA8cD5DcmVhdGVkIGZyb20gb3JpZ2luYWwgcmVzZWFyY2ggYnkgbWVtYmVycyBvZiBDV1JDL0NTw4lDIHVubGVzcyBvdGhlcndpc2Ugbm90ZWQuPC9wPgogICAgICA8L3NvdXJjZURlc2M+CiAgICA8L2ZpbGVEZXNjPgogIDwvdGVpSGVhZGVyPgogIDx0ZXh0PgogICAgPGJvZHk+CiAgICAgIDxkaXYgdHlwZT0ibGV0dGVyIj4KICAgICAgICA8aGVhZD4KICAgICAgICAgIDx0aXRsZT5TYW1wbGUgTGV0dGVyIC0gQmVydHJhbmQgUnVzc2VsbCB0byA8cGVyc05hbWUgYW5ub3RhdGlvbklkPSJlbnRfNzMiIGNlcnQ9InByb2JhYmxlIiByZWY9IjI3OTM5OTM5OSI+UGF0cmljaWEgU3BlbmNlPC9wZXJzTmFtZT4gLSBPY3RvYmVyIDIxLCAxOTM1PC90aXRsZT4KICAgICAgICA8L2hlYWQ+CiAgICAgICAgPG9wZW5lcj4KICAgICAgICAgIDxub3RlPgogICAgICAgICAgICA8cD5CYWQgd3JpdGluZyBkdWUgdG8gc2hha3kgdHJhaW48L3A+PHA+SW4gdHJhaW48L3A+PHA+CiAgICAgICAgICAgICAgPHBsYWNlTmFtZSBhbm5vdGF0aW9uSWQ9ImVudF8xNDMiIGNlcnQ9ImRlZmluaXRlIiByZWY9Imh0dHA6Ly93d3cuZ2VvbmFtZXMub3JnLzY0NTMzNjYiPk9zbG88L3BsYWNlTmFtZT4gdG8gQmVyZ2VuPC9wPgogICAgICAgICAgPC9ub3RlPgogICAgICAgICAgPGRhdGVsaW5lPgogICAgICAgICAgICA8ZGF0ZSBhbm5vdGF0aW9uSWQ9ImVudF82OSIgY2VydD0iZGVmaW5pdGUiIHdoZW49IjE5MzUtMTAtMjEiPjIxLjEwLjM1PC9kYXRlPgogICAgICAgICAgPC9kYXRlbGluZT4KICAgICAgICAgIDxzYWx1dGU+RGVhcmVzdCAtPC9zYWx1dGU+CiAgICAgICAgPC9vcGVuZXI+PHA+SSBoYXZlIGhhZCBubzxub3RlIGFubm90YXRpb25JZD0iZW50XzE5MCIgdHlwZT0icmVzZWFyY2hOb3RlIj4KICAgICAgICAgICAgICAgIDxwIHhtbG5zPSJodHRwOi8vd3d3LnRlaS1jLm9yZy9ucy8xLjAiPlNvbWUga2luZCBvZiBub3RlPC9wPgogICAgICAgICAgICA8L25vdGU+IGxldHRlciBmcm9tIHlvdSBzaW5jZSBJIGxlZnQgPHBsYWNlTmFtZSBhbm5vdGF0aW9uSWQ9ImVudF8xNDUiIG9mZnNldElkPSJlbnRfMTQ1IiBjZXJ0PSJkZWZpbml0ZSIgcmVmPSJodHRwOi8vd3d3Lmdlb25hbWVzLm9yZy8yNjczNzIyIj5TdG9ja2hvbG08L3BsYWNlTmFtZT4sIGJ1dCBJIGhhZCBhIG5pY2Ugb25lIGZyb20gSm9obiBpbiBhbiBlbnZlbG9wZSB5b3UgaGFkIHNlbnQgaGltLiBJIGhhZCBzZW50IGhpbSBvbmUgYWRkcmVzc2VkIHRvIENvcGVuaGFnZW4gYnV0IGhlIGhhZG4ndCB1c2VkIGl0LjwvcD48cD5XaGVuIEkgcmVhY2hlZCBPc2xvIHllc3RlcmRheSBldmVuaW5nLCBCcnluanVsZiBCdWxsIHNob3VsZCBoYXZlIGJlZW4gdGhlcmUgdG8gbWVldCBtZSwgYnV0IHdhc24ndC4gSGUgaXMgbm90IG9uIHRoZSB0ZWxlcGhvbmUsIHNvIEkgdG9vayBhIHRheGkgdG8gaGlzIGFkZHJlc3MsIHdoaWNoIHR1cm5lZCBvdXQgdG8gYmUgYSBzdHVkZW50cycgY2x1YiB3aXRoIG5vIG9uZSBhYm91dCBvbiBTdW5kYXlzLCBzbyBJIHdlbnQgdG8gYSBob3RlbCBmZWVsaW5nIHJhdGhlciBub24tcGx1c3NlZC4gQnV0IHByZXNlbnRseSBoZSB0dXJuZWQgdXAuIEhlIGhhZCBnb3QgdGhlIDxwYiBuPSIyIj48L3BiPiB0aW1lIG9mIG15IGFycml2YWwgd3JvbmcsIGFuZCAKICAgICAgICAgICAgPGNob2ljZSBhbm5vdGF0aW9uSWQ9ImVudF82NSI+PHNpYyBhbm5vdGF0aW9uSWQ9ImVudF82NSI+d2hlbjwvc2ljPjxjb3JyIGFubm90YXRpb25JZD0iZW50XzY1Ij53aGVuPC9jb3JyPjwvY2hvaWNlPgogICAgICAgICAgaGUgaGFkIGZvdW5kIGhlIGhhZCBtaXNzZWQgbWUgaGUgcGhvbmVkIHRvIGV2ZXJ5IGhvdGVsIGluIE9zbG8gdGlsbCBoZSBoaXQgb24gdGhlIHJpZ2h0IG9uZS4gSGUgbGVmdCBtZSBhdCAxMCwgYW5kIHRoZW4gSSBoYWQgdG8gZG8gYSBTdW5kYXkgUmVmZXJlZSBhcnRpY2xlLiBUb2RheSBteSBqb3VybmV5IGxhc3RzIGZyb20gOSB0aWxsIDkgLSBmb3J0dW5hdGVseSBvbmUgb2YgdGhlIG1vc3QgYmVhdXRpZnVsIHJhaWx3YXkgam91cm5leXMgaW4gdGhlIHdvcmxkLiBUb21vcnJvdyBJIGxlY3R1cmUgYXQgPHBsYWNlTmFtZSBhbm5vdGF0aW9uSWQ9ImVudF8xNDQiIGNlcnQ9ImRlZmluaXRlIiByZWY9Imh0dHA6Ly93d3cuZ2VvbmFtZXMub3JnLzY1NDg1MjgiPkJlcmdlbjwvcGxhY2VOYW1lPiB0byB0aGUgQW5nbG8tTm9yd2VnaWFuIFNvY2lldHkuIE5leHQgZGF5IEkgZ28gYmFjayB0byBPc2xvLCBsZWN0dXJlIHRoZXJlIEZyaS4gYW5kIFNhdC4gYW5kIHRoZW4gc3RhcnQgZm9yIGhvbWUgdmlhIEJlcmdlbi48L3A+CiAgICAgICAgPHBiIG49IjMiPjwvcGI+CiAgICAgICAgPHA+QnVsbCBpcyBhIG5pY2UgeW91bmcgbWFuIGJ1dCBpbmNvbXBldGVudCAtIGNhbid0IHF1aXRlIHN0YW5kIHRoZSBjb21tdW5pc3RzLCBidXQgZmluZHMgdGhlIHNvY2lhbGlzdHMgdG9vIG1pbGQuPC9wPjxwPkkgYW0gdW5oYXBwaWx5IHdvbmRlcmluZyB3aGF0IHlvdSBhcmUgZmVlbGluZyBhYm91dCBtZS48L3A+CiAgICAgICAgPGNsb3Nlcj4KICAgICAgICAgIDxzYWx1dGU+SSBsb3ZlIHlvdSB2ZXJ5IG11Y2ggLTwvc2FsdXRlPgogICAgICAgICAgPHNpZ25lZD4KICAgICAgICAgICAgPHBlcnNOYW1lIHNhbWVBcz0iaHR0cDovL3d3dy5mcmVlYmFzZS5jb20vdmlldy9lbi9iZXJ0cmFuZF9ydXNzZWxsIj4KICAgICAgICAgICAgICA8cGVyc05hbWUgYW5ub3RhdGlvbklkPSJlbnRfMTA5IiBjZXJ0PSJkZWZpbml0ZSIgdHlwZT0icmVhbCIgcmVmPSJodHRwOi8vdmlhZi5vcmcvdmlhZi8zNjkyNDEzNyI+QjwvcGVyc05hbWU+CiAgICAgICAgICAgIDwvcGVyc05hbWU+CiAgICAgICAgICA8L3NpZ25lZD4KICAgICAgICA8L2Nsb3Nlcj4KICAgICAgPC9kaXY+CiAgICA8L2JvZHk+CiAgPC90ZXh0Pgo8L1RFST4K"
+			"sha": "30d74d258442c7c65512eafab474568dd706c430",
+			"branch": "dev",
+			"content": "dGVzdA=="
 		})
-		.query({
-			"access_token": config.personal_oath_for_testing
-		})
-		.reply(200, ["1f8b0800000000000003b595c96edb3010865fc5e0d9b1b848a664a06881de7acea945118cc891a5548b43524dd340efde611c27ae9302b6d35c247028cec7f967d13d33431fb00f6c75cf7ae890ad58401f6e942a16e1576073b6815093d58c2e2437f171b0ef6ba0eda2028526ab0a85529499b485d5950559d8caa4a5b2a92a944c392787bef94d18a5f274ce46d7d2e13a848d5f25096c9ac5ba09f5582eccd0250e37834fae4d0d2e38e86d029774b5e4f1c63e79fd4a1f1d561f9e0f11b00e5d7bf537698ff2c27fd90ee53ef5750cf92527076e8f0b80ce2511e2931354b3c36ddf0e600f880e6e1f251b3dba47691ed47b11", "d79ee19f2185bb4d2c81aa699102bc6a9bfe878fa5e1b1adde3f5124ccc990b3c48c15b147fa0fd5304d736aa5ae8b11905c0f3db1c4aa5a1a0d0600554aaf54716da4d2a9e02615202de8b2d08a943ea70f62e45ba44f4e409dd80d5bc2290018433db8bd81f285e68a9f7ddeb531858b1d343101d766f1d4dd9fd6d1184b973eb010621d4a2ef20b9e5dc8f452142b9ead94f8ca9e940ef8be94e0902eb1cb269702017525b9d152e572292d37987110798965914b2d910b6ddf90cd08f4c9d120128284f5b08e52f9a1c3d93659b39d350e6f47c39d5af8db2e0ce498e7160d4fa548b5d5064aa5b3a2304221a66209864cf952bc218c5d519e803aaf288f064cdfe7ec27baa66a0c8466e86356b76bb46c5541eb71ce1c828f5b6cec7db3ee6927feabd63d84d191c2fdd8b651d0bb3885b7cb699afe009381c29f41070000"], ['Server',
+		.reply(200, ["1f8b0800000000000003b555cb6edb3010fc954067c712294a940c04edc129d0a28a90c268e0144540f16153d1c310a9c471e07fcfb28a032797da467bd4923bbbb3335c3d7bbc6dac6cac3779f61a564b6fe259b9b663bbb6dec85b31bb7c1f314b0681301094081c2584604e791c45084ba658412889e244081ac49c84014018bd015032f2faae82cca5b52b33f17db6d2e385b6cbbe18f3b6f63bb96a8d5ff59c95bd5f6bc3fdd7be8cbf6be75327d585900f80b9b47575f71e6f0f6b1fa5a8dac287a43714c886ab1f92ffda0ca4f80ecaf8473017ed6353b54c7c28d6b1c7", "57e6bd91dd2bcd3f43d86ffc43cff669e5a451ba92c0e0aed2cdbd71921959a97f355520790cd4493371caed153958b5ed76044ead6bd722b01e4c48b133599812ce63944402a324549c33ca304f4814291ed3248d61604d2be49d1650399bcee36b9cdae2a60ab2f22bca67d74ff994aff3320bb3f2b6bc9a669b7cf6a39c6fe6eb7cfaf33e2b2f49866fcb39be0ce7b36f653ebd46573770afe4249fcd2f00fc4863bbb90d54c04d875338dcf303f831d8acb7cbb6db5b01df7bae59d39e7de9f466233b062c65cdb4936e30e9e75a3acb425c30eb9c89031c9c07e83c4433144d223a89c25bef4d342bff0fbaed2414df19828752705470c428570911418a095584d282b234621409866940dd0b3a413357cbf807d700eeb534862ddc744c5bcbb34197b35dd46dd70e362fbce35f3b067182a2304d1009491293209588534284a261cc05e6b07403059e56a731d8b9ee882a47bbee60ecedef91f7203bad346756b78d9371f896f04e15ab8c1c799d64c61d797d63f4a28113f7435934ccf61dccb5e9abca8df1c9add9e173bbddbe00d09ab942d4060000"], [
+			'Server',
 			'GitHub.com',
 			'Date',
-			'Thu, 24 May 2018 19:05:32 GMT',
+			'Fri, 31 Jan 2020 15:57:53 GMT',
 			'Content-Type',
 			'application/json; charset=utf-8',
 			'Transfer-Encoding',
@@ -1454,23 +1987,23 @@ function saveExistingFileNock() {
 			'X-RateLimit-Limit',
 			'5000',
 			'X-RateLimit-Remaining',
-			'4998',
+			'4992',
 			'X-RateLimit-Reset',
-			'1527192331',
+			'1580487107',
 			'Cache-Control',
 			'private, max-age=60, s-maxage=60',
 			'Vary',
 			'Accept, Authorization, Cookie, X-GitHub-OTP',
 			'ETag',
-			'W/"a4decab1ba27b76f281b656d4b781829"',
+			'W/"d049ab25596b02c6dfa44b4bf7eaab49"',
 			'X-OAuth-Scopes',
-			'repo',
+			'admin:repo_hook, repo',
 			'X-Accepted-OAuth-Scopes',
 			'',
 			'X-GitHub-Media-Type',
 			'github.v3; format=json',
 			'Access-Control-Expose-Headers',
-			'ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval',
+			'ETag, Link, Location, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval, X-GitHub-Media-Type',
 			'Access-Control-Allow-Origin',
 			'*',
 			'Strict-Transport-Security',
@@ -1484,14 +2017,82 @@ function saveExistingFileNock() {
 			'Referrer-Policy',
 			'origin-when-cross-origin, strict-origin-when-cross-origin',
 			'Content-Security-Policy',
-			'default-src \'none\'',
-			'X-Runtime-rack',
-			'0.727300',
+			"default-src 'none'",
 			'Content-Encoding',
 			'gzip',
 			'X-GitHub-Request-Id',
-			'99B6:3F8D:A23987:1481661:5B070CFB'
+			'AE19:25D1:413512:A04386:5E344E81'
 		]);
+
+
+
+
+
+	// nock('https://api.github.com:443', {
+	// 		"encodedQueryParams": true
+	// 	})
+	// 	.put('/repos/jchartrand/aTest/contents/curt/qurt/testq339.txt', {
+	// 		"message": "some commit message",
+	// 		"sha": "9fa3ec5f93e21b52d9d7fda29dfc4b3d43932400",
+	// 		"branch": "jchartrand",
+	// 		"content": "PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPFRFSSB4bWxucz0iaHR0cDovL3d3dy50ZWktYy5vcmcvbnMvMS4wIiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiIHhtbG5zOmN3PSJodHRwOi8vY3dyYy5jYS9ucy9jdyMiIHhtbG5zOnc9Imh0dHA6Ly9jd3JjdGMuYXJ0c3JuLnVhbGJlcnRhLmNhLyMiPgogIDx0ZWlIZWFkZXI+CiAgICA8ZmlsZURlc2M+CiAgICAgIDx0aXRsZVN0bXQ+CiAgICAgICAgPHRpdGxlPlNhbXBsZSBEb2N1bWVudCBUaXRsZSB0ZXN0IHVuZGVmaW5lZDwvdGl0bGU+CiAgICAgIDwvdGl0bGVTdG10PgogICAgICA8cHVibGljYXRpb25TdG10PgogICAgICAgIDxwPjwvcD4KICAgICAgPC9wdWJsaWNhdGlvblN0bXQ+CiAgICAgIDxzb3VyY2VEZXNjIHNhbWVBcz0iaHR0cDovL3d3dy5jd3JjLmNhIj4KICAgICAgICA8cD5DcmVhdGVkIGZyb20gb3JpZ2luYWwgcmVzZWFyY2ggYnkgbWVtYmVycyBvZiBDV1JDL0NTw4lDIHVubGVzcyBvdGhlcndpc2Ugbm90ZWQuPC9wPgogICAgICA8L3NvdXJjZURlc2M+CiAgICA8L2ZpbGVEZXNjPgogIDwvdGVpSGVhZGVyPgogIDx0ZXh0PgogICAgPGJvZHk+CiAgICAgIDxkaXYgdHlwZT0ibGV0dGVyIj4KICAgICAgICA8aGVhZD4KICAgICAgICAgIDx0aXRsZT5TYW1wbGUgTGV0dGVyIC0gQmVydHJhbmQgUnVzc2VsbCB0byA8cGVyc05hbWUgYW5ub3RhdGlvbklkPSJlbnRfNzMiIGNlcnQ9InByb2JhYmxlIiByZWY9IjI3OTM5OTM5OSI+UGF0cmljaWEgU3BlbmNlPC9wZXJzTmFtZT4gLSBPY3RvYmVyIDIxLCAxOTM1PC90aXRsZT4KICAgICAgICA8L2hlYWQ+CiAgICAgICAgPG9wZW5lcj4KICAgICAgICAgIDxub3RlPgogICAgICAgICAgICA8cD5CYWQgd3JpdGluZyBkdWUgdG8gc2hha3kgdHJhaW48L3A+PHA+SW4gdHJhaW48L3A+PHA+CiAgICAgICAgICAgICAgPHBsYWNlTmFtZSBhbm5vdGF0aW9uSWQ9ImVudF8xNDMiIGNlcnQ9ImRlZmluaXRlIiByZWY9Imh0dHA6Ly93d3cuZ2VvbmFtZXMub3JnLzY0NTMzNjYiPk9zbG88L3BsYWNlTmFtZT4gdG8gQmVyZ2VuPC9wPgogICAgICAgICAgPC9ub3RlPgogICAgICAgICAgPGRhdGVsaW5lPgogICAgICAgICAgICA8ZGF0ZSBhbm5vdGF0aW9uSWQ9ImVudF82OSIgY2VydD0iZGVmaW5pdGUiIHdoZW49IjE5MzUtMTAtMjEiPjIxLjEwLjM1PC9kYXRlPgogICAgICAgICAgPC9kYXRlbGluZT4KICAgICAgICAgIDxzYWx1dGU+RGVhcmVzdCAtPC9zYWx1dGU+CiAgICAgICAgPC9vcGVuZXI+PHA+SSBoYXZlIGhhZCBubzxub3RlIGFubm90YXRpb25JZD0iZW50XzE5MCIgdHlwZT0icmVzZWFyY2hOb3RlIj4KICAgICAgICAgICAgICAgIDxwIHhtbG5zPSJodHRwOi8vd3d3LnRlaS1jLm9yZy9ucy8xLjAiPlNvbWUga2luZCBvZiBub3RlPC9wPgogICAgICAgICAgICA8L25vdGU+IGxldHRlciBmcm9tIHlvdSBzaW5jZSBJIGxlZnQgPHBsYWNlTmFtZSBhbm5vdGF0aW9uSWQ9ImVudF8xNDUiIG9mZnNldElkPSJlbnRfMTQ1IiBjZXJ0PSJkZWZpbml0ZSIgcmVmPSJodHRwOi8vd3d3Lmdlb25hbWVzLm9yZy8yNjczNzIyIj5TdG9ja2hvbG08L3BsYWNlTmFtZT4sIGJ1dCBJIGhhZCBhIG5pY2Ugb25lIGZyb20gSm9obiBpbiBhbiBlbnZlbG9wZSB5b3UgaGFkIHNlbnQgaGltLiBJIGhhZCBzZW50IGhpbSBvbmUgYWRkcmVzc2VkIHRvIENvcGVuaGFnZW4gYnV0IGhlIGhhZG4ndCB1c2VkIGl0LjwvcD48cD5XaGVuIEkgcmVhY2hlZCBPc2xvIHllc3RlcmRheSBldmVuaW5nLCBCcnluanVsZiBCdWxsIHNob3VsZCBoYXZlIGJlZW4gdGhlcmUgdG8gbWVldCBtZSwgYnV0IHdhc24ndC4gSGUgaXMgbm90IG9uIHRoZSB0ZWxlcGhvbmUsIHNvIEkgdG9vayBhIHRheGkgdG8gaGlzIGFkZHJlc3MsIHdoaWNoIHR1cm5lZCBvdXQgdG8gYmUgYSBzdHVkZW50cycgY2x1YiB3aXRoIG5vIG9uZSBhYm91dCBvbiBTdW5kYXlzLCBzbyBJIHdlbnQgdG8gYSBob3RlbCBmZWVsaW5nIHJhdGhlciBub24tcGx1c3NlZC4gQnV0IHByZXNlbnRseSBoZSB0dXJuZWQgdXAuIEhlIGhhZCBnb3QgdGhlIDxwYiBuPSIyIj48L3BiPiB0aW1lIG9mIG15IGFycml2YWwgd3JvbmcsIGFuZCAKICAgICAgICAgICAgPGNob2ljZSBhbm5vdGF0aW9uSWQ9ImVudF82NSI+PHNpYyBhbm5vdGF0aW9uSWQ9ImVudF82NSI+d2hlbjwvc2ljPjxjb3JyIGFubm90YXRpb25JZD0iZW50XzY1Ij53aGVuPC9jb3JyPjwvY2hvaWNlPgogICAgICAgICAgaGUgaGFkIGZvdW5kIGhlIGhhZCBtaXNzZWQgbWUgaGUgcGhvbmVkIHRvIGV2ZXJ5IGhvdGVsIGluIE9zbG8gdGlsbCBoZSBoaXQgb24gdGhlIHJpZ2h0IG9uZS4gSGUgbGVmdCBtZSBhdCAxMCwgYW5kIHRoZW4gSSBoYWQgdG8gZG8gYSBTdW5kYXkgUmVmZXJlZSBhcnRpY2xlLiBUb2RheSBteSBqb3VybmV5IGxhc3RzIGZyb20gOSB0aWxsIDkgLSBmb3J0dW5hdGVseSBvbmUgb2YgdGhlIG1vc3QgYmVhdXRpZnVsIHJhaWx3YXkgam91cm5leXMgaW4gdGhlIHdvcmxkLiBUb21vcnJvdyBJIGxlY3R1cmUgYXQgPHBsYWNlTmFtZSBhbm5vdGF0aW9uSWQ9ImVudF8xNDQiIGNlcnQ9ImRlZmluaXRlIiByZWY9Imh0dHA6Ly93d3cuZ2VvbmFtZXMub3JnLzY1NDg1MjgiPkJlcmdlbjwvcGxhY2VOYW1lPiB0byB0aGUgQW5nbG8tTm9yd2VnaWFuIFNvY2lldHkuIE5leHQgZGF5IEkgZ28gYmFjayB0byBPc2xvLCBsZWN0dXJlIHRoZXJlIEZyaS4gYW5kIFNhdC4gYW5kIHRoZW4gc3RhcnQgZm9yIGhvbWUgdmlhIEJlcmdlbi48L3A+CiAgICAgICAgPHBiIG49IjMiPjwvcGI+CiAgICAgICAgPHA+QnVsbCBpcyBhIG5pY2UgeW91bmcgbWFuIGJ1dCBpbmNvbXBldGVudCAtIGNhbid0IHF1aXRlIHN0YW5kIHRoZSBjb21tdW5pc3RzLCBidXQgZmluZHMgdGhlIHNvY2lhbGlzdHMgdG9vIG1pbGQuPC9wPjxwPkkgYW0gdW5oYXBwaWx5IHdvbmRlcmluZyB3aGF0IHlvdSBhcmUgZmVlbGluZyBhYm91dCBtZS48L3A+CiAgICAgICAgPGNsb3Nlcj4KICAgICAgICAgIDxzYWx1dGU+SSBsb3ZlIHlvdSB2ZXJ5IG11Y2ggLTwvc2FsdXRlPgogICAgICAgICAgPHNpZ25lZD4KICAgICAgICAgICAgPHBlcnNOYW1lIHNhbWVBcz0iaHR0cDovL3d3dy5mcmVlYmFzZS5jb20vdmlldy9lbi9iZXJ0cmFuZF9ydXNzZWxsIj4KICAgICAgICAgICAgICA8cGVyc05hbWUgYW5ub3RhdGlvbklkPSJlbnRfMTA5IiBjZXJ0PSJkZWZpbml0ZSIgdHlwZT0icmVhbCIgcmVmPSJodHRwOi8vdmlhZi5vcmcvdmlhZi8zNjkyNDEzNyI+QjwvcGVyc05hbWU+CiAgICAgICAgICAgIDwvcGVyc05hbWU+CiAgICAgICAgICA8L3NpZ25lZD4KICAgICAgICA8L2Nsb3Nlcj4KICAgICAgPC9kaXY+CiAgICA8L2JvZHk+CiAgPC90ZXh0Pgo8L1RFST4K"
+	// 	})
+	// 	.query({
+	// 		"access_token": config.personal_oath_for_testing
+	// 	})
+	// 	.reply(200, ["1f8b0800000000000003b595c96edb3010865fc5e0d9b1b848a664a06881de7acea945118cc891a5548b43524dd340efde611c27ae9302b6d35c247028cec7f967d13d33431fb00f6c75cf7ae890ad58401f6e942a16e1576073b6815093d58c2e2437f171b0ef6ba0eda2028526ab0a85529499b485d5950559d8caa4a5b2a92a944c392787bef94d18a5f274ce46d7d2e13a848d5f25096c9ac5ba09f5582eccd0250e37834fae4d0d2e38e86d029774b5e4f1c63e79fd4a1f1d561f9e0f11b00e5d7bf537698ff2c27fd90ee53ef5750cf92527076e8f0b80ce2511e2931354b3c36ddf0e600f880e6e1f251b3dba47691ed47b11", "d79ee19f2185bb4d2c81aa699102bc6a9bfe878fa5e1b1adde3f5124ccc990b3c48c15b147fa0fd5304d736aa5ae8b11905c0f3db1c4aa5a1a0d0600554aaf54716da4d2a9e02615202de8b2d08a943ea70f62e45ba44f4e409dd80d5bc2290018433db8bd81f285e68a9f7ddeb531858b1d343101d766f1d4dd9fd6d1184b973eb010621d4a2ef20b9e5dc8f452142b9ead94f8ca9e940ef8be94e0902eb1cb269702017525b9d152e572292d37987110798965914b2d910b6ddf90cd08f4c9d120128284f5b08e52f9a1c3d93659b39d350e6f47c39d5af8db2e0ce498e7160d4fa548b5d5064aa5b3a2304221a66209864cf952bc218c5d519e803aaf288f064cdfe7ec27baa66a0c8466e86356b76bb46c5541eb71ce1c828f5b6cec7db3ee6927feabd63d84d191c2fdd8b651d0bb3885b7cb699afe009381c29f41070000"], ['Server',
+	// 		'GitHub.com',
+	// 		'Date',
+	// 		'Thu, 24 May 2018 19:05:32 GMT',
+	// 		'Content-Type',
+	// 		'application/json; charset=utf-8',
+	// 		'Transfer-Encoding',
+	// 		'chunked',
+	// 		'Connection',
+	// 		'close',
+	// 		'Status',
+	// 		'200 OK',
+	// 		'X-RateLimit-Limit',
+	// 		'5000',
+	// 		'X-RateLimit-Remaining',
+	// 		'4998',
+	// 		'X-RateLimit-Reset',
+	// 		'1527192331',
+	// 		'Cache-Control',
+	// 		'private, max-age=60, s-maxage=60',
+	// 		'Vary',
+	// 		'Accept, Authorization, Cookie, X-GitHub-OTP',
+	// 		'ETag',
+	// 		'W/"a4decab1ba27b76f281b656d4b781829"',
+	// 		'X-OAuth-Scopes',
+	// 		'repo',
+	// 		'X-Accepted-OAuth-Scopes',
+	// 		'',
+	// 		'X-GitHub-Media-Type',
+	// 		'github.v3; format=json',
+	// 		'Access-Control-Expose-Headers',
+	// 		'ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval',
+	// 		'Access-Control-Allow-Origin',
+	// 		'*',
+	// 		'Strict-Transport-Security',
+	// 		'max-age=31536000; includeSubdomains; preload',
+	// 		'X-Frame-Options',
+	// 		'deny',
+	// 		'X-Content-Type-Options',
+	// 		'nosniff',
+	// 		'X-XSS-Protection',
+	// 		'1; mode=block',
+	// 		'Referrer-Policy',
+	// 		'origin-when-cross-origin, strict-origin-when-cross-origin',
+	// 		'Content-Security-Policy',
+	// 		'default-src \'none\'',
+	// 		'X-Runtime-rack',
+	// 		'0.727300',
+	// 		'Content-Encoding',
+	// 		'gzip',
+	// 		'X-GitHub-Request-Id',
+	// 		'99B6:3F8D:A23987:1481661:5B070CFB'
+	// 	]);
 
 }
 
@@ -1501,13 +2102,13 @@ function findExistingPRNock() {
 		})
 		.get('/search/issues')
 		.query({
-			"access_token": config.personal_oath_for_testing,
-			"q": "state%3Aopen%20type%3Apr%20repo%3Ajchartrand%2FaTest%20head%3Ajchartrand"
+			"q": "state%3Aopen%20type%3Apr%20repo%3Alucaju%2Fmisc%20head%3Adev"
 		})
-		.reply(200, ["1f8b0800000000000003a595516fd33010c7bf4ae5e7ae4edaa69b22219e7805848a904053e426d7c4e0d8c13e772a51bf3b6737ebb61601cd9ea224f7fff97cbefbbb676850a8a2345e23cbd32993ba346da700a1b0e0bc42c7f2ad500ee817424b6fdf7ae6ad62396b103b97732e3a39ab25367e33232db7d019c7bf978db06885aeb85883432e9df3e0f89c4d598c9068ecbe18412280121b506e8cf894063f327aae450b076252ea2d687c25f5914240d8bd1e776410acc1569dedf759c92f8add79a562a965c5f2c57cbe4856e9dd72cab46f3760593e9f3294a8804eb156c64ae3dd247e986c8d9d7cfc444aef4260cf94a9a5a6b8a735066cb6bc4d57d994899d4061cf0f237e748ba13102ac341aa922b1473c3faadfeede2c0957db0112d26561f1bf3558803d6fb02bca43a15ba3947920c279c62fbbf87c117ed29d1852d7a318a4ebb9c106a868b495d07cb574ffeabc8b84a2a6e7e151c82a501c95dc42756552838a527ad0944d1f0738", "e2fcc6955676288dbeb65a2fb4c432b6165afe126358a4758488ae71e5dea286b4ff338b17053e8a7ade59b913e53e94c442097247251e053c53130ff75d98c1cf61d6a8e0e4b085a8da306fd1730f8f5647ae7b1fcf1743b8e94053b832e50fa08119ec5938276b0d14a069fa692e87f760d9246ea5221b36faf4ff64557942ee6781d85521e81660f324bdbb49b29b345da78b3ccbf2e5f22bade7bbea0f31ab757a9b2f577992859852193760862c3c36c616948c29653c7e5ae0c397f7ef82c7049ba26be6275d0cb4eeb87b25308ed7ca588face4767bb5b7ce822a6c4160d95caf8e3246e7bb31d59e2ae24c0b93702212272d38276a080d511a4be795ce92c3fde137a58274c9ac070000"], ['Server',
+		.reply(200, ["1f8b0800000000000003a555ef6fda3010fd57903fb73809d09648d5b4a96c9fa0ebcab68ea98a8c63825bc7cefc839646fcef3b9b1415266d4df7294a72efddf9dddd738dacb24464543969511a1f212ea92a2bc12ccb34334e5883d2051186c12fcb4a78fb5923a7054ad1d2dacaa418938a770b6e976ede052cd6ac52060b47c99dc325371473631c3338464728fce456e975d68e04b082cc99302d71bbe4780bafb12425db001dd45a3269df4ef84c005c6cf55f4c5b38f02c6d290e0ef842d9979a564e88a028cf513a180c86a7c9d9707884a4ca59e6bfa1f1c5e8f1527c88e79f1eaf67371fe3d9cd241a3ffde85d5e8c7a93e9fb07c04a57ce990e7db7dc0a06a84228cd95339df0a1b350baf3f90b843ae3036b2454c125c46d6b69f2c7c9a07fda3bc87e75f2ed6622e8dd683d995ef5c64ff7e7104d56c4127dd8c3f0d124cd14f95454490b92868172b8e17fb73aef0347a11b9670", "4c5fdbdfc6d1b33d8fe32b1586b08512423d00f2b0d4fd597f498e77981d9ecba2351e30355676c9402528dd4f6ac1cdbfc674af90105f63ff8051f00c06f4d52c6f514c8380521e24545187b50e546e6ea8e695e54ab651670f073c4a1744f227d296077006e0c1485a9c27c403ee359bba27e61650e34af315a16b2f816694f115c8d99aec00095c765df9b5fbead70bc4058fcd485efa150baebb79b63df0dddbd047ebc355c524840b45ef192c4163d0c4185e48060112dc0196ad79f7a60de0920b66ac92bbff3b034b23b043cd803bcf08dc03288992e8388a8f93b369d44fe3619a9ccc209fabf23f637af1343e4d937e3a887d0c15ca34344d15ce2e95cea0184579683724b8fc3e19795bf1360617cd2fb81f206feb9bc5c3b717cb1b9c33e78b451bb3ed7a80af9958ba6c050c0804bd9cab7c0da737aa641daf3eb79d9219430ae69b4f9586dec4dd6873bbf90dc05369f59a070000"], [
+			'Server',
 			'GitHub.com',
 			'Date',
-			'Thu, 24 May 2018 19:05:32 GMT',
+			'Fri, 31 Jan 2020 17:25:23 GMT',
 			'Content-Type',
 			'application/json; charset=utf-8',
 			'Transfer-Encoding',
@@ -1519,19 +2120,19 @@ function findExistingPRNock() {
 			'X-RateLimit-Limit',
 			'30',
 			'X-RateLimit-Remaining',
-			'29',
+			'28',
 			'X-RateLimit-Reset',
-			'1527188792',
+			'1580491551',
 			'Cache-Control',
 			'no-cache',
 			'X-OAuth-Scopes',
-			'repo',
+			'admin:repo_hook, repo',
 			'X-Accepted-OAuth-Scopes',
 			'',
 			'X-GitHub-Media-Type',
 			'github.v3; format=json',
 			'Access-Control-Expose-Headers',
-			'ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval',
+			'ETag, Link, Location, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval, X-GitHub-Media-Type',
 			'Access-Control-Allow-Origin',
 			'*',
 			'Strict-Transport-Security',
@@ -1545,14 +2146,73 @@ function findExistingPRNock() {
 			'Referrer-Policy',
 			'origin-when-cross-origin, strict-origin-when-cross-origin',
 			'Content-Security-Policy',
-			'default-src \'none\'',
-			'X-Runtime-rack',
-			'0.095574',
+			"default-src 'none'",
 			'Content-Encoding',
 			'gzip',
 			'X-GitHub-Request-Id',
-			'A7C3:3F8E:C51CD5:17ED234:5B070CFC'
+			'8514:1AD0:7DB234:12C90DC:5E346303'
 		]);
+
+
+
+
+	// nock('https://api.github.com:443', {
+	// 		"encodedQueryParams": true
+	// 	})
+	// 	.get('/search/issues')
+	// 	.query({
+	// 		"access_token": config.personal_oath_for_testing,
+	// 		"q": "state%3Aopen%20type%3Apr%20repo%3Ajchartrand%2FaTest%20head%3Ajchartrand"
+	// 	})
+	// 	.reply(200, ["1f8b0800000000000003a595516fd33010c7bf4ae5e7ae4edaa69b22219e7805848a904053e426d7c4e0d8c13e772a51bf3b6737ebb61601cd9ea224f7fff97cbefbbb676850a8a2345e23cbd32993ba346da700a1b0e0bc42c7f2ad500ee817424b6fdf7ae6ad62396b103b97732e3a39ab25367e33232db7d019c7bf978db06885aeb85883432e9df3e0f89c4d598c9068ecbe18412280121b506e8cf894063f327aae450b076252ea2d687c25f5914240d8bd1e776410acc1569dedf759c92f8add79a562a965c5f2c57cbe4856e9dd72cab46f3760593e9f3294a8804eb156c64ae3dd247e986c8d9d7cfc444aef4260cf94a9a5a6b8a735066cb6bc4d57d994899d4061cf0f237e748ba13102ac341aa922b1473c3faadfeede2c0957db0112d26561f1bf3558803d6fb02bca43a15ba3947920c279c62fbbf87c117ed29d1852d7a318a4ebb9c106a868b495d07cb574ffeabc8b84a2a6e7e151c82a501c95dc42756552838a527ad0944d1f0738", "e2fcc6955676288dbeb65a2fb4c432b6165afe126358a4758488ae71e5dea286b4ff338b17053e8a7ade59b913e53e94c442097247251e053c53130ff75d98c1cf61d6a8e0e4b085a8da306fd1730f8f5647ae7b1fcf1743b8e94053b832e50fa08119ec5938276b0d14a069fa692e87f760d9246ea5221b36faf4ff64557942ee6781d85521e81660f324bdbb49b29b345da78b3ccbf2e5f22bade7bbea0f31ab757a9b2f577992859852193760862c3c36c616948c29653c7e5ae0c397f7ef82c7049ba26be6275d0cb4eeb87b25308ed7ca588face4767bb5b7ce822a6c4160d95caf8e3246e7bb31d59e2ae24c0b93702212272d38276a080d511a4be795ce92c3fde137a58274c9ac070000"], ['Server',
+	// 		'GitHub.com',
+	// 		'Date',
+	// 		'Thu, 24 May 2018 19:05:32 GMT',
+	// 		'Content-Type',
+	// 		'application/json; charset=utf-8',
+	// 		'Transfer-Encoding',
+	// 		'chunked',
+	// 		'Connection',
+	// 		'close',
+	// 		'Status',
+	// 		'200 OK',
+	// 		'X-RateLimit-Limit',
+	// 		'30',
+	// 		'X-RateLimit-Remaining',
+	// 		'29',
+	// 		'X-RateLimit-Reset',
+	// 		'1527188792',
+	// 		'Cache-Control',
+	// 		'no-cache',
+	// 		'X-OAuth-Scopes',
+	// 		'repo',
+	// 		'X-Accepted-OAuth-Scopes',
+	// 		'',
+	// 		'X-GitHub-Media-Type',
+	// 		'github.v3; format=json',
+	// 		'Access-Control-Expose-Headers',
+	// 		'ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval',
+	// 		'Access-Control-Allow-Origin',
+	// 		'*',
+	// 		'Strict-Transport-Security',
+	// 		'max-age=31536000; includeSubdomains; preload',
+	// 		'X-Frame-Options',
+	// 		'deny',
+	// 		'X-Content-Type-Options',
+	// 		'nosniff',
+	// 		'X-XSS-Protection',
+	// 		'1; mode=block',
+	// 		'Referrer-Policy',
+	// 		'origin-when-cross-origin, strict-origin-when-cross-origin',
+	// 		'Content-Security-Policy',
+	// 		'default-src \'none\'',
+	// 		'X-Runtime-rack',
+	// 		'0.095574',
+	// 		'Content-Encoding',
+	// 		'gzip',
+	// 		'X-GitHub-Request-Id',
+	// 		'A7C3:3F8E:C51CD5:17ED234:5B070CFC'
+	// 	]);
 
 }
 
@@ -1560,54 +2220,52 @@ function saveNewFileNock() {
 	return nock('https://api.github.com:443', {
 			"encodedQueryParams": true
 		})
-		.put('/repos/jchartrand/aTest/contents/curt/qurt/testuufy.txt', {
+		.put('/repos/lucaju/misc/contents/text12.txt', {
 			"message": "some commit message",
-			"branch": "jchartrand",
-			"content": "PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPFRFSSB4bWxucz0iaHR0cDovL3d3dy50ZWktYy5vcmcvbnMvMS4wIiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiIHhtbG5zOmN3PSJodHRwOi8vY3dyYy5jYS9ucy9jdyMiIHhtbG5zOnc9Imh0dHA6Ly9jd3JjdGMuYXJ0c3JuLnVhbGJlcnRhLmNhLyMiPgogIDx0ZWlIZWFkZXI+CiAgICA8ZmlsZURlc2M+CiAgICAgIDx0aXRsZVN0bXQ+CiAgICAgICAgPHRpdGxlPlNhbXBsZSBEb2N1bWVudCBUaXRsZSB0ZXN0IHVuZGVmaW5lZDwvdGl0bGU+CiAgICAgIDwvdGl0bGVTdG10PgogICAgICA8cHVibGljYXRpb25TdG10PgogICAgICAgIDxwPjwvcD4KICAgICAgPC9wdWJsaWNhdGlvblN0bXQ+CiAgICAgIDxzb3VyY2VEZXNjIHNhbWVBcz0iaHR0cDovL3d3dy5jd3JjLmNhIj4KICAgICAgICA8cD5DcmVhdGVkIGZyb20gb3JpZ2luYWwgcmVzZWFyY2ggYnkgbWVtYmVycyBvZiBDV1JDL0NTw4lDIHVubGVzcyBvdGhlcndpc2Ugbm90ZWQuPC9wPgogICAgICA8L3NvdXJjZURlc2M+CiAgICA8L2ZpbGVEZXNjPgogIDwvdGVpSGVhZGVyPgogIDx0ZXh0PgogICAgPGJvZHk+CiAgICAgIDxkaXYgdHlwZT0ibGV0dGVyIj4KICAgICAgICA8aGVhZD4KICAgICAgICAgIDx0aXRsZT5TYW1wbGUgTGV0dGVyIC0gQmVydHJhbmQgUnVzc2VsbCB0byA8cGVyc05hbWUgYW5ub3RhdGlvbklkPSJlbnRfNzMiIGNlcnQ9InByb2JhYmxlIiByZWY9IjI3OTM5OTM5OSI+UGF0cmljaWEgU3BlbmNlPC9wZXJzTmFtZT4gLSBPY3RvYmVyIDIxLCAxOTM1PC90aXRsZT4KICAgICAgICA8L2hlYWQ+CiAgICAgICAgPG9wZW5lcj4KICAgICAgICAgIDxub3RlPgogICAgICAgICAgICA8cD5CYWQgd3JpdGluZyBkdWUgdG8gc2hha3kgdHJhaW48L3A+PHA+SW4gdHJhaW48L3A+PHA+CiAgICAgICAgICAgICAgPHBsYWNlTmFtZSBhbm5vdGF0aW9uSWQ9ImVudF8xNDMiIGNlcnQ9ImRlZmluaXRlIiByZWY9Imh0dHA6Ly93d3cuZ2VvbmFtZXMub3JnLzY0NTMzNjYiPk9zbG88L3BsYWNlTmFtZT4gdG8gQmVyZ2VuPC9wPgogICAgICAgICAgPC9ub3RlPgogICAgICAgICAgPGRhdGVsaW5lPgogICAgICAgICAgICA8ZGF0ZSBhbm5vdGF0aW9uSWQ9ImVudF82OSIgY2VydD0iZGVmaW5pdGUiIHdoZW49IjE5MzUtMTAtMjEiPjIxLjEwLjM1PC9kYXRlPgogICAgICAgICAgPC9kYXRlbGluZT4KICAgICAgICAgIDxzYWx1dGU+RGVhcmVzdCAtPC9zYWx1dGU+CiAgICAgICAgPC9vcGVuZXI+PHA+SSBoYXZlIGhhZCBubzxub3RlIGFubm90YXRpb25JZD0iZW50XzE5MCIgdHlwZT0icmVzZWFyY2hOb3RlIj4KICAgICAgICAgICAgICAgIDxwIHhtbG5zPSJodHRwOi8vd3d3LnRlaS1jLm9yZy9ucy8xLjAiPlNvbWUga2luZCBvZiBub3RlPC9wPgogICAgICAgICAgICA8L25vdGU+IGxldHRlciBmcm9tIHlvdSBzaW5jZSBJIGxlZnQgPHBsYWNlTmFtZSBhbm5vdGF0aW9uSWQ9ImVudF8xNDUiIG9mZnNldElkPSJlbnRfMTQ1IiBjZXJ0PSJkZWZpbml0ZSIgcmVmPSJodHRwOi8vd3d3Lmdlb25hbWVzLm9yZy8yNjczNzIyIj5TdG9ja2hvbG08L3BsYWNlTmFtZT4sIGJ1dCBJIGhhZCBhIG5pY2Ugb25lIGZyb20gSm9obiBpbiBhbiBlbnZlbG9wZSB5b3UgaGFkIHNlbnQgaGltLiBJIGhhZCBzZW50IGhpbSBvbmUgYWRkcmVzc2VkIHRvIENvcGVuaGFnZW4gYnV0IGhlIGhhZG4ndCB1c2VkIGl0LjwvcD48cD5XaGVuIEkgcmVhY2hlZCBPc2xvIHllc3RlcmRheSBldmVuaW5nLCBCcnluanVsZiBCdWxsIHNob3VsZCBoYXZlIGJlZW4gdGhlcmUgdG8gbWVldCBtZSwgYnV0IHdhc24ndC4gSGUgaXMgbm90IG9uIHRoZSB0ZWxlcGhvbmUsIHNvIEkgdG9vayBhIHRheGkgdG8gaGlzIGFkZHJlc3MsIHdoaWNoIHR1cm5lZCBvdXQgdG8gYmUgYSBzdHVkZW50cycgY2x1YiB3aXRoIG5vIG9uZSBhYm91dCBvbiBTdW5kYXlzLCBzbyBJIHdlbnQgdG8gYSBob3RlbCBmZWVsaW5nIHJhdGhlciBub24tcGx1c3NlZC4gQnV0IHByZXNlbnRseSBoZSB0dXJuZWQgdXAuIEhlIGhhZCBnb3QgdGhlIDxwYiBuPSIyIj48L3BiPiB0aW1lIG9mIG15IGFycml2YWwgd3JvbmcsIGFuZCAKICAgICAgICAgICAgPGNob2ljZSBhbm5vdGF0aW9uSWQ9ImVudF82NSI+PHNpYyBhbm5vdGF0aW9uSWQ9ImVudF82NSI+d2hlbjwvc2ljPjxjb3JyIGFubm90YXRpb25JZD0iZW50XzY1Ij53aGVuPC9jb3JyPjwvY2hvaWNlPgogICAgICAgICAgaGUgaGFkIGZvdW5kIGhlIGhhZCBtaXNzZWQgbWUgaGUgcGhvbmVkIHRvIGV2ZXJ5IGhvdGVsIGluIE9zbG8gdGlsbCBoZSBoaXQgb24gdGhlIHJpZ2h0IG9uZS4gSGUgbGVmdCBtZSBhdCAxMCwgYW5kIHRoZW4gSSBoYWQgdG8gZG8gYSBTdW5kYXkgUmVmZXJlZSBhcnRpY2xlLiBUb2RheSBteSBqb3VybmV5IGxhc3RzIGZyb20gOSB0aWxsIDkgLSBmb3J0dW5hdGVseSBvbmUgb2YgdGhlIG1vc3QgYmVhdXRpZnVsIHJhaWx3YXkgam91cm5leXMgaW4gdGhlIHdvcmxkLiBUb21vcnJvdyBJIGxlY3R1cmUgYXQgPHBsYWNlTmFtZSBhbm5vdGF0aW9uSWQ9ImVudF8xNDQiIGNlcnQ9ImRlZmluaXRlIiByZWY9Imh0dHA6Ly93d3cuZ2VvbmFtZXMub3JnLzY1NDg1MjgiPkJlcmdlbjwvcGxhY2VOYW1lPiB0byB0aGUgQW5nbG8tTm9yd2VnaWFuIFNvY2lldHkuIE5leHQgZGF5IEkgZ28gYmFjayB0byBPc2xvLCBsZWN0dXJlIHRoZXJlIEZyaS4gYW5kIFNhdC4gYW5kIHRoZW4gc3RhcnQgZm9yIGhvbWUgdmlhIEJlcmdlbi48L3A+CiAgICAgICAgPHBiIG49IjMiPjwvcGI+CiAgICAgICAgPHA+QnVsbCBpcyBhIG5pY2UgeW91bmcgbWFuIGJ1dCBpbmNvbXBldGVudCAtIGNhbid0IHF1aXRlIHN0YW5kIHRoZSBjb21tdW5pc3RzLCBidXQgZmluZHMgdGhlIHNvY2lhbGlzdHMgdG9vIG1pbGQuPC9wPjxwPkkgYW0gdW5oYXBwaWx5IHdvbmRlcmluZyB3aGF0IHlvdSBhcmUgZmVlbGluZyBhYm91dCBtZS48L3A+CiAgICAgICAgPGNsb3Nlcj4KICAgICAgICAgIDxzYWx1dGU+SSBsb3ZlIHlvdSB2ZXJ5IG11Y2ggLTwvc2FsdXRlPgogICAgICAgICAgPHNpZ25lZD4KICAgICAgICAgICAgPHBlcnNOYW1lIHNhbWVBcz0iaHR0cDovL3d3dy5mcmVlYmFzZS5jb20vdmlldy9lbi9iZXJ0cmFuZF9ydXNzZWxsIj4KICAgICAgICAgICAgICA8cGVyc05hbWUgYW5ub3RhdGlvbklkPSJlbnRfMTA5IiBjZXJ0PSJkZWZpbml0ZSIgdHlwZT0icmVhbCIgcmVmPSJodHRwOi8vdmlhZi5vcmcvdmlhZi8zNjkyNDEzNyI+QjwvcGVyc05hbWU+CiAgICAgICAgICAgIDwvcGVyc05hbWU+CiAgICAgICAgICA8L3NpZ25lZD4KICAgICAgICA8L2Nsb3Nlcj4KICAgICAgPC9kaXY+CiAgICA8L2JvZHk+CiAgPC90ZXh0Pgo8L1RFST4K"
-		})
-		.query({
-			"access_token": config.personal_oath_for_testing
+			"branch": "dev",
+			"content": "PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPFRFSSB4bWxucz0iaHR0cDovL3d3dy50ZWktYy5vcmcvbnMvMS4wIiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiIHhtbG5zOmN3PSJodHRwOi8vY3dyYy5jYS9ucy9jdyMiIHhtbG5zOnc9Imh0dHA6Ly9jd3JjdGMuYXJ0c3JuLnVhbGJlcnRhLmNhLyMiPgoJPHRlaUhlYWRlcj4KCQk8ZmlsZURlc2M+CgkJCTx0aXRsZVN0bXQ+CgkJCQk8dGl0bGU+U2FtcGxlIERvY3VtZW50IFRpdGxlIHRlc3QgMTU4MDQ5MTUxOTwvdGl0bGU+CgkJCTwvdGl0bGVTdG10PgoJCQk8cHVibGljYXRpb25TdG10PgoJCQkJPHA+PC9wPgoJCQk8L3B1YmxpY2F0aW9uU3RtdD4KCQkJPHNvdXJjZURlc2Mgc2FtZUFzPSJodHRwOi8vd3d3LmN3cmMuY2EiPgoJCQkJPHA+Q3JlYXRlZCBmcm9tIG9yaWdpbmFsIHJlc2VhcmNoIGJ5IG1lbWJlcnMgb2YgQ1dSQy9DU8OJQyB1bmxlc3Mgb3RoZXJ3aXNlIG5vdGVkLjwvcD4KCQkJPC9zb3VyY2VEZXNjPgoJCTwvZmlsZURlc2M+Cgk8L3RlaUhlYWRlcj4KCTx0ZXh0PgoJCTxib2R5PgoJCQk8ZGl2IHR5cGU9ImxldHRlciI+CgkJCQk8aGVhZD4KCQkJCQk8dGl0bGU+U2FtcGxlIExldHRlciAtIEJlcnRyYW5kIFJ1c3NlbGwgdG8gPHBlcnNOYW1lIGFubm90YXRpb25JZD0iZW50XzczIiBjZXJ0PSJwcm9iYWJsZSIgcmVmPSIyNzkzOTkzOTkiPlBhdHJpY2lhIFNwZW5jZTwvcGVyc05hbWU+IC0gT2N0b2JlciAyMSwgMTkzNTwvdGl0bGU+CgkJCQk8L2hlYWQ+CgkJCQk8b3BlbmVyPgoJCQkJCTxub3RlPgoJCQkJCQk8cD5CYWQgd3JpdGluZyBkdWUgdG8gc2hha3kgdHJhaW48L3A+PHA+SW4gdHJhaW48L3A+PHA+CgkJCQkJCQk8cGxhY2VOYW1lIGFubm90YXRpb25JZD0iZW50XzE0MyIgY2VydD0iZGVmaW5pdGUiIHJlZj0iaHR0cDovL3d3dy5nZW9uYW1lcy5vcmcvNjQ1MzM2NiI+T3NsbzwvcGxhY2VOYW1lPiB0byBCZXJnZW48L3A+CgkJCQkJPC9ub3RlPgoJCQkJCTxkYXRlbGluZT4KCQkJCQkJPGRhdGUgYW5ub3RhdGlvbklkPSJlbnRfNjkiIGNlcnQ9ImRlZmluaXRlIiB3aGVuPSIxOTM1LTEwLTIxIj4yMS4xMC4zNTwvZGF0ZT4KCQkJCQk8L2RhdGVsaW5lPgoJCQkJCTxzYWx1dGU+RGVhcmVzdCAtPC9zYWx1dGU+CgkJCQk8L29wZW5lcj48cD5JIGhhdmUgaGFkIG5vPG5vdGUgYW5ub3RhdGlvbklkPSJlbnRfMTkwIiB0eXBlPSJyZXNlYXJjaE5vdGUiPgoJCQkJCQkJCTxwIHhtbG5zPSJodHRwOi8vd3d3LnRlaS1jLm9yZy9ucy8xLjAiPlNvbWUga2luZCBvZiBub3RlPC9wPgoJCQkJCQk8L25vdGU+IGxldHRlciBmcm9tIHlvdSBzaW5jZSBJIGxlZnQgPHBsYWNlTmFtZSBhbm5vdGF0aW9uSWQ9ImVudF8xNDUiIG9mZnNldElkPSJlbnRfMTQ1IiBjZXJ0PSJkZWZpbml0ZSIgcmVmPSJodHRwOi8vd3d3Lmdlb25hbWVzLm9yZy8yNjczNzIyIj5TdG9ja2hvbG08L3BsYWNlTmFtZT4sIGJ1dCBJIGhhZCBhIG5pY2Ugb25lIGZyb20gSm9obiBpbiBhbiBlbnZlbG9wZSB5b3UgaGFkIHNlbnQgaGltLiBJIGhhZCBzZW50IGhpbSBvbmUgYWRkcmVzc2VkIHRvIENvcGVuaGFnZW4gYnV0IGhlIGhhZG4ndCB1c2VkIGl0LjwvcD48cD5XaGVuIEkgcmVhY2hlZCBPc2xvIHllc3RlcmRheSBldmVuaW5nLCBCcnluanVsZiBCdWxsIHNob3VsZCBoYXZlIGJlZW4gdGhlcmUgdG8gbWVldCBtZSwgYnV0IHdhc24ndC4gSGUgaXMgbm90IG9uIHRoZSB0ZWxlcGhvbmUsIHNvIEkgdG9vayBhIHRheGkgdG8gaGlzIGFkZHJlc3MsIHdoaWNoIHR1cm5lZCBvdXQgdG8gYmUgYSBzdHVkZW50cycgY2x1YiB3aXRoIG5vIG9uZSBhYm91dCBvbiBTdW5kYXlzLCBzbyBJIHdlbnQgdG8gYSBob3RlbCBmZWVsaW5nIHJhdGhlciBub24tcGx1c3NlZC4gQnV0IHByZXNlbnRseSBoZSB0dXJuZWQgdXAuIEhlIGhhZCBnb3QgdGhlIDxwYiBuPSIyIj48L3BiPiB0aW1lIG9mIG15IGFycml2YWwgd3JvbmcsIGFuZCAKCQkJCQkJPGNob2ljZSBhbm5vdGF0aW9uSWQ9ImVudF82NSI+PHNpYyBhbm5vdGF0aW9uSWQ9ImVudF82NSI+d2hlbjwvc2ljPjxjb3JyIGFubm90YXRpb25JZD0iZW50XzY1Ij53aGVuPC9jb3JyPjwvY2hvaWNlPgoJCQkJCWhlIGhhZCBmb3VuZCBoZSBoYWQgbWlzc2VkIG1lIGhlIHBob25lZCB0byBldmVyeSBob3RlbCBpbiBPc2xvIHRpbGwgaGUgaGl0IG9uIHRoZSByaWdodCBvbmUuIEhlIGxlZnQgbWUgYXQgMTAsIGFuZCB0aGVuIEkgaGFkIHRvIGRvIGEgU3VuZGF5IFJlZmVyZWUgYXJ0aWNsZS4gVG9kYXkgbXkgam91cm5leSBsYXN0cyBmcm9tIDkgdGlsbCA5IC0gZm9ydHVuYXRlbHkgb25lIG9mIHRoZSBtb3N0IGJlYXV0aWZ1bCByYWlsd2F5IGpvdXJuZXlzIGluIHRoZSB3b3JsZC4gVG9tb3Jyb3cgSSBsZWN0dXJlIGF0IDxwbGFjZU5hbWUgYW5ub3RhdGlvbklkPSJlbnRfMTQ0IiBjZXJ0PSJkZWZpbml0ZSIgcmVmPSJodHRwOi8vd3d3Lmdlb25hbWVzLm9yZy82NTQ4NTI4Ij5CZXJnZW48L3BsYWNlTmFtZT4gdG8gdGhlIEFuZ2xvLU5vcndlZ2lhbiBTb2NpZXR5LiBOZXh0IGRheSBJIGdvIGJhY2sgdG8gT3NsbywgbGVjdHVyZSB0aGVyZSBGcmkuIGFuZCBTYXQuIGFuZCB0aGVuIHN0YXJ0IGZvciBob21lIHZpYSBCZXJnZW4uPC9wPgoJCQkJPHBiIG49IjMiPjwvcGI+CgkJCQk8cD5CdWxsIGlzIGEgbmljZSB5b3VuZyBtYW4gYnV0IGluY29tcGV0ZW50IC0gY2FuJ3QgcXVpdGUgc3RhbmQgdGhlIGNvbW11bmlzdHMsIGJ1dCBmaW5kcyB0aGUgc29jaWFsaXN0cyB0b28gbWlsZC48L3A+PHA+SSBhbSB1bmhhcHBpbHkgd29uZGVyaW5nIHdoYXQgeW91IGFyZSBmZWVsaW5nIGFib3V0IG1lLjwvcD4KCQkJCTxjbG9zZXI+CgkJCQkJPHNhbHV0ZT5JIGxvdmUgeW91IHZlcnkgbXVjaCAtPC9zYWx1dGU+CgkJCQkJPHNpZ25lZD4KCQkJCQkJPHBlcnNOYW1lIHNhbWVBcz0iaHR0cDovL3d3dy5mcmVlYmFzZS5jb20vdmlldy9lbi9iZXJ0cmFuZF9ydXNzZWxsIj4KCQkJCQkJCTxwZXJzTmFtZSBhbm5vdGF0aW9uSWQ9ImVudF8xMDkiIGNlcnQ9ImRlZmluaXRlIiB0eXBlPSJyZWFsIiByZWY9Imh0dHA6Ly92aWFmLm9yZy92aWFmLzM2OTI0MTM3Ij5CPC9wZXJzTmFtZT4KCQkJCQkJPC9wZXJzTmFtZT4KCQkJCQk8L3NpZ25lZD4KCQkJCTwvY2xvc2VyPgoJCQk8L2Rpdj4KCQk8L2JvZHk+Cgk8L3RleHQ+CjwvVEVJPgo="
 		})
 		.reply(201, {
 			"content": {
-				"name": "testufy.txt",
-				"path": "curt/qurt/testufy.txt",
-				"sha": "9fa3ec5f93e21b52d9d7fda29dfc4b3d43932400",
-				"size": 3384,
-				"url": "https://api.github.com/repos/jchartrand/aTest/contents/curt/qurt/testufy.txt?ref=jchartrand",
-				"html_url": "https://github.com/jchartrand/aTest/blob/jchartrand/curt/qurt/testufy.txt",
-				"git_url": "https://api.github.com/repos/jchartrand/aTest/git/blobs/9fa3ec5f93e21b52d9d7fda29dfc4b3d43932400",
-				"download_url": "https://raw.githubusercontent.com/jchartrand/aTest/jchartrand/curt/qurt/testufy.txt",
+				"name": "text12.txt",
+				"path": "text12.txt",
+				"sha": "992245210dcd0cc79fee2e43bbabf55ad26c91bb",
+				"size": 3197,
+				"url": "https://api.github.com/repos/lucaju/misc/contents/text12.txt?ref=dev",
+				"html_url": "https://github.com/lucaju/misc/blob/dev/text12.txt",
+				"git_url": "https://api.github.com/repos/lucaju/misc/git/blobs/992245210dcd0cc79fee2e43bbabf55ad26c91bb",
+				"download_url": "https://raw.githubusercontent.com/lucaju/misc/dev/text12.txt",
 				"type": "file",
 				"_links": {
-					"self": "https://api.github.com/repos/jchartrand/aTest/contents/curt/qurt/testufy.txt?ref=jchartrand",
-					"git": "https://api.github.com/repos/jchartrand/aTest/git/blobs/9fa3ec5f93e21b52d9d7fda29dfc4b3d43932400",
-					"html": "https://github.com/jchartrand/aTest/blob/jchartrand/curt/qurt/testufy.txt"
+					"self": "https://api.github.com/repos/lucaju/misc/contents/text12.txt?ref=dev",
+					"git": "https://api.github.com/repos/lucaju/misc/git/blobs/992245210dcd0cc79fee2e43bbabf55ad26c91bb",
+					"html": "https://github.com/lucaju/misc/blob/dev/text12.txt"
 				}
 			},
 			"commit": {
-				"sha": "5f98b10ff8b7841081445b0004d71e3660fc5d19",
-				"url": "https://api.github.com/repos/jchartrand/aTest/git/commits/5f98b10ff8b7841081445b0004d71e3660fc5d19",
-				"html_url": "https://github.com/jchartrand/aTest/commit/5f98b10ff8b7841081445b0004d71e3660fc5d19",
+				"sha": "3b0777da9ce4ee8292f06d76a16645a2bd86bdfc",
+				"node_id": "MDY6Q29tbWl0MjI1OTQyODcxOjNiMDc3N2RhOWNlNGVlODI5MmYwNmQ3NmExNjY0NWEyYmQ4NmJkZmM=",
+				"url": "https://api.github.com/repos/lucaju/misc/git/commits/3b0777da9ce4ee8292f06d76a16645a2bd86bdfc",
+				"html_url": "https://github.com/lucaju/misc/commit/3b0777da9ce4ee8292f06d76a16645a2bd86bdfc",
 				"author": {
-					"name": "James Chartrand",
-					"email": "jc.chartrand@gmail.com",
-					"date": "2018-05-24T19:05:33Z"
+					"name": "Luciano Frizzera",
+					"email": "lucaju@me.com",
+					"date": "2020-01-31T17:25:22Z"
 				},
 				"committer": {
-					"name": "James Chartrand",
-					"email": "jc.chartrand@gmail.com",
-					"date": "2018-05-24T19:05:33Z"
+					"name": "Luciano Frizzera",
+					"email": "lucaju@me.com",
+					"date": "2020-01-31T17:25:22Z"
 				},
 				"tree": {
-					"sha": "2334e036dfee384e8d445fc1cf87dd8dab9d2aff",
-					"url": "https://api.github.com/repos/jchartrand/aTest/git/trees/2334e036dfee384e8d445fc1cf87dd8dab9d2aff"
+					"sha": "fd470cedb96c93062133d7c3f08442721e93bbe6",
+					"url": "https://api.github.com/repos/lucaju/misc/git/trees/fd470cedb96c93062133d7c3f08442721e93bbe6"
 				},
 				"message": "some commit message",
 				"parents": [{
-					"sha": "6eff6c7acaae34aca4307c237410c41a2da7b973",
-					"url": "https://api.github.com/repos/jchartrand/aTest/git/commits/6eff6c7acaae34aca4307c237410c41a2da7b973",
-					"html_url": "https://github.com/jchartrand/aTest/commit/6eff6c7acaae34aca4307c237410c41a2da7b973"
+					"sha": "c423f1be505994bf2104118eb500cc2da349cca2",
+					"url": "https://api.github.com/repos/lucaju/misc/git/commits/c423f1be505994bf2104118eb500cc2da349cca2",
+					"html_url": "https://github.com/lucaju/misc/commit/c423f1be505994bf2104118eb500cc2da349cca2"
 				}],
 				"verification": {
 					"verified": false,
@@ -1616,14 +2274,15 @@ function saveNewFileNock() {
 					"payload": null
 				}
 			}
-		}, ['Server',
+		}, [
+			'Server',
 			'GitHub.com',
 			'Date',
-			'Thu, 24 May 2018 19:05:34 GMT',
+			'Fri, 31 Jan 2020 17:25:22 GMT',
 			'Content-Type',
 			'application/json; charset=utf-8',
 			'Content-Length',
-			'1850',
+			'1765',
 			'Connection',
 			'close',
 			'Status',
@@ -1633,21 +2292,21 @@ function saveNewFileNock() {
 			'X-RateLimit-Remaining',
 			'4996',
 			'X-RateLimit-Reset',
-			'1527192331',
+			'1580495088',
 			'Cache-Control',
 			'private, max-age=60, s-maxage=60',
 			'Vary',
 			'Accept, Authorization, Cookie, X-GitHub-OTP',
 			'ETag',
-			'"553b9477c201db8225eb545d8dc1b6f5"',
+			'"532d1f009d3879038e64c3581b6f68c7"',
 			'X-OAuth-Scopes',
-			'repo',
+			'admin:repo_hook, repo',
 			'X-Accepted-OAuth-Scopes',
 			'',
 			'X-GitHub-Media-Type',
 			'github.v3; format=json',
 			'Access-Control-Expose-Headers',
-			'ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval',
+			'ETag, Link, Location, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval, X-GitHub-Media-Type',
 			'Access-Control-Allow-Origin',
 			'*',
 			'Strict-Transport-Security',
@@ -1661,12 +2320,124 @@ function saveNewFileNock() {
 			'Referrer-Policy',
 			'origin-when-cross-origin, strict-origin-when-cross-origin',
 			'Content-Security-Policy',
-			'default-src \'none\'',
-			'X-Runtime-rack',
-			'0.698888',
+			"default-src 'none'",
 			'X-GitHub-Request-Id',
-			'A795:3F8E:C51D41:17ED2F2:5B070CFD'
+			'8BC0:4B2C:26F407:5F286D:5E346301'
 		]);
+
+
+
+
+	// nock('https://api.github.com:443', {
+	// 		"encodedQueryParams": true
+	// 	})
+	// 	.put('/repos/jchartrand/aTest/contents/curt/qurt/testuufy.txt', {
+	// 		"message": "some commit message",
+	// 		"branch": "jchartrand",
+	// 		"content": "PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPFRFSSB4bWxucz0iaHR0cDovL3d3dy50ZWktYy5vcmcvbnMvMS4wIiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiIHhtbG5zOmN3PSJodHRwOi8vY3dyYy5jYS9ucy9jdyMiIHhtbG5zOnc9Imh0dHA6Ly9jd3JjdGMuYXJ0c3JuLnVhbGJlcnRhLmNhLyMiPgogIDx0ZWlIZWFkZXI+CiAgICA8ZmlsZURlc2M+CiAgICAgIDx0aXRsZVN0bXQ+CiAgICAgICAgPHRpdGxlPlNhbXBsZSBEb2N1bWVudCBUaXRsZSB0ZXN0IHVuZGVmaW5lZDwvdGl0bGU+CiAgICAgIDwvdGl0bGVTdG10PgogICAgICA8cHVibGljYXRpb25TdG10PgogICAgICAgIDxwPjwvcD4KICAgICAgPC9wdWJsaWNhdGlvblN0bXQ+CiAgICAgIDxzb3VyY2VEZXNjIHNhbWVBcz0iaHR0cDovL3d3dy5jd3JjLmNhIj4KICAgICAgICA8cD5DcmVhdGVkIGZyb20gb3JpZ2luYWwgcmVzZWFyY2ggYnkgbWVtYmVycyBvZiBDV1JDL0NTw4lDIHVubGVzcyBvdGhlcndpc2Ugbm90ZWQuPC9wPgogICAgICA8L3NvdXJjZURlc2M+CiAgICA8L2ZpbGVEZXNjPgogIDwvdGVpSGVhZGVyPgogIDx0ZXh0PgogICAgPGJvZHk+CiAgICAgIDxkaXYgdHlwZT0ibGV0dGVyIj4KICAgICAgICA8aGVhZD4KICAgICAgICAgIDx0aXRsZT5TYW1wbGUgTGV0dGVyIC0gQmVydHJhbmQgUnVzc2VsbCB0byA8cGVyc05hbWUgYW5ub3RhdGlvbklkPSJlbnRfNzMiIGNlcnQ9InByb2JhYmxlIiByZWY9IjI3OTM5OTM5OSI+UGF0cmljaWEgU3BlbmNlPC9wZXJzTmFtZT4gLSBPY3RvYmVyIDIxLCAxOTM1PC90aXRsZT4KICAgICAgICA8L2hlYWQ+CiAgICAgICAgPG9wZW5lcj4KICAgICAgICAgIDxub3RlPgogICAgICAgICAgICA8cD5CYWQgd3JpdGluZyBkdWUgdG8gc2hha3kgdHJhaW48L3A+PHA+SW4gdHJhaW48L3A+PHA+CiAgICAgICAgICAgICAgPHBsYWNlTmFtZSBhbm5vdGF0aW9uSWQ9ImVudF8xNDMiIGNlcnQ9ImRlZmluaXRlIiByZWY9Imh0dHA6Ly93d3cuZ2VvbmFtZXMub3JnLzY0NTMzNjYiPk9zbG88L3BsYWNlTmFtZT4gdG8gQmVyZ2VuPC9wPgogICAgICAgICAgPC9ub3RlPgogICAgICAgICAgPGRhdGVsaW5lPgogICAgICAgICAgICA8ZGF0ZSBhbm5vdGF0aW9uSWQ9ImVudF82OSIgY2VydD0iZGVmaW5pdGUiIHdoZW49IjE5MzUtMTAtMjEiPjIxLjEwLjM1PC9kYXRlPgogICAgICAgICAgPC9kYXRlbGluZT4KICAgICAgICAgIDxzYWx1dGU+RGVhcmVzdCAtPC9zYWx1dGU+CiAgICAgICAgPC9vcGVuZXI+PHA+SSBoYXZlIGhhZCBubzxub3RlIGFubm90YXRpb25JZD0iZW50XzE5MCIgdHlwZT0icmVzZWFyY2hOb3RlIj4KICAgICAgICAgICAgICAgIDxwIHhtbG5zPSJodHRwOi8vd3d3LnRlaS1jLm9yZy9ucy8xLjAiPlNvbWUga2luZCBvZiBub3RlPC9wPgogICAgICAgICAgICA8L25vdGU+IGxldHRlciBmcm9tIHlvdSBzaW5jZSBJIGxlZnQgPHBsYWNlTmFtZSBhbm5vdGF0aW9uSWQ9ImVudF8xNDUiIG9mZnNldElkPSJlbnRfMTQ1IiBjZXJ0PSJkZWZpbml0ZSIgcmVmPSJodHRwOi8vd3d3Lmdlb25hbWVzLm9yZy8yNjczNzIyIj5TdG9ja2hvbG08L3BsYWNlTmFtZT4sIGJ1dCBJIGhhZCBhIG5pY2Ugb25lIGZyb20gSm9obiBpbiBhbiBlbnZlbG9wZSB5b3UgaGFkIHNlbnQgaGltLiBJIGhhZCBzZW50IGhpbSBvbmUgYWRkcmVzc2VkIHRvIENvcGVuaGFnZW4gYnV0IGhlIGhhZG4ndCB1c2VkIGl0LjwvcD48cD5XaGVuIEkgcmVhY2hlZCBPc2xvIHllc3RlcmRheSBldmVuaW5nLCBCcnluanVsZiBCdWxsIHNob3VsZCBoYXZlIGJlZW4gdGhlcmUgdG8gbWVldCBtZSwgYnV0IHdhc24ndC4gSGUgaXMgbm90IG9uIHRoZSB0ZWxlcGhvbmUsIHNvIEkgdG9vayBhIHRheGkgdG8gaGlzIGFkZHJlc3MsIHdoaWNoIHR1cm5lZCBvdXQgdG8gYmUgYSBzdHVkZW50cycgY2x1YiB3aXRoIG5vIG9uZSBhYm91dCBvbiBTdW5kYXlzLCBzbyBJIHdlbnQgdG8gYSBob3RlbCBmZWVsaW5nIHJhdGhlciBub24tcGx1c3NlZC4gQnV0IHByZXNlbnRseSBoZSB0dXJuZWQgdXAuIEhlIGhhZCBnb3QgdGhlIDxwYiBuPSIyIj48L3BiPiB0aW1lIG9mIG15IGFycml2YWwgd3JvbmcsIGFuZCAKICAgICAgICAgICAgPGNob2ljZSBhbm5vdGF0aW9uSWQ9ImVudF82NSI+PHNpYyBhbm5vdGF0aW9uSWQ9ImVudF82NSI+d2hlbjwvc2ljPjxjb3JyIGFubm90YXRpb25JZD0iZW50XzY1Ij53aGVuPC9jb3JyPjwvY2hvaWNlPgogICAgICAgICAgaGUgaGFkIGZvdW5kIGhlIGhhZCBtaXNzZWQgbWUgaGUgcGhvbmVkIHRvIGV2ZXJ5IGhvdGVsIGluIE9zbG8gdGlsbCBoZSBoaXQgb24gdGhlIHJpZ2h0IG9uZS4gSGUgbGVmdCBtZSBhdCAxMCwgYW5kIHRoZW4gSSBoYWQgdG8gZG8gYSBTdW5kYXkgUmVmZXJlZSBhcnRpY2xlLiBUb2RheSBteSBqb3VybmV5IGxhc3RzIGZyb20gOSB0aWxsIDkgLSBmb3J0dW5hdGVseSBvbmUgb2YgdGhlIG1vc3QgYmVhdXRpZnVsIHJhaWx3YXkgam91cm5leXMgaW4gdGhlIHdvcmxkLiBUb21vcnJvdyBJIGxlY3R1cmUgYXQgPHBsYWNlTmFtZSBhbm5vdGF0aW9uSWQ9ImVudF8xNDQiIGNlcnQ9ImRlZmluaXRlIiByZWY9Imh0dHA6Ly93d3cuZ2VvbmFtZXMub3JnLzY1NDg1MjgiPkJlcmdlbjwvcGxhY2VOYW1lPiB0byB0aGUgQW5nbG8tTm9yd2VnaWFuIFNvY2lldHkuIE5leHQgZGF5IEkgZ28gYmFjayB0byBPc2xvLCBsZWN0dXJlIHRoZXJlIEZyaS4gYW5kIFNhdC4gYW5kIHRoZW4gc3RhcnQgZm9yIGhvbWUgdmlhIEJlcmdlbi48L3A+CiAgICAgICAgPHBiIG49IjMiPjwvcGI+CiAgICAgICAgPHA+QnVsbCBpcyBhIG5pY2UgeW91bmcgbWFuIGJ1dCBpbmNvbXBldGVudCAtIGNhbid0IHF1aXRlIHN0YW5kIHRoZSBjb21tdW5pc3RzLCBidXQgZmluZHMgdGhlIHNvY2lhbGlzdHMgdG9vIG1pbGQuPC9wPjxwPkkgYW0gdW5oYXBwaWx5IHdvbmRlcmluZyB3aGF0IHlvdSBhcmUgZmVlbGluZyBhYm91dCBtZS48L3A+CiAgICAgICAgPGNsb3Nlcj4KICAgICAgICAgIDxzYWx1dGU+SSBsb3ZlIHlvdSB2ZXJ5IG11Y2ggLTwvc2FsdXRlPgogICAgICAgICAgPHNpZ25lZD4KICAgICAgICAgICAgPHBlcnNOYW1lIHNhbWVBcz0iaHR0cDovL3d3dy5mcmVlYmFzZS5jb20vdmlldy9lbi9iZXJ0cmFuZF9ydXNzZWxsIj4KICAgICAgICAgICAgICA8cGVyc05hbWUgYW5ub3RhdGlvbklkPSJlbnRfMTA5IiBjZXJ0PSJkZWZpbml0ZSIgdHlwZT0icmVhbCIgcmVmPSJodHRwOi8vdmlhZi5vcmcvdmlhZi8zNjkyNDEzNyI+QjwvcGVyc05hbWU+CiAgICAgICAgICAgIDwvcGVyc05hbWU+CiAgICAgICAgICA8L3NpZ25lZD4KICAgICAgICA8L2Nsb3Nlcj4KICAgICAgPC9kaXY+CiAgICA8L2JvZHk+CiAgPC90ZXh0Pgo8L1RFST4K"
+	// 	})
+	// 	.query({
+	// 		"access_token": config.personal_oath_for_testing
+	// 	})
+	// 	.reply(201, {
+	// 		"content": {
+	// 			"name": "testufy.txt",
+	// 			"path": "curt/qurt/testufy.txt",
+	// 			"sha": "9fa3ec5f93e21b52d9d7fda29dfc4b3d43932400",
+	// 			"size": 3384,
+	// 			"url": "https://api.github.com/repos/jchartrand/aTest/contents/curt/qurt/testufy.txt?ref=jchartrand",
+	// 			"html_url": "https://github.com/jchartrand/aTest/blob/jchartrand/curt/qurt/testufy.txt",
+	// 			"git_url": "https://api.github.com/repos/jchartrand/aTest/git/blobs/9fa3ec5f93e21b52d9d7fda29dfc4b3d43932400",
+	// 			"download_url": "https://raw.githubusercontent.com/jchartrand/aTest/jchartrand/curt/qurt/testufy.txt",
+	// 			"type": "file",
+	// 			"_links": {
+	// 				"self": "https://api.github.com/repos/jchartrand/aTest/contents/curt/qurt/testufy.txt?ref=jchartrand",
+	// 				"git": "https://api.github.com/repos/jchartrand/aTest/git/blobs/9fa3ec5f93e21b52d9d7fda29dfc4b3d43932400",
+	// 				"html": "https://github.com/jchartrand/aTest/blob/jchartrand/curt/qurt/testufy.txt"
+	// 			}
+	// 		},
+	// 		"commit": {
+	// 			"sha": "5f98b10ff8b7841081445b0004d71e3660fc5d19",
+	// 			"url": "https://api.github.com/repos/jchartrand/aTest/git/commits/5f98b10ff8b7841081445b0004d71e3660fc5d19",
+	// 			"html_url": "https://github.com/jchartrand/aTest/commit/5f98b10ff8b7841081445b0004d71e3660fc5d19",
+	// 			"author": {
+	// 				"name": "James Chartrand",
+	// 				"email": "jc.chartrand@gmail.com",
+	// 				"date": "2018-05-24T19:05:33Z"
+	// 			},
+	// 			"committer": {
+	// 				"name": "James Chartrand",
+	// 				"email": "jc.chartrand@gmail.com",
+	// 				"date": "2018-05-24T19:05:33Z"
+	// 			},
+	// 			"tree": {
+	// 				"sha": "2334e036dfee384e8d445fc1cf87dd8dab9d2aff",
+	// 				"url": "https://api.github.com/repos/jchartrand/aTest/git/trees/2334e036dfee384e8d445fc1cf87dd8dab9d2aff"
+	// 			},
+	// 			"message": "some commit message",
+	// 			"parents": [{
+	// 				"sha": "6eff6c7acaae34aca4307c237410c41a2da7b973",
+	// 				"url": "https://api.github.com/repos/jchartrand/aTest/git/commits/6eff6c7acaae34aca4307c237410c41a2da7b973",
+	// 				"html_url": "https://github.com/jchartrand/aTest/commit/6eff6c7acaae34aca4307c237410c41a2da7b973"
+	// 			}],
+	// 			"verification": {
+	// 				"verified": false,
+	// 				"reason": "unsigned",
+	// 				"signature": null,
+	// 				"payload": null
+	// 			}
+	// 		}
+	// 	}, ['Server',
+	// 		'GitHub.com',
+	// 		'Date',
+	// 		'Thu, 24 May 2018 19:05:34 GMT',
+	// 		'Content-Type',
+	// 		'application/json; charset=utf-8',
+	// 		'Content-Length',
+	// 		'1850',
+	// 		'Connection',
+	// 		'close',
+	// 		'Status',
+	// 		'201 Created',
+	// 		'X-RateLimit-Limit',
+	// 		'5000',
+	// 		'X-RateLimit-Remaining',
+	// 		'4996',
+	// 		'X-RateLimit-Reset',
+	// 		'1527192331',
+	// 		'Cache-Control',
+	// 		'private, max-age=60, s-maxage=60',
+	// 		'Vary',
+	// 		'Accept, Authorization, Cookie, X-GitHub-OTP',
+	// 		'ETag',
+	// 		'"553b9477c201db8225eb545d8dc1b6f5"',
+	// 		'X-OAuth-Scopes',
+	// 		'repo',
+	// 		'X-Accepted-OAuth-Scopes',
+	// 		'',
+	// 		'X-GitHub-Media-Type',
+	// 		'github.v3; format=json',
+	// 		'Access-Control-Expose-Headers',
+	// 		'ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval',
+	// 		'Access-Control-Allow-Origin',
+	// 		'*',
+	// 		'Strict-Transport-Security',
+	// 		'max-age=31536000; includeSubdomains; preload',
+	// 		'X-Frame-Options',
+	// 		'deny',
+	// 		'X-Content-Type-Options',
+	// 		'nosniff',
+	// 		'X-XSS-Protection',
+	// 		'1; mode=block',
+	// 		'Referrer-Policy',
+	// 		'origin-when-cross-origin, strict-origin-when-cross-origin',
+	// 		'Content-Security-Policy',
+	// 		'default-src \'none\'',
+	// 		'X-Runtime-rack',
+	// 		'0.698888',
+	// 		'X-GitHub-Request-Id',
+	// 		'A795:3F8E:C51D41:17ED2F2:5B070CFD'
+	// 	]);
 
 }
 
@@ -1675,15 +2446,13 @@ function getLatestFileSHANockForNew() {
 			"encodedQueryParams": true
 		})
 		.post('/graphql', {
-			"query": "{\n\t\t\trepository(owner: \"jchartrand\", name: \"aTest\") {\n\t\t\t\tobject(expression: \"jchartrand:curt/qurt/testuufy.txt\") {\n\t\t\t\t\t... on Blob {\n\t\t\t\t\t\toid\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t}\n\t\t}"
+			"query": "{\n\t\t\trepository(owner: \"lucaju\", name: \"misc\") {\n\t\t\t\tobject(expression: \"dev:text12.txt\") {\n\t\t\t\t\t... on Blob {\n\t\t\t\t\t\toid\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t}\n\t\t}"
 		})
-		.query({
-			"access_token": config.personal_oath_for_testing
-		})
-		.reply(200, ["1f8b0800000000000003ab564a492c4954b2aa562a4a2dc82fce2cc92faa04f1f293b252934b94acf24a73726a6b6b019ac688b327000000"], ['Server',
+		.reply(200, ["1f8b0800000000000003ab564a492c4954b2aa562a4a2dc82fce2cc92faa04f1f293b252934b94acf24a73726a6b6b019ac688b327000000"], [
+			'Server',
 			'GitHub.com',
 			'Date',
-			'Thu, 24 May 2018 19:23:25 GMT',
+			'Fri, 31 Jan 2020 17:25:21 GMT',
 			'Content-Type',
 			'application/json; charset=utf-8',
 			'Transfer-Encoding',
@@ -1692,22 +2461,22 @@ function getLatestFileSHANockForNew() {
 			'close',
 			'Status',
 			'200 OK',
-			'X-RateLimit-Limit',
-			'5000',
-			'X-RateLimit-Remaining',
-			'4996',
-			'X-RateLimit-Reset',
-			'1527192331',
 			'Cache-Control',
 			'no-cache',
 			'X-OAuth-Scopes',
-			'repo',
+			'admin:repo_hook, repo',
 			'X-Accepted-OAuth-Scopes',
 			'repo',
 			'X-GitHub-Media-Type',
 			'github.v3; format=json',
+			'X-RateLimit-Limit',
+			'5000',
+			'X-RateLimit-Remaining',
+			'4998',
+			'X-RateLimit-Reset',
+			'1580495089',
 			'Access-Control-Expose-Headers',
-			'ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval',
+			'ETag, Link, Location, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval, X-GitHub-Media-Type',
 			'Access-Control-Allow-Origin',
 			'*',
 			'Strict-Transport-Security',
@@ -1721,14 +2490,72 @@ function getLatestFileSHANockForNew() {
 			'Referrer-Policy',
 			'origin-when-cross-origin, strict-origin-when-cross-origin',
 			'Content-Security-Policy',
-			'default-src \'none\'',
-			'X-Runtime-rack',
-			'0.059255',
+			"default-src 'none'",
 			'Content-Encoding',
 			'gzip',
 			'X-GitHub-Request-Id',
-			'8872:3F8E:C7892E:183A3EF:5B07112D'
+			'9B20:4124:7B0F0B:12510C1:5E346301'
 		]);
+
+
+	// nock('https://api.github.com:443', {
+	// 		"encodedQueryParams": true
+	// 	})
+	// 	.post('/graphql', {
+	// 		"query": "{\n\t\t\trepository(owner: \"jchartrand\", name: \"aTest\") {\n\t\t\t\tobject(expression: \"jchartrand:curt/qurt/testuufy.txt\") {\n\t\t\t\t\t... on Blob {\n\t\t\t\t\t\toid\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t}\n\t\t}"
+	// 	})
+	// 	.query({
+	// 		"access_token": config.personal_oath_for_testing
+	// 	})
+	// 	.reply(200, ["1f8b0800000000000003ab564a492c4954b2aa562a4a2dc82fce2cc92faa04f1f293b252934b94acf24a73726a6b6b019ac688b327000000"], ['Server',
+	// 		'GitHub.com',
+	// 		'Date',
+	// 		'Thu, 24 May 2018 19:23:25 GMT',
+	// 		'Content-Type',
+	// 		'application/json; charset=utf-8',
+	// 		'Transfer-Encoding',
+	// 		'chunked',
+	// 		'Connection',
+	// 		'close',
+	// 		'Status',
+	// 		'200 OK',
+	// 		'X-RateLimit-Limit',
+	// 		'5000',
+	// 		'X-RateLimit-Remaining',
+	// 		'4996',
+	// 		'X-RateLimit-Reset',
+	// 		'1527192331',
+	// 		'Cache-Control',
+	// 		'no-cache',
+	// 		'X-OAuth-Scopes',
+	// 		'repo',
+	// 		'X-Accepted-OAuth-Scopes',
+	// 		'repo',
+	// 		'X-GitHub-Media-Type',
+	// 		'github.v3; format=json',
+	// 		'Access-Control-Expose-Headers',
+	// 		'ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval',
+	// 		'Access-Control-Allow-Origin',
+	// 		'*',
+	// 		'Strict-Transport-Security',
+	// 		'max-age=31536000; includeSubdomains; preload',
+	// 		'X-Frame-Options',
+	// 		'deny',
+	// 		'X-Content-Type-Options',
+	// 		'nosniff',
+	// 		'X-XSS-Protection',
+	// 		'1; mode=block',
+	// 		'Referrer-Policy',
+	// 		'origin-when-cross-origin, strict-origin-when-cross-origin',
+	// 		'Content-Security-Policy',
+	// 		'default-src \'none\'',
+	// 		'X-Runtime-rack',
+	// 		'0.059255',
+	// 		'Content-Encoding',
+	// 		'gzip',
+	// 		'X-GitHub-Request-Id',
+	// 		'8872:3F8E:C7892E:183A3EF:5B07112D'
+	// 	]);
 
 }
 
@@ -1737,15 +2564,13 @@ function missingSHANock() {
 			"encodedQueryParams": true
 		})
 		.post('/graphql', {
-			"query": "{\n\t\t\trepository(owner: \"jchartrand\", name: \"aTest\") {\n\t\t\t\tobject(expression: \"master:curt/qurt/tesddt.txt\") {\n\t\t\t\t\t... on Blob {\n\t\t\t\t\t\toid\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t}\n\t\t}"
+			"query": "{\n\t\t\trepository(owner: \"lucaju\", name: \"misc\") {\n\t\t\t\tobject(expression: \"dev:text.txt\") {\n\t\t\t\t\t... on Blob {\n\t\t\t\t\t\toid\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t}\n\t\t}"
 		})
-		.query({
-			"access_token": config.personal_oath_for_testing
-		})
-		.reply(200, ["1f8b0800000000000003ab564a492c4954b2aa562a4a2dc82fce2cc92faa04f1f293b252934b94acf24a73726a6b6b019ac688b327000000"], ['Server',
+		.reply(200, ["1f8b08000000000000031dc7490e80200c40d1bbf404282dd36da02d096e30c8c618efeef057ef5f20796648170cddfbd1661fe777bd6ccaf357134880265b442647a431b2776a4309240b6325e363095857b402f7db03d38e8a3c55000000"], [
+			'Server',
 			'GitHub.com',
 			'Date',
-			'Thu, 24 May 2018 19:31:17 GMT',
+			'Tue, 28 Jan 2020 05:47:59 GMT',
 			'Content-Type',
 			'application/json; charset=utf-8',
 			'Transfer-Encoding',
@@ -1754,22 +2579,22 @@ function missingSHANock() {
 			'close',
 			'Status',
 			'200 OK',
-			'X-RateLimit-Limit',
-			'5000',
-			'X-RateLimit-Remaining',
-			'4994',
-			'X-RateLimit-Reset',
-			'1527192331',
 			'Cache-Control',
 			'no-cache',
 			'X-OAuth-Scopes',
-			'repo',
+			'admin:repo_hook, repo',
 			'X-Accepted-OAuth-Scopes',
 			'repo',
 			'X-GitHub-Media-Type',
 			'github.v3; format=json',
+			'X-RateLimit-Limit',
+			'5000',
+			'X-RateLimit-Remaining',
+			'4992',
+			'X-RateLimit-Reset',
+			'1580190622',
 			'Access-Control-Expose-Headers',
-			'ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval',
+			'ETag, Link, Location, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval, X-GitHub-Media-Type',
 			'Access-Control-Allow-Origin',
 			'*',
 			'Strict-Transport-Security',
@@ -1783,14 +2608,77 @@ function missingSHANock() {
 			'Referrer-Policy',
 			'origin-when-cross-origin, strict-origin-when-cross-origin',
 			'Content-Security-Policy',
-			'default-src \'none\'',
-			'X-Runtime-rack',
-			'0.064002',
+			"default-src 'none'",
 			'Content-Encoding',
 			'gzip',
 			'X-GitHub-Request-Id',
-			'8198:3F8B:541F42:BD5AC4:5B071305'
+			'B75F:14EE:1149C6:1D3FBC:5E2FCB0F'
 		]);
+
+
+
+
+
+
+
+	// nock('https://api.github.com:443', {
+	// 		"encodedQueryParams": true
+	// 	})
+	// 	.post('/graphql', {
+	// 		"query": "{\n\t\t\trepository(owner: \"jchartrand\", name: \"aTest\") {\n\t\t\t\tobject(expression: \"master:curt/qurt/tesddt.txt\") {\n\t\t\t\t\t... on Blob {\n\t\t\t\t\t\toid\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t}\n\t\t}"
+	// 	})
+	// 	.query({
+	// 		"access_token": config.personal_oath_for_testing
+	// 	})
+	// 	.reply(200, ["1f8b0800000000000003ab564a492c4954b2aa562a4a2dc82fce2cc92faa04f1f293b252934b94acf24a73726a6b6b019ac688b327000000"], ['Server',
+	// 		'GitHub.com',
+	// 		'Date',
+	// 		'Thu, 24 May 2018 19:31:17 GMT',
+	// 		'Content-Type',
+	// 		'application/json; charset=utf-8',
+	// 		'Transfer-Encoding',
+	// 		'chunked',
+	// 		'Connection',
+	// 		'close',
+	// 		'Status',
+	// 		'200 OK',
+	// 		'X-RateLimit-Limit',
+	// 		'5000',
+	// 		'X-RateLimit-Remaining',
+	// 		'4994',
+	// 		'X-RateLimit-Reset',
+	// 		'1527192331',
+	// 		'Cache-Control',
+	// 		'no-cache',
+	// 		'X-OAuth-Scopes',
+	// 		'repo',
+	// 		'X-Accepted-OAuth-Scopes',
+	// 		'repo',
+	// 		'X-GitHub-Media-Type',
+	// 		'github.v3; format=json',
+	// 		'Access-Control-Expose-Headers',
+	// 		'ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval',
+	// 		'Access-Control-Allow-Origin',
+	// 		'*',
+	// 		'Strict-Transport-Security',
+	// 		'max-age=31536000; includeSubdomains; preload',
+	// 		'X-Frame-Options',
+	// 		'deny',
+	// 		'X-Content-Type-Options',
+	// 		'nosniff',
+	// 		'X-XSS-Protection',
+	// 		'1; mode=block',
+	// 		'Referrer-Policy',
+	// 		'origin-when-cross-origin, strict-origin-when-cross-origin',
+	// 		'Content-Security-Policy',
+	// 		'default-src \'none\'',
+	// 		'X-Runtime-rack',
+	// 		'0.064002',
+	// 		'Content-Encoding',
+	// 		'gzip',
+	// 		'X-GitHub-Request-Id',
+	// 		'8198:3F8B:541F42:BD5AC4:5B071305'
+	// 	]);
 }
 
 function missingBranchNock() {
@@ -1859,13 +2747,13 @@ function missingPRNock() {
 		})
 		.get('/search/issues')
 		.query({
-			"access_token": config.personal_oath_for_testing,
-			"q": "state%3Aopen%20type%3Apr%20repo%3Ajchartrand%2FaTest%20head%3Ahote"
+			"q": "state%3Aopen%20type%3Apr%20repo%3Alucaju%2Fmisc%20head%3Adev"
 		})
-		.reply(200, ["1f8b0800000000000003ab562ac92f49cc894fce2fcd2b51b232d051cacc4bcecf2dc8492d498d2f4a2d2ecd292956b24a4bcc294e054a95a4e60279d1b1b500c845f5b737000000"], ['Server',
+		.reply(200, ["1f8b0800000000000003a555ef4fdb3010fd572a7f863a491ba091d0b4896e9f2863741b634291ebb8a9c1b133ff2894a8fffbce6ea868276d847d8a92dc7b777e77f7dc20ab2c1139554e5a94c507884baaaa5a30cb72cd8c13d6a06c4e8461f0cbb20ade7e36c8698132b4b0b63619c6a4e6fd92db859bf5018b35ab95c1c25172e770c50dc5dc18c70c8ed1010a3fb9557a95772301ac2033264c47dc3639dec01b2c49c5d64007b5564cdab7133e1300175bfe17d3060e3c0b5b89bd03be50f6a5a6b5132228ca0b94a5693a3a4e4e46a3032455c172ff0d9d9f8d1f2fc48778f6e9f1eae6fa637c733d89ce9f7e0c2ecec683c9f4fd0360a5ab664c87be5b6e0503542994e6ca995ef8d09b2bddfbfc05429df1810d12aae412e236b5b4f9e3241d1e0ff6b25f1e7dbb9e087a375e4da69783f3a7fb5388264b6289deef61f86892768a7c2aaaa40549c34039dcf2bf5b9e0e81a3d42d4b38", "a6afed6fe3e8d99ec7f1950a43d85c09a11e00b95feaeeacbf24c75bcc16cf65d9190f98062bbb60a01294ee27b5e4e65f63ba5348886fb07fc028780603fa6a567428a64540290f12aa68c25a072a373354f3da7225bba8b383031ea54b22f913e9ca033803f060241dce13e201f79a4ddd1173036870adf992d095974033caf812e4ec4cb687042ebbaafdda7df5eb05e282c7e6a4a8fc8a05d75d3fdb1ef8ee6de8a3f5e1aa6612c285a2f70c96a03568620c2f25830009ee00cbd6be7bd30670c5053356c9edffad816511d8a166c05de404ee019444497418c587c9c9341a66f1284b8e6e209fab8b3f6306f1344eb3f4384b873e860a655a9ab60a67174ae7508ca23cb41b125c7c9f8cbdad781b838be617dc0f90b7f3cde2e19b8be50dce59f0f9bc8bd9f63dc0d74c2c5d74020604825ece54b182d31b55b19e579fdb5ec58c2125f3cda74a436fe27eb4be5dff06db7316bd9a070000"], [
+			'Server',
 			'GitHub.com',
 			'Date',
-			'Thu, 24 May 2018 19:39:48 GMT',
+			'Fri, 31 Jan 2020 16:16:44 GMT',
 			'Content-Type',
 			'application/json; charset=utf-8',
 			'Transfer-Encoding',
@@ -1877,19 +2765,19 @@ function missingPRNock() {
 			'X-RateLimit-Limit',
 			'30',
 			'X-RateLimit-Remaining',
-			'28',
+			'29',
 			'X-RateLimit-Reset',
-			'1527190847',
+			'1580487464',
 			'Cache-Control',
 			'no-cache',
 			'X-OAuth-Scopes',
-			'repo',
+			'admin:repo_hook, repo',
 			'X-Accepted-OAuth-Scopes',
 			'',
 			'X-GitHub-Media-Type',
 			'github.v3; format=json',
 			'Access-Control-Expose-Headers',
-			'ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval',
+			'ETag, Link, Location, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval, X-GitHub-Media-Type',
 			'Access-Control-Allow-Origin',
 			'*',
 			'Strict-Transport-Security',
@@ -1903,14 +2791,71 @@ function missingPRNock() {
 			'Referrer-Policy',
 			'origin-when-cross-origin, strict-origin-when-cross-origin',
 			'Content-Security-Policy',
-			'default-src \'none\'',
-			'X-Runtime-rack',
-			'0.068931',
+			"default-src 'none'",
 			'Content-Encoding',
 			'gzip',
 			'X-GitHub-Request-Id',
-			'A184:3F8C:73D486:FDABA9:5B071503'
+			'891D:6DE3:7CC0BB:11B473C:5E3452EC'
 		]);
+
+
+	// nock('https://api.github.com:443', {
+	// 		"encodedQueryParams": true
+	// 	})
+	// 	.get('/search/issues')
+	// 	.query({
+	// 		"access_token": config.personal_oath_for_testing,
+	// 		"q": "state%3Aopen%20type%3Apr%20repo%3Ajchartrand%2FaTest%20head%3Ahote"
+	// 	})
+	// 	.reply(200, ["1f8b0800000000000003ab562ac92f49cc894fce2fcd2b51b232d051cacc4bcecf2dc8492d498d2f4a2d2ecd292956b24a4bcc294e054a95a4e60279d1b1b500c845f5b737000000"], ['Server',
+	// 		'GitHub.com',
+	// 		'Date',
+	// 		'Thu, 24 May 2018 19:39:48 GMT',
+	// 		'Content-Type',
+	// 		'application/json; charset=utf-8',
+	// 		'Transfer-Encoding',
+	// 		'chunked',
+	// 		'Connection',
+	// 		'close',
+	// 		'Status',
+	// 		'200 OK',
+	// 		'X-RateLimit-Limit',
+	// 		'30',
+	// 		'X-RateLimit-Remaining',
+	// 		'28',
+	// 		'X-RateLimit-Reset',
+	// 		'1527190847',
+	// 		'Cache-Control',
+	// 		'no-cache',
+	// 		'X-OAuth-Scopes',
+	// 		'repo',
+	// 		'X-Accepted-OAuth-Scopes',
+	// 		'',
+	// 		'X-GitHub-Media-Type',
+	// 		'github.v3; format=json',
+	// 		'Access-Control-Expose-Headers',
+	// 		'ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval',
+	// 		'Access-Control-Allow-Origin',
+	// 		'*',
+	// 		'Strict-Transport-Security',
+	// 		'max-age=31536000; includeSubdomains; preload',
+	// 		'X-Frame-Options',
+	// 		'deny',
+	// 		'X-Content-Type-Options',
+	// 		'nosniff',
+	// 		'X-XSS-Protection',
+	// 		'1; mode=block',
+	// 		'Referrer-Policy',
+	// 		'origin-when-cross-origin, strict-origin-when-cross-origin',
+	// 		'Content-Security-Policy',
+	// 		'default-src \'none\'',
+	// 		'X-Runtime-rack',
+	// 		'0.068931',
+	// 		'Content-Encoding',
+	// 		'gzip',
+	// 		'X-GitHub-Request-Id',
+	// 		'A184:3F8C:73D486:FDABA9:5B071503'
+	// 	]);
 
 }
 
@@ -2056,17 +3001,17 @@ function createBranchFromMasterCreateBranch() {
 
 function getDoc() {
 	return nock('https://api.github.com:443', {
-			'encodedQueryParams': true
+			"encodedQueryParams": true
 		})
-		.get('/repos/jchartrand/aTest/contents/curt/qurt/test.txt')
+		.get('/repos/lucaju/misc/contents/text.txt')
 		.query({
-			'access_token': config.personal_oath_for_testing,
-			'ref': 'jchartrand'
+			"ref": "master"
 		})
-		.reply(200, ["1f8b0800000000000003b5586993aa5812fd2ff5b53a5eb1484ff1222626c405f129a5a220444574b0586c17b44b40b1a3fffb9c04b5ace54d74cfc47cf02d70efcdcc93274fe6e58fbbdccd3677dfef8acdbef8561c8bbb5fee766e11e1895fbe160fbfd31f37eff6918b57f28b2b6e7ce945163702ef49422007ff78095c410e5efc8e27061d5116850ec7e1b07d7cc2f1a2f8d8f9e5ae7c65d81c15c56efffde1c1ddc5dfc2b8884aef9bbfcd1e5e37bbedfe21f123f7b57875f3e0c15dc2", "a5077f9b179bbcd83f7c76e75faf9b977fbe6d80b1a8c8d86fefaddc58f874b6c7b6deadc5cf2670260ef870e45f731cfb1ec8c0fee16fa0156c0f39dbbac1078bafeee10c55b9dfbc9e216950fb14d3cd832fc329ea1da5fb25661b04773e0a0f667db9e3598730c8ccda1758e5255c3c353a072d569897e995a3b2d23971b1692ed4c9328c67a7ce8fd97031340ca5f39c7bd6b1f4f1d61d2d38bfbfad26622006b5c439565ad8b554f9995f79f9b43a9f084bb47e573baa2d3fe75a1671c1a8fbeba496b1cf2f83d3b4f4c4713e390da4a7655a4dfb5a354db4c2cf16d964ad4b5ebe88363dbef4eb698cdda3a8f054e9f494e9e2cc186f83d1e2f0143f56363c80edc43664ac949300abaf6b735f26abcff9d96e1288e32450a7a5bd1e73be382e27b91979ea98f9b035c9f46882ddb3701b6afd23a2629a630dd3e7dc596bf7bdb81b6abdeea393b1bdb35a305f985e9e35abddf562ef983ae7ade76fcf7bddf0399f8d16bb403db219d3236fadec1d43197882ce7b9659063d65d5ec3414ce59eb9c36324b473533d79298d33f54f05c659ca7ae6e6c1daaf699b90c549e6bbc851df2cd1f99b1a7b2c45e2f769e202d69f7bb15e4e961961c2abfdff971de15ce7af221b0c67bd7d2239c5c79ac8de2393fc74cbb4e9e68d6b6600ee065a28d1089652a5f70a141989044c692371b8d777da9ef67266c98a9a63ab5277021f2bf730456dae024de9d8037ac8440cdced310360a9b985a2b95132b7d931ff7279cbe3c74589f90f254f344ef02354206839d2fac422f93916fc79a9714d72d3a1351af82f538f990bdc789e0ec70521319ad87e7401e5eee0cd58c908dfaca887574c57ba68e2b6794de722075d7367607237670961c32617238a5fe88834ba7dee0dfe4e1cc2078be9496b6c51f90f3707939a1c78573e0108cc69197cdc3558eb80573eff514ceab812cacf89c04cc3d6b15da9684ba5ab4b94c598a6a61a8a517fd84ca5075203597b55c01fee3c8ce8e0cb55f3b5653a189263e2da7a846fc0ced7ea50e393f63896b0dc295d8280423549df5f8b4cc8685b3ec84134399d9e2024ca54c697ded38e9758f3881c7cab62a96ef79301122665b9faa44c5b960bdff9e35840c45c36e32f9c6f7bed4c34984397804ee964eada4013008d4c7d017a2c815d3905073adcee344ecdecf46dd7bc3eabc7b4615da7d57b3d7ca18297bdbd25913aba1007b09bc1872ae259786051433b384ede1e351efdf609b2d1854a2445d5fb1fda87d8e60561e4e256db9a8a00d664f4f7a62c7b3543e79ea233cbeb10fac292ae2017637ec86e76fd5dfa082a75fa23553890f266a5cba22897cb7bad1ea1ae2fa598c8850001f42d47f1df4b99814ea39c759c07c05b50db68ed591b564204d4fab62baec16d36410cf127021191c2649c38514aaf485edcb1be856093e5d55e95c1527db3af2b072bf40d5904204bd2e50c3aeeb9bab4ab5f157a8869214bbc9b5a16cedb5c334358a9c9e527aa72332467cd2d461495a71d6cab143715912b746379af63430a4ade237558a9e68df275dbbb0b1d1d64be7b9ed50e891e2245f30d7e093e77c92c9b55353af7a043add185da1a2aa75a182f09074aecde07bf56aac3419835e110b57f71a7a0aba20f36325f333b9d046ac0a0ce584bc24c8e498de3bf93c9c9d59fc9cff271eb72c4636553973729d058337e5982ee73c6cc74a82cae7105bea58d0cc8c81311ae976f629de2c60e840d4254e1431785e3fd67ae29ff493064594d0bbe4c415a2ca53b98f3cdf6bea98476744044dd6a897a8d2ce2675172464aeed1d46266fbd58d9e117e1078d7398472a6228922702517598a25321631e507055564ce2eb99e8341287f3779ea1a01249351729e51aba8a5d8b4a1be80d93c07375887ed209", "eddca41d2d97d44e0e0ff966353af4a4eda9d4e3d6d0f7521ba4840b3cb7a1768861e60bc70a19623e38840927da180ac31456225bf9a4a7f4fc1c8a919b7be4bf1758c73d3cdf1253f1a477e1f098911f4db783c7a406c097c10fa8d3a1f56f1444be40be75c016033dc45d4f9b9e88bc96886bdb4c1ad691f92ab0cf566407b1422555b9726b25c29a68a3a6a4a9381fa89d5029a933c28c244eb13ad8624ed86215ef679851c0d8603d6f7cb10945f02f18993433015fbff6a11947de8e15116ab845162bf28374c6ce64ca7185cc2d034b823ab013703879b53246be47e00fb2d69c8b1aa6ca43b7cb1cabd130bc1f43cf8003558bd0297cf5c8fba20e7f28ee39656a84aeb6d6a9f3ed81751337ba7f89c9200cd65d64e89cc99e0294c912fe8f0a46c670e6cc209652cf50e259ac40f179e45dce34959780478dae28d0cc82be03147d307688eaedfe78a7a9ad22abfad6131855e497fd83b45547af9d8df41d6c23035f7599cbaa006cf2886b3871961c13cc4ff545c9b0bb9dfb6eb4cce6516b2231128ad9aca6e90f9cac90c5773db5f5dc25c650dda84e4559b9f21d1c73d73aaa660eced19a55d832a8ad16aa5053803a009d88662720c28071d3c7802da3598572b075c11664acc57b44d31fcde72d2b3a2131167353d6725a89a0f6c7690fdc265f88bde07fa3e994459cece087b88d0b87d2700535821f8cf0c6540fd53832d4fdca139a9a2bf0fb9d66592f33e1eb11158a8a04c75b4d79024b5caabe7e4a934d06c438e0d0f44eec6c94c213ecd67b95c7d4e3833b987ca200d83ba85f62264e10ed751abae03855c906358809e41c73807bd231259f50df025ff9f9b80ac07ad26b4c52d8813a024a17ddfe996a0335e847abdbf3b7c9ee2f4e1fb04d53cddbf4c1ebfd909f26b8f3a5a875d26fe2191042d77fc244caa80e509d1ce51e35862a446e8b25d43d104c4c03c3521beae01643574a917bc43d9a23434389f4c511482186093406f9c6398d22a2e2f78ea55365b226bff4f7c0a95d037a4b391fe24e829abecd7f9331e41667c336f18d1819642cd20667cfe376da7b37198c1460d469a65cdcf19ad8aeb7bab652312f403988a93bdc2aa24bcfd958328f1a07ef87e806e7de84ee87bebd8686a3b66826c1648d2e144077867c33f98d74eeeab5a124c834e6167069477c43dc31e926cd89ce687a6646831eeea30c1a4acf64a8258fbb497b97c1d493e0f696a640830b7112261be500ae49504b3093fa4a3301a3de87f0a399063033ad60c5a42ed8cec717e545cff8022555df7bd0d18f5338e2c61df0328ba102b10a53556be35cf73c4f37b7c992d469b8473d7c35ed41e51cf4f04ff71f9add460aee267ac3b5db1b263af0fbef0d98764c062e9d1c4302ae5c85dcb3a0969917cb314d287e06351e8297502cea44a8e78fb78acb8df97c73fad9bd896687c50b265ae967d3cfcd9c1879981b6fa7a1e79cbe5010339db8fd3ad2fefb11537e5aebfdc149afb5fb79c3c5f606073fae37919b5e82fbe8572bcef33bbad467549bdd98153fe793266edc54af5f3426c2db4d96ee6c0e6eb9cdcde271c2e3cb0f66f2e71c1f9136b9bf0de23cc45724cfdd6f7eede0d96f2cced3fdddf73feef61bf6f2fffdea872f6d7fdbc07ff5758e3e2fde58fa1f3f2dfef9e7bf016a96151c7d150000"], ['Server',
+		.reply(200, ["1f8b0800000000000003ad91cd4ec3301084dfc5e7aa26a40d492584c485224e7046aafcb3a90d8e6dc51bb5a5eabbb38180d27240451c7c19ed7cde9dd9332f1a600b86b0c5296e914d5814688e95640409d525c8fa2217ba9485c821d75955ccca725655aad2baccaee6b2d6f3020891ec1b41b3f98475ad23ab418c69c1b98876bab6683a3955a1e12dc490b8eb9478e9786393e22a78048f897fed73d3427ddd8884d012d760e356c7c8116e0c922e48fee9fb661180a64ffcbfae4416ded3123f23001d36de05a14f3e6bc566b8bf4bd00ec77e4431defde7dab88b7d49b5757dba838f047d67a2daddf6cfdc2f9f1c2c1f1f9e3d8d8057415bbfa61929121433d256cefad7c4167b96c0d5ffd80a25740eed4f", "81f6cd8f3e39a7f5c3e11da12ace98e6020000"], [
+			'Server',
 			'GitHub.com',
 			'Date',
-			'Thu, 24 May 2018 20:01:34 GMT',
+			'Sat, 25 Jan 2020 05:44:48 GMT',
 			'Content-Type',
 			'application/json; charset=utf-8',
 			'Transfer-Encoding',
@@ -2076,27 +3021,23 @@ function getDoc() {
 			'Status',
 			'200 OK',
 			'X-RateLimit-Limit',
-			'5000',
+			'60',
 			'X-RateLimit-Remaining',
-			'4983',
+			'36',
 			'X-RateLimit-Reset',
-			'1527192331',
+			'1579933722',
 			'Cache-Control',
-			'private, max-age=60, s-maxage=60',
+			'public, max-age=60, s-maxage=60',
 			'Vary',
-			'Accept, Authorization, Cookie, X-GitHub-OTP',
+			'Accept',
 			'ETag',
-			'W/"9fa3ec5f93e21b52d9d7fda29dfc4b3d43932400"',
+			'W/"92ebf03ad8b6a3e3d196488499c9dd8175bfd56e"',
 			'Last-Modified',
-			'Thu, 24 May 2018 19:23:25 GMT',
-			'X-OAuth-Scopes',
-			'repo',
-			'X-Accepted-OAuth-Scopes',
-			'',
+			'Sat, 25 Jan 2020 05:35:10 GMT',
 			'X-GitHub-Media-Type',
 			'github.v3; format=json',
 			'Access-Control-Expose-Headers',
-			'ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval',
+			'ETag, Link, Location, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X - RateLimit - Reset, X - OAuth - Scopes, X - Accepted - OAuth - Scopes, X - Poll - Interval, X - GitHub - Media - Type ',
 			'Access-Control-Allow-Origin',
 			'*',
 			'Strict-Transport-Security',
@@ -2110,13 +3051,11 @@ function getDoc() {
 			'Referrer-Policy',
 			'origin-when-cross-origin, strict-origin-when-cross-origin',
 			'Content-Security-Policy',
-			'default-src \'none\'',
-			'X-Runtime-rack',
-			'0.062517',
+			"default-src 'none'",
 			'Content-Encoding',
 			'gzip',
 			'X-GitHub-Request-Id',
-			'8B13:3F8D:A8DD55:1558ACE:5B071A1E'
+			'9D28:528B:934091:16B1F2B:5E2BD5D0'
 		]);
 
 }
@@ -2125,15 +3064,15 @@ function getRepoContentsTree() {
 	return nock('https://api.github.com:443', {
 			"encodedQueryParams": true
 		})
-		.get((uri) => uri.includes('git/trees'))
+		.get('/repos/lucaju/misc/git/trees/2fc7a21e01174680f395f323cec364c103a097d5')
 		.query({
-			"access_token": config.personal_oath_for_testing,
 			"recursive": "1"
 		})
-		.reply(200, ["1f8b0800000000000003dd594d6f1b3710fd2f3a07da2139fcf2ad40d2537b297a2b7a1892c34a86a495b5eb3676e0ffde59397104c14869efa1c0f246ac88c787375f7cfab21a36b4ba59855062d1503070f54a55971d59af958390a25345be193289571f56f7a79d1cd88ce371b8e93a3a6ed77f6dc7cd7d5ae77edf9df8d80fdd6dded0693cd1a174f43b0f6327bfe8c613f3d0bd01683ab0baf9e3cbea48e346207ffbf4d3c75f3fadf7452eb1ef8b7c5b2900", "8728fbf1e138edd3ae4fb27be6e4513365174af2b5181fab4a456959e81d24acd1aa5489a7e3c3f6518efbf7939b8087ae19f1e9c30b2b3a1cfa91c66d7f18d6b7437f682407d525e60ca0c045c85e671501453fc20c39fb8a399383fc424eb9b9ec9a212fd8e5fbd3f89d1120c8fa2ed759e16f7219678b46575c54852013d812a18854420c98c8689f6c744e0ecc0bc166a02b1e5d6a2703beca8d232a63729c6e6e3c2a4694e4623098a3b2199ee59947a619e83532dd28c9b91e3f5f48f4c38c8a950c675ba361ad92d5523324b548c752332653d00857d1f825e88c09f87eb99e93aa19f49a6159925c139965cb75d72e9753925b3140243036c402b2b5b626473aa1411d30d6407a7eb76a06ba8ebd89ccf2e53a33548b2d200fed11d95c86df5f0d9fe7a766a0eb889cc82c36224b9feff77c18d79ff7bbc6012a3205cad980d219bc73da6576c0d5f812316699415079aee1a597a18df07ef5bef6b256d00bf56efb030f8d33147acf3144ed6370520e59dbe4549051a3a09f1a3793b316f4fc19aa19e89a48f7cfa6a737c82417a78c187c091963f22654a3bc077239a86a855fc829a4ef23870215e6cad40cfa2a3bb36c7a7777cbe6f79622d21c28df9e98ff7f748ec3b0ecfc7b7ca44567e030f4b4dc187d68ec74ec5d2af2b4b6a582f434240ba8a32e3969aa861d875ac54898dfe99a81ae7bc1c3d4eaee9629d5f1d42813e4043e5831aa48ba378a3c95d129ae3189c7638db14c18aa9e6dea34035dc8743c2d761a19fa3d7fdcb6aa64c42aac9ed0554bbe78ef2d46d09a721133b17292098ca3239aad5233d0854a5fa974f4f376c76f786b6aaedaf969042e939b6d0052422fa5013041d4621660b0da9cfde2b3fdabccdcb9b119f2157a03e7fe507ee1bf79d72e5c412b4b4dae1b0173095a4663a38cf7e8a363822a5373a8f3ab6033d07f32eb2e889e157d83e92da623e99c2452c18358abc63156a3339197c74d32c1a51cfdb3a77c96d4cc7eb135433efd29ff429cee0f99462eab9b4abb819ffe05f5f3b2da5f190000"], ['Server',
+		.reply(200, ["1f8b0800000000000003a5944d8bdb301086ff8bce5b5bd2e833b7c2ee712fbd961e349a51e3c5ae4d2c43da25ffbd0a94d0b217a741170dc3cba38711f32ed6631207a14bf6492b964a79e3822c106d010d99333893958424a3272b9ec4761a5be058ebb21efa3e2d43f77da8c70dbb3c4ffd899779edc72da7b7ad9f8635f7add9d713f3dadfc1b806c4e1ebbb58523d36da9797cfcfaf2fdd448d3fcdd47a4249e98c6975fdb95c6b1c676cd51f1da5adb3edbd902145321a2950bb17870610c124696cb6fa1a187eb5b8fb2faf2bb379ed855d9e6e4295874f34e7ee3c8d3b950cab441689d0151bda515ac9864ec1470590325acbd1aa9b12488007ac76f33e5ae93bb4a2ca8e404a8b8e31bae4bdcd9abdf70e922bdac498d8199d6f5a", "5169ff80d66ede472db843cba2549e3c9ae88261042d734160229db2892606238d062e7f69b947b476f3fed13ad7ae9eebce0f183563697b8002ba040ca4a23321b409e5481494b758c83abe2929fbc89cf6d22edfda0a386d3f72aa4ce250d2b8f2e537e8c2cc8ad7040000"], [
+			'Server',
 			'GitHub.com',
 			'Date',
-			'Thu, 26 Jul 2018 12:47:10 GMT',
+			'Sat, 25 Jan 2020 06:07:42 GMT',
 			'Content-Type',
 			'application/json; charset=utf-8',
 			'Transfer-Encoding',
@@ -2143,27 +3082,23 @@ function getRepoContentsTree() {
 			'Status',
 			'200 OK',
 			'X-RateLimit-Limit',
-			'5000',
+			'60',
 			'X-RateLimit-Remaining',
-			'4933',
+			'24',
 			'X-RateLimit-Reset',
-			'1532610663',
+			'1579933721',
 			'Cache-Control',
-			'private, max-age=60, s-maxage=60',
+			'public, max-age=60, s-maxage=60',
 			'Vary',
-			'Accept, Authorization, Cookie, X-GitHub-OTP',
+			'Accept',
 			'ETag',
-			'W/"8da5cafeee33318d132e660c3c3bb235"',
+			'W/"55dedfe8210eeb22a951b65760f44b00"',
 			'Last-Modified',
-			'Mon, 23 Jul 2018 13:16:03 GMT',
-			'X-OAuth-Scopes',
-			'repo',
-			'X-Accepted-OAuth-Scopes',
-			'',
+			'Sat, 25 Jan 2020 05:35:12 GMT',
 			'X-GitHub-Media-Type',
-			'github.v3; param=text-match; format=json',
+			'github.v3; format=json',
 			'Access-Control-Expose-Headers',
-			'ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval',
+			'ETag, Link, Location, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval, X-GitHub-Media-Type',
 			'Access-Control-Allow-Origin',
 			'*',
 			'Strict-Transport-Security',
@@ -2177,16 +3112,81 @@ function getRepoContentsTree() {
 			'Referrer-Policy',
 			'origin-when-cross-origin, strict-origin-when-cross-origin',
 			'Content-Security-Policy',
-			'default-src \'none\'',
-			'X-Runtime-rack',
-			'0.051997',
+			"default-src 'none'",
 			'Content-Encoding',
 			'gzip',
 			'X-GitHub-Request-Id',
-			'B257:6064:1F88F83:3E6535E:5B59C2CE'
+			'A637:5522:7C531:153D6A:5E2BDB2E'
 		]);
 
 }
+
+// function getRepoContentsTree() {
+// 	return nock('https://api.github.com:443', {
+// 			"encodedQueryParams": true
+// 		})
+// 		.get((uri) => uri.includes('git/trees'))
+// 		.query({
+// 			"access_token": config.personal_oath_for_testing,
+// 			"recursive": "1"
+// 		})
+// 		.reply(200, ["1f8b0800000000000003dd594d6f1b3710fd2f3a07da2139fcf2ad40d2537b297a2b7a1892c34a86a495b5eb3676e0ffde59397104c14869efa1c0f246ac88c787375f7cfab21a36b4ba59855062d1503070f54a55971d59af958390a25345be193289571f56f7a79d1cd88ce371b8e93a3a6ed77f6dc7cd7d5ae77edf9df8d80fdd6dded0693cd1a174f43b0f6327bfe8c613f3d0bd01683ab0baf9e3cbea48e346207ffbf4d3c75f3fadf7452eb1ef8b7c5b2900", "8728fbf1e138edd3ae4fb27be6e4513365174af2b5181fab4a456959e81d24acd1aa5489a7e3c3f6518efbf7939b8087ae19f1e9c30b2b3a1cfa91c66d7f18d6b7437f682407d525e60ca0c045c85e671501453fc20c39fb8a399383fc424eb9b9ec9a212fd8e5fbd3f89d1120c8fa2ed759e16f7219678b46575c54852013d812a18854420c98c8689f6c744e0ecc0bc166a02b1e5d6a2703beca8d232a63729c6e6e3c2a4694e4623098a3b2199ee59947a619e83532dd28c9b91e3f5f48f4c38c8a950c675ba361ad92d5523324b548c752332653d00857d1f825e88c09f87eb99e93aa19f49a6159925c139965cb75d72e9753925b3140243036c402b2b5b626473aa1411d30d6407a7eb76a06ba8ebd89ccf2e53a33548b2d200fed11d95c86df5f0d9fe7a766a0eb889cc82c36224b9feff77c18d79ff7bbc6012a3205cad980d219bc73da6576c0d5f812316699415079aee1a597a18df07ef5bef6b256d00bf56efb030f8d33147acf3144ed6370520e59dbe4549051a3a09f1a3793b316f4fc19aa19e89a48f7cfa6a737c82417a78c187c091963f22654a3bc077239a86a855fc829a4ef23870215e6cad40cfa2a3bb36c7a7777cbe6f79622d21c28df9e98ff7f748ec3b0ecfc7b7ca44567e030f4b4dc187d68ec74ec5d2af2b4b6a582f434240ba8a32e3969aa861d875ac54898dfe99a81ae7bc1c3d4eaee9629d5f1d42813e4043e5831aa48ba378a3c95d129ae3189c7638db14c18aa9e6dea34035dc8743c2d761a19fa3d7fdcb6aa64c42aac9ed0554bbe78ef2d46d09a721133b17292098ca3239aad5233d0854a5fa974f4f376c76f786b6aaedaf969042e939b6d0052422fa5013041d4621660b0da9cfde2b3fdabccdcb9b119f2157a03e7fe507ee1bf79d72e5c412b4b4dae1b0173095a4663a38cf7e8a363822a5373a8f3ab6033d07f32eb2e889e157d83e92da623e99c2452c18358abc63156a3339197c74d32c1a51cfdb3a77c96d4cc7eb135433efd29ff429cee0f99462eab9b4abb819ffe05f5f3b2da5f190000"], ['Server',
+// 			'GitHub.com',
+// 			'Date',
+// 			'Thu, 26 Jul 2018 12:47:10 GMT',
+// 			'Content-Type',
+// 			'application/json; charset=utf-8',
+// 			'Transfer-Encoding',
+// 			'chunked',
+// 			'Connection',
+// 			'close',
+// 			'Status',
+// 			'200 OK',
+// 			'X-RateLimit-Limit',
+// 			'5000',
+// 			'X-RateLimit-Remaining',
+// 			'4933',
+// 			'X-RateLimit-Reset',
+// 			'1532610663',
+// 			'Cache-Control',
+// 			'private, max-age=60, s-maxage=60',
+// 			'Vary',
+// 			'Accept, Authorization, Cookie, X-GitHub-OTP',
+// 			'ETag',
+// 			'W/"8da5cafeee33318d132e660c3c3bb235"',
+// 			'Last-Modified',
+// 			'Mon, 23 Jul 2018 13:16:03 GMT',
+// 			'X-OAuth-Scopes',
+// 			'repo',
+// 			'X-Accepted-OAuth-Scopes',
+// 			'',
+// 			'X-GitHub-Media-Type',
+// 			'github.v3; param=text-match; format=json',
+// 			'Access-Control-Expose-Headers',
+// 			'ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval',
+// 			'Access-Control-Allow-Origin',
+// 			'*',
+// 			'Strict-Transport-Security',
+// 			'max-age=31536000; includeSubdomains; preload',
+// 			'X-Frame-Options',
+// 			'deny',
+// 			'X-Content-Type-Options',
+// 			'nosniff',
+// 			'X-XSS-Protection',
+// 			'1; mode=block',
+// 			'Referrer-Policy',
+// 			'origin-when-cross-origin, strict-origin-when-cross-origin',
+// 			'Content-Security-Policy',
+// 			'default-src \'none\'',
+// 			'X-Runtime-rack',
+// 			'0.051997',
+// 			'Content-Encoding',
+// 			'gzip',
+// 			'X-GitHub-Request-Id',
+// 			'B257:6064:1F88F83:3E6535E:5B59C2CE'
+// 		]);
+
+// }
 
 function createBranchGeneric() {
 	return nock('https://api.github.com:443', {
@@ -2261,6 +3261,7 @@ function createBranchGeneric() {
 
 }
 module.exports = {
+	// userAuthenticateNock: authenticate,
 	getDetailsForAuthenticatedUserNock: getDetailsForAuthenticatedUserNock,
 	getGithubCommitNock: getGithubCommitNock,
 	// getCreateGithubCWRCBranchNock:getCreateGithubCWRCBranchNock,

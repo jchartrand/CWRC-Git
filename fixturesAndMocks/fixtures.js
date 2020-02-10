@@ -4,6 +4,30 @@ const config = require('../config');
 // but we don't match to match repositories that are code repositories,
 // so here we sneakily concatenate the full string to avoid matches on this code repo.
 const cwrcAppName = 'CWRC-GitWriter' + '-web-app';
+
+const owner = 'lucaju';
+const testRepo = 'misc';
+const ownerAndRepo = `${owner}/${testRepo}`;
+const versionTimestamp = Math.floor(Date.now() / 1000);
+
+const annotationBundleText = 'some annotations';
+const base64AnnotationBundle = Buffer.from(annotationBundleText).toString('base64');
+const aSingleAnno = 'a single anno with timestamped uris ' + versionTimestamp;
+const testRepoDescription = 'a description of the repo';
+const isPrivate = false;
+
+const baseTreeSHA = 'theBASETReeSHAForTesting';
+const parentCommitSHA = 'parentCommitSHAForTesting';
+
+const newTreeSHA = 'newTreeSHAForTesting';
+const newCommitSHA = 'newCommitSHAForTesting';
+
+const fileSHA = 'SHAForTesting';
+
+const commitMessage = 'saving cwrc draft';
+
+//const cwrcJWTTokenContainingGithubOathToken = jwt.sign(config.personal_oath_for_testing, config.jwt_secret);
+
 const testDoc = `<?xml version="1.0" encoding="UTF-8"?>
 <TEI xmlns="http://www.tei-c.org/ns/1.0" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:cw="http://cwrc.ca/ns/cw#" xmlns:w="http://cwrctc.artsrn.ualberta.ca/#">
 	<teiHeader>
@@ -105,28 +129,8 @@ const testDocWithVersion = `<?xml version="1.0" encoding="UTF-8"?>
 	</text>
 </TEI>`;
 
-const owner = 'jchartrand';
-const testRepo = 'aTest';
-const ownerAndRepo = `${owner}/${testRepo}`;
-const versionTimestamp = Math.floor(Date.now() / 1000);
+
 const base64TestDoc = Buffer.from(testDoc).toString('base64');
-const annotationBundleText = 'some annotations';
-const base64AnnotationBundle = Buffer.from(annotationBundleText).toString('base64');
-const aSingleAnno = 'a single anno with timestamped uris ' + versionTimestamp;
-const testRepoDescription = 'a description of the repo';
-const isPrivate = false;
-
-const baseTreeSHA = 'theBASETReeSHAForTesting';
-const parentCommitSHA = 'parentCommitSHAForTesting';
-
-const newTreeSHA = 'newTreeSHAForTesting';
-const newCommitSHA = 'newCommitSHAForTesting';
-
-const fileSHA = 'SHAForTesting';
-
-const commitMessage = 'saving cwrc draft';
-
-//const cwrcJWTTokenContainingGithubOathToken = jwt.sign(config.personal_oath_for_testing, config.jwt_secret);
 
 
 module.exports = {

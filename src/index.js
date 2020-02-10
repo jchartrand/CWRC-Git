@@ -1,17 +1,31 @@
-const github = require('@octokit/rest')({
-	headers: {
-		accept: 'application/vnd.github.v3.text-match+json',
-		'user-agent': 'octokit/rest.js v1.2.3' // v1.2.3 will be current version
-	},
-});
-const DOMParser = require('xmldom').DOMParser;
-const XMLSerializer = require('xmldom').XMLSerializer;
-const serializer = new XMLSerializer();
+// const github = require('@octokit/rest')({
+// 	headers: {
+// 		accept: 'application/vnd.github.v3.text-match+json',
+// 		'user-agent': 'octokit/rest.js v1.2.3' // v1.2.3 will be current version
+// 	},
+// });
+
+
+const { Octokit } = require('@octokit/rest');
+let octokit;
+
+// const octokit = new Octokit({
+// 	auth: 'b7a9c8fb3cf4774edaba53a025a7f02d5f0f8469',
+// 	userAgent: 'octokit/rest.js v16.40.2',
+// })
+
+
+
+
+
+// const DOMParser = require('xmldom').DOMParser;
+// const XMLSerializer = require('xmldom').XMLSerializer;
+// const serializer = new XMLSerializer();
 
 // we use the cwrcAppName to match CWRC GitHub repositories that are themselves documemnts,
 // but we don't match to match repositories that are code repositories,
 // so here we sneakily concatenate the full string to avoid matches on this code repo.
-const cwrcAppName = 'CWRC-GitWriter' + '-web-app';
+// const cwrcAppName = 'CWRC-GitWriter' + '-web-app';
 
 // We chain together the calls to github as a series of chained promises, and pass
 // the growing result as an object (strictly speaking, creating a copy of the object
@@ -21,13 +35,9 @@ const cwrcAppName = 'CWRC-GitWriter' + '-web-app';
 // new raw github URIs for the newly saved document and annotation files.
 
 
-function _encodeContent(content) {
-	return Buffer.from(content).toString('base64')
-}
-
-function _decodeContent(content) {
-	return Buffer.from(content, 'base64').toString('utf8')
-}
+//Encoding & Decoding
+const _encodeContent = (content) => Buffer.from(content).toString('base64');
+const _decodeContent = (content) => Buffer.from(content, 'base64').toString('utf8')
 
 
 /**
@@ -36,11 +46,26 @@ function _decodeContent(content) {
  * @param {String} gitHubOAuthToken The OAuth token from GitHub
  * @returns {Promise}
  */
-function authenticate(gitHubOAuthToken) {
-	return github.authenticate({
-		type: 'oauth',
-		token: gitHubOAuthToken
+//  const authenticate = async(gitHubOAuthToken) => {
+// 	return octokit.auth({
+// 		type: 'token',
+// 		token: gitHubOAuthToken
+// 	})
+// }
+
+/**
+ * Authenticate the user for making calls to GitHub, using their OAuth token.
+ * See {@link https://developer.github.com/v3/#authentication}
+ * @param {String} gitHubOAuthToken The OAuth token from GitHub
+ * @returns {Promise}
+ */
+const authenticate = async(gitHubOAuthToken) => {
+	octokit = new Octokit({
+		auth: gitHubOAuthToken,
+		userAgent: 'octokit/rest.js v16.40.2',
 	})
+
+	return octokit;
 }
 
 /**
@@ -48,9 +73,8 @@ function authenticate(gitHubOAuthToken) {
  * See {@link https://developer.github.com/v3/users/#get-the-authenticated-user}
  * @returns {Promise}
  */
-function getDetailsForAuthenticatedUser() {
-	return github.users.getAuthenticated({})
-}
+// const getDetailsForAuthenticatedUser = () => octokit.users.getAuthenticated({})
+const getDetailsForAuthenticatedUser = () => octokit.users.getAuthenticated()
 
 /**
  * Get the details for a specific user.
@@ -58,8 +82,8 @@ function getDetailsForAuthenticatedUser() {
  * @param {String} username 
  * @returns {Promise}
  */
-function getDetailsForUser(username) {
-	return github.users.getByUsername({
+const getDetailsForUser = (username) => {
+	return octokit.users.getByUsername({
 		username
 	})
 }
@@ -72,14 +96,21 @@ function getDetailsForUser(username) {
  * @param {Integer} per_page Repos per page
  * @returns {Promise}
  */
-function getReposForAuthenticatedUser(affiliation, page, per_page) {
-	return github.repos.list({
+const getReposForAuthenticatedUser = async (affiliation, page, per_page) => {
+
+	return await octokit.repos.list({
 		page,
 		per_page,
 		affiliation
-	}).then((result) => {
-		return result
-	})
+	});
+
+	// return octokit.repos.list({
+	// 	page,
+	// 	per_page,
+	// 	affiliation
+	// }).then((result) => {
+	// 	return result
+	// })
 }
 
 /**
@@ -90,8 +121,8 @@ function getReposForAuthenticatedUser(affiliation, page, per_page) {
  * @param {Integer} per_page Repos per page
  * @returns {Promise}
  */
-function getReposForUser(username, page, per_page) {
-	return github.repos.listForUser({
+const getReposForUser = (username, page, per_page) => {
+	return octokit.repos.listForUser({
 		username,
 		page,
 		per_page
@@ -104,8 +135,8 @@ function getReposForUser(username, page, per_page) {
  * @param {String} org The org name
  * @returns {Promise}
  */
-function getDetailsForOrg(org) {
-	return github.orgs.get({
+const getDetailsForOrg = (org) => {
+	return octokit.orgs.get({
 		org
 	})
 }
@@ -118,8 +149,8 @@ function getDetailsForOrg(org) {
  * @param {String} username The username
  * @returns {Promise}
  */
-function getPermissionsForUser(owner, repo, username) {
-	return github.repos.getCollaboratorPermissionLevel({
+const getPermissionsForUser = (owner, repo, username) => {
+	return octokit.repos.getCollaboratorPermissionLevel({
 		owner,
 		repo,
 		username
@@ -135,8 +166,8 @@ function getPermissionsForUser(owner, repo, username) {
  * @param {String} path The path
  * @returns {Promise}
  */
-function getTemplates(owner, repo, ref, path) {
-	return github.repos.getContents({
+const getTemplates = (owner, repo, ref, path) => {
+	return octokit.repos.getContents({
 		owner,
 		repo,
 		ref,
@@ -147,26 +178,30 @@ function getTemplates(owner, repo, ref, path) {
 /**
  * Get a document from GitHub.
  * See {@link https://developer.github.com/v3/repos/contents/#get-contents}
+ * See {@link https://octokit.github.io/rest.js/#octokit-routes-repos-get-contents}
  * @param {String} owner The owner
  * @param {String} repo The repo
  * @param {String} ref The branch/tag
  * @param {String} path The path
  * @returns {Promise}
  */
-function getDoc(owner, repo, ref, path) {
-	return github.repos.getContents({
+const getDoc = async (owner, repo, ref, path) => {
+
+	const result = await octokit.repos.getContents({
 		owner,
 		repo,
+		path,
 		ref,
-		path
-	}).then(result => ({
+	})
+
+	return {
 		owner,
 		repo,
 		ref,
 		path,
 		doc: _decodeContent(result.data.content),
 		sha: result.data.sha
-	}))
+	}
 }
 
 /**
@@ -177,30 +212,49 @@ function getDoc(owner, repo, ref, path) {
  * @param {String|Boolean} isPrivate Is the repo private
  * @returns {Promise}
  */
-function createRepo(repo, description, isPrivate) {
-	if (isPrivate === 'true') {
-		isPrivate = true;
-	} else if (isPrivate === 'false') {
-		isPrivate = false;
-	}
-	const createParams = {
+const createRepo = async (repo, description, isPrivate) => {
+
+	isPrivate = (isPrivate == 'true') ? true : false;
+
+	const githubResponse = await octokit.repos.createForAuthenticatedUser({
 		name: repo,
 		auto_init: true,
 		private: isPrivate,
 		description: description
-	}
-	return github.repos.createForAuthenticatedUser(createParams)
-		.then(githubResponse => {
-			return {
-				description,
-				isPrivate,
-				owner: githubResponse.data.owner.login,
-				repo: githubResponse.data.name
-			}
-		})
-		.catch(logError)
+	}).catch(logError)
 
-	// .then(_getMasterBranchSHAs)
+	return {
+		description,
+		isPrivate,
+		owner: githubResponse.data.owner.login,
+		repo: githubResponse.data.name
+	}
+
+	// if (isPrivate === 'true') {
+	// 	isPrivate = true;
+	// } else if (isPrivate === 'false') {
+	// 	isPrivate = false;
+	// }
+
+	// const createParams = {
+	// 	name: repo,
+	// 	auto_init: true,
+	// 	private: isPrivate,
+	// 	description: description
+	// }
+
+	// return octokit.repos.createForAuthenticatedUser(createParams)
+	// 	.then(githubResponse => {
+	// 		return {
+	// 			description,
+	// 			isPrivate,
+	// 			owner: githubResponse.data.owner.login,
+	// 			repo: githubResponse.data.name
+	// 		}
+	// 	})
+	// 	.catch(logError)
+
+	//  // .then(_getMasterBranchSHAs)
 }
 
 /**
@@ -212,30 +266,50 @@ function createRepo(repo, description, isPrivate) {
  * @param {String|Boolean} isPrivate Is the repo private
  * @returns {Promise}
  */
-function createOrgRepo(org, repo, description, isPrivate) {
-	if (isPrivate === 'true') {
-		isPrivate = true;
-	} else if (isPrivate === 'false') {
-		isPrivate = false;
-	}
-	const createParams = {
+const createOrgRepo = async (org, repo, description, isPrivate) => {
+
+	isPrivate = (isPrivate == 'true') ? true : false;
+
+	const githubResponse = await octokit.repos.createInOrg({
 		org,
 		name: repo,
 		auto_init: true,
 		private: isPrivate,
 		description: description
+	}).catch(logError)
+
+	return {
+		org,
+		description,
+		isPrivate,
+		owner: githubResponse.data.owner.login,
+		repo: githubResponse.data.name
 	}
-	return github.repos.createForOrg(createParams)
-		.then(githubResponse => {
-			return {
-				org,
-				description,
-				isPrivate,
-				owner: githubResponse.data.owner.login,
-				repo: githubResponse.data.name
-			}
-		})
-		.catch(logError)
+
+
+	// if (isPrivate === 'true') {
+	// 	isPrivate = true;
+	// } else if (isPrivate === 'false') {
+	// 	isPrivate = false;
+	// }
+	// const createParams = {
+	// 	org,
+	// 	name: repo,
+	// 	auto_init: true,
+	// 	private: isPrivate,
+	// 	description: description
+	// }
+	// return octokit.repos.createInOrg(createParams)
+	// 	.then(githubResponse => {
+	// 		return {
+	// 			org,
+	// 			description,
+	// 			isPrivate,
+	// 			owner: githubResponse.data.owner.login,
+	// 			repo: githubResponse.data.name
+	// 		}
+	// 	})
+	// 	.catch(logError)
 }
 
 /**
@@ -250,7 +324,8 @@ function createOrgRepo(org, repo, description, isPrivate) {
  * @param {String} [sha] The SHA
  * @returns {Promise}
  */
-async function saveDoc(owner, repo, path, content, branch, message, sha) {
+const saveDoc = async (owner, repo, path, content, branch, message, sha) => {
+	
 	if (sha === undefined) {
 		// try to get the sha
 		sha = await _getLatestFileSHA({
@@ -260,6 +335,7 @@ async function saveDoc(owner, repo, path, content, branch, message, sha) {
 			path
 		})
 	}
+
 	if (sha) {
 		return _updateFile({
 			owner,
@@ -287,37 +363,56 @@ owner: the owner of the repo
 repo: repoName
 branch: the branch name
  */
-function _createBranchFromMaster(theDetails) {
+const _createBranchFromMaster = async (theDetails) => {
 	const {
 		owner,
 		repo,
 		branch
 	} = theDetails
-	return _getMasterBranchSHAs(theDetails)
-		.then(result => ({
-			owner,
-			repo,
-			ref: `refs/heads/${branch}`,
-			sha: result.parentCommitSHA
-		}))
-		.then(github.gitdata.createReference)
-		.then(githubResponse => ({
-			...theDetails,
-			refURL: githubResponse.data.url
-		}))
+
+	const result = await _getMasterBranchSHAs(theDetails)
 		.catch(logError)
+	
+	const githubResponse = octokit.git.createRef({
+		owner,
+		repo,
+		ref: `refs/heads/${branch}`,
+		sha: result.parentCommitSHA
+	})
+
+	return {
+		...theDetails,
+		refURL: githubResponse.data.url
+	}
+
+	// return _getMasterBranchSHAs(theDetails)
+	// 	.then(result => ({
+	// 		owner,
+	// 		repo,
+	// 		ref: `refs/heads/${branch}`,
+	// 		sha: result.parentCommitSHA
+	// 	}))
+	// 	.then(octokit.git.createRef)
+	// 	.then(githubResponse => ({
+	// 		...theDetails,
+	// 		refURL: githubResponse.data.url
+	// 	}))
+	// 	.catch(logError)
 }
 
-function _checkForPullRequest({
-	owner,
-	repo,
-	branch
-}) {
-	return github.search.issuesAndPullRequests({
+const _checkForPullRequest = async ({owner,repo,branch}) => {
+
+	const result = await octokit.search.issuesAndPullRequests({
 		q: `state:open type:pr repo:${owner}/${repo} head:${branch}`
-	}).then(
-		result => result.data.total_count > 0
-	)
+	})
+
+	return result.data.total_count > 0;
+
+	// return octokit.search.issuesAndPullRequests({
+	// 	q: `state:open type:pr repo:${owner}/${repo} head:${branch}`
+	// }).then(
+	// 	result => result.data.total_count > 0
+	// )
 }
 
 /**
@@ -333,12 +428,13 @@ function _checkForPullRequest({
  * @param {String} [sha] The SHA
  * @returns {Promise}
  */
-async function saveAsPullRequest(owner, repo, path, content, branch, message, title, sha) {
+const saveAsPullRequest = async (owner, repo, path, content, branch, message, title, sha) => {
 	const doesBranchExist = await _checkForBranch({
 		owner,
 		repo,
 		branch
 	});
+
 	if (!doesBranchExist) {
 		await _createBranchFromMaster({
 			owner,
@@ -346,23 +442,25 @@ async function saveAsPullRequest(owner, repo, path, content, branch, message, ti
 			branch
 		})
 	}
+
 	const resultOfSave = await saveDoc(owner, repo, path, content, branch, message, sha)
+
 	const doesPullRequestExist = await _checkForPullRequest({
 		owner,
 		repo,
 		branch
 	})
+
 	// there can be only one PR per branch */
 	if (!doesPullRequestExist) {
-		const prArgs = {
+		await octokit.pulls.create({
 			owner,
 			repo,
 			title,
 			head: branch,
 			base: 'master',
 			body: message
-		}
-		const prResult = await github.pullRequests.create(prArgs)
+		})
 	}
 
 	return {
@@ -377,13 +475,14 @@ async function saveAsPullRequest(owner, repo, path, content, branch, message, ti
 	}
 }
 
-async function _getLatestFileSHA(chainedResult) {
+ const _getLatestFileSHA = async (chainedResult) => {
 	const {
 		owner,
 		repo,
 		branch,
 		path
 	} = chainedResult
+
 	const {
 		data: {
 			data: {
@@ -392,7 +491,7 @@ async function _getLatestFileSHA(chainedResult) {
 				}
 			}
 		}
-	} = await github.request({
+	} = await octokit.request({
 		method: 'POST',
 		url: '/graphql',
 		query: `{
@@ -421,7 +520,7 @@ async function _getLatestFileSHA(chainedResult) {
 //      branch: branch (default master)
 // }
 // returns the chained result object for passing to further promise based calls.
-function _createFile(chainedResult) {
+const _createFile = async (chainedResult) => {
 	const {
 		owner,
 		repo,
@@ -430,18 +529,21 @@ function _createFile(chainedResult) {
 		content,
 		branch
 	} = chainedResult
-	return github.repos.createFile({
-			owner,
-			repo,
-			path,
-			message,
-			branch,
-			content: _encodeContent(content)
-		})
-		.then(result => ({
-			...chainedResult,
-			sha: result.data.content.sha
-		}))
+
+	const result = await octokit.repos.createOrUpdateFile({
+		owner,
+		repo,
+		path,
+		message,
+		branch,
+		content: _encodeContent(content)
+	})
+
+	return {
+		...chainedResult,
+		sha: result.data.content.sha
+	};
+
 }
 
 // expects in theDetails:
@@ -455,7 +557,7 @@ function _createFile(chainedResult) {
 //      sha: oldFileSHA
 // }
 // returns the chained result object for passing to further promise based calls.
-function _updateFile(chainedResult) {
+const _updateFile = async (chainedResult) => {
 	const {
 		owner,
 		repo,
@@ -466,19 +568,35 @@ function _updateFile(chainedResult) {
 		branch
 	} = chainedResult
 	//probably want to write in the cwrc-git /// application tag, but that could go in from the cwrc-writer I guess, before sending.
-	return github.repos.updateFile({
-			owner,
-			repo,
-			path,
-			message,
-			sha,
-			branch,
-			content: _encodeContent(content)
-		})
-		.then(result => ({
-			...chainedResult,
-			sha: result.data.content.sha
-		}))
+
+	const result = await octokit.repos.createOrUpdateFile({
+		owner,
+		repo,
+		path,
+		message,
+		sha,
+		branch,
+		content: _encodeContent(content)
+	})
+
+	return {
+		...chainedResult,
+		sha: result.data.content.sha
+	};
+
+	// return octokit.repos.createOrUpdateFile({
+	// 	owner,
+	// 	repo,
+	// 	path,
+	// 	message,
+	// 	sha,
+	// 	branch,
+	// 	content: _encodeContent(content)
+	// })
+	// .then(result => ({
+	// 	...chainedResult,
+	// 	sha: result.data.content.sha
+	// }))
 }
 
 function logError(error) {
@@ -487,18 +605,30 @@ function logError(error) {
 	return Promise.reject(error);
 }
 
-function _getMasterBranchSHAs(chainedResult) {
-	return github.repos.getBranch({
+async function _getMasterBranchSHAs(chainedResult) {
+	const githubResponse = await octokit.repos.getBranch({
 		owner: chainedResult.owner,
 		repo: chainedResult.repo,
 		branch: 'master'
-	}).then(
-		githubResponse => ({
-			...chainedResult,
-			baseTreeSHA: githubResponse.data.commit.commit.tree.sha,
-			parentCommitSHA: githubResponse.data.commit.sha
-		})
-	)
+	});
+
+	return {
+		...chainedResult,
+		baseTreeSHA: githubResponse.data.commit.commit.tree.sha,
+		parentCommitSHA: githubResponse.data.commit.sha
+	}
+
+	// return octokit.repos.getBranch({
+	// 	owner: chainedResult.owner,
+	// 	repo: chainedResult.repo,
+	// 	branch: 'master'
+	// }).then(
+	// 	githubResponse => ({
+	// 		...chainedResult,
+	// 		baseTreeSHA: githubResponse.data.commit.commit.tree.sha,
+	// 		parentCommitSHA: githubResponse.data.commit.sha
+	// 	})
+	// )
 }
 
 function _getTreeContentsByDrillDown(chainedResult) {
@@ -523,7 +653,7 @@ function _getTreeContentsByDrillDown(chainedResult) {
 }
 
 function _getTreeContents(treeDetails, basePath) {
-	return github.gitdata.getTree(treeDetails).then(
+	return octokit.git.getTree(treeDetails).then(
 		githubResponse => {
 			let promises = githubResponse.data.tree.map(entry => {
 				let path = basePath + entry.path
@@ -618,10 +748,13 @@ function _unflattenContents(flatContents) {
  * @returns {Promise}
  */
 function searchCode(query, page, per_page) {
-	return github.search.code({
+	return octokit.search.code({
 		q: query,
 		page,
-		per_page
+		per_page,
+		mediaType: {
+			format: 'text-match'
+		}
 	}).then(
 		(result) => {
 			return result
@@ -638,10 +771,13 @@ function searchCode(query, page, per_page) {
  * @returns {Promise}
  */
 function searchRepos(query, page, per_page) {
-	return github.search.repos({
+	return octokit.search.repos({
 		q: query,
 		page,
-		per_page
+		per_page,
+		mediaType: {
+			format: 'text-match'
+		}
 	}).then(
 		(result) => {
 			return result
@@ -656,27 +792,31 @@ function searchRepos(query, page, per_page) {
  * @param {String} repo The repo
  * @returns {Promise}
  */
-function getRepoContents(owner, repo) {
-	return _getMasterBranchSHAs({
-			owner,
-			repo
-		})
-		.then(_getTreeContentsRecursively)
+async function getRepoContents(owner, repo) {
+
+	const masterBranch = await _getMasterBranchSHAs({
+		owner,
+		repo
+	})
+
+	return _getTreeContentsRecursively(masterBranch);
 }
 
-function _getTreeContentsRecursively(chainedResult) {
-	return github.gitdata.getTree({
+async function _getTreeContentsRecursively(chainedResult) {
+
+	const githubResponse = await octokit.git.getTree({
 		owner: chainedResult.owner,
 		repo: chainedResult.repo,
 		tree_sha: chainedResult.baseTreeSHA,
 		recursive: 1
-	}).then(
-		githubResponse => ({
-			...chainedResult,
-			contents: _unflattenContents(githubResponse.data.tree),
-			truncated: githubResponse.data.truncated
-		})
-	)
+	})
+
+	return {
+		...chainedResult,
+		contents: _unflattenContents(githubResponse.data.tree),
+		truncated: githubResponse.data.truncated
+	}
+
 }
 
 /**
@@ -686,32 +826,59 @@ function _getTreeContentsRecursively(chainedResult) {
  * @param {String} repo The repo
  * @returns {Promise}
  */
-function getRepoContentsByDrillDown(owner, repo) {
-	return _getMasterBranchSHAs({
-			owner,
-			repo
-		})
-		.then(_getTreeContentsByDrillDown)
+const getRepoContentsByDrillDown = async (owner, repo) => {
+
+	const results = await _getMasterBranchSHAs({
+		owner,
+		repo
+	})
+
+	return await _getTreeContentsByDrillDown(results);
+	
+
+		// return _getMasterBranchSHAs({
+		// 	owner,
+		// 	repo
+		// })
+		// .then(_getTreeContentsByDrillDown)
 }
 
-function _checkForBranch(theDetails) {
-	return github.gitdata.getRef({
+const _checkForBranch = async (theDetails) => {
+
+
+	const results = await octokit.git.getRef({
 		owner: theDetails.owner,
 		repo: theDetails.repo,
 		ref: `heads/${theDetails.branch}`
-	}).then(
-		result => {
-			// this next check also handles the case where the branch name doesn't exist, but there are branches
-			// for which this name is a prefix, in which case the call returns an array of those 'matching' branches.
-			// See:  https://developer.github.com/v3/git/refs/#get-a-reference
-			return result.data.hasOwnProperty('object')
-		}).catch((error) => {
-		if (error.code === 404) {
+	}).catch((error) => {
+		if (error.status === 404) {
 			return false
 		} else {
 			throw new Error('Something went wrong with the call to check for a branch. ' + error.message);
 		}
 	})
+
+	return results.data.hasOwnProperty('object') 
+
+
+
+	// return octokit.git.getRef({
+	// 	owner: theDetails.owner,
+	// 	repo: theDetails.repo,
+	// 	ref: `heads/${theDetails.branch}`
+	// }).then(
+	// 	result => {
+	// 		// this next check also handles the case where the branch name doesn't exist, but there are branches
+	// 		// for which this name is a prefix, in which case the call returns an array of those 'matching' branches.
+	// 		// See:  https://developer.github.com/v3/git/refs/#get-a-reference
+	// 		return result.data.hasOwnProperty('object')
+	// 	}).catch((error) => {
+	// 	if (error.status === 404) {
+	// 		return false
+	// 	} else {
+	// 		throw new Error('Something went wrong with the call to check for a branch. ' + error.message);
+	// 	}
+	// })
 }
 
 
