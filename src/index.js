@@ -856,11 +856,14 @@ const _checkForBranch = async (theDetails) => {
 		}
 	})
 
-	// this next check also handles the case where the branch name doesn't exist, but there are branches
-	// for which this name is a prefix, in which case the call returns an array of those 'matching' branches.
-	// See:  https://developer.github.com/v3/git/refs/#get-a-reference
-	return results.data.hasOwnProperty('object') 
-
+	if (results === false) {
+		return false;
+	} else {
+		// this next check also handles the case where the branch name doesn't exist, but there are branches
+		// for which this name is a prefix, in which case the call returns an array of those 'matching' branches.
+		// See:  https://developer.github.com/v3/git/refs/#get-a-reference
+		return results.data.hasOwnProperty('object');
+	}
 }
 
 
