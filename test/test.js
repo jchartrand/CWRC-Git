@@ -196,7 +196,7 @@ describe('cwrcGit', () => {
 	// 	// })
 
 	// // describe('.checkForBranch', () => {
-	// // 	beforeEach(function () {
+	// // 	beforeEach( () => {
 	// // 		mocks.getUserBranchHeadNock()
 	// // 		mocks.missingBranchNock()
 	// // 	})
@@ -307,8 +307,8 @@ describe('cwrcGit', () => {
 			mocks.getLatestFileSHANock()
 			mocks.saveExistingFileNock()
 			mocks.findExistingPRNock()
-			// mocks.saveNewFileNock()
-			// mocks.getLatestFileSHANockForNew()
+			mocks.saveNewFileNock()
+			mocks.getLatestFileSHANockForNew()
 		})
 
 		it('returns correctly for existing file', async () => {
@@ -324,7 +324,7 @@ describe('cwrcGit', () => {
 
 		// it('returns correctly for new file', async () => {
 		// 	const result = await cwrcGit.saveAsPullRequest(
-		// 		fixtures.owner, fixtures.testRepo, 'text12.txt', fixtures.testDoc,
+		// 		fixtures.owner, fixtures.testRepo, 'text15.txt', fixtures.testDoc,
 		// 		'dev', 'some commit message', 'glorious title for PR'
 		// 	)
 
