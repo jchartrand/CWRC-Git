@@ -5,7 +5,6 @@ const config = require('../config.js');
 const fixtures = require('../fixturesAndMocks/fixtures.js');
 const mocks = require('../fixturesAndMocks/mocks.js');
 const templateMocks = require('../fixturesAndMocks/templateMocks.js')
-const request = require('request')
 
 // uncomment this next line to use actual authentication with a real github personal token
 cwrcGit.authenticate(config.personal_oath_for_testing);
@@ -163,7 +162,6 @@ describe('cwrcGit', () => {
 	// 	// 		})
 
 	// 	// 		expect(result.refURL).to.exist
-	// 	// 		expect(request.head('http://www.google.com', (error, response)=>(!error && response.statusCode == 200)))
 	// 	// 	})
 	// 	// })
 
