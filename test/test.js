@@ -1,7 +1,7 @@
-const cwrcGit = require('../src/index.js');
-const nock = require('nock');
 const expect = require('chai').expect;
-const config = require('../config.js');
+
+const config = require('../config.json');
+const cwrcGit = require('../src/index.js');
 const fixtures = require('../fixturesAndMocks/fixtures.js');
 const mocks = require('../fixturesAndMocks/mocks.js');
 const templateMocks = require('../fixturesAndMocks/templateMocks.js')
@@ -13,6 +13,7 @@ cwrcGit.authenticate(config.personal_oath_for_testing);
 // to the console, for use in nock.  I've put past nock recordings in /fixturesAndMocks/mocks.js,
 //  which nock now returns for calls to GitHub that it intercepts (by virtue of 'requiring' nock
 // above.)  See https://github.com/node-nock/nock for full details.
+// const nock = require('nock');
 // nock.recorder.rec();
 
 /* could also use "tape-nock" to simplify recording and use of fixtures.  Here are
