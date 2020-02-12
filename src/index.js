@@ -1,3 +1,8 @@
+/**
+ * Module providing GitHub API calls.
+ * @module src/index
+ */
+
 const { Octokit } = require('@octokit/rest');
 
 let octokit;
