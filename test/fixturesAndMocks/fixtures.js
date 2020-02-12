@@ -1,4 +1,4 @@
-const config = require('../config');
+// const config = require('../config.json');
 //const jwt = require('jsonwebtoken');
 // we use the cwrcAppName to match CWRC GitHub repositories that are themselves documemnts,
 // but we don't match to match repositories that are code repositories,
@@ -22,7 +22,7 @@ const parentCommitSHA = 'parentCommitSHAForTesting';
 const newTreeSHA = 'newTreeSHAForTesting';
 const newCommitSHA = 'newCommitSHAForTesting';
 
-const fileSHA = 'SHAForTesting';
+// const fileSHA = 'SHAForTesting';
 
 const commitMessage = 'saving cwrc draft';
 

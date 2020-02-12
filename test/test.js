@@ -2,9 +2,9 @@ const expect = require('chai').expect;
 
 const config = require('./config.json');
 const cwrcGit = require('../src/index.js');
-const fixtures = require('../fixturesAndMocks/fixtures.js');
-const mocks = require('../fixturesAndMocks/mocks.js');
-const templateMocks = require('../fixturesAndMocks/templateMocks.js')
+const fixtures = require('./fixturesAndMocks/fixtures.js');
+const mocks = require('./fixturesAndMocks/mocks.js');
+const templateMocks = require('./fixturesAndMocks/templateMocks.js')
 
 // uncomment this next line to use actual authentication with a real github personal token
 cwrcGit.authenticate(config.personal_oath_for_testing);

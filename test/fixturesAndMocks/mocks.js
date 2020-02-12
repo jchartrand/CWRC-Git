@@ -1,7 +1,8 @@
 /* eslint-disable quotes */
 const nock = require('nock');
-const config = require('../config');
-const fixtures = require('./fixtures.js');
+
+const config = require('../config.json');
+const fixtures = require('./fixtures');
 
 // we use the cwrcAppName to match CWRC GitHub repositories that are themselves documemnts,
 // but we don't match to match repositories that are code repositories,
