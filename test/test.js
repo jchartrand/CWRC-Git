@@ -1,6 +1,6 @@
 const expect = require('chai').expect;
 
-const config = require('../config.json');
+const config = require('./config.json');
 const cwrcGit = require('../src/index.js');
 const fixtures = require('../fixturesAndMocks/fixtures.js');
 const mocks = require('../fixturesAndMocks/mocks.js');
