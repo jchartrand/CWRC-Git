@@ -286,20 +286,6 @@ const _createBranchFromMaster = async (theDetails) => {
 		...theDetails,
 		refURL: githubResponse.data.url
 	}
-
-	// return _getMasterBranchSHAs(theDetails)
-	// 	.then(result => ({
-	// 		owner,
-	// 		repo,
-	// 		ref: `refs/heads/${branch}`,
-	// 		sha: result.parentCommitSHA
-	// 	}))
-	// 	.then(octokit.git.createRef)
-	// 	.then(githubResponse => ({
-	// 		...theDetails,
-	// 		refURL: githubResponse.data.url
-	// 	}))
-	// 	.catch(logError)
 }
 
 const _checkForPullRequest = async ({owner,repo,branch}) => {
@@ -525,27 +511,6 @@ const _getTreeContentsByDrillDown = async (chainedResult) => {
 
 }
 
-// function _getTreeContentsByDrillDown(chainedResult) {
-// 	let basePath = ''
-// 	return _getTreeContents({
-// 			owner: chainedResult.owner,
-// 			repo: chainedResult.repo,
-// 			tree_sha: chainedResult.baseTreeSHA
-// 		},
-// 		basePath
-// 	).then(
-// 		contents => ({
-// 			...chainedResult,
-// 			contents: {
-// 				type: 'folder',
-// 				path: '',
-// 				name: '',
-// 				contents: contents
-// 			}
-// 		})
-// 	)
-// }
-
 const _getTreeContents = async (treeDetails, basePath) => {
 
 	const response = await octokit.git.getTree(treeDetails);
@@ -580,41 +545,6 @@ const _getTreeContents = async (treeDetails, basePath) => {
 	})
 
 }
-
-// function _getTreeContents(treeDetails, basePath) {
-// 	return octokit.git.getTree(treeDetails).then(
-// 		githubResponse => {
-// 			let promises = githubResponse.data.tree.map(entry => {
-// 				let path = basePath + entry.path
-// 				if (entry.type === 'tree') {
-// 					return _getTreeContents({
-// 							owner: treeDetails.owner,
-// 							repo: treeDetails.repo,
-// 							tree_sha: entry.sha
-// 						},
-// 						path + '/'
-// 					).then(folderContents => ({
-// 						type: 'folder',
-// 						path: path,
-// 						name: entry.path,
-// 						contents: folderContents
-// 					}))
-
-// 				} else {
-// 					return Promise.resolve({
-// 						type: 'file',
-// 						path: path,
-// 						name: entry.path
-// 					})
-// 				}
-// 			})
-
-// 			return Promise.all(promises).then(results => {
-// 				return results;
-// 			})
-// 		}
-// 	)
-// }
 
 const _unflattenContents = (flatContents) => {
 	const files = flatContents.filter(file => file.type === 'blob')
@@ -668,58 +598,6 @@ const _unflattenContents = (flatContents) => {
 	return result
 }
 
-// function _unflattenContents(flatContents) {
-// 	const files = flatContents.filter(file => file.type === 'blob')
-// 	const result = {
-// 		type: 'folder',
-// 		name: '',
-// 		path: '',
-// 		contents: []
-// 	}
-// 	const findSubFolder = (parentFolder, folderNameToFind) => {
-// 		const subfolder = parentFolder.contents.find(el => {
-// 			return el.type === 'folder' && el.name === folderNameToFind
-// 		})
-// 		return subfolder;
-// 	}
-// 	const addSubFolder = (newFolderName, parentFolder) => {
-// 		const newSubFolder = {
-// 			type: 'folder',
-// 			name: newFolderName,
-// 			path: `${parentFolder.path}/${newFolderName}`,
-// 			contents: []
-// 		}
-// 		parentFolder.contents.push(newSubFolder)
-// 		return newSubFolder;
-// 	}
-// 	const addFile = (newFileName, parentFolder) => {
-// 		const newFile = {
-// 			type: 'file',
-// 			name: newFileName,
-// 			path: `${parentFolder.path}/${newFileName}`
-// 		}
-// 		parentFolder.contents.push(newFile)
-// 	}
-// 	const isFile = (pathSections, currentIndex) => {
-// 		return pathSections.length - 1 == currentIndex
-// 	}
-
-// 	files.forEach(file => {
-// 		const pathSections = file.path.split('/')
-// 		pathSections.reduce(function (parentFolder, pathSection, pathSectionIndex) {
-// 			const subFolder = findSubFolder(parentFolder, pathSection)
-// 			if (subFolder) {
-// 				return subFolder
-// 			} else if (isFile(pathSections, pathSectionIndex)) {
-// 				return addFile(pathSection, parentFolder)
-// 			} else {
-// 				return addSubFolder(pathSection, parentFolder)
-// 			}
-// 		}, result)
-// 	})
-// 	return result
-// }
-
 /**
  * Search for files based on a specific query.
  * See {@link https://developer.github.com/v3/search/#search-code}
@@ -740,21 +618,6 @@ const searchCode = async (query, page, per_page) => {
 
 	return response;
 }
-
-// function searchCode(query, page, per_page) {
-// 	return octokit.search.code({
-// 		q: query,
-// 		page,
-// 		per_page,
-// 		mediaType: {
-// 			format: 'text-match'
-// 		}
-// 	}).then(
-// 		(result) => {
-// 			return result
-// 		}
-// 	);
-// }
 
 /**
  * Search for repos based on a specific query.
@@ -777,21 +640,6 @@ const searchRepos = async (query, page, per_page) => {
 	return response;
 
 }
-
-// function searchRepos(query, page, per_page) {
-// 	return octokit.search.repos({
-// 		q: query,
-// 		page,
-// 		per_page,
-// 		mediaType: {
-// 			format: 'text-match'
-// 		}
-// 	}).then(
-// 		(result) => {
-// 			return result
-// 		}
-// 	);
-// }
 
 /**
  * Gets the contents (i.e. file structure) of a repo using the GitHub recursive tree method.
@@ -856,16 +704,14 @@ const _checkForBranch = async (theDetails) => {
 		}
 	})
 
-	if (results === false) {
-		return false;
-	} else {
-		// this next check also handles the case where the branch name doesn't exist, but there are branches
-		// for which this name is a prefix, in which case the call returns an array of those 'matching' branches.
-		// See:  https://developer.github.com/v3/git/refs/#get-a-reference
-		return results.data.hasOwnProperty('object');
-	}
+	if (results === false) return false;
+		
+	// this next check also handles the case where the branch name doesn't exist, but there are branches
+	// for which this name is a prefix, in which case the call returns an array of those 'matching' branches.
+	// See:  https://developer.github.com/v3/git/refs/#get-a-reference
+	return results.data.hasOwnProperty('object');
+	
 }
-
 
 module.exports = {
 	authenticate,
