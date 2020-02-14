@@ -1462,85 +1462,37 @@ const saveNewFileNock = () => {
 		})
 		.put('/repos/lucaju/misc/contents/text15.txt', {
 			"message": "some commit message",
+			"sha": "9d53f095186b5f960fd533ecad96d189444647be",
 			"branch": "dev",
-			"content": "PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPFRFSSB4bWxucz0iaHR0cDovL3d3dy50ZWktYy5vcmcvbnMvMS4wIiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiIHhtbG5zOmN3PSJodHRwOi8vY3dyYy5jYS9ucy9jdyMiIHhtbG5zOnc9Imh0dHA6Ly9jd3JjdGMuYXJ0c3JuLnVhbGJlcnRhLmNhLyMiPgoJPHRlaUhlYWRlcj4KCQk8ZmlsZURlc2M+CgkJCTx0aXRsZVN0bXQ+CgkJCQk8dGl0bGU+U2FtcGxlIERvY3VtZW50IFRpdGxlIHRlc3QgMTU4MTM3ODE4NTwvdGl0bGU+CgkJCTwvdGl0bGVTdG10PgoJCQk8cHVibGljYXRpb25TdG10PgoJCQkJPHA+PC9wPgoJCQk8L3B1YmxpY2F0aW9uU3RtdD4KCQkJPHNvdXJjZURlc2Mgc2FtZUFzPSJodHRwOi8vd3d3LmN3cmMuY2EiPgoJCQkJPHA+Q3JlYXRlZCBmcm9tIG9yaWdpbmFsIHJlc2VhcmNoIGJ5IG1lbWJlcnMgb2YgQ1dSQy9DU8OJQyB1bmxlc3Mgb3RoZXJ3aXNlIG5vdGVkLjwvcD4KCQkJPC9zb3VyY2VEZXNjPgoJCTwvZmlsZURlc2M+Cgk8L3RlaUhlYWRlcj4KCTx0ZXh0PgoJCTxib2R5PgoJCQk8ZGl2IHR5cGU9ImxldHRlciI+CgkJCQk8aGVhZD4KCQkJCQk8dGl0bGU+U2FtcGxlIExldHRlciAtIEJlcnRyYW5kIFJ1c3NlbGwgdG8gPHBlcnNOYW1lIGFubm90YXRpb25JZD0iZW50XzczIiBjZXJ0PSJwcm9iYWJsZSIgcmVmPSIyNzkzOTkzOTkiPlBhdHJpY2lhIFNwZW5jZTwvcGVyc05hbWU+IC0gT2N0b2JlciAyMSwgMTkzNTwvdGl0bGU+CgkJCQk8L2hlYWQ+CgkJCQk8b3BlbmVyPgoJCQkJCTxub3RlPgoJCQkJCQk8cD5CYWQgd3JpdGluZyBkdWUgdG8gc2hha3kgdHJhaW48L3A+PHA+SW4gdHJhaW48L3A+PHA+CgkJCQkJCQk8cGxhY2VOYW1lIGFubm90YXRpb25JZD0iZW50XzE0MyIgY2VydD0iZGVmaW5pdGUiIHJlZj0iaHR0cDovL3d3dy5nZW9uYW1lcy5vcmcvNjQ1MzM2NiI+T3NsbzwvcGxhY2VOYW1lPiB0byBCZXJnZW48L3A+CgkJCQkJPC9ub3RlPgoJCQkJCTxkYXRlbGluZT4KCQkJCQkJPGRhdGUgYW5ub3RhdGlvbklkPSJlbnRfNjkiIGNlcnQ9ImRlZmluaXRlIiB3aGVuPSIxOTM1LTEwLTIxIj4yMS4xMC4zNTwvZGF0ZT4KCQkJCQk8L2RhdGVsaW5lPgoJCQkJCTxzYWx1dGU+RGVhcmVzdCAtPC9zYWx1dGU+CgkJCQk8L29wZW5lcj48cD5JIGhhdmUgaGFkIG5vPG5vdGUgYW5ub3RhdGlvbklkPSJlbnRfMTkwIiB0eXBlPSJyZXNlYXJjaE5vdGUiPgoJCQkJCQkJCTxwIHhtbG5zPSJodHRwOi8vd3d3LnRlaS1jLm9yZy9ucy8xLjAiPlNvbWUga2luZCBvZiBub3RlPC9wPgoJCQkJCQk8L25vdGU+IGxldHRlciBmcm9tIHlvdSBzaW5jZSBJIGxlZnQgPHBsYWNlTmFtZSBhbm5vdGF0aW9uSWQ9ImVudF8xNDUiIG9mZnNldElkPSJlbnRfMTQ1IiBjZXJ0PSJkZWZpbml0ZSIgcmVmPSJodHRwOi8vd3d3Lmdlb25hbWVzLm9yZy8yNjczNzIyIj5TdG9ja2hvbG08L3BsYWNlTmFtZT4sIGJ1dCBJIGhhZCBhIG5pY2Ugb25lIGZyb20gSm9obiBpbiBhbiBlbnZlbG9wZSB5b3UgaGFkIHNlbnQgaGltLiBJIGhhZCBzZW50IGhpbSBvbmUgYWRkcmVzc2VkIHRvIENvcGVuaGFnZW4gYnV0IGhlIGhhZG4ndCB1c2VkIGl0LjwvcD48cD5XaGVuIEkgcmVhY2hlZCBPc2xvIHllc3RlcmRheSBldmVuaW5nLCBCcnluanVsZiBCdWxsIHNob3VsZCBoYXZlIGJlZW4gdGhlcmUgdG8gbWVldCBtZSwgYnV0IHdhc24ndC4gSGUgaXMgbm90IG9uIHRoZSB0ZWxlcGhvbmUsIHNvIEkgdG9vayBhIHRheGkgdG8gaGlzIGFkZHJlc3MsIHdoaWNoIHR1cm5lZCBvdXQgdG8gYmUgYSBzdHVkZW50cycgY2x1YiB3aXRoIG5vIG9uZSBhYm91dCBvbiBTdW5kYXlzLCBzbyBJIHdlbnQgdG8gYSBob3RlbCBmZWVsaW5nIHJhdGhlciBub24tcGx1c3NlZC4gQnV0IHByZXNlbnRseSBoZSB0dXJuZWQgdXAuIEhlIGhhZCBnb3QgdGhlIDxwYiBuPSIyIj48L3BiPiB0aW1lIG9mIG15IGFycml2YWwgd3JvbmcsIGFuZCAKCQkJCQkJPGNob2ljZSBhbm5vdGF0aW9uSWQ9ImVudF82NSI+PHNpYyBhbm5vdGF0aW9uSWQ9ImVudF82NSI+d2hlbjwvc2ljPjxjb3JyIGFubm90YXRpb25JZD0iZW50XzY1Ij53aGVuPC9jb3JyPjwvY2hvaWNlPgoJCQkJCWhlIGhhZCBmb3VuZCBoZSBoYWQgbWlzc2VkIG1lIGhlIHBob25lZCB0byBldmVyeSBob3RlbCBpbiBPc2xvIHRpbGwgaGUgaGl0IG9uIHRoZSByaWdodCBvbmUuIEhlIGxlZnQgbWUgYXQgMTAsIGFuZCB0aGVuIEkgaGFkIHRvIGRvIGEgU3VuZGF5IFJlZmVyZWUgYXJ0aWNsZS4gVG9kYXkgbXkgam91cm5leSBsYXN0cyBmcm9tIDkgdGlsbCA5IC0gZm9ydHVuYXRlbHkgb25lIG9mIHRoZSBtb3N0IGJlYXV0aWZ1bCByYWlsd2F5IGpvdXJuZXlzIGluIHRoZSB3b3JsZC4gVG9tb3Jyb3cgSSBsZWN0dXJlIGF0IDxwbGFjZU5hbWUgYW5ub3RhdGlvbklkPSJlbnRfMTQ0IiBjZXJ0PSJkZWZpbml0ZSIgcmVmPSJodHRwOi8vd3d3Lmdlb25hbWVzLm9yZy82NTQ4NTI4Ij5CZXJnZW48L3BsYWNlTmFtZT4gdG8gdGhlIEFuZ2xvLU5vcndlZ2lhbiBTb2NpZXR5LiBOZXh0IGRheSBJIGdvIGJhY2sgdG8gT3NsbywgbGVjdHVyZSB0aGVyZSBGcmkuIGFuZCBTYXQuIGFuZCB0aGVuIHN0YXJ0IGZvciBob21lIHZpYSBCZXJnZW4uPC9wPgoJCQkJPHBiIG49IjMiPjwvcGI+CgkJCQk8cD5CdWxsIGlzIGEgbmljZSB5b3VuZyBtYW4gYnV0IGluY29tcGV0ZW50IC0gY2FuJ3QgcXVpdGUgc3RhbmQgdGhlIGNvbW11bmlzdHMsIGJ1dCBmaW5kcyB0aGUgc29jaWFsaXN0cyB0b28gbWlsZC48L3A+PHA+SSBhbSB1bmhhcHBpbHkgd29uZGVyaW5nIHdoYXQgeW91IGFyZSBmZWVsaW5nIGFib3V0IG1lLjwvcD4KCQkJCTxjbG9zZXI+CgkJCQkJPHNhbHV0ZT5JIGxvdmUgeW91IHZlcnkgbXVjaCAtPC9zYWx1dGU+CgkJCQkJPHNpZ25lZD4KCQkJCQkJPHBlcnNOYW1lIHNhbWVBcz0iaHR0cDovL3d3dy5mcmVlYmFzZS5jb20vdmlldy9lbi9iZXJ0cmFuZF9ydXNzZWxsIj4KCQkJCQkJCTxwZXJzTmFtZSBhbm5vdGF0aW9uSWQ9ImVudF8xMDkiIGNlcnQ9ImRlZmluaXRlIiB0eXBlPSJyZWFsIiByZWY9Imh0dHA6Ly92aWFmLm9yZy92aWFmLzM2OTI0MTM3Ij5CPC9wZXJzTmFtZT4KCQkJCQkJPC9wZXJzTmFtZT4KCQkJCQk8L3NpZ25lZD4KCQkJCTwvY2xvc2VyPgoJCQk8L2Rpdj4KCQk8L2JvZHk+Cgk8L3RleHQ+CjwvVEVJPgo="
+			"content": "PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPFRFSSB4bWxucz0iaHR0cDovL3d3dy50ZWktYy5vcmcvbnMvMS4wIiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiIHhtbG5zOmN3PSJodHRwOi8vY3dyYy5jYS9ucy9jdyMiIHhtbG5zOnc9Imh0dHA6Ly9jd3JjdGMuYXJ0c3JuLnVhbGJlcnRhLmNhLyMiPgoJPHRlaUhlYWRlcj4KCQk8ZmlsZURlc2M+CgkJCTx0aXRsZVN0bXQ+CgkJCQk8dGl0bGU+U2FtcGxlIERvY3VtZW50IFRpdGxlIHRlc3QgMTU4MTY1NDc2MDwvdGl0bGU+CgkJCTwvdGl0bGVTdG10PgoJCQk8cHVibGljYXRpb25TdG10PgoJCQkJPHA+PC9wPgoJCQk8L3B1YmxpY2F0aW9uU3RtdD4KCQkJPHNvdXJjZURlc2Mgc2FtZUFzPSJodHRwOi8vd3d3LmN3cmMuY2EiPgoJCQkJPHA+Q3JlYXRlZCBmcm9tIG9yaWdpbmFsIHJlc2VhcmNoIGJ5IG1lbWJlcnMgb2YgQ1dSQy9DU8OJQyB1bmxlc3Mgb3RoZXJ3aXNlIG5vdGVkLjwvcD4KCQkJPC9zb3VyY2VEZXNjPgoJCTwvZmlsZURlc2M+Cgk8L3RlaUhlYWRlcj4KCTx0ZXh0PgoJCTxib2R5PgoJCQk8ZGl2IHR5cGU9ImxldHRlciI+CgkJCQk8aGVhZD4KCQkJCQk8dGl0bGU+U2FtcGxlIExldHRlciAtIEJlcnRyYW5kIFJ1c3NlbGwgdG8gPHBlcnNOYW1lIGFubm90YXRpb25JZD0iZW50XzczIiBjZXJ0PSJwcm9iYWJsZSIgcmVmPSIyNzkzOTkzOTkiPlBhdHJpY2lhIFNwZW5jZTwvcGVyc05hbWU+IC0gT2N0b2JlciAyMSwgMTkzNTwvdGl0bGU+CgkJCQk8L2hlYWQ+CgkJCQk8b3BlbmVyPgoJCQkJCTxub3RlPgoJCQkJCQk8cD5CYWQgd3JpdGluZyBkdWUgdG8gc2hha3kgdHJhaW48L3A+PHA+SW4gdHJhaW48L3A+PHA+CgkJCQkJCQk8cGxhY2VOYW1lIGFubm90YXRpb25JZD0iZW50XzE0MyIgY2VydD0iZGVmaW5pdGUiIHJlZj0iaHR0cDovL3d3dy5nZW9uYW1lcy5vcmcvNjQ1MzM2NiI+T3NsbzwvcGxhY2VOYW1lPiB0byBCZXJnZW48L3A+CgkJCQkJPC9ub3RlPgoJCQkJCTxkYXRlbGluZT4KCQkJCQkJPGRhdGUgYW5ub3RhdGlvbklkPSJlbnRfNjkiIGNlcnQ9ImRlZmluaXRlIiB3aGVuPSIxOTM1LTEwLTIxIj4yMS4xMC4zNTwvZGF0ZT4KCQkJCQk8L2RhdGVsaW5lPgoJCQkJCTxzYWx1dGU+RGVhcmVzdCAtPC9zYWx1dGU+CgkJCQk8L29wZW5lcj48cD5JIGhhdmUgaGFkIG5vPG5vdGUgYW5ub3RhdGlvbklkPSJlbnRfMTkwIiB0eXBlPSJyZXNlYXJjaE5vdGUiPgoJCQkJCQkJCTxwIHhtbG5zPSJodHRwOi8vd3d3LnRlaS1jLm9yZy9ucy8xLjAiPlNvbWUga2luZCBvZiBub3RlPC9wPgoJCQkJCQk8L25vdGU+IGxldHRlciBmcm9tIHlvdSBzaW5jZSBJIGxlZnQgPHBsYWNlTmFtZSBhbm5vdGF0aW9uSWQ9ImVudF8xNDUiIG9mZnNldElkPSJlbnRfMTQ1IiBjZXJ0PSJkZWZpbml0ZSIgcmVmPSJodHRwOi8vd3d3Lmdlb25hbWVzLm9yZy8yNjczNzIyIj5TdG9ja2hvbG08L3BsYWNlTmFtZT4sIGJ1dCBJIGhhZCBhIG5pY2Ugb25lIGZyb20gSm9obiBpbiBhbiBlbnZlbG9wZSB5b3UgaGFkIHNlbnQgaGltLiBJIGhhZCBzZW50IGhpbSBvbmUgYWRkcmVzc2VkIHRvIENvcGVuaGFnZW4gYnV0IGhlIGhhZG4ndCB1c2VkIGl0LjwvcD48cD5XaGVuIEkgcmVhY2hlZCBPc2xvIHllc3RlcmRheSBldmVuaW5nLCBCcnluanVsZiBCdWxsIHNob3VsZCBoYXZlIGJlZW4gdGhlcmUgdG8gbWVldCBtZSwgYnV0IHdhc24ndC4gSGUgaXMgbm90IG9uIHRoZSB0ZWxlcGhvbmUsIHNvIEkgdG9vayBhIHRheGkgdG8gaGlzIGFkZHJlc3MsIHdoaWNoIHR1cm5lZCBvdXQgdG8gYmUgYSBzdHVkZW50cycgY2x1YiB3aXRoIG5vIG9uZSBhYm91dCBvbiBTdW5kYXlzLCBzbyBJIHdlbnQgdG8gYSBob3RlbCBmZWVsaW5nIHJhdGhlciBub24tcGx1c3NlZC4gQnV0IHByZXNlbnRseSBoZSB0dXJuZWQgdXAuIEhlIGhhZCBnb3QgdGhlIDxwYiBuPSIyIj48L3BiPiB0aW1lIG9mIG15IGFycml2YWwgd3JvbmcsIGFuZCAKCQkJCQkJPGNob2ljZSBhbm5vdGF0aW9uSWQ9ImVudF82NSI+PHNpYyBhbm5vdGF0aW9uSWQ9ImVudF82NSI+d2hlbjwvc2ljPjxjb3JyIGFubm90YXRpb25JZD0iZW50XzY1Ij53aGVuPC9jb3JyPjwvY2hvaWNlPgoJCQkJCWhlIGhhZCBmb3VuZCBoZSBoYWQgbWlzc2VkIG1lIGhlIHBob25lZCB0byBldmVyeSBob3RlbCBpbiBPc2xvIHRpbGwgaGUgaGl0IG9uIHRoZSByaWdodCBvbmUuIEhlIGxlZnQgbWUgYXQgMTAsIGFuZCB0aGVuIEkgaGFkIHRvIGRvIGEgU3VuZGF5IFJlZmVyZWUgYXJ0aWNsZS4gVG9kYXkgbXkgam91cm5leSBsYXN0cyBmcm9tIDkgdGlsbCA5IC0gZm9ydHVuYXRlbHkgb25lIG9mIHRoZSBtb3N0IGJlYXV0aWZ1bCByYWlsd2F5IGpvdXJuZXlzIGluIHRoZSB3b3JsZC4gVG9tb3Jyb3cgSSBsZWN0dXJlIGF0IDxwbGFjZU5hbWUgYW5ub3RhdGlvbklkPSJlbnRfMTQ0IiBjZXJ0PSJkZWZpbml0ZSIgcmVmPSJodHRwOi8vd3d3Lmdlb25hbWVzLm9yZy82NTQ4NTI4Ij5CZXJnZW48L3BsYWNlTmFtZT4gdG8gdGhlIEFuZ2xvLU5vcndlZ2lhbiBTb2NpZXR5LiBOZXh0IGRheSBJIGdvIGJhY2sgdG8gT3NsbywgbGVjdHVyZSB0aGVyZSBGcmkuIGFuZCBTYXQuIGFuZCB0aGVuIHN0YXJ0IGZvciBob21lIHZpYSBCZXJnZW4uPC9wPgoJCQkJPHBiIG49IjMiPjwvcGI+CgkJCQk8cD5CdWxsIGlzIGEgbmljZSB5b3VuZyBtYW4gYnV0IGluY29tcGV0ZW50IC0gY2FuJ3QgcXVpdGUgc3RhbmQgdGhlIGNvbW11bmlzdHMsIGJ1dCBmaW5kcyB0aGUgc29jaWFsaXN0cyB0b28gbWlsZC48L3A+PHA+SSBhbSB1bmhhcHBpbHkgd29uZGVyaW5nIHdoYXQgeW91IGFyZSBmZWVsaW5nIGFib3V0IG1lLjwvcD4KCQkJCTxjbG9zZXI+CgkJCQkJPHNhbHV0ZT5JIGxvdmUgeW91IHZlcnkgbXVjaCAtPC9zYWx1dGU+CgkJCQkJPHNpZ25lZD4KCQkJCQkJPHBlcnNOYW1lIHNhbWVBcz0iaHR0cDovL3d3dy5mcmVlYmFzZS5jb20vdmlldy9lbi9iZXJ0cmFuZF9ydXNzZWxsIj4KCQkJCQkJCTxwZXJzTmFtZSBhbm5vdGF0aW9uSWQ9ImVudF8xMDkiIGNlcnQ9ImRlZmluaXRlIiB0eXBlPSJyZWFsIiByZWY9Imh0dHA6Ly92aWFmLm9yZy92aWFmLzM2OTI0MTM3Ij5CPC9wZXJzTmFtZT4KCQkJCQkJPC9wZXJzTmFtZT4KCQkJCQk8L3NpZ25lZD4KCQkJCTwvY2xvc2VyPgoJCQk8L2Rpdj4KCQk8L2JvZHk+Cgk8L3RleHQ+CjwvVEVJPgo="
 		})
-		.reply(201, {
-			"content": {
-				"name": "text15.txt",
-				"path": "text15.txt",
-				"sha": "5dacbd64cfe19df27d7345222f9d5b113d4b6d9d",
-				"size": 3197,
-				"url": "https://api.github.com/repos/lucaju/misc/contents/text15.txt?ref=dev",
-				"html_url": "https://github.com/lucaju/misc/blob/dev/text15.txt",
-				"git_url": "https://api.github.com/repos/lucaju/misc/git/blobs/5dacbd64cfe19df27d7345222f9d5b113d4b6d9d",
-				"download_url": "https://raw.githubusercontent.com/lucaju/misc/dev/text15.txt",
-				"type": "file",
-				"_links": {
-					"self": "https://api.github.com/repos/lucaju/misc/contents/text15.txt?ref=dev",
-					"git": "https://api.github.com/repos/lucaju/misc/git/blobs/5dacbd64cfe19df27d7345222f9d5b113d4b6d9d",
-					"html": "https://github.com/lucaju/misc/blob/dev/text15.txt"
-				}
-			},
-			"commit": {
-				"sha": "0af3e0dd7957a0cd75b84839845f469fe4a7f302",
-				"node_id": "MDY6Q29tbWl0MjI1OTQyODcxOjBhZjNlMGRkNzk1N2EwY2Q3NWI4NDgzOTg0NWY0NjlmZTRhN2YzMDI=",
-				"url": "https://api.github.com/repos/lucaju/misc/git/commits/0af3e0dd7957a0cd75b84839845f469fe4a7f302",
-				"html_url": "https://github.com/lucaju/misc/commit/0af3e0dd7957a0cd75b84839845f469fe4a7f302",
-				"author": {
-					"name": "Luciano Frizzera",
-					"email": "lucaju@me.com",
-					"date": "2020-02-10T23:43:06Z"
-				},
-				"committer": {
-					"name": "Luciano Frizzera",
-					"email": "lucaju@me.com",
-					"date": "2020-02-10T23:43:06Z"
-				},
-				"tree": {
-					"sha": "b05fe9f625ba7135e4a00bed15858f247907e0ff",
-					"url": "https://api.github.com/repos/lucaju/misc/git/trees/b05fe9f625ba7135e4a00bed15858f247907e0ff"
-				},
-				"message": "some commit message",
-				"parents": [{
-					"sha": "3891ccbb28aa4b1eeb072c0f18ddb96477efba8a",
-					"url": "https://api.github.com/repos/lucaju/misc/git/commits/3891ccbb28aa4b1eeb072c0f18ddb96477efba8a",
-					"html_url": "https://github.com/lucaju/misc/commit/3891ccbb28aa4b1eeb072c0f18ddb96477efba8a"
-				}],
-				"verification": {
-					"verified": false,
-					"reason": "unsigned",
-					"signature": null,
-					"payload": null
-				}
-			}
-		}, [
+		.reply(200, ["1f8b0800000000000003b5555d6fda3014fd2b559e69632771122355dba476d5a40162a2aac634558e7d0da64e8262a7052afefbec021b630f6baaed3137b9e7def361e739e07565a1b241ff39a85809413fb0b0b2985cd8950d7ac192d9f969cdcc992b1534ce21a294e342f0587251a43921397155a059c45286a4a0823910a3360e38c634eb056da35df3dcdaa5e987215baa8b99b2f3b6b8e0751936b0ac4da85bce166d582ac3c3fd7a26fcb5d5bb06e4a58047073cb7a5be", "ff1df108ed18a7d07511baa6231cd7ef3e3e69ffeb42ae25f46026ec2080a89f2a5d337132ac614f7bf6ad81664ff54588e3d5ffd8daae97de27a934380ef75a550fc6fb6740cb7fa7ad23da05ec4dba78ff8e8674f06ebbedb9e896a55fd2317f49649648827156500e89109262c0244ff21828467196e5b94808901c3bd1aa5ac0bd12ae6970f5351d47d416771a0d169ff068325e8faef86ab4e068bab85d0d26428dee867a78f3e561ba78584d27d77874354e06d12d194c3e6c861b9e8c6ec6687877ebead7970ebc63c4bd723b2a26ec40e1f5d9df8177c166ad9dd7cdd19df0b9e58a55f5d9c7466d36d0f8430d2553debc5d54df97e083ebea82599fce0845e81c45e73899a0a41f47fd844c839fa659f83fe8b60137fc1008ced3026312a5c079c238c9a28c1319230c8c48a044b2042420f436cffc2c13be7a86e35e82316ce6d5317509673b5fce0e557fd936ee2a7667f9db8141222165902386d22c1569564404a308981031e529e5224e13c8e51b191c52d7614ae7d4bd1a7bfbbd173c42a3a4e2ccaabaf236ee9ec19d53c9b4815ed00033fe55d05646cd2af7c6ff5d6615b36de374ad5aadbd8c6b7fd9ee1eb7dbed0f9310a984e5060000"], [
 			'Server',
 			'GitHub.com',
 			'Date',
-			'Mon, 10 Feb 2020 23:43:07 GMT',
+			'Fri, 14 Feb 2020 04:32:45 GMT',
 			'Content-Type',
 			'application/json; charset=utf-8',
-			'Content-Length',
-			'1765',
+			'Transfer-Encoding',
+			'chunked',
 			'Connection',
 			'close',
 			'Status',
-			'201 Created',
+			'200 OK',
 			'X-RateLimit-Limit',
 			'5000',
 			'X-RateLimit-Remaining',
-			'4947',
+			'4995',
 			'X-RateLimit-Reset',
-			'1581379645',
+			'1581657838',
 			'Cache-Control',
 			'private, max-age=60, s-maxage=60',
 			'Vary',
 			'Accept, Authorization, Cookie, X-GitHub-OTP',
 			'ETag',
-			'"3b3bb194fdbaaf11234f2bf911145594"',
+			'W/"679c0155a8992a8404cefd350a32547c"',
 			'X-OAuth-Scopes',
-			'delete_repo, notifications, repo, user',
+			'repo, user',
 			'X-Accepted-OAuth-Scopes',
 			'',
 			'X-GitHub-Media-Type',
@@ -1562,129 +1514,17 @@ const saveNewFileNock = () => {
 			'Content-Security-Policy',
 			"default-src 'none'",
 			'Vary',
-			'Accept-Encoding, Accept',
+			'Accept-Encoding, Accept, X-Requested-With',
+			'Content-Encoding',
+			'gzip',
 			'X-GitHub-Request-Id',
-			'B166:34D7:AF297:155782:5E41EA8A'
+			'937F:5E2E:3E3BA4:9A899D:5E4622EC'
 		]);
-
-
-
-
-	// nock('https://api.github.com:443', {
-	// 		"encodedQueryParams": true
-	// 	})
-	// 	.put('/repos/jchartrand/aTest/contents/curt/qurt/testuufy.txt', {
-	// 		"message": "some commit message",
-	// 		"branch": "jchartrand",
-	// 		"content": "PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPFRFSSB4bWxucz0iaHR0cDovL3d3dy50ZWktYy5vcmcvbnMvMS4wIiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiIHhtbG5zOmN3PSJodHRwOi8vY3dyYy5jYS9ucy9jdyMiIHhtbG5zOnc9Imh0dHA6Ly9jd3JjdGMuYXJ0c3JuLnVhbGJlcnRhLmNhLyMiPgogIDx0ZWlIZWFkZXI+CiAgICA8ZmlsZURlc2M+CiAgICAgIDx0aXRsZVN0bXQ+CiAgICAgICAgPHRpdGxlPlNhbXBsZSBEb2N1bWVudCBUaXRsZSB0ZXN0IHVuZGVmaW5lZDwvdGl0bGU+CiAgICAgIDwvdGl0bGVTdG10PgogICAgICA8cHVibGljYXRpb25TdG10PgogICAgICAgIDxwPjwvcD4KICAgICAgPC9wdWJsaWNhdGlvblN0bXQ+CiAgICAgIDxzb3VyY2VEZXNjIHNhbWVBcz0iaHR0cDovL3d3dy5jd3JjLmNhIj4KICAgICAgICA8cD5DcmVhdGVkIGZyb20gb3JpZ2luYWwgcmVzZWFyY2ggYnkgbWVtYmVycyBvZiBDV1JDL0NTw4lDIHVubGVzcyBvdGhlcndpc2Ugbm90ZWQuPC9wPgogICAgICA8L3NvdXJjZURlc2M+CiAgICA8L2ZpbGVEZXNjPgogIDwvdGVpSGVhZGVyPgogIDx0ZXh0PgogICAgPGJvZHk+CiAgICAgIDxkaXYgdHlwZT0ibGV0dGVyIj4KICAgICAgICA8aGVhZD4KICAgICAgICAgIDx0aXRsZT5TYW1wbGUgTGV0dGVyIC0gQmVydHJhbmQgUnVzc2VsbCB0byA8cGVyc05hbWUgYW5ub3RhdGlvbklkPSJlbnRfNzMiIGNlcnQ9InByb2JhYmxlIiByZWY9IjI3OTM5OTM5OSI+UGF0cmljaWEgU3BlbmNlPC9wZXJzTmFtZT4gLSBPY3RvYmVyIDIxLCAxOTM1PC90aXRsZT4KICAgICAgICA8L2hlYWQ+CiAgICAgICAgPG9wZW5lcj4KICAgICAgICAgIDxub3RlPgogICAgICAgICAgICA8cD5CYWQgd3JpdGluZyBkdWUgdG8gc2hha3kgdHJhaW48L3A+PHA+SW4gdHJhaW48L3A+PHA+CiAgICAgICAgICAgICAgPHBsYWNlTmFtZSBhbm5vdGF0aW9uSWQ9ImVudF8xNDMiIGNlcnQ9ImRlZmluaXRlIiByZWY9Imh0dHA6Ly93d3cuZ2VvbmFtZXMub3JnLzY0NTMzNjYiPk9zbG88L3BsYWNlTmFtZT4gdG8gQmVyZ2VuPC9wPgogICAgICAgICAgPC9ub3RlPgogICAgICAgICAgPGRhdGVsaW5lPgogICAgICAgICAgICA8ZGF0ZSBhbm5vdGF0aW9uSWQ9ImVudF82OSIgY2VydD0iZGVmaW5pdGUiIHdoZW49IjE5MzUtMTAtMjEiPjIxLjEwLjM1PC9kYXRlPgogICAgICAgICAgPC9kYXRlbGluZT4KICAgICAgICAgIDxzYWx1dGU+RGVhcmVzdCAtPC9zYWx1dGU+CiAgICAgICAgPC9vcGVuZXI+PHA+SSBoYXZlIGhhZCBubzxub3RlIGFubm90YXRpb25JZD0iZW50XzE5MCIgdHlwZT0icmVzZWFyY2hOb3RlIj4KICAgICAgICAgICAgICAgIDxwIHhtbG5zPSJodHRwOi8vd3d3LnRlaS1jLm9yZy9ucy8xLjAiPlNvbWUga2luZCBvZiBub3RlPC9wPgogICAgICAgICAgICA8L25vdGU+IGxldHRlciBmcm9tIHlvdSBzaW5jZSBJIGxlZnQgPHBsYWNlTmFtZSBhbm5vdGF0aW9uSWQ9ImVudF8xNDUiIG9mZnNldElkPSJlbnRfMTQ1IiBjZXJ0PSJkZWZpbml0ZSIgcmVmPSJodHRwOi8vd3d3Lmdlb25hbWVzLm9yZy8yNjczNzIyIj5TdG9ja2hvbG08L3BsYWNlTmFtZT4sIGJ1dCBJIGhhZCBhIG5pY2Ugb25lIGZyb20gSm9obiBpbiBhbiBlbnZlbG9wZSB5b3UgaGFkIHNlbnQgaGltLiBJIGhhZCBzZW50IGhpbSBvbmUgYWRkcmVzc2VkIHRvIENvcGVuaGFnZW4gYnV0IGhlIGhhZG4ndCB1c2VkIGl0LjwvcD48cD5XaGVuIEkgcmVhY2hlZCBPc2xvIHllc3RlcmRheSBldmVuaW5nLCBCcnluanVsZiBCdWxsIHNob3VsZCBoYXZlIGJlZW4gdGhlcmUgdG8gbWVldCBtZSwgYnV0IHdhc24ndC4gSGUgaXMgbm90IG9uIHRoZSB0ZWxlcGhvbmUsIHNvIEkgdG9vayBhIHRheGkgdG8gaGlzIGFkZHJlc3MsIHdoaWNoIHR1cm5lZCBvdXQgdG8gYmUgYSBzdHVkZW50cycgY2x1YiB3aXRoIG5vIG9uZSBhYm91dCBvbiBTdW5kYXlzLCBzbyBJIHdlbnQgdG8gYSBob3RlbCBmZWVsaW5nIHJhdGhlciBub24tcGx1c3NlZC4gQnV0IHByZXNlbnRseSBoZSB0dXJuZWQgdXAuIEhlIGhhZCBnb3QgdGhlIDxwYiBuPSIyIj48L3BiPiB0aW1lIG9mIG15IGFycml2YWwgd3JvbmcsIGFuZCAKICAgICAgICAgICAgPGNob2ljZSBhbm5vdGF0aW9uSWQ9ImVudF82NSI+PHNpYyBhbm5vdGF0aW9uSWQ9ImVudF82NSI+d2hlbjwvc2ljPjxjb3JyIGFubm90YXRpb25JZD0iZW50XzY1Ij53aGVuPC9jb3JyPjwvY2hvaWNlPgogICAgICAgICAgaGUgaGFkIGZvdW5kIGhlIGhhZCBtaXNzZWQgbWUgaGUgcGhvbmVkIHRvIGV2ZXJ5IGhvdGVsIGluIE9zbG8gdGlsbCBoZSBoaXQgb24gdGhlIHJpZ2h0IG9uZS4gSGUgbGVmdCBtZSBhdCAxMCwgYW5kIHRoZW4gSSBoYWQgdG8gZG8gYSBTdW5kYXkgUmVmZXJlZSBhcnRpY2xlLiBUb2RheSBteSBqb3VybmV5IGxhc3RzIGZyb20gOSB0aWxsIDkgLSBmb3J0dW5hdGVseSBvbmUgb2YgdGhlIG1vc3QgYmVhdXRpZnVsIHJhaWx3YXkgam91cm5leXMgaW4gdGhlIHdvcmxkLiBUb21vcnJvdyBJIGxlY3R1cmUgYXQgPHBsYWNlTmFtZSBhbm5vdGF0aW9uSWQ9ImVudF8xNDQiIGNlcnQ9ImRlZmluaXRlIiByZWY9Imh0dHA6Ly93d3cuZ2VvbmFtZXMub3JnLzY1NDg1MjgiPkJlcmdlbjwvcGxhY2VOYW1lPiB0byB0aGUgQW5nbG8tTm9yd2VnaWFuIFNvY2lldHkuIE5leHQgZGF5IEkgZ28gYmFjayB0byBPc2xvLCBsZWN0dXJlIHRoZXJlIEZyaS4gYW5kIFNhdC4gYW5kIHRoZW4gc3RhcnQgZm9yIGhvbWUgdmlhIEJlcmdlbi48L3A+CiAgICAgICAgPHBiIG49IjMiPjwvcGI+CiAgICAgICAgPHA+QnVsbCBpcyBhIG5pY2UgeW91bmcgbWFuIGJ1dCBpbmNvbXBldGVudCAtIGNhbid0IHF1aXRlIHN0YW5kIHRoZSBjb21tdW5pc3RzLCBidXQgZmluZHMgdGhlIHNvY2lhbGlzdHMgdG9vIG1pbGQuPC9wPjxwPkkgYW0gdW5oYXBwaWx5IHdvbmRlcmluZyB3aGF0IHlvdSBhcmUgZmVlbGluZyBhYm91dCBtZS48L3A+CiAgICAgICAgPGNsb3Nlcj4KICAgICAgICAgIDxzYWx1dGU+SSBsb3ZlIHlvdSB2ZXJ5IG11Y2ggLTwvc2FsdXRlPgogICAgICAgICAgPHNpZ25lZD4KICAgICAgICAgICAgPHBlcnNOYW1lIHNhbWVBcz0iaHR0cDovL3d3dy5mcmVlYmFzZS5jb20vdmlldy9lbi9iZXJ0cmFuZF9ydXNzZWxsIj4KICAgICAgICAgICAgICA8cGVyc05hbWUgYW5ub3RhdGlvbklkPSJlbnRfMTA5IiBjZXJ0PSJkZWZpbml0ZSIgdHlwZT0icmVhbCIgcmVmPSJodHRwOi8vdmlhZi5vcmcvdmlhZi8zNjkyNDEzNyI+QjwvcGVyc05hbWU+CiAgICAgICAgICAgIDwvcGVyc05hbWU+CiAgICAgICAgICA8L3NpZ25lZD4KICAgICAgICA8L2Nsb3Nlcj4KICAgICAgPC9kaXY+CiAgICA8L2JvZHk+CiAgPC90ZXh0Pgo8L1RFST4K"
-	// 	})
-	// 	.query({
-	// 		"access_token": config.personal_oath_for_testing
-	// 	})
-	// 	.reply(201, {
-	// 		"content": {
-	// 			"name": "testufy.txt",
-	// 			"path": "curt/qurt/testufy.txt",
-	// 			"sha": "9fa3ec5f93e21b52d9d7fda29dfc4b3d43932400",
-	// 			"size": 3384,
-	// 			"url": "https://api.github.com/repos/jchartrand/aTest/contents/curt/qurt/testufy.txt?ref=jchartrand",
-	// 			"html_url": "https://github.com/jchartrand/aTest/blob/jchartrand/curt/qurt/testufy.txt",
-	// 			"git_url": "https://api.github.com/repos/jchartrand/aTest/git/blobs/9fa3ec5f93e21b52d9d7fda29dfc4b3d43932400",
-	// 			"download_url": "https://raw.githubusercontent.com/jchartrand/aTest/jchartrand/curt/qurt/testufy.txt",
-	// 			"type": "file",
-	// 			"_links": {
-	// 				"self": "https://api.github.com/repos/jchartrand/aTest/contents/curt/qurt/testufy.txt?ref=jchartrand",
-	// 				"git": "https://api.github.com/repos/jchartrand/aTest/git/blobs/9fa3ec5f93e21b52d9d7fda29dfc4b3d43932400",
-	// 				"html": "https://github.com/jchartrand/aTest/blob/jchartrand/curt/qurt/testufy.txt"
-	// 			}
-	// 		},
-	// 		"commit": {
-	// 			"sha": "5f98b10ff8b7841081445b0004d71e3660fc5d19",
-	// 			"url": "https://api.github.com/repos/jchartrand/aTest/git/commits/5f98b10ff8b7841081445b0004d71e3660fc5d19",
-	// 			"html_url": "https://github.com/jchartrand/aTest/commit/5f98b10ff8b7841081445b0004d71e3660fc5d19",
-	// 			"author": {
-	// 				"name": "James Chartrand",
-	// 				"email": "jc.chartrand@gmail.com",
-	// 				"date": "2018-05-24T19:05:33Z"
-	// 			},
-	// 			"committer": {
-	// 				"name": "James Chartrand",
-	// 				"email": "jc.chartrand@gmail.com",
-	// 				"date": "2018-05-24T19:05:33Z"
-	// 			},
-	// 			"tree": {
-	// 				"sha": "2334e036dfee384e8d445fc1cf87dd8dab9d2aff",
-	// 				"url": "https://api.github.com/repos/jchartrand/aTest/git/trees/2334e036dfee384e8d445fc1cf87dd8dab9d2aff"
-	// 			},
-	// 			"message": "some commit message",
-	// 			"parents": [{
-	// 				"sha": "6eff6c7acaae34aca4307c237410c41a2da7b973",
-	// 				"url": "https://api.github.com/repos/jchartrand/aTest/git/commits/6eff6c7acaae34aca4307c237410c41a2da7b973",
-	// 				"html_url": "https://github.com/jchartrand/aTest/commit/6eff6c7acaae34aca4307c237410c41a2da7b973"
-	// 			}],
-	// 			"verification": {
-	// 				"verified": false,
-	// 				"reason": "unsigned",
-	// 				"signature": null,
-	// 				"payload": null
-	// 			}
-	// 		}
-	// 	}, ['Server',
-	// 		'GitHub.com',
-	// 		'Date',
-	// 		'Thu, 24 May 2018 19:05:34 GMT',
-	// 		'Content-Type',
-	// 		'application/json; charset=utf-8',
-	// 		'Content-Length',
-	// 		'1850',
-	// 		'Connection',
-	// 		'close',
-	// 		'Status',
-	// 		'201 Created',
-	// 		'X-RateLimit-Limit',
-	// 		'5000',
-	// 		'X-RateLimit-Remaining',
-	// 		'4996',
-	// 		'X-RateLimit-Reset',
-	// 		'1527192331',
-	// 		'Cache-Control',
-	// 		'private, max-age=60, s-maxage=60',
-	// 		'Vary',
-	// 		'Accept, Authorization, Cookie, X-GitHub-OTP',
-	// 		'ETag',
-	// 		'"553b9477c201db8225eb545d8dc1b6f5"',
-	// 		'X-OAuth-Scopes',
-	// 		'repo',
-	// 		'X-Accepted-OAuth-Scopes',
-	// 		'',
-	// 		'X-GitHub-Media-Type',
-	// 		'github.v3; format=json',
-	// 		'Access-Control-Expose-Headers',
-	// 		'ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval',
-	// 		'Access-Control-Allow-Origin',
-	// 		'*',
-	// 		'Strict-Transport-Security',
-	// 		'max-age=31536000; includeSubdomains; preload',
-	// 		'X-Frame-Options',
-	// 		'deny',
-	// 		'X-Content-Type-Options',
-	// 		'nosniff',
-	// 		'X-XSS-Protection',
-	// 		'1; mode=block',
-	// 		'Referrer-Policy',
-	// 		'origin-when-cross-origin, strict-origin-when-cross-origin',
-	// 		'Content-Security-Policy',
-	// 		'default-src \'none\'',
-	// 		'X-Runtime-rack',
-	// 		'0.698888',
-	// 		'X-GitHub-Request-Id',
-	// 		'A795:3F8E:C51D41:17ED2F2:5B070CFD'
-	// 	]);
 
 }
 
 const getLatestFileSHANockForNew = () => {
-	nock('https://api.github.com:443', {
+	return nock('https://api.github.com:443', {
 			"encodedQueryParams": true
 		})
 		.post('/graphql', {
@@ -1741,66 +1581,398 @@ const getLatestFileSHANockForNew = () => {
 			'9E25:7F2D:10D696:1FC997:5E41EA89'
 		]);
 
+}
 
-	// nock('https://api.github.com:443', {
-	// 		"encodedQueryParams": true
-	// 	})
-	// 	.post('/graphql', {
-	// 		"query": "{\n\t\t\trepository(owner: \"jchartrand\", name: \"aTest\") {\n\t\t\t\tobject(expression: \"jchartrand:curt/qurt/testuufy.txt\") {\n\t\t\t\t\t... on Blob {\n\t\t\t\t\t\toid\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t}\n\t\t}"
-	// 	})
-	// 	.query({
-	// 		"access_token": config.personal_oath_for_testing
-	// 	})
-	// 	.reply(200, ["1f8b0800000000000003ab564a492c4954b2aa562a4a2dc82fce2cc92faa04f1f293b252934b94acf24a73726a6b6b019ac688b327000000"], ['Server',
-	// 		'GitHub.com',
-	// 		'Date',
-	// 		'Thu, 24 May 2018 19:23:25 GMT',
-	// 		'Content-Type',
-	// 		'application/json; charset=utf-8',
-	// 		'Transfer-Encoding',
-	// 		'chunked',
-	// 		'Connection',
-	// 		'close',
-	// 		'Status',
-	// 		'200 OK',
-	// 		'X-RateLimit-Limit',
-	// 		'5000',
-	// 		'X-RateLimit-Remaining',
-	// 		'4996',
-	// 		'X-RateLimit-Reset',
-	// 		'1527192331',
-	// 		'Cache-Control',
-	// 		'no-cache',
-	// 		'X-OAuth-Scopes',
-	// 		'repo',
-	// 		'X-Accepted-OAuth-Scopes',
-	// 		'repo',
-	// 		'X-GitHub-Media-Type',
-	// 		'github.v3; format=json',
-	// 		'Access-Control-Expose-Headers',
-	// 		'ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval',
-	// 		'Access-Control-Allow-Origin',
-	// 		'*',
-	// 		'Strict-Transport-Security',
-	// 		'max-age=31536000; includeSubdomains; preload',
-	// 		'X-Frame-Options',
-	// 		'deny',
-	// 		'X-Content-Type-Options',
-	// 		'nosniff',
-	// 		'X-XSS-Protection',
-	// 		'1; mode=block',
-	// 		'Referrer-Policy',
-	// 		'origin-when-cross-origin, strict-origin-when-cross-origin',
-	// 		'Content-Security-Policy',
-	// 		'default-src \'none\'',
-	// 		'X-Runtime-rack',
-	// 		'0.059255',
-	// 		'Content-Encoding',
-	// 		'gzip',
-	// 		'X-GitHub-Request-Id',
-	// 		'8872:3F8E:C7892E:183A3EF:5B07112D'
-	// 	]);
-
+const pullRequestNock = () => {
+	return nock('https://api.github.com:443', {
+			"encodedQueryParams": true
+		})
+		.post('/repos/lucaju/misc/pulls', {
+			"title": "glorious title for PR",
+			"head": "dev",
+			"base": "master",
+			"body": "some commit message"
+		})
+		.reply(201, {
+			"url": "https://api.github.com/repos/lucaju/misc/pulls/6",
+			"id": 375205332,
+			"node_id": "MDExOlB1bGxSZXF1ZXN0Mzc1MjA1MzMy",
+			"html_url": "https://github.com/lucaju/misc/pull/6",
+			"diff_url": "https://github.com/lucaju/misc/pull/6.diff",
+			"patch_url": "https://github.com/lucaju/misc/pull/6.patch",
+			"issue_url": "https://api.github.com/repos/lucaju/misc/issues/6",
+			"number": 6,
+			"state": "open",
+			"locked": false,
+			"title": "glorious title for PR",
+			"user": {
+				"login": "lucaju",
+				"id": 1254739,
+				"node_id": "MDQ6VXNlcjEyNTQ3Mzk=",
+				"avatar_url": "https://avatars2.githubusercontent.com/u/1254739?v=4",
+				"gravatar_id": "",
+				"url": "https://api.github.com/users/lucaju",
+				"html_url": "https://github.com/lucaju",
+				"followers_url": "https://api.github.com/users/lucaju/followers",
+				"following_url": "https://api.github.com/users/lucaju/following{/other_user}",
+				"gists_url": "https://api.github.com/users/lucaju/gists{/gist_id}",
+				"starred_url": "https://api.github.com/users/lucaju/starred{/owner}{/repo}",
+				"subscriptions_url": "https://api.github.com/users/lucaju/subscriptions",
+				"organizations_url": "https://api.github.com/users/lucaju/orgs",
+				"repos_url": "https://api.github.com/users/lucaju/repos",
+				"events_url": "https://api.github.com/users/lucaju/events{/privacy}",
+				"received_events_url": "https://api.github.com/users/lucaju/received_events",
+				"type": "User",
+				"site_admin": false
+			},
+			"body": "some commit message",
+			"created_at": "2020-02-14T04:24:02Z",
+			"updated_at": "2020-02-14T04:24:02Z",
+			"closed_at": null,
+			"merged_at": null,
+			"merge_commit_sha": null,
+			"assignee": null,
+			"assignees": [],
+			"requested_reviewers": [],
+			"requested_teams": [],
+			"labels": [],
+			"milestone": null,
+			"commits_url": "https://api.github.com/repos/lucaju/misc/pulls/6/commits",
+			"review_comments_url": "https://api.github.com/repos/lucaju/misc/pulls/6/comments",
+			"review_comment_url": "https://api.github.com/repos/lucaju/misc/pulls/comments{/number}",
+			"comments_url": "https://api.github.com/repos/lucaju/misc/issues/6/comments",
+			"statuses_url": "https://api.github.com/repos/lucaju/misc/statuses/4fe6ae80a0676d67b25102eadd39c69cd364e8f0",
+			"head": {
+				"label": "lucaju:dev",
+				"ref": "dev",
+				"sha": "4fe6ae80a0676d67b25102eadd39c69cd364e8f0",
+				"user": {
+					"login": "lucaju",
+					"id": 1254739,
+					"node_id": "MDQ6VXNlcjEyNTQ3Mzk=",
+					"avatar_url": "https://avatars2.githubusercontent.com/u/1254739?v=4",
+					"gravatar_id": "",
+					"url": "https://api.github.com/users/lucaju",
+					"html_url": "https://github.com/lucaju",
+					"followers_url": "https://api.github.com/users/lucaju/followers",
+					"following_url": "https://api.github.com/users/lucaju/following{/other_user}",
+					"gists_url": "https://api.github.com/users/lucaju/gists{/gist_id}",
+					"starred_url": "https://api.github.com/users/lucaju/starred{/owner}{/repo}",
+					"subscriptions_url": "https://api.github.com/users/lucaju/subscriptions",
+					"organizations_url": "https://api.github.com/users/lucaju/orgs",
+					"repos_url": "https://api.github.com/users/lucaju/repos",
+					"events_url": "https://api.github.com/users/lucaju/events{/privacy}",
+					"received_events_url": "https://api.github.com/users/lucaju/received_events",
+					"type": "User",
+					"site_admin": false
+				},
+				"repo": {
+					"id": 225942871,
+					"node_id": "MDEwOlJlcG9zaXRvcnkyMjU5NDI4NzE=",
+					"name": "misc",
+					"full_name": "lucaju/misc",
+					"private": false,
+					"owner": {
+						"login": "lucaju",
+						"id": 1254739,
+						"node_id": "MDQ6VXNlcjEyNTQ3Mzk=",
+						"avatar_url": "https://avatars2.githubusercontent.com/u/1254739?v=4",
+						"gravatar_id": "",
+						"url": "https://api.github.com/users/lucaju",
+						"html_url": "https://github.com/lucaju",
+						"followers_url": "https://api.github.com/users/lucaju/followers",
+						"following_url": "https://api.github.com/users/lucaju/following{/other_user}",
+						"gists_url": "https://api.github.com/users/lucaju/gists{/gist_id}",
+						"starred_url": "https://api.github.com/users/lucaju/starred{/owner}{/repo}",
+						"subscriptions_url": "https://api.github.com/users/lucaju/subscriptions",
+						"organizations_url": "https://api.github.com/users/lucaju/orgs",
+						"repos_url": "https://api.github.com/users/lucaju/repos",
+						"events_url": "https://api.github.com/users/lucaju/events{/privacy}",
+						"received_events_url": "https://api.github.com/users/lucaju/received_events",
+						"type": "User",
+						"site_admin": false
+					},
+					"html_url": "https://github.com/lucaju/misc",
+					"description": null,
+					"fork": false,
+					"url": "https://api.github.com/repos/lucaju/misc",
+					"forks_url": "https://api.github.com/repos/lucaju/misc/forks",
+					"keys_url": "https://api.github.com/repos/lucaju/misc/keys{/key_id}",
+					"collaborators_url": "https://api.github.com/repos/lucaju/misc/collaborators{/collaborator}",
+					"teams_url": "https://api.github.com/repos/lucaju/misc/teams",
+					"hooks_url": "https://api.github.com/repos/lucaju/misc/hooks",
+					"issue_events_url": "https://api.github.com/repos/lucaju/misc/issues/events{/number}",
+					"events_url": "https://api.github.com/repos/lucaju/misc/events",
+					"assignees_url": "https://api.github.com/repos/lucaju/misc/assignees{/user}",
+					"branches_url": "https://api.github.com/repos/lucaju/misc/branches{/branch}",
+					"tags_url": "https://api.github.com/repos/lucaju/misc/tags",
+					"blobs_url": "https://api.github.com/repos/lucaju/misc/git/blobs{/sha}",
+					"git_tags_url": "https://api.github.com/repos/lucaju/misc/git/tags{/sha}",
+					"git_refs_url": "https://api.github.com/repos/lucaju/misc/git/refs{/sha}",
+					"trees_url": "https://api.github.com/repos/lucaju/misc/git/trees{/sha}",
+					"statuses_url": "https://api.github.com/repos/lucaju/misc/statuses/{sha}",
+					"languages_url": "https://api.github.com/repos/lucaju/misc/languages",
+					"stargazers_url": "https://api.github.com/repos/lucaju/misc/stargazers",
+					"contributors_url": "https://api.github.com/repos/lucaju/misc/contributors",
+					"subscribers_url": "https://api.github.com/repos/lucaju/misc/subscribers",
+					"subscription_url": "https://api.github.com/repos/lucaju/misc/subscription",
+					"commits_url": "https://api.github.com/repos/lucaju/misc/commits{/sha}",
+					"git_commits_url": "https://api.github.com/repos/lucaju/misc/git/commits{/sha}",
+					"comments_url": "https://api.github.com/repos/lucaju/misc/comments{/number}",
+					"issue_comment_url": "https://api.github.com/repos/lucaju/misc/issues/comments{/number}",
+					"contents_url": "https://api.github.com/repos/lucaju/misc/contents/{+path}",
+					"compare_url": "https://api.github.com/repos/lucaju/misc/compare/{base}...{head}",
+					"merges_url": "https://api.github.com/repos/lucaju/misc/merges",
+					"archive_url": "https://api.github.com/repos/lucaju/misc/{archive_format}{/ref}",
+					"downloads_url": "https://api.github.com/repos/lucaju/misc/downloads",
+					"issues_url": "https://api.github.com/repos/lucaju/misc/issues{/number}",
+					"pulls_url": "https://api.github.com/repos/lucaju/misc/pulls{/number}",
+					"milestones_url": "https://api.github.com/repos/lucaju/misc/milestones{/number}",
+					"notifications_url": "https://api.github.com/repos/lucaju/misc/notifications{?since,all,participating}",
+					"labels_url": "https://api.github.com/repos/lucaju/misc/labels{/name}",
+					"releases_url": "https://api.github.com/repos/lucaju/misc/releases{/id}",
+					"deployments_url": "https://api.github.com/repos/lucaju/misc/deployments",
+					"created_at": "2019-12-04T19:36:29Z",
+					"updated_at": "2020-02-11T21:32:03Z",
+					"pushed_at": "2020-02-14T04:24:01Z",
+					"git_url": "git://github.com/lucaju/misc.git",
+					"ssh_url": "git@github.com:lucaju/misc.git",
+					"clone_url": "https://github.com/lucaju/misc.git",
+					"svn_url": "https://github.com/lucaju/misc",
+					"homepage": null,
+					"size": 48,
+					"stargazers_count": 0,
+					"watchers_count": 0,
+					"language": null,
+					"has_issues": true,
+					"has_projects": true,
+					"has_downloads": true,
+					"has_wiki": true,
+					"has_pages": false,
+					"forks_count": 0,
+					"mirror_url": null,
+					"archived": false,
+					"disabled": false,
+					"open_issues_count": 1,
+					"license": null,
+					"forks": 0,
+					"open_issues": 1,
+					"watchers": 0,
+					"default_branch": "master"
+				}
+			},
+			"base": {
+				"label": "lucaju:master",
+				"ref": "master",
+				"sha": "abf8c58e9b4e5d8e8ae53a4d98c20bffb3141835",
+				"user": {
+					"login": "lucaju",
+					"id": 1254739,
+					"node_id": "MDQ6VXNlcjEyNTQ3Mzk=",
+					"avatar_url": "https://avatars2.githubusercontent.com/u/1254739?v=4",
+					"gravatar_id": "",
+					"url": "https://api.github.com/users/lucaju",
+					"html_url": "https://github.com/lucaju",
+					"followers_url": "https://api.github.com/users/lucaju/followers",
+					"following_url": "https://api.github.com/users/lucaju/following{/other_user}",
+					"gists_url": "https://api.github.com/users/lucaju/gists{/gist_id}",
+					"starred_url": "https://api.github.com/users/lucaju/starred{/owner}{/repo}",
+					"subscriptions_url": "https://api.github.com/users/lucaju/subscriptions",
+					"organizations_url": "https://api.github.com/users/lucaju/orgs",
+					"repos_url": "https://api.github.com/users/lucaju/repos",
+					"events_url": "https://api.github.com/users/lucaju/events{/privacy}",
+					"received_events_url": "https://api.github.com/users/lucaju/received_events",
+					"type": "User",
+					"site_admin": false
+				},
+				"repo": {
+					"id": 225942871,
+					"node_id": "MDEwOlJlcG9zaXRvcnkyMjU5NDI4NzE=",
+					"name": "misc",
+					"full_name": "lucaju/misc",
+					"private": false,
+					"owner": {
+						"login": "lucaju",
+						"id": 1254739,
+						"node_id": "MDQ6VXNlcjEyNTQ3Mzk=",
+						"avatar_url": "https://avatars2.githubusercontent.com/u/1254739?v=4",
+						"gravatar_id": "",
+						"url": "https://api.github.com/users/lucaju",
+						"html_url": "https://github.com/lucaju",
+						"followers_url": "https://api.github.com/users/lucaju/followers",
+						"following_url": "https://api.github.com/users/lucaju/following{/other_user}",
+						"gists_url": "https://api.github.com/users/lucaju/gists{/gist_id}",
+						"starred_url": "https://api.github.com/users/lucaju/starred{/owner}{/repo}",
+						"subscriptions_url": "https://api.github.com/users/lucaju/subscriptions",
+						"organizations_url": "https://api.github.com/users/lucaju/orgs",
+						"repos_url": "https://api.github.com/users/lucaju/repos",
+						"events_url": "https://api.github.com/users/lucaju/events{/privacy}",
+						"received_events_url": "https://api.github.com/users/lucaju/received_events",
+						"type": "User",
+						"site_admin": false
+					},
+					"html_url": "https://github.com/lucaju/misc",
+					"description": null,
+					"fork": false,
+					"url": "https://api.github.com/repos/lucaju/misc",
+					"forks_url": "https://api.github.com/repos/lucaju/misc/forks",
+					"keys_url": "https://api.github.com/repos/lucaju/misc/keys{/key_id}",
+					"collaborators_url": "https://api.github.com/repos/lucaju/misc/collaborators{/collaborator}",
+					"teams_url": "https://api.github.com/repos/lucaju/misc/teams",
+					"hooks_url": "https://api.github.com/repos/lucaju/misc/hooks",
+					"issue_events_url": "https://api.github.com/repos/lucaju/misc/issues/events{/number}",
+					"events_url": "https://api.github.com/repos/lucaju/misc/events",
+					"assignees_url": "https://api.github.com/repos/lucaju/misc/assignees{/user}",
+					"branches_url": "https://api.github.com/repos/lucaju/misc/branches{/branch}",
+					"tags_url": "https://api.github.com/repos/lucaju/misc/tags",
+					"blobs_url": "https://api.github.com/repos/lucaju/misc/git/blobs{/sha}",
+					"git_tags_url": "https://api.github.com/repos/lucaju/misc/git/tags{/sha}",
+					"git_refs_url": "https://api.github.com/repos/lucaju/misc/git/refs{/sha}",
+					"trees_url": "https://api.github.com/repos/lucaju/misc/git/trees{/sha}",
+					"statuses_url": "https://api.github.com/repos/lucaju/misc/statuses/{sha}",
+					"languages_url": "https://api.github.com/repos/lucaju/misc/languages",
+					"stargazers_url": "https://api.github.com/repos/lucaju/misc/stargazers",
+					"contributors_url": "https://api.github.com/repos/lucaju/misc/contributors",
+					"subscribers_url": "https://api.github.com/repos/lucaju/misc/subscribers",
+					"subscription_url": "https://api.github.com/repos/lucaju/misc/subscription",
+					"commits_url": "https://api.github.com/repos/lucaju/misc/commits{/sha}",
+					"git_commits_url": "https://api.github.com/repos/lucaju/misc/git/commits{/sha}",
+					"comments_url": "https://api.github.com/repos/lucaju/misc/comments{/number}",
+					"issue_comment_url": "https://api.github.com/repos/lucaju/misc/issues/comments{/number}",
+					"contents_url": "https://api.github.com/repos/lucaju/misc/contents/{+path}",
+					"compare_url": "https://api.github.com/repos/lucaju/misc/compare/{base}...{head}",
+					"merges_url": "https://api.github.com/repos/lucaju/misc/merges",
+					"archive_url": "https://api.github.com/repos/lucaju/misc/{archive_format}{/ref}",
+					"downloads_url": "https://api.github.com/repos/lucaju/misc/downloads",
+					"issues_url": "https://api.github.com/repos/lucaju/misc/issues{/number}",
+					"pulls_url": "https://api.github.com/repos/lucaju/misc/pulls{/number}",
+					"milestones_url": "https://api.github.com/repos/lucaju/misc/milestones{/number}",
+					"notifications_url": "https://api.github.com/repos/lucaju/misc/notifications{?since,all,participating}",
+					"labels_url": "https://api.github.com/repos/lucaju/misc/labels{/name}",
+					"releases_url": "https://api.github.com/repos/lucaju/misc/releases{/id}",
+					"deployments_url": "https://api.github.com/repos/lucaju/misc/deployments",
+					"created_at": "2019-12-04T19:36:29Z",
+					"updated_at": "2020-02-11T21:32:03Z",
+					"pushed_at": "2020-02-14T04:24:01Z",
+					"git_url": "git://github.com/lucaju/misc.git",
+					"ssh_url": "git@github.com:lucaju/misc.git",
+					"clone_url": "https://github.com/lucaju/misc.git",
+					"svn_url": "https://github.com/lucaju/misc",
+					"homepage": null,
+					"size": 48,
+					"stargazers_count": 0,
+					"watchers_count": 0,
+					"language": null,
+					"has_issues": true,
+					"has_projects": true,
+					"has_downloads": true,
+					"has_wiki": true,
+					"has_pages": false,
+					"forks_count": 0,
+					"mirror_url": null,
+					"archived": false,
+					"disabled": false,
+					"open_issues_count": 1,
+					"license": null,
+					"forks": 0,
+					"open_issues": 1,
+					"watchers": 0,
+					"default_branch": "master"
+				}
+			},
+			"_links": {
+				"self": {
+					"href": "https://api.github.com/repos/lucaju/misc/pulls/6"
+				},
+				"html": {
+					"href": "https://github.com/lucaju/misc/pull/6"
+				},
+				"issue": {
+					"href": "https://api.github.com/repos/lucaju/misc/issues/6"
+				},
+				"comments": {
+					"href": "https://api.github.com/repos/lucaju/misc/issues/6/comments"
+				},
+				"review_comments": {
+					"href": "https://api.github.com/repos/lucaju/misc/pulls/6/comments"
+				},
+				"review_comment": {
+					"href": "https://api.github.com/repos/lucaju/misc/pulls/comments{/number}"
+				},
+				"commits": {
+					"href": "https://api.github.com/repos/lucaju/misc/pulls/6/commits"
+				},
+				"statuses": {
+					"href": "https://api.github.com/repos/lucaju/misc/statuses/4fe6ae80a0676d67b25102eadd39c69cd364e8f0"
+				}
+			},
+			"author_association": "OWNER",
+			"merged": false,
+			"mergeable": null,
+			"rebaseable": null,
+			"mergeable_state": "unknown",
+			"merged_by": null,
+			"comments": 0,
+			"review_comments": 0,
+			"maintainer_can_modify": false,
+			"commits": 56,
+			"additions": 438,
+			"deletions": 46,
+			"changed_files": 9
+		}, [
+			'Server',
+			'GitHub.com',
+			'Date',
+			'Fri, 14 Feb 2020 04:24:03 GMT',
+			'Content-Type',
+			'application/json; charset=utf-8',
+			'Content-Length',
+			'13716',
+			'Connection',
+			'close',
+			'Status',
+			'201 Created',
+			'X-RateLimit-Limit',
+			'5000',
+			'X-RateLimit-Remaining',
+			'4997',
+			'X-RateLimit-Reset',
+			'1581657838',
+			'Cache-Control',
+			'private, max-age=60, s-maxage=60',
+			'Vary',
+			'Accept, Authorization, Cookie, X-GitHub-OTP',
+			'ETag',
+			'"3b14233a24ab60ed3865485c8d77f0cb"',
+			'X-OAuth-Scopes',
+			'repo, user',
+			'X-Accepted-OAuth-Scopes',
+			'',
+			'Location',
+			'https://api.github.com/repos/lucaju/misc/pulls/6',
+			'X-GitHub-Media-Type',
+			'github.v3; format=json',
+			'Access-Control-Expose-Headers',
+			'ETag, Link, Location, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval, X-GitHub-Media-Type',
+			'Access-Control-Allow-Origin',
+			'*',
+			'Strict-Transport-Security',
+			'max-age=31536000; includeSubdomains; preload',
+			'X-Frame-Options',
+			'deny',
+			'X-Content-Type-Options',
+			'nosniff',
+			'X-XSS-Protection',
+			'1; mode=block',
+			'Referrer-Policy',
+			'origin-when-cross-origin, strict-origin-when-cross-origin',
+			'Content-Security-Policy',
+			"default-src 'none'",
+			'Vary',
+			'Accept-Encoding, Accept, X-Requested-With',
+			'X-GitHub-Request-Id',
+			'BBC9:2C00:73B961:11D4FDF:5E4620E2'
+		]);
 }
 
 const missingSHANock = () => {
@@ -2347,6 +2519,7 @@ module.exports = {
 	findExistingPRNock,
 	saveNewFileNock,
 	missingSHANock,
+	pullRequestNock,
 	missingBranchNock,
 	missingPRNock,
 	createBranchFromMasterGetMaster,
