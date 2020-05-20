@@ -62,7 +62,7 @@ const getDetailsForUser = async (username) => {
  * @returns {Promise}
  */
 const getReposForAuthenticatedUser = async (affiliation, page, per_page) => {
-	return await octokit.repos.list({
+	return await octokit.repos.listForAuthenticatedUser({
 		affiliation,
 		page,
 		per_page,

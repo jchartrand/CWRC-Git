@@ -34,17 +34,17 @@
     "travis-deploy-once": "travis-deploy-once"
   },
   "dependencies": {
-    "@octokit/rest": "^17.6.0"
+    "@octokit/rest": "^17.9.2"
   },
   "devDependencies": {
     "chai": "^4.2.0",
-    "codecov": "^3.6.5",
-    "commitizen": "^4.0.4",
-    "cz-conventional-changelog": "^3.1.0",
-    "eslint": "^6.8.0",
+    "codecov": "^3.7.0",
+    "commitizen": "^4.1.2",
+    "cz-conventional-changelog": "^3.2.0",
+    "eslint": "^7.0.0",
     "husky": "^4.2.5",
     "jsdoc-to-markdown": "^5.0.3",
-    "mocha": "^7.1.1",
+    "mocha": "^7.1.2",
     "nock": "^12.0.3",
     "nyc": "^15.0.1",
     "semantic-release": "^17.0.7",
