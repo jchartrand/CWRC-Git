@@ -34,7 +34,7 @@
     "travis-deploy-once": "travis-deploy-once"
   },
   "dependencies": {
-    "@octokit/rest": "^18.0.0"
+    "@octokit/rest": "^17.9.2"
   },
   "devDependencies": {
     "chai": "^4.2.0",
