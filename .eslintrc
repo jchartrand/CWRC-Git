@@ -11,12 +11,16 @@
         "SharedArrayBuffer": "readonly"
     },
     "parserOptions": {
-        "ecmaVersion": 2019,
+        "ecmaVersion": 2020,
         "sourceType": "module"
     },
     "rules": {
         "require-atomic-updates": "off",
         "quotes": [2, "single"],
-        "no-unused-vars": 2
+        "no-unused-vars": 2,
+        "no-multi-spaces": 0,
+        "no-trailing-spaces": 0,
+        "semi": ["error", "always"],
+        "require-await": ["error"]
     }
 }
