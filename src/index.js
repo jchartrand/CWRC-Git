@@ -123,7 +123,7 @@ const getPermissionsForUser = async (owner, repo, username) => {
  * @returns {Promise}
  */
 const getTemplates = async (owner, repo, ref, path) => {
-	return await octokit.repos.getContents({
+	return await octokit.repos.getContent({
 		owner,
 		repo,
 		ref,
@@ -143,7 +143,7 @@ const getTemplates = async (owner, repo, ref, path) => {
  */
 const getDoc = async (owner, repo, ref, path) => {
 
-	const result = await octokit.repos.getContents({
+	const result = await octokit.repos.getContent({
 		owner,
 		repo,
 		path,
@@ -417,7 +417,7 @@ const _createFile = async (chainedResult) => {
 		branch
 	} = chainedResult
 
-	const result = await octokit.repos.createOrUpdateFile({
+	const result = await octokit.repos.createOrUpdateFileContents({
 		owner,
 		repo,
 		path,
@@ -456,7 +456,7 @@ const _updateFile = async (chainedResult) => {
 	} = chainedResult
 	//probably want to write in the cwrc-git /// application tag, but that could go in from the cwrc-writer I guess, before sending.
 
-	const result = await octokit.repos.createOrUpdateFile({
+	const result = await octokit.repos.createOrUpdateFileContents({
 		owner,
 		repo,
 		path,
