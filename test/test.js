@@ -4,7 +4,7 @@ const config = require('./config.json');
 const cwrcGit = require('../src/index.js');
 const fixtures = require('./fixturesAndMocks/fixtures.js');
 const mocks = require('./fixturesAndMocks/mocks.js');
-const templateMocks = require('./fixturesAndMocks/templateMocks.js')
+const templateMocks = require('./fixturesAndMocks/templateMocks.js');
 
 // uncomment this next line to use actual authentication with a real github personal token
 cwrcGit.authenticate(config.personal_oath_for_testing);
@@ -45,23 +45,21 @@ nocks in the beforeEach:  tape-nock will take care of it all.
  */
 
 describe('cwrcGit', () => {
-
 	describe('.getDoc', () => {
-
 		beforeEach(() => {
-			mocks.getDoc()
+			mocks.getDoc();
 
 			// mocks.getDocumentFromGithubNock();
 			// mocks.getAnnotationsFromGithubNock();
 			// mocks.getBranchInfoFromGithubNock();
-
 		});
 
 		it('returns correctly', async () => {
-			const result = await cwrcGit.getDoc(fixtures.owner, fixtures.testRepo, 'master', 'text.txt')
-				.catch(err => {
+			const result = await cwrcGit
+				.getDoc(fixtures.owner, fixtures.testRepo, 'master', 'text.txt')
+				.catch((err) => {
 					console.log(err);
-				})
+				});
 
 			expect(result.sha).to.be.a('string');
 
@@ -70,82 +68,80 @@ describe('cwrcGit', () => {
 
 			expect(result.owner).to.equal(fixtures.owner);
 			expect(result.repo).to.equal(fixtures.testRepo);
-
 		});
-
 	});
 
 	describe('.getRepoContents', () => {
 		beforeEach(() => {
-			mocks.getRepoContentsByDrillDownBranchNock()
+			mocks.getRepoContentsByDrillDownBranchNock();
 			mocks.getRepoContentsNock();
-			mocks.getRepoContentsTree()
-		})
+			mocks.getRepoContentsTree();
+		});
 
 		it('returns correctly', async () => {
-			const result = await cwrcGit.getRepoContents(fixtures.owner, fixtures.testRepo)
+			const result = await cwrcGit.getRepoContents(fixtures.owner, fixtures.testRepo);
 			expect(result).to.exist;
-		})
-	})
-
+		});
+	});
 
 	describe('.getRepoContentsByDrillDown', () => {
 		beforeEach(() => {
-			mocks.getRepoContentsByDrillDownBranchNock()
-			mocks.getRepoContentsByDrillDownRootTreeNock()
-			mocks.getReposByDrillDownSecondLevelNock()
-			mocks.getReposByDrillDownThirdLevelNock()
-		})
+			mocks.getRepoContentsByDrillDownBranchNock();
+			mocks.getRepoContentsByDrillDownRootTreeNock();
+			mocks.getReposByDrillDownSecondLevelNock();
+			mocks.getReposByDrillDownThirdLevelNock();
+		});
 
 		it('returns correctly', async () => {
-			const result = await cwrcGit.getRepoContentsByDrillDown(fixtures.owner, fixtures.testRepo)
-			expect(result).to.exist
-		})
-	})
+			const result = await cwrcGit.getRepoContentsByDrillDown(
+				fixtures.owner,
+				fixtures.testRepo
+			);
+			expect(result).to.exist;
+		});
+	});
 
 	describe('.getReposForUser', () => {
-
 		beforeEach(() => {
 			mocks.getReposForGithubUserNock();
 		});
 
 		it('returns correctly', async () => {
-			const result = await cwrcGit.getReposForUser(fixtures.owner, 1, 10)
+			const result = await cwrcGit.getReposForUser(fixtures.owner, 1, 10);
 			expect(result).to.exist;
-			expect(result.data[0].owner.login).to.equal(fixtures.owner)
-		})
-
+			expect(result.data[0].owner.login).to.equal(fixtures.owner);
+		});
 	});
 
-
 	describe('.getReposForAuthenticatedUser', () => {
-
-		beforeEach( () => {
+		beforeEach(() => {
 			mocks.getDetailsForAuthenticatedUserNock();
 			mocks.getReposForAuthenticatedUserNock();
 		});
 
 		it('returns correctly', async () => {
-			const result = await cwrcGit.getReposForAuthenticatedUser('owner', 1, 10)
+			const result = await cwrcGit.getReposForAuthenticatedUser('owner', 1, 10);
 			expect(result).to.exist;
 			expect(result.data[0].name).to.equal(fixtures.testRepo);
 		}).timeout(5000); // to force mocha to wait longer for async to return
-
 	});
-
 
 	describe('.createRepo', () => {
 		beforeEach(() => {
 			mocks.getCreateGithubRepoNock();
 			mocks.getMasterBranchFromGithubNock();
-		})
+		});
 
 		it('returns correctly', async () => {
-			const result = await cwrcGit.createRepo(fixtures.testRepo, fixtures.testRepoDescription, fixtures.isPrivate)
+			const result = await cwrcGit.createRepo(
+				fixtures.testRepo,
+				fixtures.testRepoDescription,
+				fixtures.isPrivate
+			);
 			expect(result.owner).to.equal(fixtures.owner);
 			expect(result.repo).to.equal(fixtures.testRepo);
 		}).timeout(5000);
-	})
+	});
 
 	// 	// describe('.createBranchFromMaster', () => {
 
@@ -302,18 +298,23 @@ describe('cwrcGit', () => {
 
 	describe('.saveAsPullRequest', () => {
 		beforeEach(() => {
-			mocks.getUserBranchHeadNock()
-			mocks.getLatestFileSHANock()
-			mocks.saveExistingFileNock()
-			mocks.findExistingPRNock()
-			mocks.saveNewFileNock()
-			mocks.getLatestFileSHANockForNew()
-		})
+			mocks.getUserBranchHeadNock();
+			mocks.getLatestFileSHANock();
+			mocks.saveExistingFileNock();
+			mocks.findExistingPRNock();
+			mocks.saveNewFileNock();
+			mocks.getLatestFileSHANockForNew();
+		});
 
 		it('returns correctly for existing file', async () => {
 			const result = await cwrcGit.saveAsPullRequest(
-				fixtures.owner, fixtures.testRepo, 'text.txt', 'test',
-				'dev', 'some commit message', 'glorious title for PR'
+				fixtures.owner,
+				fixtures.testRepo,
+				'text.txt',
+				'test',
+				'dev',
+				'some commit message',
+				'glorious title for PR'
 			);
 
 			expect(result.sha).to.be.a('string');
@@ -331,50 +332,48 @@ describe('cwrcGit', () => {
 		// 	expect(result.owner).to.equal(fixtures.owner);
 		// 	expect(result.repo).to.equal(fixtures.testRepo);
 		// }).timeout(9000);
-	})
+	});
 
 	describe('.getDetailsForAuthenticatedUser', () => {
-
 		beforeEach(() => {
 			mocks.getDetailsForAuthenticatedUserNock();
 		});
 
 		it('returns correctly', async () => {
-			const result = await cwrcGit.getDetailsForAuthenticatedUser()
+			const result = await cwrcGit.getDetailsForAuthenticatedUser();
 			expect(result).to.exist;
 		});
-
 	});
 
 	describe('.getTemplates', () => {
-
 		beforeEach(() => {
 			templateMocks();
 		});
 
 		it('returns correctly', async () => {
-			const result = await cwrcGit.getTemplates('cwrc', 'CWRC-Writer-Templates', 'master', 'templates')
+			const result = await cwrcGit.getTemplates(
+				'cwrc',
+				'CWRC-Writer-Templates',
+				'master',
+				'templates'
+			);
 			expect(result).to.exist;
 		}).timeout(5000);
-
 	});
 
 	describe('.searchCode', () => {
-
 		beforeEach(() => {
 			mocks.getSearchNock();
 		});
 
 		it('returns correctly', async () => {
-			const result = await cwrcGit.searchCode('test+repo:lucaju/misc')
-			expect(result).to.exist
-		}) //.timeout(5000); // to force mocha to wait longer for async to return
+			const result = await cwrcGit.searchCode('test+repo:lucaju/misc');
+			expect(result).to.exist;
+		}); //.timeout(5000); // to force mocha to wait longer for async to return
 
 		it('returns highlighting', async () => {
-			const result = await cwrcGit.searchCode('test+repo:lucaju/misc')
-			expect(result.data.items[0].text_matches).to.exist
-		})
-
+			const result = await cwrcGit.searchCode('test+repo:lucaju/misc');
+			expect(result.data.items[0].text_matches).to.exist;
+		});
 	});
-
 });

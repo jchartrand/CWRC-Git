@@ -129,9 +129,7 @@ const testDocWithVersion = `<?xml version="1.0" encoding="UTF-8"?>
 	</text>
 </TEI>`;
 
-
 const base64TestDoc = Buffer.from(testDoc).toString('base64');
-
 
 module.exports = {
 	testDoc: testDoc,
@@ -150,6 +148,6 @@ module.exports = {
 	parentCommitSHA: parentCommitSHA,
 	newTreeSHA: newTreeSHA,
 	newCommitSHA: newCommitSHA,
-	commitMessage: commitMessage
+	commitMessage: commitMessage,
 	//cwrcJWTTokenContainingGithubOathToken:cwrcJWTTokenContainingGithubOathToken
-}
+};

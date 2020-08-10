@@ -2,8 +2,8 @@
 	"env": {
 		"browser": true,
 		"es6": true,
-		"node": true,
-		"mocha": true
+		"mocha": true,
+		"node": true
 	},
 	"extends": "eslint:recommended",
 	"globals": {
@@ -16,8 +16,8 @@
 	},
 	"rules": {
 		"indent": ["warn", "tab"],
-		"no-multi-spaces": 0,
-		"no-trailing-spaces": 0,
+		"no-multi-spaces": 1,
+		"no-trailing-spaces": 1,
 		"no-unused-vars": 2,
 		"quotes": [2, "single"],
 		"require-atomic-updates": "off",
