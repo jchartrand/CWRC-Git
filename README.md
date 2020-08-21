@@ -11,12 +11,13 @@
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 [![experimental](http://badges.github.io/stability-badges/dist/experimental.svg)](http://github.com/badges/stability-badges)
 
-1. [Overview](#overview)
-1. [Demo](#demo)
-1. [Installation](#installation)
-1. [Use](#use)
-1. [API](#api)
-1. [License](#license)
+- [CWRC-Git](#cwrc-git)
+  - [Overview](#overview)
+  - [Demo](#demo)
+  - [Installation](#installation)
+  - [Use](#use)
+  - [API](#api)
+    - [License](#license)
 
 <!---
 1. [Development](#development)
