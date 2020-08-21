@@ -242,13 +242,13 @@ const _createFile = async (chainedResult) => {
 	const { owner, repo, path, message, content, branch } = chainedResult;
 
 	const result = await octokit.repos.createOrUpdateFileContents({
-			owner,
-			repo,
-			path,
-			message,
+		owner,
+		repo,
+		path,
+		message,
 		content: _encodeContent(content),
 		branch,
-		});
+	});
 
 	return {
 		...chainedResult,
@@ -272,19 +272,19 @@ const _updateFile = async (chainedResult) => {
 	//probably want to write in the cwrc-git /// application tag, but that could go in from the cwrc-writer I guess, before sending.
 
 	const result = await octokit.repos.createOrUpdateFileContents({
-			owner,
-			repo,
-			path,
-			message,
+		owner,
+		repo,
+		path,
+		message,
 		content: _encodeContent(content),
 		sha,
 		branch,
-		});
+	});
 
 	return {
 		...chainedResult,
 		sha: result.data.content.sha,
-};
+	};
 };
 
 /* the Details must contain:
@@ -333,32 +333,32 @@ const _checkForPullRequest = async ({ owner, repo, branch }) => {
  * @param {String} [sha] The SHA
  * @returns {Promise}
  */
-const saveAsPullRequest = async (owner, repo, path, content, branch, message, title, sha) => {
-	const doesBranchExist = await _checkForBranch({
-		owner,
-		repo,
-		branch,
-	});
+const saveAsPullRequest = async ({
+	owner,
+	repo,
+	path,
+	content,
+	branch,
+	message,
+	title,
+	crossRepository = false,
+	sha,
+}) => {
+	if (!crossRepository) {
+		//test and create branch
+		const doesBranchExist = await _checkForBranch({ owner, repo, branch });
+		if (!doesBranchExist) await _createBranchFromMaster({ owner, repo, branch });
 
-	if (!doesBranchExist) {
-		await _createBranchFromMaster({
-			owner,
-			repo,
-			branch,
-		});
+		//save file in the new branch
+		const resultOfSave = await saveDoc({ owner, repo, path, content, branch, message, sha });
+		sha = resultOfSave.sha;
 	}
 
-	const resultOfSave = await saveDoc(owner, repo, path, content, branch, message, sha);
-
-	const doesPullRequestExist = await _checkForPullRequest({
-		owner,
-		repo,
-		branch,
-	});
-
 	// there can be only one PR per branch */
+	const doesPullRequestExist = await _checkForPullRequest({ owner, repo, branch });
+
 	if (!doesPullRequestExist) {
-		await octokit.pulls.create({
+		await _createPullRequest({
 			owner,
 			repo,
 			title,
@@ -368,16 +368,13 @@ const saveAsPullRequest = async (owner, repo, path, content, branch, message, ti
 		});
 	}
 
-	return {
-		owner,
-		repo,
-		path,
-		content,
-		branch,
-		message,
-		title,
-		sha: resultOfSave.sha,
-	};
+	return { owner, repo, path, content, branch, message, title, sha };
+};
+
+const _createPullRequest = async ({ owner, repo, title, head, base, body }) => {
+	return await octokit.pulls
+		.create({ owner, repo, title, head, base, body })
+		.catch((error) => error);
 };
 
 const _getLatestFileSHA = async (chainedResult) => {
@@ -661,20 +658,21 @@ const _checkForBranch = async (theDetails) => {
 module.exports = {
 	authenticate,
 	createFork,
+	createRepo,
+	createOrgRepo,
 	getDetailsForAuthenticatedUser,
 	getDetailsForUser,
 	getDetailsForOrg,
+	getDoc,
+	getMembershipForUser,
+	getRepoContents,
+	getRepoContentsByDrillDown,
 	getReposForAuthenticatedUser,
 	getReposForUser,
 	getPermissionsForUser,
+	getTemplates,
 	saveAsPullRequest,
 	saveDoc,
-	getDoc,
-	createRepo,
-	createOrgRepo,
-	getTemplates,
 	searchCode,
 	searchRepos,
-	getRepoContents,
-	getRepoContentsByDrillDown,
 };
