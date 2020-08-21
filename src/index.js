@@ -47,9 +47,7 @@ const getDetailsForAuthenticatedUser = async () => await octokit.users.getAuthen
  * @returns {Promise}
  */
 const getDetailsForUser = async (username) => {
-	return await octokit.users.getByUsername({
-		username,
-	});
+	return await octokit.users.getByUsername({ username });
 };
 
 /**
@@ -61,11 +59,7 @@ const getDetailsForUser = async (username) => {
  * @returns {Promise}
  */
 const getReposForAuthenticatedUser = async (affiliation, page, per_page) => {
-	return await octokit.repos.listForAuthenticatedUser({
-		affiliation,
-		page,
-		per_page,
-	});
+	return await octokit.repos.listForAuthenticatedUser({ affiliation, page, per_page });
 };
 
 /**
@@ -77,11 +71,7 @@ const getReposForAuthenticatedUser = async (affiliation, page, per_page) => {
  * @returns {Promise}
  */
 const getReposForUser = async (username, page, per_page) => {
-	return await octokit.repos.listForUser({
-		username,
-		page,
-		per_page,
-	});
+	return await octokit.repos.listForUser({ username, page, per_page });
 };
 
 /**
@@ -91,25 +81,31 @@ const getReposForUser = async (username, page, per_page) => {
  * @returns {Promise}
  */
 const getDetailsForOrg = async (org) => {
-	return await octokit.orgs.get({
-		org,
-	});
+	return await octokit.orgs.get({ org });
+};
+
+/**
+ * Get organization membership for a user
+ * See {@link https://docs.github.com/en/rest/reference/orgs#set-organization-membership-for-a-user}
+ * @param {String} org The org name
+ * @param {String} username The user name
+ * @returns {Promise}
+ */
+const getMembershipForUser = async ({ org, username }) => {
+	return await octokit.orgs.getMembershipForUser({ org, username });
 };
 
 /**
  * Get the permissions for a specific user and repo.
  * See {@link https://developer.github.com/v3/repos/collaborators/#review-a-users-permission-level}
- * @param {String} owner The repo owner
- * @param {String} repo The repo
- * @param {String} username The username
+ * @param {String} req.owner The repo owner
+ * @param {String} req.repo The repo
+ * @param {String} req.username The username
  * @returns {Promise}
  */
-const getPermissionsForUser = async (owner, repo, username) => {
-	return await octokit.repos.getCollaboratorPermissionLevel({
-		owner,
-		repo,
-		username,
-	});
+const getPermissionsForUser = async ({ owner, repo, username }) => {
+	const result = await octokit.repos.getCollaboratorPermissionLevel({ owner, repo, username });
+	return result;
 };
 
 /**
@@ -122,12 +118,7 @@ const getPermissionsForUser = async (owner, repo, username) => {
  * @returns {Promise}
  */
 const getTemplates = async (owner, repo, ref, path) => {
-	return await octokit.repos.getContent({
-		owner,
-		repo,
-		ref,
-		path,
-	});
+	return await octokit.repos.getContent({ owner, repo, ref, path });
 };
 
 /**
@@ -140,13 +131,8 @@ const getTemplates = async (owner, repo, ref, path) => {
  * @param {String} path The path
  * @returns {Promise}
  */
-const getDoc = async (owner, repo, ref, path) => {
-	const result = await octokit.repos.getContent({
-		owner,
-		repo,
-		path,
-		ref,
-	});
+const getDoc = async ({ owner, repo, path, ref }) => {
+	const result = await octokit.repos.getContent({ owner, repo, ref, path });
 
 	return {
 		owner,
@@ -166,15 +152,15 @@ const getDoc = async (owner, repo, ref, path) => {
  * @param {String|Boolean} isPrivate Is the repo private
  * @returns {Promise}
  */
-const createRepo = async (repo, description, isPrivate) => {
+const createRepo = async ({ repo, description, isPrivate }) => {
 	isPrivate = isPrivate === 'true' ? true : false;
 
 	const githubResponse = await octokit.repos
 		.createForAuthenticatedUser({
 			name: repo,
+			description,
 			auto_init: true,
 			private: isPrivate,
-			description: description,
 		})
 		.catch(logError);
 
@@ -195,16 +181,16 @@ const createRepo = async (repo, description, isPrivate) => {
  * @param {String|Boolean} isPrivate Is the repo private
  * @returns {Promise}
  */
-const createOrgRepo = async (org, repo, description, isPrivate) => {
+const createOrgRepo = async ({ org, repo, description, isPrivate }) => {
 	isPrivate = isPrivate == 'true' ? true : false;
 
 	const githubResponse = await octokit.repos
 		.createInOrg({
 			org,
 			name: repo,
+			description: description,
 			auto_init: true,
 			private: isPrivate,
-			description: description,
 		})
 		.catch(logError);
 
@@ -229,37 +215,76 @@ const createOrgRepo = async (org, repo, description, isPrivate) => {
  * @param {String} [sha] The SHA
  * @returns {Promise}
  */
-const saveDoc = async (owner, repo, path, content, branch, message, sha) => {
+const saveDoc = async ({ owner, repo, path, content, branch, message, sha }) => {
 	if (sha === undefined) {
 		// try to get the sha
-		sha = await _getLatestFileSHA({
-			owner,
-			repo,
-			branch,
-			path,
-		});
+		sha = await _getLatestFileSHA({ owner, repo, branch, path });
 	}
 
 	if (sha) {
-		return await _updateFile({
-			owner,
-			repo,
-			path,
-			content,
-			branch,
-			message,
-			sha,
-		});
+		return await _updateFile({ owner, repo, path, content, branch, message, sha });
 	} else {
-		return await _createFile({
-			owner,
-			repo,
-			path,
-			content,
-			branch,
-			message,
-		});
+		return await _createFile({ owner, repo, path, content, branch, message });
 	}
+};
+
+// expects in theDetails:
+// {
+//      owner: owner,
+//      repo: repo,
+//      path: path,
+//      message:  the commit message
+//      content: the doc,
+//      branch: branch (default master)
+// }
+// returns the chained result object for passing to further promise based calls.
+const _createFile = async (chainedResult) => {
+	const { owner, repo, path, message, content, branch } = chainedResult;
+
+	const result = await octokit.repos.createOrUpdateFileContents({
+		owner,
+		repo,
+		path,
+		message,
+		content: _encodeContent(content),
+		branch,
+	});
+
+	return {
+		...chainedResult,
+		sha: result.data.content.sha,
+	};
+};
+
+// expects in theDetails:
+// {
+//      owner: owner,
+//      repo: repo,
+//      path: path,
+//      message:  the commit message
+//      content: the doc,
+//      branch: branch (default master)
+//      sha: oldFileSHA
+// }
+// returns the chained result object for passing to further promise based calls.
+const _updateFile = async (chainedResult) => {
+	const { owner, repo, path, message, content, sha, branch } = chainedResult;
+	//probably want to write in the cwrc-git /// application tag, but that could go in from the cwrc-writer I guess, before sending.
+
+	const result = await octokit.repos.createOrUpdateFileContents({
+		owner,
+		repo,
+		path,
+		message,
+		content: _encodeContent(content),
+		sha,
+		branch,
+	});
+
+	return {
+		...chainedResult,
+		sha: result.data.content.sha,
+	};
 };
 
 /* the Details must contain:
@@ -308,32 +333,32 @@ const _checkForPullRequest = async ({ owner, repo, branch }) => {
  * @param {String} [sha] The SHA
  * @returns {Promise}
  */
-const saveAsPullRequest = async (owner, repo, path, content, branch, message, title, sha) => {
-	const doesBranchExist = await _checkForBranch({
-		owner,
-		repo,
-		branch,
-	});
+const saveAsPullRequest = async ({
+	owner,
+	repo,
+	path,
+	content,
+	branch,
+	message,
+	title,
+	crossRepository = false,
+	sha,
+}) => {
+	if (!crossRepository) {
+		//test and create branch
+		const doesBranchExist = await _checkForBranch({ owner, repo, branch });
+		if (!doesBranchExist) await _createBranchFromMaster({ owner, repo, branch });
 
-	if (!doesBranchExist) {
-		await _createBranchFromMaster({
-			owner,
-			repo,
-			branch,
-		});
+		//save file in the new branch
+		const resultOfSave = await saveDoc({ owner, repo, path, content, branch, message, sha });
+		sha = resultOfSave.sha;
 	}
 
-	const resultOfSave = await saveDoc(owner, repo, path, content, branch, message, sha);
-
-	const doesPullRequestExist = await _checkForPullRequest({
-		owner,
-		repo,
-		branch,
-	});
-
 	// there can be only one PR per branch */
+	const doesPullRequestExist = await _checkForPullRequest({ owner, repo, branch });
+
 	if (!doesPullRequestExist) {
-		await octokit.pulls.create({
+		await _createPullRequest({
 			owner,
 			repo,
 			title,
@@ -343,16 +368,13 @@ const saveAsPullRequest = async (owner, repo, path, content, branch, message, ti
 		});
 	}
 
-	return {
-		owner,
-		repo,
-		path,
-		content,
-		branch,
-		message,
-		title,
-		sha: resultOfSave.sha,
-	};
+	return { owner, repo, path, content, branch, message, title, sha };
+};
+
+const _createPullRequest = async ({ owner, repo, title, head, base, body }) => {
+	return await octokit.pulls
+		.create({ owner, repo, title, head, base, body })
+		.catch((error) => error);
 };
 
 const _getLatestFileSHA = async (chainedResult) => {
@@ -386,63 +408,19 @@ const _getLatestFileSHA = async (chainedResult) => {
 	return sha;
 };
 
-// expects in theDetails:
-// {
-//      owner: owner,
-//      repo: repo,
-//      path: path,
-//      message:  the commit message
-//      content: the doc,
-//      branch: branch (default master)
-// }
-// returns the chained result object for passing to further promise based calls.
-const _createFile = async (chainedResult) => {
-	const { owner, repo, path, message, content, branch } = chainedResult;
-
-	const result = await octokit.repos.createOrUpdateFileContents({
-		owner,
-		repo,
-		path,
-		message,
-		branch,
-		content: _encodeContent(content),
-	});
-
-	return {
-		...chainedResult,
-		sha: result.data.content.sha,
-	};
-};
-
-// expects in theDetails:
-// {
-//      owner: owner,
-//      repo: repo,
-//      path: path,
-//      message:  the commit message
-//      content: the doc,
-//      branch: branch (default master)
-//      sha: oldFileSHA
-// }
-// returns the chained result object for passing to further promise based calls.
-const _updateFile = async (chainedResult) => {
-	const { owner, repo, path, message, content, sha, branch } = chainedResult;
-	//probably want to write in the cwrc-git /// application tag, but that could go in from the cwrc-writer I guess, before sending.
-
-	const result = await octokit.repos.createOrUpdateFileContents({
-		owner,
-		repo,
-		path,
-		message,
-		sha,
-		branch,
-		content: _encodeContent(content),
-	});
-
-	return {
-		...chainedResult,
-		sha: result.data.content.sha,
-	};
+/**
+ * Create a fork for the authenticated user.
+ * See {@link https://octokit.github.io/rest.js/v18#repos-create-fork}
+ * @param {String} owner The owner
+ * @param {String} repo The repo
+ * @param {String} [organization] The organization
+ * @returns {Promise}
+ */
+const createFork = async ({ owner, repo, organization }) => {
+	const fork = { owner, repo };
+	if (organization) fork.organization = organization;
+	const result = await octokit.repos.createFork(fork);
+	return { owner, repo, organization, result };
 };
 
 const logError = (error) => {
@@ -587,9 +565,7 @@ const searchCode = async (query, page, per_page) => {
 		q: query,
 		page,
 		per_page,
-		mediaType: {
-			format: 'text-match',
-		},
+		mediaType: { format: 'text-match' },
 	});
 
 	return response;
@@ -608,9 +584,7 @@ const searchRepos = async (query, page, per_page) => {
 		q: query,
 		page,
 		per_page,
-		mediaType: {
-			format: 'text-match',
-		},
+		mediaType: { format: 'text-match' },
 	});
 
 	return response;
@@ -623,12 +597,8 @@ const searchRepos = async (query, page, per_page) => {
  * @param {String} repo The repo
  * @returns {Promise}
  */
-const getRepoContents = async (owner, repo) => {
-	const masterBranch = await _getMasterBranchSHAs({
-		owner,
-		repo,
-	});
-
+const getRepoContents = async ({ owner, repo }) => {
+	const masterBranch = await _getMasterBranchSHAs({ owner, repo });
 	return await _getTreeContentsRecursively(masterBranch);
 };
 
@@ -655,11 +625,7 @@ const _getTreeContentsRecursively = async (chainedResult) => {
  * @returns {Promise}
  */
 const getRepoContentsByDrillDown = async (owner, repo) => {
-	const results = await _getMasterBranchSHAs({
-		owner,
-		repo,
-	});
-
+	const results = await _getMasterBranchSHAs({ owner, repo });
 	return await _getTreeContentsByDrillDown(results);
 };
 
@@ -691,20 +657,22 @@ const _checkForBranch = async (theDetails) => {
 
 module.exports = {
 	authenticate,
+	createFork,
+	createRepo,
+	createOrgRepo,
 	getDetailsForAuthenticatedUser,
 	getDetailsForUser,
 	getDetailsForOrg,
+	getDoc,
+	getMembershipForUser,
+	getRepoContents,
+	getRepoContentsByDrillDown,
 	getReposForAuthenticatedUser,
 	getReposForUser,
 	getPermissionsForUser,
+	getTemplates,
 	saveAsPullRequest,
 	saveDoc,
-	getDoc,
-	createRepo,
-	createOrgRepo,
-	getTemplates,
 	searchCode,
 	searchRepos,
-	getRepoContents,
-	getRepoContentsByDrillDown,
 };
