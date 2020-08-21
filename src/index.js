@@ -85,6 +85,17 @@ const getDetailsForOrg = async (org) => {
 };
 
 /**
+ * Get organization membership for a user
+ * See {@link https://docs.github.com/en/rest/reference/orgs#set-organization-membership-for-a-user}
+ * @param {String} org The org name
+ * @param {String} username The user name
+ * @returns {Promise}
+ */
+const getMembershipForUser = async ({ org, username }) => {
+	return await octokit.orgs.getMembershipForUser({ org, username });
+};
+
+/**
  * Get the permissions for a specific user and repo.
  * See {@link https://developer.github.com/v3/repos/collaborators/#review-a-users-permission-level}
  * @param {String} req.owner The repo owner
