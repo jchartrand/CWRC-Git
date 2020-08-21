@@ -47,9 +47,7 @@ const getDetailsForAuthenticatedUser = async () => await octokit.users.getAuthen
  * @returns {Promise}
  */
 const getDetailsForUser = async (username) => {
-	return await octokit.users.getByUsername({
-		username,
-	});
+	return await octokit.users.getByUsername({ username });
 };
 
 /**
@@ -61,11 +59,7 @@ const getDetailsForUser = async (username) => {
  * @returns {Promise}
  */
 const getReposForAuthenticatedUser = async (affiliation, page, per_page) => {
-	return await octokit.repos.listForAuthenticatedUser({
-		affiliation,
-		page,
-		per_page,
-	});
+	return await octokit.repos.listForAuthenticatedUser({ affiliation, page, per_page });
 };
 
 /**
@@ -77,11 +71,7 @@ const getReposForAuthenticatedUser = async (affiliation, page, per_page) => {
  * @returns {Promise}
  */
 const getReposForUser = async (username, page, per_page) => {
-	return await octokit.repos.listForUser({
-		username,
-		page,
-		per_page,
-	});
+	return await octokit.repos.listForUser({ username, page, per_page });
 };
 
 /**
@@ -91,9 +81,7 @@ const getReposForUser = async (username, page, per_page) => {
  * @returns {Promise}
  */
 const getDetailsForOrg = async (org) => {
-	return await octokit.orgs.get({
-		org,
-	});
+	return await octokit.orgs.get({ org });
 };
 
 /**
@@ -122,12 +110,7 @@ const getPermissionsForUser = async (owner, repo, username) => {
  * @returns {Promise}
  */
 const getTemplates = async (owner, repo, ref, path) => {
-	return await octokit.repos.getContent({
-		owner,
-		repo,
-		ref,
-		path,
-	});
+	return await octokit.repos.getContent({ owner, repo, ref, path });
 };
 
 /**
@@ -587,9 +570,7 @@ const searchCode = async (query, page, per_page) => {
 		q: query,
 		page,
 		per_page,
-		mediaType: {
-			format: 'text-match',
-		},
+		mediaType: { format: 'text-match' },
 	});
 
 	return response;
@@ -608,9 +589,7 @@ const searchRepos = async (query, page, per_page) => {
 		q: query,
 		page,
 		per_page,
-		mediaType: {
-			format: 'text-match',
-		},
+		mediaType: { format: 'text-match' },
 	});
 
 	return response;
