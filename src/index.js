@@ -27,7 +27,7 @@ const _decodeContent = (content) => Buffer.from(content, 'base64').toString('utf
 const authenticate = (gitHubOAuthToken) => {
 	octokit = new Octokit({
 		auth: gitHubOAuthToken,
-		userAgent: 'octokit/rest.js v18.0.3',
+		userAgent: 'octokit/rest.js v18.0.11',
 	});
 
 	return octokit;
