@@ -1,26 +1,27 @@
 {
-    "env": {
-        "browser": true,
-        "es6": true,
-        "node": true,
-        "mocha": true
-    },
-    "extends": "eslint:recommended",
-    "globals": {
-        "Atomics": "readonly",
-        "SharedArrayBuffer": "readonly"
-    },
-    "parserOptions": {
-        "ecmaVersion": 2020,
-        "sourceType": "module"
-    },
-    "rules": {
-        "require-atomic-updates": "off",
-        "quotes": [2, "single"],
-        "no-unused-vars": 2,
-        "no-multi-spaces": 0,
-        "no-trailing-spaces": 0,
-        "semi": ["error", "always"],
-        "require-await": ["error"]
-    }
+	"env": {
+		"browser": true,
+		"es6": true,
+		"mocha": true,
+		"node": true
+	},
+	"extends": "eslint:recommended",
+	"globals": {
+		"Atomics": "readonly",
+		"SharedArrayBuffer": "readonly"
+	},
+	"parserOptions": {
+		"ecmaVersion": 2020,
+		"sourceType": "module"
+	},
+	"rules": {
+		"indent": ["warn", "tab"],
+		"no-multi-spaces": 1,
+		"no-trailing-spaces": 1,
+		"no-unused-vars": 2,
+		"quotes": [2, "single"],
+		"require-atomic-updates": "off",
+		"require-await": ["error"],
+		"semi": ["error", "always"]
+	}
 }

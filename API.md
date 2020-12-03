@@ -1,39 +1,41 @@
-# src/index
-
 <a name="module_src/index"></a>
+
+## src/index
 
 Module providing GitHub API calls.
 
-- [src/index](#module_src/index)
-  - [~authenticate(gitHubOAuthToken)](#module_src/index..authenticate) ⇒ `Promise`
-  - [~getDetailsForAuthenticatedUser()](#module_src/index..getDetailsForAuthenticatedUser) ⇒ `Promise`
-  - [~getDetailsForUser(username)](#module_src/index..getDetailsForUser) ⇒ `Promise`
-  - [~getReposForAuthenticatedUser(affiliation, page, per_page)](#module_src/index..getReposForAuthenticatedUser) ⇒ `Promise`
-  - [~getReposForUser(username, page, per_page)](#module_src/index..getReposForUser) ⇒ `Promise`
-  - [~getDetailsForOrg(org)](#module_src/index..getDetailsForOrg) ⇒ `Promise`
-  - [~getPermissionsForUser(owner, repo, username)](#module_src/index..getPermissionsForUser) ⇒ `Promise`
-  - [~getTemplates(owner, repo, ref, path)](#module_src/index..getTemplates) ⇒ `Promise`
-  - [~getDoc(owner, repo, ref, path)](#module_src/index..getDoc) ⇒ `Promise`
-  - [~createRepo(repo, description, isPrivate)](#module_src/index..createRepo) ⇒ `Promise`
-  - [~createOrgRepo(org, repo, description, isPrivate)](#module_src/index..createOrgRepo) ⇒ `Promise`
-  - [~saveDoc(owner, repo, path, content, branch, message, [sha])](#module_src/index..saveDoc) ⇒ `Promise`
-  - [~saveAsPullRequest(owner, repo, path, content, branch, message, title, [sha])](#module_src/index..saveAsPullRequest) ⇒ `Promise`
-  - [~searchCode(query, page, per_page)](#module_src/index..searchCode) ⇒ `Promise`
-  - [~searchRepos(query, page, per_page)](#module_src/index..searchRepos) ⇒ `Promise`
-  - [~getRepoContents(owner, repo)](#module_src/index..getRepoContents) ⇒ `Promise`
-  - [~getRepoContentsByDrillDown(owner, repo)](#module_src/index..getRepoContentsByDrillDown) ⇒ `Promise`
+- [src/index](#srcindex)
+  - [src/index~authenticate(gitHubOAuthToken) ⇒ `Promise`](#srcindexauthenticategithuboauthtoken--promise)
+  - [src/index~getDetailsForAuthenticatedUser() ⇒ `Promise`](#srcindexgetdetailsforauthenticateduser--promise)
+  - [src/index~getDetailsForUser(username) ⇒ `Promise`](#srcindexgetdetailsforuserusername--promise)
+  - [src/index~getReposForAuthenticatedUser(affiliation, page, per_page) ⇒ `Promise`](#srcindexgetreposforauthenticateduseraffiliation-page-per_page--promise)
+  - [src/index~getReposForUser(username, page, per_page) ⇒ `Promise`](#srcindexgetreposforuserusername-page-per_page--promise)
+  - [src/index~getDetailsForOrg(org) ⇒ `Promise`](#srcindexgetdetailsfororgorg--promise)
+  - [src/index~getMembershipForUser(org, username) ⇒ `Promise`](#srcindexgetmembershipforuserorg-username--promise)
+  - [src/index~getPermissionsForUser() ⇒ `Promise`](#srcindexgetpermissionsforuser--promise)
+  - [src/index~getTemplates(owner, repo, ref, path) ⇒ `Promise`](#srcindexgettemplatesowner-repo-ref-path--promise)
+  - [src/index~getDoc(owner, repo, ref, path) ⇒ `Promise`](#srcindexgetdocowner-repo-ref-path--promise)
+  - [src/index~createRepo(repo, description, isPrivate) ⇒ `Promise`](#srcindexcreatereporepo-description-isprivate--promise)
+  - [src/index~createOrgRepo(org, repo, description, isPrivate) ⇒ `Promise`](#srcindexcreateorgrepoorg-repo-description-isprivate--promise)
+  - [src/index~saveDoc(owner, repo, path, content, branch, message, [sha]) ⇒ `Promise`](#srcindexsavedocowner-repo-path-content-branch-message-sha--promise)
+  - [src/index~saveAsPullRequest(owner, repo, path, content, branch, message, title, [sha]) ⇒ `Promise`](#srcindexsaveaspullrequestowner-repo-path-content-branch-message-title-sha--promise)
+  - [src/index~createFork(owner, repo, [organization]) ⇒ `Promise`](#srcindexcreateforkowner-repo-organization--promise)
+  - [src/index~searchCode(query, page, per_page) ⇒ `Promise`](#srcindexsearchcodequery-page-per_page--promise)
+  - [src/index~searchRepos(query, page, per_page) ⇒ `Promise`](#srcindexsearchreposquery-page-per_page--promise)
+  - [src/index~getRepoContents(owner, repo) ⇒ `Promise`](#srcindexgetrepocontentsowner-repo--promise)
+  - [src/index~getRepoContentsByDrillDown(owner, repo) ⇒ `Promise`](#srcindexgetrepocontentsbydrilldownowner-repo--promise)
 
 <a name="module_src/index..authenticate"></a>
 
-## src/index~authenticate(gitHubOAuthToken) ⇒ `Promise`
+### src/index~authenticate(gitHubOAuthToken) ⇒ `Promise`
 
 Authenticate the user for making calls to GitHub, using their OAuth token.
 See [https://developer.github.com/v3/#authentication](https://developer.github.com/v3/#authentication)
 
-**Kind**: inner method of [`src/index`](#module_src/index)
+**Kind**: inner method of [`src/index`](#module_src/index)  
 
-| Param            | Type     | Description                 |
-| ---------------- | -------- | --------------------------- |
+| Param | Type | Description |
+| --- | --- | --- |
 | gitHubOAuthToken | `String` | The OAuth token from GitHub |
 
 <a name="module_src/index..getDetailsForAuthenticatedUser"></a>
@@ -51,10 +53,10 @@ See [https://developer.github.com/v3/users/#get-the-authenticated-user](https://
 Get the details for a specific user.
 See [https://developer.github.com/v3/users/#get-a-single-user](https://developer.github.com/v3/users/#get-a-single-user)
 
-**Kind**: inner method of [`src/index`](#module_src/index)
+**Kind**: inner method of [`src/index`](#module_src/index)  
 
-| Param    | Type     |
-| -------- | -------- |
+| Param | Type |
+| --- | --- |
 | username | `String` |
 
 <a name="module_src/index..getReposForAuthenticatedUser"></a>
@@ -64,13 +66,13 @@ See [https://developer.github.com/v3/users/#get-a-single-user](https://developer
 Get the repos the user has explicit permission to access.
 See [https://developer.github.com/v3/repos/#list-your-repositories](https://developer.github.com/v3/repos/#list-your-repositories)
 
-**Kind**: inner method of [`src/index`](#module_src/index)
+**Kind**: inner method of [`src/index`](#module_src/index)  
 
-| Param       | Type      | Description                 |
-| ----------- | --------- | --------------------------- |
-| affiliation | `String`  | User's relation to the repo |
-| page        | `Integer` | The page number             |
-| per_page    | `Integer` | Repos per page              |
+| Param | Type | Description |
+| --- | --- | --- |
+| affiliation | `String` | User's relation to the repo |
+| page | `Integer` | The page number |
+| per_page | `Integer` | Repos per page |
 
 <a name="module_src/index..getReposForUser"></a>
 
@@ -79,13 +81,13 @@ See [https://developer.github.com/v3/repos/#list-your-repositories](https://deve
 Get the repos for a specific user.
 See [https://developer.github.com/v3/repos/#list-user-repositories](https://developer.github.com/v3/repos/#list-user-repositories)
 
-**Kind**: inner method of [`src/index`](#module_src/index)
+**Kind**: inner method of [`src/index`](#module_src/index)  
 
-| Param    | Type      | Description     |
-| -------- | --------- | --------------- |
-| username | `String`  | The username    |
-| page     | `Integer` | The page number |
-| per_page | `Integer` | Repos per page  |
+| Param | Type | Description |
+| --- | --- | --- |
+| username | `String` | The username |
+| page | `Integer` | The page number |
+| per_page | `Integer` | Repos per page |
 
 <a name="module_src/index..getDetailsForOrg"></a>
 
@@ -94,26 +96,40 @@ See [https://developer.github.com/v3/repos/#list-user-repositories](https://deve
 Get the repos for a specific org.
 See [https://developer.github.com/v3/repos/#list-organization-repositories](https://developer.github.com/v3/repos/#list-organization-repositories)
 
-**Kind**: inner method of [`src/index`](#module_src/index)
+**Kind**: inner method of [`src/index`](#module_src/index)  
 
-| Param | Type     | Description  |
-| ----- | -------- | ------------ |
-| org   | `String` | The org name |
+| Param | Type | Description |
+| --- | --- | --- |
+| org | `String` | The org name |
+
+<a name="module_src/index..getMembershipForUser"></a>
+
+### src/index~getMembershipForUser(org, username) ⇒ `Promise`
+
+Get organization membership for a user
+See [https://docs.github.com/en/rest/reference/orgs#set-organization-membership-for-a-user](https://docs.github.com/en/rest/reference/orgs#set-organization-membership-for-a-user)
+
+**Kind**: inner method of [`src/index`](#module_src/index)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| org | `String` | The org name |
+| username | `String` | The user name |
 
 <a name="module_src/index..getPermissionsForUser"></a>
 
-### src/index~getPermissionsForUser(owner, repo, username) ⇒ `Promise`
+### src/index~getPermissionsForUser() ⇒ `Promise`
 
 Get the permissions for a specific user and repo.
 See [https://developer.github.com/v3/repos/collaborators/#review-a-users-permission-level](https://developer.github.com/v3/repos/collaborators/#review-a-users-permission-level)
 
-**Kind**: inner method of [`src/index`](#module_src/index)
+**Kind**: inner method of [`src/index`](#module_src/index)  
 
-| Param    | Type     | Description    |
-| -------- | -------- | -------------- |
-| owner    | `String` | The repo owner |
-| repo     | `String` | The repo       |
-| username | `String` | The username   |
+| Param | Type | Description |
+| --- | --- | --- |
+| req.owner | `String` | The repo owner |
+| req.repo | `String` | The repo |
+| req.username | `String` | The username |
 
 <a name="module_src/index..getTemplates"></a>
 
@@ -122,14 +138,14 @@ See [https://developer.github.com/v3/repos/collaborators/#review-a-users-permiss
 Get the CWRC Writer templates.
 Default location is [https://github.com/cwrc/CWRC-Writer-Templates/tree/master/templates](https://github.com/cwrc/CWRC-Writer-Templates/tree/master/templates)
 
-**Kind**: inner method of [`src/index`](#module_src/index)
+**Kind**: inner method of [`src/index`](#module_src/index)  
 
-| Param | Type     | Description    |
-| ----- | -------- | -------------- |
-| owner | `String` | The owner      |
-| repo  | `String` | The repo       |
-| ref   | `String` | The branch/tag |
-| path  | `String` | The path       |
+| Param | Type | Description |
+| --- | --- | --- |
+| owner | `String` | The owner |
+| repo | `String` | The repo |
+| ref | `String` | The branch/tag |
+| path | `String` | The path |
 
 <a name="module_src/index..getDoc"></a>
 
@@ -139,14 +155,14 @@ Get a document from GitHub.
 See [https://developer.github.com/v3/repos/contents/#get-contents](https://developer.github.com/v3/repos/contents/#get-contents)
 See [https://octokit.github.io/rest.js/#octokit-routes-repos-get-contents](https://octokit.github.io/rest.js/#octokit-routes-repos-get-contents)
 
-**Kind**: inner method of [`src/index`](#module_src/index)
+**Kind**: inner method of [`src/index`](#module_src/index)  
 
-| Param | Type     | Description    |
-| ----- | -------- | -------------- |
-| owner | `String` | The owner      |
-| repo  | `String` | The repo       |
-| ref   | `String` | The branch/tag |
-| path  | `String` | The path       |
+| Param | Type | Description |
+| --- | --- | --- |
+| owner | `String` | The owner |
+| repo | `String` | The repo |
+| ref | `String` | The branch/tag |
+| path | `String` | The path |
 
 <a name="module_src/index..createRepo"></a>
 
@@ -155,13 +171,13 @@ See [https://octokit.github.io/rest.js/#octokit-routes-repos-get-contents](https
 Create a new repo for the authenticated user.
 See [https://developer.github.com/v3/repos/#create](https://developer.github.com/v3/repos/#create)
 
-**Kind**: inner method of [`src/index`](#module_src/index)
+**Kind**: inner method of [`src/index`](#module_src/index)  
 
-| Param       | Type                  | Description          |
-| ----------- | --------------------- | -------------------- |
-| repo        | `String`              | The repo             |
-| description | `String`              | The repo description |
-| isPrivate   | `String` \| `Boolean` | Is the repo private  |
+| Param | Type | Description |
+| --- | --- | --- |
+| repo | `String` | The repo |
+| description | `String` | The repo description |
+| isPrivate | `String` \| `Boolean` | Is the repo private |
 
 <a name="module_src/index..createOrgRepo"></a>
 
@@ -170,14 +186,14 @@ See [https://developer.github.com/v3/repos/#create](https://developer.github.com
 Create a new repo for a specific org.
 See [https://developer.github.com/v3/repos/#create](https://developer.github.com/v3/repos/#create)
 
-**Kind**: inner method of [`src/index`](#module_src/index)
+**Kind**: inner method of [`src/index`](#module_src/index)  
 
-| Param       | Type                  | Description         |
-| ----------- | --------------------- | ------------------- |
-| org         | `String`              | The org             |
-| repo        | `String`              | The repo            |
-| description | `String`              | The description     |
-| isPrivate   | `String` \| `Boolean` | Is the repo private |
+| Param | Type | Description |
+| --- | --- | --- |
+| org | `String` | The org |
+| repo | `String` | The repo |
+| description | `String` | The description |
+| isPrivate | `String` \| `Boolean` | Is the repo private |
 
 <a name="module_src/index..saveDoc"></a>
 
@@ -186,17 +202,17 @@ See [https://developer.github.com/v3/repos/#create](https://developer.github.com
 Save (i.e. create or update) a document.
 See [https://developer.github.com/v3/repos/contents/#create-or-update-a-file](https://developer.github.com/v3/repos/contents/#create-or-update-a-file)
 
-**Kind**: inner method of [`src/index`](#module_src/index)
+**Kind**: inner method of [`src/index`](#module_src/index)  
 
-| Param   | Type     | Description        |
-| ------- | -------- | ------------------ |
-| owner   | `String` | The owner          |
-| repo    | `String` | The repo           |
-| path    | `String` | The path           |
-| content | `String` | The content        |
-| branch  | `String` | The branch         |
+| Param | Type | Description |
+| --- | --- | --- |
+| owner | `String` | The owner |
+| repo | `String` | The repo |
+| path | `String` | The path |
+| content | `String` | The content |
+| branch | `String` | The branch |
 | message | `String` | The commit message |
-| [sha]   | `String` | The SHA            |
+| [sha] | `String` | The SHA |
 
 <a name="module_src/index..saveAsPullRequest"></a>
 
@@ -205,18 +221,33 @@ See [https://developer.github.com/v3/repos/contents/#create-or-update-a-file](ht
 Save (i.e. create) a document as a pull request.
 See [https://developer.github.com/v3/pulls/#create-a-pull-request](https://developer.github.com/v3/pulls/#create-a-pull-request)
 
-**Kind**: inner method of [`src/index`](#module_src/index)
+**Kind**: inner method of [`src/index`](#module_src/index)  
 
-| Param   | Type     | Description                   |
-| ------- | -------- | ----------------------------- |
-| owner   | `String` | The owner                     |
-| repo    | `String` | The repo                      |
-| path    | `String` | The path                      |
-| content | `String` | The content                   |
-| branch  | `String` | The branch                    |
-| message | `String` | The commit message            |
-| title   | `String` | The title of the pull request |
-| [sha]   | `String` | The SHA                       |
+| Param | Type | Description |
+| --- | --- | --- |
+| owner | `String` | The owner |
+| repo | `String` | The repo |
+| path | `String` | The path |
+| content | `String` | The content |
+| branch | `String` | The branch |
+| message | `String` | The commit message |
+| title | `String` | The title of the pull request |
+| [sha] | `String` | The SHA |
+
+<a name="module_src/index..createFork"></a>
+
+### src/index~createFork(owner, repo, [organization]) ⇒ `Promise`
+
+Create a fork for the authenticated user.
+See [https://octokit.github.io/rest.js/v18#repos-create-fork](https://octokit.github.io/rest.js/v18#repos-create-fork)
+
+**Kind**: inner method of [`src/index`](#module_src/index)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| owner | `String` | The owner |
+| repo | `String` | The repo |
+| [organization] | `String` | The organization |
 
 <a name="module_src/index..searchCode"></a>
 
@@ -225,12 +256,12 @@ See [https://developer.github.com/v3/pulls/#create-a-pull-request](https://devel
 Search for files based on a specific query.
 See [https://developer.github.com/v3/search/#search-code](https://developer.github.com/v3/search/#search-code)
 
-**Kind**: inner method of [`src/index`](#module_src/index)
+**Kind**: inner method of [`src/index`](#module_src/index)  
 
-| Param    | Type     | Description      |
-| -------- | -------- | ---------------- |
-| query    | `String` | The query        |
-| page     | `String` | The page number  |
+| Param | Type | Description |
+| --- | --- | --- |
+| query | `String` | The query |
+| page | `String` | The page number |
 | per_page | `String` | Results per page |
 
 <a name="module_src/index..searchRepos"></a>
@@ -240,12 +271,12 @@ See [https://developer.github.com/v3/search/#search-code](https://developer.gith
 Search for repos based on a specific query.
 See [https://developer.github.com/v3/search/#search-repositories](https://developer.github.com/v3/search/#search-repositories)
 
-**Kind**: inner method of [`src/index`](#module_src/index)
+**Kind**: inner method of [`src/index`](#module_src/index)  
 
-| Param    | Type     | Description      |
-| -------- | -------- | ---------------- |
-| query    | `String` | The query        |
-| page     | `String` | The page number  |
+| Param | Type | Description |
+| --- | --- | --- |
+| query | `String` | The query |
+| page | `String` | The page number |
 | per_page | `String` | Results per page |
 
 <a name="module_src/index..getRepoContents"></a>
@@ -255,12 +286,12 @@ See [https://developer.github.com/v3/search/#search-repositories](https://develo
 Gets the contents (i.e. file structure) of a repo using the GitHub recursive tree method.
 See [https://developer.github.com/v3/git/trees/#get-a-tree-recursively](https://developer.github.com/v3/git/trees/#get-a-tree-recursively)
 
-**Kind**: inner method of [`src/index`](#module_src/index)
+**Kind**: inner method of [`src/index`](#module_src/index)  
 
-| Param | Type     | Description |
-| ----- | -------- | ----------- |
-| owner | `String` | The owner   |
-| repo  | `String` | The repo    |
+| Param | Type | Description |
+| --- | --- | --- |
+| owner | `String` | The owner |
+| repo | `String` | The repo |
 
 <a name="module_src/index..getRepoContentsByDrillDown"></a>
 
@@ -269,9 +300,9 @@ See [https://developer.github.com/v3/git/trees/#get-a-tree-recursively](https://
 Gets the contents (i.e. file structure) of a repo by manually recursing.
 Intended to be used if the github recursive option didn't work because the repository is too big.
 
-**Kind**: inner method of [`src/index`](#module_src/index)
+**Kind**: inner method of [`src/index`](#module_src/index)  
 
-| Param | Type     | Description |
-| ----- | -------- | ----------- |
-| owner | `String` | The owner   |
-| repo  | `String` | The repo    |
+| Param | Type | Description |
+| --- | --- | --- |
+| owner | `String` | The owner |
+| repo | `String` | The repo |
