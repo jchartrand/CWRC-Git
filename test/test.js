@@ -45,7 +45,7 @@ nocks in the beforeEach:  tape-nock will take care of it all.
  */
 
 describe('cwrcGit', () => {
-	const { isPrivate, owner, testDoc, testRepo, testRepoDescription } = fixtures;
+	const { isPrivate, owner, testRepo, testRepoDescription } = fixtures;
 
 	describe('.getDoc', () => {
 		beforeEach(() => mocks.getDoc());
@@ -347,17 +347,17 @@ describe('cwrcGit', () => {
 		}).timeout(5000);
 	});
 
-	describe('.searchCode', () => {
-		beforeEach(() => mocks.getSearchNock());
+	// describe.skip('.searchCode', () => {
+	// 	beforeEach(() => mocks.getSearchNock());
 
-		it('returns correctly', async () => {
-			const result = await cwrcGit.searchCode('test+repo:lucaju/misc');
-			expect(result).to.exist;
-		}); //.timeout(5000); // to force mocha to wait longer for async to return
+	// 	it('returns correctly', async () => {
+	// 		const result = await cwrcGit.searchCode('test+repo:lucaju/misc');
+	// 		expect(result).to.exist;
+	// 	}); //.timeout(5000); // to force mocha to wait longer for async to return
 
-		it('returns highlighting', async () => {
-			const result = await cwrcGit.searchCode('test+repo:lucaju/misc');
-			expect(result.data.items[0].text_matches).to.exist;
-		});
-	});
+	// 	it('returns highlighting', async () => {
+	// 		const result = await cwrcGit.searchCode('test+repo:lucaju/misc');
+	// 		expect(result.data.items[0].text_matches).to.exist;
+	// 	});
+	// });
 });

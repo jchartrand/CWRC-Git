@@ -796,26 +796,19 @@ const getTemplateNock = () => {
 };
 
 const getSearchNock = () => {
-	return nock('https://api.github.com:443', {
-		encodedQueryParams: true,
-	})
+	return nock('https://api.github.com:443', { encodedQueryParams: true })
 		.get('/search/code')
-		.query({
-			q: 'test%20repo%3Alucaju%2Fmisc',
-			page: 'undefined',
-			per_page: 'undefined',
-		})
+		.query({ q: 'test%20repo%3Alucaju%2Fmisc' })
 		.reply(
 			200,
 			[
-				'1f8b08000000000000039d986d6fdb3610c7bf4aa1b733ccc896e3d84090176b366c4032746887025b6150d4d9622291024925b1857cf7dd51b26cc745621a2d9a5ad1efcfe33df1e82672daf1622174ad5c348f079154429755010e16066c5d381bcd97bcb080bf7250e2a77f9b48f112a279e4e0c50ddd8b8b0651c55d7ef8c4e61c1fcc2ed2a54827f1c5e5c588f338e63019f364940910f115f0f16c996657f801256a5320903b57d93963bc92c39574799d0ed12066a0d2563a6d2458361a4d66c9e86a1a33a19503e52cdb9a726360799da6130197a35824cb249d5c4e47b344a4d96c9a26179359ba4c05ccaec4a5005c1497589cb330722c2d746a59c00e7357166f56dbdb62510bfe50b3525ae1a5d9a9dbe8378ffbe9fdb48ee64d24b368de3b6b10299dc1829e45779f6f9fff2afe2cc4efb30dfffef793508febbb876f93fbcf7f24f79bdb6b54ea624ce6e0a7655d148beed1',
-				'9ea11479239fb8c374e8b2443f2b30b478a15752e15aedebf826ad1c8f26c9743c3bb4e5cbe53fdfef0bf170bbbefffa657cb779a4f539aa72f33638fea11d75a9515b305d0af82ca959a77ff3749d50744da7e2378d0fde0d35a959d69b7b4ab4c833ba28f433926f4d3d4ce07d71d6333d2fd52a9847a661dae5805e42d35f69c3d2ba1043fcfb0da31f9818a460d1bf06b200633a024da1c8bf36be56bd549d5a6164e5a45621461d70a8a3cd8a2bb9e1a13ac859c47d4904ecc7bf8f1c3c516709005ba061be22c49a5c6040807c4277068bbd2151cbad2b6abadf30d4e45cecc60b9e955462bef25e07d83b4fec2fc867d0c7269a2bac6eca64f3d897f1bb95e25dd4558a6f582848f407de3ac2b0101042f811d6c12c310dc37fbbcc1558883cd586e329112c76003778aeecb4288e0e7819ace9218473adc33de32184a5b5359c943ec7def5ac65dbbc547599b66de2946c3c966b29b4895b2b570a20d8233dd8b06dc74a0d57220f97da720d6bffe7a3c457c1261183a83fcbdfaff56387f44340c370da69fbaf5b9c63052911772084a3cc592611d70b3973469cbc3904f632d8e41d862cd89e2dc79ace430557ab9aafc2957a10a34547ce8a6f3e3c748f43b6235186460723d3fabc86b163c9a2f6acc3fa0a77d10edd09f94333341ff70f4ebfbdb2941f9d60c72eeab083543c538af2e8ad1c7dfef860fdb959c4356cd7c7dae6d829867aabeb8e5b7bf675b7d78a50c9fe3ad2fc421722ea08285f7103e14a1e634dcaf1681f0e874d0edc0f68259833aaa7a510e746e4389184dad36c393cb14beefc94b72473329cfa0acdb3e0b4ef41146943116a534bedc7adc23926d8100fedab94b200ebb40aef513b725f4f692797529c32bf1ea7fd01dcdc58bc9fc380e3b886e9e1a4909867780fa048e0f003e1bb6f293417aff4edc45a00a65cb0170db45cc3da7b440655a1d76755fa1e1ae1546b853638f88e87c974361dc7639ac65edc02b390e606ff7d844e1f409c7791ef4bf6ecaf10bac5bbf1fc374c9e5fdb6f25302695d115188797717fd860ffc2874bc357e418fabe2497f613fee59f1ca6dc7f8aea7b6f5fb4517a0b7f4755a23229fc8ee38b419cfc786dfffc0f668a07d0c4110000',
+				'1f8b0800000000000003ab562ac92f49cc894fce2fcd2b51b232d051cacc4bcecf2dc8492d498d2f4a2d2ecd292956b24a4bcc294e054a95a4e60279d1b1b500c845f5b737000000',
 			],
 			[
 				'Server',
 				'GitHub.com',
 				'Date',
-				'Tue, 28 Jan 2020 05:30:54 GMT',
+				'Thu, 03 Dec 2020 21:42:33 GMT',
 				'Content-Type',
 				'application/json; charset=utf-8',
 				'Transfer-Encoding',
@@ -824,22 +817,26 @@ const getSearchNock = () => {
 				'close',
 				'Status',
 				'200 OK',
+				'Cache-Control',
+				'no-cache',
+				'Vary',
+				'Accept, Authorization, Cookie, X-GitHub-OTP',
+				'X-OAuth-Scopes',
+				'repo, user, workflow',
+				'X-Accepted-OAuth-Scopes',
+				'',
+				'X-GitHub-Media-Type',
+				'github.v3; param=text-match',
 				'X-RateLimit-Limit',
 				'30',
 				'X-RateLimit-Remaining',
 				'29',
 				'X-RateLimit-Reset',
-				'1580189514',
-				'Cache-Control',
-				'no-cache',
-				'X-OAuth-Scopes',
-				'admin:repo_hook, repo',
-				'X-Accepted-OAuth-Scopes',
-				'',
-				'X-GitHub-Media-Type',
-				'github.v3; param=text-match',
+				'1607031813',
+				'X-RateLimit-Used',
+				'1',
 				'Access-Control-Expose-Headers',
-				'ETag, Link, Location, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval, X-GitHub-Media-Type',
+				'ETag, Link, Location, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Used, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval, X-GitHub-Media-Type, Deprecation, Sunset',
 				'Access-Control-Allow-Origin',
 				'*',
 				'Strict-Transport-Security',
@@ -854,10 +851,12 @@ const getSearchNock = () => {
 				'origin-when-cross-origin, strict-origin-when-cross-origin',
 				'Content-Security-Policy',
 				"default-src 'none'",
+				'Vary',
+				'Accept-Encoding, Accept, X-Requested-With',
 				'Content-Encoding',
 				'gzip',
 				'X-GitHub-Request-Id',
-				'939E:2EA6:219F4:59107:5E2FC70D',
+				'C773:0F96:9E447:111817:5FC95BC9',
 			]
 		);
 };
