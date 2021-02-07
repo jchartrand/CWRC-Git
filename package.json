@@ -33,7 +33,7 @@
     "semantic-release": "semantic-release"
   },
   "dependencies": {
-    "@octokit/rest": "^18.0.12"
+    "@octokit/rest": "^18.1.0"
   },
   "devDependencies": {
     "chai": "^4.2.0",
