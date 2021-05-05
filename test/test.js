@@ -337,7 +337,12 @@ describe('cwrcGit', () => {
     beforeEach(() => templateMocks());
 
     it('returns correctly', async () => {
-      const result = await cwrcGit.getTemplates('cwrc', 'CWRC-Writer-Templates', 'master', 'templates');
+      const result = await cwrcGit.getTemplates(
+        'cwrc',
+        'CWRC-Writer-Templates',
+        'master',
+        'templates'
+      );
       expect(result).to.exist;
     }).timeout(5000);
   });

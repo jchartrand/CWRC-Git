@@ -399,17 +399,22 @@ const getTemplatesNock = () => {
           path: 'templates/biography.xml',
           sha: 'df8924ab45525603b11131084bac46a65e40dd05',
           size: 8969,
-          url: 'https://api.github.com/repos/cwrc/CWRC-Writer-Templates/contents/templates/biography.xml?ref=master',
-          html_url: 'https://github.com/cwrc/CWRC-Writer-Templates/blob/master/templates/biography.xml',
+          url:
+            'https://api.github.com/repos/cwrc/CWRC-Writer-Templates/contents/templates/biography.xml?ref=master',
+          html_url:
+            'https://github.com/cwrc/CWRC-Writer-Templates/blob/master/templates/biography.xml',
           git_url:
             'https://api.github.com/repos/cwrc/CWRC-Writer-Templates/git/blobs/df8924ab45525603b11131084bac46a65e40dd05',
-          download_url: 'https://raw.githubusercontent.com/cwrc/CWRC-Writer-Templates/master/templates/biography.xml',
+          download_url:
+            'https://raw.githubusercontent.com/cwrc/CWRC-Writer-Templates/master/templates/biography.xml',
           type: 'file',
           _links: {
-            self: 'https://api.github.com/repos/cwrc/CWRC-Writer-Templates/contents/templates/biography.xml?ref=master',
+            self:
+              'https://api.github.com/repos/cwrc/CWRC-Writer-Templates/contents/templates/biography.xml?ref=master',
             git:
               'https://api.github.com/repos/cwrc/CWRC-Writer-Templates/git/blobs/df8924ab45525603b11131084bac46a65e40dd05',
-            html: 'https://github.com/cwrc/CWRC-Writer-Templates/blob/master/templates/biography.xml',
+            html:
+              'https://github.com/cwrc/CWRC-Writer-Templates/blob/master/templates/biography.xml',
           },
         },
         {
@@ -419,7 +424,8 @@ const getTemplatesNock = () => {
           size: 12918,
           url:
             'https://api.github.com/repos/cwrc/CWRC-Writer-Templates/contents/templates/ceww_new_entry_template.xml?ref=master',
-          html_url: 'https://github.com/cwrc/CWRC-Writer-Templates/blob/master/templates/ceww_new_entry_template.xml',
+          html_url:
+            'https://github.com/cwrc/CWRC-Writer-Templates/blob/master/templates/ceww_new_entry_template.xml',
           git_url:
             'https://api.github.com/repos/cwrc/CWRC-Writer-Templates/git/blobs/ed224c05b1dd8b2e8053fd880e04c983065698c1',
           download_url:
@@ -430,7 +436,8 @@ const getTemplatesNock = () => {
               'https://api.github.com/repos/cwrc/CWRC-Writer-Templates/contents/templates/ceww_new_entry_template.xml?ref=master',
             git:
               'https://api.github.com/repos/cwrc/CWRC-Writer-Templates/git/blobs/ed224c05b1dd8b2e8053fd880e04c983065698c1',
-            html: 'https://github.com/cwrc/CWRC-Writer-Templates/blob/master/templates/ceww_new_entry_template.xml',
+            html:
+              'https://github.com/cwrc/CWRC-Writer-Templates/blob/master/templates/ceww_new_entry_template.xml',
           },
         },
         {
@@ -438,17 +445,22 @@ const getTemplatesNock = () => {
           path: 'templates/cwrcEntry.xml',
           sha: '5cc998e21ac16e733e8e2d176ac77b1276651d1a',
           size: 1192,
-          url: 'https://api.github.com/repos/cwrc/CWRC-Writer-Templates/contents/templates/cwrcEntry.xml?ref=master',
-          html_url: 'https://github.com/cwrc/CWRC-Writer-Templates/blob/master/templates/cwrcEntry.xml',
+          url:
+            'https://api.github.com/repos/cwrc/CWRC-Writer-Templates/contents/templates/cwrcEntry.xml?ref=master',
+          html_url:
+            'https://github.com/cwrc/CWRC-Writer-Templates/blob/master/templates/cwrcEntry.xml',
           git_url:
             'https://api.github.com/repos/cwrc/CWRC-Writer-Templates/git/blobs/5cc998e21ac16e733e8e2d176ac77b1276651d1a',
-          download_url: 'https://raw.githubusercontent.com/cwrc/CWRC-Writer-Templates/master/templates/cwrcEntry.xml',
+          download_url:
+            'https://raw.githubusercontent.com/cwrc/CWRC-Writer-Templates/master/templates/cwrcEntry.xml',
           type: 'file',
           _links: {
-            self: 'https://api.github.com/repos/cwrc/CWRC-Writer-Templates/contents/templates/cwrcEntry.xml?ref=master',
+            self:
+              'https://api.github.com/repos/cwrc/CWRC-Writer-Templates/contents/templates/cwrcEntry.xml?ref=master',
             git:
               'https://api.github.com/repos/cwrc/CWRC-Writer-Templates/git/blobs/5cc998e21ac16e733e8e2d176ac77b1276651d1a',
-            html: 'https://github.com/cwrc/CWRC-Writer-Templates/blob/master/templates/cwrcEntry.xml',
+            html:
+              'https://github.com/cwrc/CWRC-Writer-Templates/blob/master/templates/cwrcEntry.xml',
           },
         },
         {
@@ -456,14 +468,18 @@ const getTemplatesNock = () => {
           path: 'templates/letter.xml',
           sha: '1525a783ddcd2844d75677d3748673d749c99963',
           size: 4470,
-          url: 'https://api.github.com/repos/cwrc/CWRC-Writer-Templates/contents/templates/letter.xml?ref=master',
-          html_url: 'https://github.com/cwrc/CWRC-Writer-Templates/blob/master/templates/letter.xml',
+          url:
+            'https://api.github.com/repos/cwrc/CWRC-Writer-Templates/contents/templates/letter.xml?ref=master',
+          html_url:
+            'https://github.com/cwrc/CWRC-Writer-Templates/blob/master/templates/letter.xml',
           git_url:
             'https://api.github.com/repos/cwrc/CWRC-Writer-Templates/git/blobs/1525a783ddcd2844d75677d3748673d749c99963',
-          download_url: 'https://raw.githubusercontent.com/cwrc/CWRC-Writer-Templates/master/templates/letter.xml',
+          download_url:
+            'https://raw.githubusercontent.com/cwrc/CWRC-Writer-Templates/master/templates/letter.xml',
           type: 'file',
           _links: {
-            self: 'https://api.github.com/repos/cwrc/CWRC-Writer-Templates/contents/templates/letter.xml?ref=master',
+            self:
+              'https://api.github.com/repos/cwrc/CWRC-Writer-Templates/contents/templates/letter.xml?ref=master',
             git:
               'https://api.github.com/repos/cwrc/CWRC-Writer-Templates/git/blobs/1525a783ddcd2844d75677d3748673d749c99963',
             html: 'https://github.com/cwrc/CWRC-Writer-Templates/blob/master/templates/letter.xml',
@@ -474,14 +490,17 @@ const getTemplatesNock = () => {
           path: 'templates/poem.xml',
           sha: '3646f33255208aa71b79ef0a7adaa03af2057ec4',
           size: 9775,
-          url: 'https://api.github.com/repos/cwrc/CWRC-Writer-Templates/contents/templates/poem.xml?ref=master',
+          url:
+            'https://api.github.com/repos/cwrc/CWRC-Writer-Templates/contents/templates/poem.xml?ref=master',
           html_url: 'https://github.com/cwrc/CWRC-Writer-Templates/blob/master/templates/poem.xml',
           git_url:
             'https://api.github.com/repos/cwrc/CWRC-Writer-Templates/git/blobs/3646f33255208aa71b79ef0a7adaa03af2057ec4',
-          download_url: 'https://raw.githubusercontent.com/cwrc/CWRC-Writer-Templates/master/templates/poem.xml',
+          download_url:
+            'https://raw.githubusercontent.com/cwrc/CWRC-Writer-Templates/master/templates/poem.xml',
           type: 'file',
           _links: {
-            self: 'https://api.github.com/repos/cwrc/CWRC-Writer-Templates/contents/templates/poem.xml?ref=master',
+            self:
+              'https://api.github.com/repos/cwrc/CWRC-Writer-Templates/contents/templates/poem.xml?ref=master',
             git:
               'https://api.github.com/repos/cwrc/CWRC-Writer-Templates/git/blobs/3646f33255208aa71b79ef0a7adaa03af2057ec4',
             html: 'https://github.com/cwrc/CWRC-Writer-Templates/blob/master/templates/poem.xml',
@@ -492,14 +511,17 @@ const getTemplatesNock = () => {
           path: 'templates/prose.xml',
           sha: 'abe5f5729d23b51a54ad4098c182bbd3e70b2d79',
           size: 19730,
-          url: 'https://api.github.com/repos/cwrc/CWRC-Writer-Templates/contents/templates/prose.xml?ref=master',
+          url:
+            'https://api.github.com/repos/cwrc/CWRC-Writer-Templates/contents/templates/prose.xml?ref=master',
           html_url: 'https://github.com/cwrc/CWRC-Writer-Templates/blob/master/templates/prose.xml',
           git_url:
             'https://api.github.com/repos/cwrc/CWRC-Writer-Templates/git/blobs/abe5f5729d23b51a54ad4098c182bbd3e70b2d79',
-          download_url: 'https://raw.githubusercontent.com/cwrc/CWRC-Writer-Templates/master/templates/prose.xml',
+          download_url:
+            'https://raw.githubusercontent.com/cwrc/CWRC-Writer-Templates/master/templates/prose.xml',
           type: 'file',
           _links: {
-            self: 'https://api.github.com/repos/cwrc/CWRC-Writer-Templates/contents/templates/prose.xml?ref=master',
+            self:
+              'https://api.github.com/repos/cwrc/CWRC-Writer-Templates/contents/templates/prose.xml?ref=master',
             git:
               'https://api.github.com/repos/cwrc/CWRC-Writer-Templates/git/blobs/abe5f5729d23b51a54ad4098c182bbd3e70b2d79',
             html: 'https://github.com/cwrc/CWRC-Writer-Templates/blob/master/templates/prose.xml',
@@ -512,7 +534,8 @@ const getTemplatesNock = () => {
           size: 79937,
           url:
             'https://api.github.com/repos/cwrc/CWRC-Writer-Templates/contents/templates/sample_biography.xml?ref=master',
-          html_url: 'https://github.com/cwrc/CWRC-Writer-Templates/blob/master/templates/sample_biography.xml',
+          html_url:
+            'https://github.com/cwrc/CWRC-Writer-Templates/blob/master/templates/sample_biography.xml',
           git_url:
             'https://api.github.com/repos/cwrc/CWRC-Writer-Templates/git/blobs/95edb8af9142e198f7b5adda6a2520f606171c1a',
           download_url:
@@ -523,7 +546,8 @@ const getTemplatesNock = () => {
               'https://api.github.com/repos/cwrc/CWRC-Writer-Templates/contents/templates/sample_biography.xml?ref=master',
             git:
               'https://api.github.com/repos/cwrc/CWRC-Writer-Templates/git/blobs/95edb8af9142e198f7b5adda6a2520f606171c1a',
-            html: 'https://github.com/cwrc/CWRC-Writer-Templates/blob/master/templates/sample_biography.xml',
+            html:
+              'https://github.com/cwrc/CWRC-Writer-Templates/blob/master/templates/sample_biography.xml',
           },
         },
         {
@@ -533,7 +557,8 @@ const getTemplatesNock = () => {
           size: 20765,
           url:
             'https://api.github.com/repos/cwrc/CWRC-Writer-Templates/contents/templates/sample_letter.xml?ref=master',
-          html_url: 'https://github.com/cwrc/CWRC-Writer-Templates/blob/master/templates/sample_letter.xml',
+          html_url:
+            'https://github.com/cwrc/CWRC-Writer-Templates/blob/master/templates/sample_letter.xml',
           git_url:
             'https://api.github.com/repos/cwrc/CWRC-Writer-Templates/git/blobs/3018280fedf351a4a9330326cd654382aa80984b',
           download_url:
@@ -544,7 +569,8 @@ const getTemplatesNock = () => {
               'https://api.github.com/repos/cwrc/CWRC-Writer-Templates/contents/templates/sample_letter.xml?ref=master',
             git:
               'https://api.github.com/repos/cwrc/CWRC-Writer-Templates/git/blobs/3018280fedf351a4a9330326cd654382aa80984b',
-            html: 'https://github.com/cwrc/CWRC-Writer-Templates/blob/master/templates/sample_letter.xml',
+            html:
+              'https://github.com/cwrc/CWRC-Writer-Templates/blob/master/templates/sample_letter.xml',
           },
         },
         {
@@ -552,18 +578,22 @@ const getTemplatesNock = () => {
           path: 'templates/sample_poem.xml',
           sha: 'e3fadfac318e076318ffbf69a335470df6a73b42',
           size: 6572,
-          url: 'https://api.github.com/repos/cwrc/CWRC-Writer-Templates/contents/templates/sample_poem.xml?ref=master',
-          html_url: 'https://github.com/cwrc/CWRC-Writer-Templates/blob/master/templates/sample_poem.xml',
+          url:
+            'https://api.github.com/repos/cwrc/CWRC-Writer-Templates/contents/templates/sample_poem.xml?ref=master',
+          html_url:
+            'https://github.com/cwrc/CWRC-Writer-Templates/blob/master/templates/sample_poem.xml',
           git_url:
             'https://api.github.com/repos/cwrc/CWRC-Writer-Templates/git/blobs/e3fadfac318e076318ffbf69a335470df6a73b42',
-          download_url: 'https://raw.githubusercontent.com/cwrc/CWRC-Writer-Templates/master/templates/sample_poem.xml',
+          download_url:
+            'https://raw.githubusercontent.com/cwrc/CWRC-Writer-Templates/master/templates/sample_poem.xml',
           type: 'file',
           _links: {
             self:
               'https://api.github.com/repos/cwrc/CWRC-Writer-Templates/contents/templates/sample_poem.xml?ref=master',
             git:
               'https://api.github.com/repos/cwrc/CWRC-Writer-Templates/git/blobs/e3fadfac318e076318ffbf69a335470df6a73b42',
-            html: 'https://github.com/cwrc/CWRC-Writer-Templates/blob/master/templates/sample_poem.xml',
+            html:
+              'https://github.com/cwrc/CWRC-Writer-Templates/blob/master/templates/sample_poem.xml',
           },
         },
         {
@@ -573,7 +603,8 @@ const getTemplatesNock = () => {
           size: 93162,
           url:
             'https://api.github.com/repos/cwrc/CWRC-Writer-Templates/contents/templates/sample_writing.xml?ref=master',
-          html_url: 'https://github.com/cwrc/CWRC-Writer-Templates/blob/master/templates/sample_writing.xml',
+          html_url:
+            'https://github.com/cwrc/CWRC-Writer-Templates/blob/master/templates/sample_writing.xml',
           git_url:
             'https://api.github.com/repos/cwrc/CWRC-Writer-Templates/git/blobs/70f5fa95ddd70ae11aa7413d63369dfcabd4d81f',
           download_url:
@@ -584,7 +615,8 @@ const getTemplatesNock = () => {
               'https://api.github.com/repos/cwrc/CWRC-Writer-Templates/contents/templates/sample_writing.xml?ref=master',
             git:
               'https://api.github.com/repos/cwrc/CWRC-Writer-Templates/git/blobs/70f5fa95ddd70ae11aa7413d63369dfcabd4d81f',
-            html: 'https://github.com/cwrc/CWRC-Writer-Templates/blob/master/templates/sample_writing.xml',
+            html:
+              'https://github.com/cwrc/CWRC-Writer-Templates/blob/master/templates/sample_writing.xml',
           },
         },
         {
@@ -592,14 +624,18 @@ const getTemplatesNock = () => {
           path: 'templates/writing.xml',
           sha: '978a11166ed998a61e60732597178eea51ae2daf',
           size: 6316,
-          url: 'https://api.github.com/repos/cwrc/CWRC-Writer-Templates/contents/templates/writing.xml?ref=master',
-          html_url: 'https://github.com/cwrc/CWRC-Writer-Templates/blob/master/templates/writing.xml',
+          url:
+            'https://api.github.com/repos/cwrc/CWRC-Writer-Templates/contents/templates/writing.xml?ref=master',
+          html_url:
+            'https://github.com/cwrc/CWRC-Writer-Templates/blob/master/templates/writing.xml',
           git_url:
             'https://api.github.com/repos/cwrc/CWRC-Writer-Templates/git/blobs/978a11166ed998a61e60732597178eea51ae2daf',
-          download_url: 'https://raw.githubusercontent.com/cwrc/CWRC-Writer-Templates/master/templates/writing.xml',
+          download_url:
+            'https://raw.githubusercontent.com/cwrc/CWRC-Writer-Templates/master/templates/writing.xml',
           type: 'file',
           _links: {
-            self: 'https://api.github.com/repos/cwrc/CWRC-Writer-Templates/contents/templates/writing.xml?ref=master',
+            self:
+              'https://api.github.com/repos/cwrc/CWRC-Writer-Templates/contents/templates/writing.xml?ref=master',
             git:
               'https://api.github.com/repos/cwrc/CWRC-Writer-Templates/git/blobs/978a11166ed998a61e60732597178eea51ae2daf',
             html: 'https://github.com/cwrc/CWRC-Writer-Templates/blob/master/templates/writing.xml',
@@ -675,17 +711,20 @@ const getTemplateNock = () => {
         path: 'templates/letter.xml',
         sha: '1525a783ddcd2844d75677d3748673d749c99963',
         size: 4470,
-        url: 'https://api.github.com/repos/cwrc/CWRC-Writer-Templates/contents/templates/letter.xml?ref=master',
+        url:
+          'https://api.github.com/repos/cwrc/CWRC-Writer-Templates/contents/templates/letter.xml?ref=master',
         html_url: 'https://github.com/cwrc/CWRC-Writer-Templates/blob/master/templates/letter.xml',
         git_url:
           'https://api.github.com/repos/cwrc/CWRC-Writer-Templates/git/blobs/1525a783ddcd2844d75677d3748673d749c99963',
-        download_url: 'https://raw.githubusercontent.com/cwrc/CWRC-Writer-Templates/master/templates/letter.xml',
+        download_url:
+          'https://raw.githubusercontent.com/cwrc/CWRC-Writer-Templates/master/templates/letter.xml',
         type: 'file',
         content:
           '77u/PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPD94\nbWwtbW9kZWwgaHJlZj0iaHR0cDovL2N3cmMuY2Evc2NoZW1hcy9jd3JjX3Rl\naV9saXRlLnJuZyIgdHlwZT0iYXBwbGljYXRpb24veG1sIiBzY2hlbWF0eXBl\nbnM9Imh0dHA6Ly9yZWxheG5nLm9yZy9ucy9zdHJ1Y3R1cmUvMS4wIj8+Cjw/\neG1sLXN0eWxlc2hlZXQgdHlwZT0idGV4dC9jc3MiIGhyZWY9Imh0dHA6Ly9j\nd3JjLmNhL3RlbXBsYXRlcy9jc3MvdGVpLmNzcyI/Pgo8VEVJIHhtbG5zPSJo\ndHRwOi8vd3d3LnRlaS1jLm9yZy9ucy8xLjAiIHhtbG5zOnJkZj0iaHR0cDov\nL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyIgeG1sbnM6\nY3c9Imh0dHA6Ly9jd3JjLmNhL25zL2N3IyIgeG1sbnM6dz0iaHR0cDovL2N3\ncmN0Yy5hcnRzcm4udWFsYmVydGEuY2EvIyI+Cgk8cmRmOlJERiB4bWxuczpy\nZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1u\ncyMiIHhtbG5zOmN3PSJodHRwOi8vY3dyYy5jYS9ucy9jdyMiIHhtbG5zOm9h\nPSJodHRwOi8vd3d3LnczLm9yZy9ucy9vYSMiIHhtbG5zOmZvYWY9Imh0dHA6\nLy94bWxucy5jb20vZm9hZi8wLjEvIj4KCQk8cmRmOkRlc2NyaXB0aW9uIHJk\nZjphYm91dD0iaHR0cDovL2FwcHMudGVzdGluZy5jd3JjLmNhL2VkaXRvci9k\nb2N1bWVudHMvbnVsbCI+CgkJCTxjdzptb2RlPjA8L2N3Om1vZGU+CgkJPC9y\nZGY6RGVzY3JpcHRpb24+CgkJPHJkZjpEZXNjcmlwdGlvbiB4bWxuczpyZGY9\nImh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMi\nIHJkZjphYm91dD0iaHR0cDovL2lkLmN3cmMuY2EvYW5ub3RhdGlvbi8zM2Mz\nNzdmMS0yMWZhLTQ1OTQtOWIxZi05M2Q3ZTM4N2ZjOGEiPgoJCQk8b2E6aGFz\nVGFyZ2V0IHhtbG5zOm9hPSJodHRwOi8vd3d3LnczLm9yZy9ucy9vYSMiIHJk\nZjpyZXNvdXJjZT0iaHR0cDovL2lkLmN3cmMuY2EvdGFyZ2V0LzE2OGJhMzlk\nLTJiYjktNDY0ZC1iMzNhLTAxM2ZhNjMwZDJjMSIvPgoJCQk8b2E6aGFzQm9k\neSB4bWxuczpvYT0iaHR0cDovL3d3dy53My5vcmcvbnMvb2EjIiByZGY6cmVz\nb3VyY2U9Imh0dHA6Ly9jd3JjLWRldi0wMS5zcnYudWFsYmVydGEuY2EvaXNs\nYW5kb3JhL29iamVjdC83M2MzMzRkMy0yNjI5LTRmNjMtODM1Yi0yM2ZjMGE3\nMDZkN2MiLz4KCQkJPG9hOmFubm90YXRlZEJ5IHhtbG5zOm9hPSJodHRwOi8v\nd3d3LnczLm9yZy9ucy9vYSMiIHJkZjpyZXNvdXJjZT0iaHR0cDovL2lkLmN3\ncmMuY2EvdXNlci8wNmY5M2JjMy1kODNhLTQzMDAtYTIwOS0zY2YxMmNjNmE5\nZTkiLz4KCQkJPG9hOmFubm90YXRlZEF0IHhtbG5zOm9hPSJodHRwOi8vd3d3\nLnczLm9yZy9ucy9vYSMiPjIwMTQtMTAtMDFUMTY6MTI6MTMuNDY0Wjwvb2E6\nYW5ub3RhdGVkQXQ+CgkJCTxvYTpzZXJpYWxpemVkQnkgeG1sbnM6b2E9Imh0\ndHA6Ly93d3cudzMub3JnL25zL29hIyIgcmRmOnJlc291cmNlPSIiLz4KCQkJ\nPG9hOnNlcmlhbGl6ZWRBdCB4bWxuczpvYT0iaHR0cDovL3d3dy53My5vcmcv\nbnMvb2EjIj4yMDE0LTEwLTAxVDE2OjEyOjEzLjQ2NFo8L29hOnNlcmlhbGl6\nZWRBdD4KCQkJPHJkZjp0eXBlIHJkZjpyZXNvdXJjZT0iaHR0cDovL3d3dy53\nMy5vcmcvbnMvb2EjQW5ub3RhdGlvbiIvPgoJCQk8b2E6bW90aXZhdGVkQnkg\neG1sbnM6b2E9Imh0dHA6Ly93d3cudzMub3JnL25zL29hIyIgcmRmOnJlc291\ncmNlPSJodHRwOi8vd3d3LnczLm9yZy9ucy9vYSN0YWdnaW5nIi8+CgkJCTxv\nYTptb3RpdmF0ZWRCeSB4bWxuczpvYT0iaHR0cDovL3d3dy53My5vcmcvbnMv\nb2EjIiByZGY6cmVzb3VyY2U9Imh0dHA6Ly93d3cudzMub3JnL25zL29hI2lk\nZW50aWZ5aW5nIi8+CgkJCTxjdzpoYXNDZXJ0YWludHkgeG1sbnM6Y3c9Imh0\ndHA6Ly9jd3JjLmNhL25zL2N3IyIgcmRmOnJlc291cmNlPSJodHRwOi8vY3dy\nYy5jYS9ucy9jdyNkZWZpbml0ZSIvPgoJCQk8Y3c6Y3dyY0luZm8geG1sbnM6\nY3c9Imh0dHA6Ly9jd3JjLmNhL25zL2N3IyI+eyJpZCI6Imh0dHA6Ly92aWFm\nLm9yZy92aWFmLzM5NTY5NzUyIiwibmFtZSI6IkJyb3duLCBNaXF1ZWwiLCJy\nZXBvc2l0b3J5IjoidmlhZiJ9PC9jdzpjd3JjSW5mbz4KCQkJPGN3OmN3cmNB\ndHRyaWJ1dGVzIHhtbG5zOmN3PSJodHRwOi8vY3dyYy5jYS9ucy9jdyMiPnsi\nY2VydCI6ImRlZmluaXRlIiwidHlwZSI6InJlYWwiLCJyZWYiOiJodHRwOi8v\ndmlhZi5vcmcvdmlhZi8zOTU2OTc1MiJ9PC9jdzpjd3JjQXR0cmlidXRlcz4K\nCQk8L3JkZjpEZXNjcmlwdGlvbj4KCQk8cmRmOkRlc2NyaXB0aW9uIHhtbG5z\nOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4\nLW5zIyIgcmRmOmFib3V0PSJodHRwOi8vY3dyYy1kZXYtMDEuc3J2LnVhbGJl\ncnRhLmNhL2lzbGFuZG9yYS9vYmplY3QvNzNjMzM0ZDMtMjYyOS00ZjYzLTgz\nNWItMjNmYzBhNzA2ZDdjIj4KCQkJPHJkZjp0eXBlIHJkZjpyZXNvdXJjZT0i\naHR0cDovL3d3dy53My5vcmcvbnMvb2EjU2VtYW50aWNUYWciLz4KCQkJPHJk\nZjp0eXBlIHJkZjpyZXNvdXJjZT0iaHR0cDovL3htbG5zLmNvbS9mb2FmLzAu\nMS9QZXJzb24iLz4KCQk8L3JkZjpEZXNjcmlwdGlvbj4KCQk8cmRmOkRlc2Ny\naXB0aW9uIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8y\nMi1yZGYtc3ludGF4LW5zIyIgcmRmOmFib3V0PSJodHRwOi8vaWQuY3dyYy5j\nYS90YXJnZXQvMTY4YmEzOWQtMmJiOS00NjRkLWIzM2EtMDEzZmE2MzBkMmMx\nIj4KCQkJPG9hOmhhc1NvdXJjZSB4bWxuczpvYT0iaHR0cDovL3d3dy53My5v\ncmcvbnMvb2EjIiByZGY6cmVzb3VyY2U9Imh0dHA6Ly9pZC5jd3JjLmNhL2Rv\nYy85YTgxMzIzNi00YjRlLTRmMzEtYjQxOC03YTE4M2EyODViNWUiLz4KCQkJ\nPHJkZjp0eXBlIHJkZjpyZXNvdXJjZT0iaHR0cDovL3d3dy53My5vcmcvbnMv\nb2EjU3BlY2lmaWNSZXNvdXJjZSIvPgoJCQk8b2E6aGFzU2VsZWN0b3IgeG1s\nbnM6b2E9Imh0dHA6Ly93d3cudzMub3JnL25zL29hIyIgcmRmOnJlc291cmNl\nPSJodHRwOi8vaWQuY3dyYy5jYS9zZWxlY3Rvci82YjRiYmQxYS1iODg3LTQ5\nOGItYjVmNy1iZTQwMWJmY2Q2ZDkiLz4KCQk8L3JkZjpEZXNjcmlwdGlvbj4K\nCQk8cmRmOkRlc2NyaXB0aW9uIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5v\ncmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyIgcmRmOmFib3V0PSJodHRw\nOi8vaWQuY3dyYy5jYS9zZWxlY3Rvci82YjRiYmQxYS1iODg3LTQ5OGItYjVm\nNy1iZTQwMWJmY2Q2ZDkiPgoJCQk8cmRmOnZhbHVlPnhwb2ludGVyKC8vcGVy\nc05hbWVbQGFubm90YXRpb25JZD0iZW50XzYyIl0pPC9yZGY6dmFsdWU+CgkJ\nCTxyZGY6dHlwZSByZGY6cmVzb3VyY2U9Imh0dHA6Ly93d3cudzMub3JnL25z\nL29hI0ZyYWdtZW50U2VsZWN0b3IiLz4KCQk8L3JkZjpEZXNjcmlwdGlvbj4K\nCTwvcmRmOlJERj4KCTx0ZWlIZWFkZXI+CgkJPGZpbGVEZXNjPgoJCQk8dGl0\nbGVTdG10PgoJCQkJPHRpdGxlPlNhbXBsZSBEb2N1bWVudCBUaXRsZTwvdGl0\nbGU+CgkJCTwvdGl0bGVTdG10PgoJCQk8cHVibGljYXRpb25TdG10PgoJCQkJ\nPHAvPgoJCQk8L3B1YmxpY2F0aW9uU3RtdD4KCQkJPHNvdXJjZURlc2Mgc2Ft\nZUFzPSJodHRwOi8vd3d3LmN3cmMuY2EiPgoJCQkJPHA+Q3JlYXRlZCBmcm9t\nIG9yaWdpbmFsIHJlc2VhcmNoIGJ5IG1lbWJlcnMgb2YgQ1dSQy9DU++/vUMg\ndW5sZXNzIG90aGVyd2lzZSBub3RlZC48L3A+CgkJCTwvc291cmNlRGVzYz4K\nCQk8L2ZpbGVEZXNjPgoJPC90ZWlIZWFkZXI+Cgk8dGV4dD4KCQk8Ym9keT4K\nCQkJPGRpdiB0eXBlPSJsZXR0ZXIiPgoJCQkJPGhlYWQ+CgkJCQkJPHRpdGxl\nPlNhbXBsZSBMZXR0ZXIgVGl0bGU8L3RpdGxlPgoJCQkJPC9oZWFkPgoJCQkJ\nPG9wZW5lcj4KCQkJCQk8bm90ZSB0eXBlPSJzZXR0aW5nIj4KCQkJCQkJPHA+\nU29tZSBvcGVuaW5nIG5vdGUgZGVzY3JpYmluZyB0aGUgd3JpdGluZyBzZXR0\naW5nPC9wPgoJCQkJCTwvbm90ZT4KCQkJCQk8ZGF0ZWxpbmU+CgkJCQkJCTxk\nYXRlPlNvbWUgZGF0ZSAoc2V0IGRhdGUgdmFsdWUgaW4gYXR0cmlidXRlKS48\nL2RhdGU+CgkJCQkJPC9kYXRlbGluZT4KCQkJCQk8c2FsdXRlPlNvbWUgc2Fs\ndXRhdGlvbiwgZS5nLiAiRGVhcmVzdCA8cGVyc05hbWUgYW5ub3RhdGlvbklk\nPSJlbnRfNjIiIGNlcnQ9ImRlZmluaXRlIiB0eXBlPSJyZWFsIiByZWY9Imh0\ndHA6Ly92aWFmLm9yZy92aWFmLzM5NTY5NzUyIj5NaXF1ZWw8L3BlcnNOYW1l\nPiI8L3NhbHV0ZT4KCQkJCTwvb3BlbmVyPgoJCQkJPHA+U2FtcGxlIGxldHRl\nciBjb250ZW50PC9wPgoJCQkJPGNsb3Nlcj4KCQkJCQk8c2FsdXRlPlNvbWUg\nY2xvc2luZyBzYWx1dGF0aW9uLCBlLmcuICJXaXRoIGxvdmUuLi4iPC9zYWx1\ndGU+CgkJCQkJPHNpZ25lZD5TZW5kZXIgbmFtZSBhbmQvb3Igc2lnbmF0dXJl\nLjwvc2lnbmVkPgoJCQkJPC9jbG9zZXI+CgkJCTwvZGl2PgoJCTwvYm9keT4K\nCTwvdGV4dD4KPC9URUk+\n',
         encoding: 'base64',
         _links: {
-          self: 'https://api.github.com/repos/cwrc/CWRC-Writer-Templates/contents/templates/letter.xml?ref=master',
+          self:
+            'https://api.github.com/repos/cwrc/CWRC-Writer-Templates/contents/templates/letter.xml?ref=master',
           git:
             'https://api.github.com/repos/cwrc/CWRC-Writer-Templates/git/blobs/1525a783ddcd2844d75677d3748673d749c99963',
           html: 'https://github.com/cwrc/CWRC-Writer-Templates/blob/master/templates/letter.xml',
@@ -1173,20 +1212,25 @@ const getCreateFileNock = () => {
           size: 3197,
           url: 'https://api.github.com/repos/lucaju/misc/contents/text10.txt?ref=dev',
           html_url: 'https://github.com/lucaju/misc/blob/dev/text10.txt',
-          git_url: 'https://api.github.com/repos/lucaju/misc/git/blobs/e5f345781ca3c2fd6df65bdedba803966cec0435',
+          git_url:
+            'https://api.github.com/repos/lucaju/misc/git/blobs/e5f345781ca3c2fd6df65bdedba803966cec0435',
           download_url: 'https://raw.githubusercontent.com/lucaju/misc/dev/text10.txt',
           type: 'file',
           _links: {
             self: 'https://api.github.com/repos/lucaju/misc/contents/text10.txt?ref=dev',
-            git: 'https://api.github.com/repos/lucaju/misc/git/blobs/e5f345781ca3c2fd6df65bdedba803966cec0435',
+            git:
+              'https://api.github.com/repos/lucaju/misc/git/blobs/e5f345781ca3c2fd6df65bdedba803966cec0435',
             html: 'https://github.com/lucaju/misc/blob/dev/text10.txt',
           },
         },
         commit: {
           sha: 'fd14548139ed6994432d5b772ef4a8df597e9ee4',
-          node_id: 'MDY6Q29tbWl0MjI1OTQyODcxOmZkMTQ1NDgxMzllZDY5OTQ0MzJkNWI3NzJlZjRhOGRmNTk3ZTllZTQ=',
-          url: 'https://api.github.com/repos/lucaju/misc/git/commits/fd14548139ed6994432d5b772ef4a8df597e9ee4',
-          html_url: 'https://github.com/lucaju/misc/commit/fd14548139ed6994432d5b772ef4a8df597e9ee4',
+          node_id:
+            'MDY6Q29tbWl0MjI1OTQyODcxOmZkMTQ1NDgxMzllZDY5OTQ0MzJkNWI3NzJlZjRhOGRmNTk3ZTllZTQ=',
+          url:
+            'https://api.github.com/repos/lucaju/misc/git/commits/fd14548139ed6994432d5b772ef4a8df597e9ee4',
+          html_url:
+            'https://github.com/lucaju/misc/commit/fd14548139ed6994432d5b772ef4a8df597e9ee4',
           author: {
             name: 'Luciano Frizzera',
             email: 'lucaju@me.com',
@@ -1199,14 +1243,17 @@ const getCreateFileNock = () => {
           },
           tree: {
             sha: 'c3edc1bc1a7cf84d09247f477b7a95a71da2707e',
-            url: 'https://api.github.com/repos/lucaju/misc/git/trees/c3edc1bc1a7cf84d09247f477b7a95a71da2707e',
+            url:
+              'https://api.github.com/repos/lucaju/misc/git/trees/c3edc1bc1a7cf84d09247f477b7a95a71da2707e',
           },
           message: 'some commit message',
           parents: [
             {
               sha: 'aa6a597fbcee6a4787d4f7c0a466d9fb6a47edca',
-              url: 'https://api.github.com/repos/lucaju/misc/git/commits/aa6a597fbcee6a4787d4f7c0a466d9fb6a47edca',
-              html_url: 'https://github.com/lucaju/misc/commit/aa6a597fbcee6a4787d4f7c0a466d9fb6a47edca',
+              url:
+                'https://api.github.com/repos/lucaju/misc/git/commits/aa6a597fbcee6a4787d4f7c0a466d9fb6a47edca',
+              html_url:
+                'https://github.com/lucaju/misc/commit/aa6a597fbcee6a4787d4f7c0a466d9fb6a47edca',
             },
           ],
           verification: {
@@ -1819,7 +1866,8 @@ const pullRequestNock = () => {
         review_comments_url: 'https://api.github.com/repos/lucaju/misc/pulls/6/comments',
         review_comment_url: 'https://api.github.com/repos/lucaju/misc/pulls/comments{/number}',
         comments_url: 'https://api.github.com/repos/lucaju/misc/issues/6/comments',
-        statuses_url: 'https://api.github.com/repos/lucaju/misc/statuses/4fe6ae80a0676d67b25102eadd39c69cd364e8f0',
+        statuses_url:
+          'https://api.github.com/repos/lucaju/misc/statuses/4fe6ae80a0676d67b25102eadd39c69cd364e8f0',
         head: {
           label: 'lucaju:dev',
           ref: 'dev',
@@ -1876,7 +1924,8 @@ const pullRequestNock = () => {
             url: 'https://api.github.com/repos/lucaju/misc',
             forks_url: 'https://api.github.com/repos/lucaju/misc/forks',
             keys_url: 'https://api.github.com/repos/lucaju/misc/keys{/key_id}',
-            collaborators_url: 'https://api.github.com/repos/lucaju/misc/collaborators{/collaborator}',
+            collaborators_url:
+              'https://api.github.com/repos/lucaju/misc/collaborators{/collaborator}',
             teams_url: 'https://api.github.com/repos/lucaju/misc/teams',
             hooks_url: 'https://api.github.com/repos/lucaju/misc/hooks',
             issue_events_url: 'https://api.github.com/repos/lucaju/misc/issues/events{/number}',
@@ -1906,7 +1955,8 @@ const pullRequestNock = () => {
             issues_url: 'https://api.github.com/repos/lucaju/misc/issues{/number}',
             pulls_url: 'https://api.github.com/repos/lucaju/misc/pulls{/number}',
             milestones_url: 'https://api.github.com/repos/lucaju/misc/milestones{/number}',
-            notifications_url: 'https://api.github.com/repos/lucaju/misc/notifications{?since,all,participating}',
+            notifications_url:
+              'https://api.github.com/repos/lucaju/misc/notifications{?since,all,participating}',
             labels_url: 'https://api.github.com/repos/lucaju/misc/labels{/name}',
             releases_url: 'https://api.github.com/repos/lucaju/misc/releases{/id}',
             deployments_url: 'https://api.github.com/repos/lucaju/misc/deployments',
@@ -1995,7 +2045,8 @@ const pullRequestNock = () => {
             url: 'https://api.github.com/repos/lucaju/misc',
             forks_url: 'https://api.github.com/repos/lucaju/misc/forks',
             keys_url: 'https://api.github.com/repos/lucaju/misc/keys{/key_id}',
-            collaborators_url: 'https://api.github.com/repos/lucaju/misc/collaborators{/collaborator}',
+            collaborators_url:
+              'https://api.github.com/repos/lucaju/misc/collaborators{/collaborator}',
             teams_url: 'https://api.github.com/repos/lucaju/misc/teams',
             hooks_url: 'https://api.github.com/repos/lucaju/misc/hooks',
             issue_events_url: 'https://api.github.com/repos/lucaju/misc/issues/events{/number}',
@@ -2025,7 +2076,8 @@ const pullRequestNock = () => {
             issues_url: 'https://api.github.com/repos/lucaju/misc/issues{/number}',
             pulls_url: 'https://api.github.com/repos/lucaju/misc/pulls{/number}',
             milestones_url: 'https://api.github.com/repos/lucaju/misc/milestones{/number}',
-            notifications_url: 'https://api.github.com/repos/lucaju/misc/notifications{?since,all,participating}',
+            notifications_url:
+              'https://api.github.com/repos/lucaju/misc/notifications{?since,all,participating}',
             labels_url: 'https://api.github.com/repos/lucaju/misc/labels{/name}',
             releases_url: 'https://api.github.com/repos/lucaju/misc/releases{/id}',
             deployments_url: 'https://api.github.com/repos/lucaju/misc/deployments',
@@ -2081,7 +2133,8 @@ const pullRequestNock = () => {
             href: 'https://api.github.com/repos/lucaju/misc/pulls/6/commits',
           },
           statuses: {
-            href: 'https://api.github.com/repos/lucaju/misc/statuses/4fe6ae80a0676d67b25102eadd39c69cd364e8f0',
+            href:
+              'https://api.github.com/repos/lucaju/misc/statuses/4fe6ae80a0676d67b25102eadd39c69cd364e8f0',
           },
         },
         author_association: 'OWNER',
@@ -2442,7 +2495,8 @@ const createBranchFromMasterCreateBranch = () => {
         object: {
           sha: '1539967933866a865d9a4e598af2d208543c6ad7',
           type: 'commit',
-          url: 'https://api.github.com/repos/jchartrand/aTest/git/commits/1539967933866a865d9a4e598af2d208543c6ad7',
+          url:
+            'https://api.github.com/repos/jchartrand/aTest/git/commits/1539967933866a865d9a4e598af2d208543c6ad7',
         },
       },
       [
@@ -2653,7 +2707,8 @@ const createBranchGeneric = () => {
         object: {
           sha: '248a708af7d740518bb7340be5eb1c3074dd5376',
           type: 'commit',
-          url: 'https://api.github.com/repos/jchartrand/aTest/git/commits/248a708af7d740518bb7340be5eb1c3074dd5376',
+          url:
+            'https://api.github.com/repos/jchartrand/aTest/git/commits/248a708af7d740518bb7340be5eb1c3074dd5376',
         },
       },
       [

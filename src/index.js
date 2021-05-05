@@ -372,7 +372,9 @@ const saveAsPullRequest = async ({
 };
 
 const _createPullRequest = async ({ owner, repo, title, head, base, body }) => {
-  return await octokit.pulls.create({ owner, repo, title, head, base, body }).catch((error) => error);
+  return await octokit.pulls
+    .create({ owner, repo, title, head, base, body })
+    .catch((error) => error);
 };
 
 const _getLatestFileSHA = async (chainedResult) => {
@@ -638,7 +640,9 @@ const _checkForBranch = async (theDetails) => {
       if (error.status === 404) {
         return false;
       } else {
-        throw new Error(`Something went wrong with the call to check for a branch. ${error.message}`);
+        throw new Error(
+          `Something went wrong with the call to check for a branch. ${error.message}`
+        );
       }
     });
 
