@@ -1,0 +1,16 @@
+{
+  "check-coverage": true,
+  "include": ["spec/**"],
+  "exclude": [
+    "coverage/**",
+    "fixturesAndMocks/**",
+    "spec/**",
+    "node_modules/**"
+  ],
+  "per-file": true,
+  "lines": 100,
+  "statements": 100,
+  "functions": 100,
+  "branches": 100,
+  "reporter": ["lcov"]
+}
