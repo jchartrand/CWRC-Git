@@ -25,12 +25,12 @@ const _decodeContent = (content) => Buffer.from(content, 'base64').toString('utf
  * @returns {Promise}
  */
 const authenticate = (gitHubOAuthToken) => {
-	octokit = new Octokit({
-		auth: gitHubOAuthToken,
-		userAgent: 'octokit/rest.js v18.0.11',
-	});
+  octokit = new Octokit({
+    auth: gitHubOAuthToken,
+    userAgent: 'octokit/rest.js v18.0.11',
+  });
 
-	return octokit;
+  return octokit;
 };
 
 /**
@@ -47,7 +47,7 @@ const getDetailsForAuthenticatedUser = async () => await octokit.users.getAuthen
  * @returns {Promise}
  */
 const getDetailsForUser = async (username) => {
-	return await octokit.users.getByUsername({ username });
+  return await octokit.users.getByUsername({ username });
 };
 
 /**
@@ -59,7 +59,7 @@ const getDetailsForUser = async (username) => {
  * @returns {Promise}
  */
 const getReposForAuthenticatedUser = async (affiliation, page, per_page) => {
-	return await octokit.repos.listForAuthenticatedUser({ affiliation, page, per_page });
+  return await octokit.repos.listForAuthenticatedUser({ affiliation, page, per_page });
 };
 
 /**
@@ -71,7 +71,7 @@ const getReposForAuthenticatedUser = async (affiliation, page, per_page) => {
  * @returns {Promise}
  */
 const getReposForUser = async (username, page, per_page) => {
-	return await octokit.repos.listForUser({ username, page, per_page });
+  return await octokit.repos.listForUser({ username, page, per_page });
 };
 
 /**
@@ -81,7 +81,7 @@ const getReposForUser = async (username, page, per_page) => {
  * @returns {Promise}
  */
 const getDetailsForOrg = async (org) => {
-	return await octokit.orgs.get({ org });
+  return await octokit.orgs.get({ org });
 };
 
 /**
@@ -92,7 +92,7 @@ const getDetailsForOrg = async (org) => {
  * @returns {Promise}
  */
 const getMembershipForUser = async ({ org, username }) => {
-	return await octokit.orgs.getMembershipForUser({ org, username });
+  return await octokit.orgs.getMembershipForUser({ org, username });
 };
 
 /**
@@ -104,8 +104,8 @@ const getMembershipForUser = async ({ org, username }) => {
  * @returns {Promise}
  */
 const getPermissionsForUser = async ({ owner, repo, username }) => {
-	const result = await octokit.repos.getCollaboratorPermissionLevel({ owner, repo, username });
-	return result;
+  const result = await octokit.repos.getCollaboratorPermissionLevel({ owner, repo, username });
+  return result;
 };
 
 /**
@@ -118,7 +118,7 @@ const getPermissionsForUser = async ({ owner, repo, username }) => {
  * @returns {Promise}
  */
 const getTemplates = async (owner, repo, ref, path) => {
-	return await octokit.repos.getContent({ owner, repo, ref, path });
+  return await octokit.repos.getContent({ owner, repo, ref, path });
 };
 
 /**
@@ -132,16 +132,16 @@ const getTemplates = async (owner, repo, ref, path) => {
  * @returns {Promise}
  */
 const getDoc = async ({ owner, repo, path, ref }) => {
-	const result = await octokit.repos.getContent({ owner, repo, ref, path });
+  const result = await octokit.repos.getContent({ owner, repo, ref, path });
 
-	return {
-		owner,
-		repo,
-		ref,
-		path,
-		doc: _decodeContent(result.data.content),
-		sha: result.data.sha,
-	};
+  return {
+    owner,
+    repo,
+    ref,
+    path,
+    doc: _decodeContent(result.data.content),
+    sha: result.data.sha,
+  };
 };
 
 /**
@@ -153,23 +153,23 @@ const getDoc = async ({ owner, repo, path, ref }) => {
  * @returns {Promise}
  */
 const createRepo = async ({ repo, description, isPrivate }) => {
-	isPrivate = isPrivate === 'true' ? true : false;
+  isPrivate = isPrivate === 'true' ? true : false;
 
-	const githubResponse = await octokit.repos
-		.createForAuthenticatedUser({
-			name: repo,
-			description,
-			auto_init: true,
-			private: isPrivate,
-		})
-		.catch(logError);
+  const githubResponse = await octokit.repos
+    .createForAuthenticatedUser({
+      name: repo,
+      description,
+      auto_init: true,
+      private: isPrivate,
+    })
+    .catch(logError);
 
-	return {
-		description,
-		isPrivate,
-		owner: githubResponse.data.owner.login,
-		repo: githubResponse.data.name,
-	};
+  return {
+    description,
+    isPrivate,
+    owner: githubResponse.data.owner.login,
+    repo: githubResponse.data.name,
+  };
 };
 
 /**
@@ -182,25 +182,25 @@ const createRepo = async ({ repo, description, isPrivate }) => {
  * @returns {Promise}
  */
 const createOrgRepo = async ({ org, repo, description, isPrivate }) => {
-	isPrivate = isPrivate == 'true' ? true : false;
+  isPrivate = isPrivate == 'true' ? true : false;
 
-	const githubResponse = await octokit.repos
-		.createInOrg({
-			org,
-			name: repo,
-			description: description,
-			auto_init: true,
-			private: isPrivate,
-		})
-		.catch(logError);
+  const githubResponse = await octokit.repos
+    .createInOrg({
+      org,
+      name: repo,
+      description: description,
+      auto_init: true,
+      private: isPrivate,
+    })
+    .catch(logError);
 
-	return {
-		org,
-		description,
-		isPrivate,
-		owner: githubResponse.data.owner.login,
-		repo: githubResponse.data.name,
-	};
+  return {
+    org,
+    description,
+    isPrivate,
+    owner: githubResponse.data.owner.login,
+    repo: githubResponse.data.name,
+  };
 };
 
 /**
@@ -216,16 +216,16 @@ const createOrgRepo = async ({ org, repo, description, isPrivate }) => {
  * @returns {Promise}
  */
 const saveDoc = async ({ owner, repo, path, content, branch, message, sha }) => {
-	if (sha === undefined) {
-		// try to get the sha
-		sha = await _getLatestFileSHA({ owner, repo, branch, path });
-	}
+  if (sha === undefined) {
+    // try to get the sha
+    sha = await _getLatestFileSHA({ owner, repo, branch, path });
+  }
 
-	if (sha) {
-		return await _updateFile({ owner, repo, path, content, branch, message, sha });
-	} else {
-		return await _createFile({ owner, repo, path, content, branch, message });
-	}
+  if (sha) {
+    return await _updateFile({ owner, repo, path, content, branch, message, sha });
+  } else {
+    return await _createFile({ owner, repo, path, content, branch, message });
+  }
 };
 
 // expects in theDetails:
@@ -239,21 +239,21 @@ const saveDoc = async ({ owner, repo, path, content, branch, message, sha }) => 
 // }
 // returns the chained result object for passing to further promise based calls.
 const _createFile = async (chainedResult) => {
-	const { owner, repo, path, message, content, branch } = chainedResult;
+  const { owner, repo, path, message, content, branch } = chainedResult;
 
-	const result = await octokit.repos.createOrUpdateFileContents({
-		owner,
-		repo,
-		path,
-		message,
-		content: _encodeContent(content),
-		branch,
-	});
+  const result = await octokit.repos.createOrUpdateFileContents({
+    owner,
+    repo,
+    path,
+    message,
+    content: _encodeContent(content),
+    branch,
+  });
 
-	return {
-		...chainedResult,
-		sha: result.data.content.sha,
-	};
+  return {
+    ...chainedResult,
+    sha: result.data.content.sha,
+  };
 };
 
 // expects in theDetails:
@@ -268,23 +268,23 @@ const _createFile = async (chainedResult) => {
 // }
 // returns the chained result object for passing to further promise based calls.
 const _updateFile = async (chainedResult) => {
-	const { owner, repo, path, message, content, sha, branch } = chainedResult;
-	//probably want to write in the cwrc-git /// application tag, but that could go in from the cwrc-writer I guess, before sending.
+  const { owner, repo, path, message, content, sha, branch } = chainedResult;
+  //probably want to write in the cwrc-git /// application tag, but that could go in from the cwrc-writer I guess, before sending.
 
-	const result = await octokit.repos.createOrUpdateFileContents({
-		owner,
-		repo,
-		path,
-		message,
-		content: _encodeContent(content),
-		sha,
-		branch,
-	});
+  const result = await octokit.repos.createOrUpdateFileContents({
+    owner,
+    repo,
+    path,
+    message,
+    content: _encodeContent(content),
+    sha,
+    branch,
+  });
 
-	return {
-		...chainedResult,
-		sha: result.data.content.sha,
-	};
+  return {
+    ...chainedResult,
+    sha: result.data.content.sha,
+  };
 };
 
 /* the Details must contain:
@@ -293,31 +293,31 @@ repo: repoName
 branch: the branch name
  */
 const _createBranchFromMaster = async (theDetails) => {
-	const { owner, repo, branch } = theDetails;
+  const { owner, repo, branch } = theDetails;
 
-	const result = await _getMasterBranchSHAs(theDetails).catch(logError);
+  const result = await _getMasterBranchSHAs(theDetails).catch(logError);
 
-	const githubResponse = await octokit.git
-		.createRef({
-			owner,
-			repo,
-			ref: `refs/heads/${branch}`,
-			sha: result.parentCommitSHA,
-		})
-		.catch(logError);
+  const githubResponse = await octokit.git
+    .createRef({
+      owner,
+      repo,
+      ref: `refs/heads/${branch}`,
+      sha: result.parentCommitSHA,
+    })
+    .catch(logError);
 
-	return {
-		...theDetails,
-		refURL: githubResponse.data.url,
-	};
+  return {
+    ...theDetails,
+    refURL: githubResponse.data.url,
+  };
 };
 
 const _checkForPullRequest = async ({ owner, repo, branch }) => {
-	const result = await octokit.search.issuesAndPullRequests({
-		q: `state:open type:pr repo:${owner}/${repo} head:${branch}`,
-	});
+  const result = await octokit.search.issuesAndPullRequests({
+    q: `state:open type:pr repo:${owner}/${repo} head:${branch}`,
+  });
 
-	return result.data.total_count > 0;
+  return result.data.total_count > 0;
 };
 
 /**
@@ -334,63 +334,63 @@ const _checkForPullRequest = async ({ owner, repo, branch }) => {
  * @returns {Promise}
  */
 const saveAsPullRequest = async ({
-	owner,
-	repo,
-	path,
-	content,
-	branch,
-	message,
-	title,
-	crossRepository = false,
-	sha,
+  owner,
+  repo,
+  path,
+  content,
+  branch,
+  message,
+  title,
+  crossRepository = false,
+  sha,
 }) => {
-	if (!crossRepository) {
-		//test and create branch
-		const doesBranchExist = await _checkForBranch({ owner, repo, branch });
-		if (!doesBranchExist) await _createBranchFromMaster({ owner, repo, branch });
+  if (!crossRepository) {
+    //test and create branch
+    const doesBranchExist = await _checkForBranch({ owner, repo, branch });
+    if (!doesBranchExist) await _createBranchFromMaster({ owner, repo, branch });
 
-		//save file in the new branch
-		const resultOfSave = await saveDoc({ owner, repo, path, content, branch, message, sha });
-		sha = resultOfSave.sha;
-	}
+    //save file in the new branch
+    const resultOfSave = await saveDoc({ owner, repo, path, content, branch, message, sha });
+    sha = resultOfSave.sha;
+  }
 
-	// there can be only one PR per branch */
-	const doesPullRequestExist = await _checkForPullRequest({ owner, repo, branch });
+  // there can be only one PR per branch */
+  const doesPullRequestExist = await _checkForPullRequest({ owner, repo, branch });
 
-	if (!doesPullRequestExist) {
-		await _createPullRequest({
-			owner,
-			repo,
-			title,
-			head: branch,
-			base: 'master',
-			body: message,
-		});
-	}
+  if (!doesPullRequestExist) {
+    await _createPullRequest({
+      owner,
+      repo,
+      title,
+      head: branch,
+      base: 'master',
+      body: message,
+    });
+  }
 
-	return { owner, repo, path, content, branch, message, title, sha };
+  return { owner, repo, path, content, branch, message, title, sha };
 };
 
 const _createPullRequest = async ({ owner, repo, title, head, base, body }) => {
-	return await octokit.pulls
-		.create({ owner, repo, title, head, base, body })
-		.catch((error) => error);
+  return await octokit.pulls
+    .create({ owner, repo, title, head, base, body })
+    .catch((error) => error);
 };
 
 const _getLatestFileSHA = async (chainedResult) => {
-	const { owner, repo, branch, path } = chainedResult;
+  const { owner, repo, branch, path } = chainedResult;
 
-	const {
-		data: {
-			data: {
-				repository: { object: result },
-			},
-		},
-	} = await octokit
-		.request({
-			method: 'POST',
-			url: '/graphql',
-			query: `{
+  const {
+    data: {
+      data: {
+        repository: { object: result },
+      },
+    },
+  } = await octokit
+    .request({
+      method: 'POST',
+      url: '/graphql',
+      query: `{
 			repository(owner: "${owner}", name: "${repo}") {
 				object(expression: "${branch}:${path}") {
 					... on Blob {
@@ -399,13 +399,13 @@ const _getLatestFileSHA = async (chainedResult) => {
 				}
 			}
 		}`,
-		})
-		.catch((error) => {
-			console.log(error);
-		});
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 
-	const sha = result ? result.oid : null;
-	return sha;
+  const sha = result ? result.oid : null;
+  return sha;
 };
 
 /**
@@ -417,139 +417,139 @@ const _getLatestFileSHA = async (chainedResult) => {
  * @returns {Promise}
  */
 const createFork = async ({ owner, repo, organization }) => {
-	const fork = { owner, repo };
-	if (organization) fork.organization = organization;
-	const result = await octokit.repos.createFork(fork);
-	return { owner, repo, organization, result };
+  const fork = { owner, repo };
+  if (organization) fork.organization = organization;
+  const result = await octokit.repos.createFork(fork);
+  return { owner, repo, organization, result };
 };
 
 const logError = (error) => {
-	console.error('oh no!');
-	console.log(error);
-	throw new Error(error);
-	// return Promise.reject(error);
+  console.error('oh no!');
+  console.log(error);
+  throw new Error(error);
+  // return Promise.reject(error);
 };
 
 const _getMasterBranchSHAs = async (chainedResult) => {
-	const githubResponse = await octokit.repos.getBranch({
-		owner: chainedResult.owner,
-		repo: chainedResult.repo,
-		branch: 'master',
-	});
+  const githubResponse = await octokit.repos.getBranch({
+    owner: chainedResult.owner,
+    repo: chainedResult.repo,
+    branch: 'master',
+  });
 
-	return {
-		...chainedResult,
-		baseTreeSHA: githubResponse.data.commit.commit.tree.sha,
-		parentCommitSHA: githubResponse.data.commit.sha,
-	};
+  return {
+    ...chainedResult,
+    baseTreeSHA: githubResponse.data.commit.commit.tree.sha,
+    parentCommitSHA: githubResponse.data.commit.sha,
+  };
 };
 
 const _getTreeContentsByDrillDown = async (chainedResult) => {
-	const basePath = '';
+  const basePath = '';
 
-	const response = await _getTreeContents(
-		{
-			owner: chainedResult.owner,
-			repo: chainedResult.repo,
-			tree_sha: chainedResult.baseTreeSHA,
-		},
-		basePath
-	);
+  const response = await _getTreeContents(
+    {
+      owner: chainedResult.owner,
+      repo: chainedResult.repo,
+      tree_sha: chainedResult.baseTreeSHA,
+    },
+    basePath
+  );
 
-	return {
-		...chainedResult,
-		contents: {
-			type: 'folder',
-			path: '',
-			name: '',
-			contents: response,
-		},
-	};
+  return {
+    ...chainedResult,
+    contents: {
+      type: 'folder',
+      path: '',
+      name: '',
+      contents: response,
+    },
+  };
 };
 
 const _getTreeContents = async (treeDetails, basePath) => {
-	const response = await octokit.git.getTree(treeDetails);
+  const response = await octokit.git.getTree(treeDetails);
 
-	let promises = response.data.tree.map((entry) => {
-		let path = basePath + entry.path;
-		if (entry.type === 'tree') {
-			return _getTreeContents(
-				{
-					owner: treeDetails.owner,
-					repo: treeDetails.repo,
-					tree_sha: entry.sha,
-				},
-				`${path}/`
-			).then((folderContents) => ({
-				type: 'folder',
-				path: path,
-				name: entry.path,
-				contents: folderContents,
-			}));
-		} else {
-			return Promise.resolve({
-				type: 'file',
-				path: path,
-				name: entry.path,
-			});
-		}
-	});
+  let promises = response.data.tree.map((entry) => {
+    let path = basePath + entry.path;
+    if (entry.type === 'tree') {
+      return _getTreeContents(
+        {
+          owner: treeDetails.owner,
+          repo: treeDetails.repo,
+          tree_sha: entry.sha,
+        },
+        `${path}/`
+      ).then((folderContents) => ({
+        type: 'folder',
+        path: path,
+        name: entry.path,
+        contents: folderContents,
+      }));
+    } else {
+      return Promise.resolve({
+        type: 'file',
+        path: path,
+        name: entry.path,
+      });
+    }
+  });
 
-	return Promise.all(promises).then((results) => {
-		return results;
-	});
+  return Promise.all(promises).then((results) => {
+    return results;
+  });
 };
 
 const _unflattenContents = (flatContents) => {
-	const files = flatContents.filter((file) => file.type === 'blob');
-	const result = {
-		type: 'folder',
-		name: '',
-		path: '',
-		contents: [],
-	};
-	const findSubFolder = (parentFolder, folderNameToFind) => {
-		const subfolder = parentFolder.contents.find((el) => {
-			return el.type === 'folder' && el.name === folderNameToFind;
-		});
-		return subfolder;
-	};
-	const addSubFolder = (newFolderName, parentFolder) => {
-		const newSubFolder = {
-			type: 'folder',
-			name: newFolderName,
-			path: `${parentFolder.path}/${newFolderName}`,
-			contents: [],
-		};
-		parentFolder.contents.push(newSubFolder);
-		return newSubFolder;
-	};
-	const addFile = (newFileName, parentFolder) => {
-		const newFile = {
-			type: 'file',
-			name: newFileName,
-			path: `${parentFolder.path}/${newFileName}`,
-		};
-		parentFolder.contents.push(newFile);
-	};
-	const isFile = (pathSections, currentIndex) => {
-		return pathSections.length - 1 == currentIndex;
-	};
+  const files = flatContents.filter((file) => file.type === 'blob');
+  const result = {
+    type: 'folder',
+    name: '',
+    path: '',
+    contents: [],
+  };
+  const findSubFolder = (parentFolder, folderNameToFind) => {
+    const subfolder = parentFolder.contents.find((el) => {
+      return el.type === 'folder' && el.name === folderNameToFind;
+    });
+    return subfolder;
+  };
+  const addSubFolder = (newFolderName, parentFolder) => {
+    const newSubFolder = {
+      type: 'folder',
+      name: newFolderName,
+      path: `${parentFolder.path}/${newFolderName}`,
+      contents: [],
+    };
+    parentFolder.contents.push(newSubFolder);
+    return newSubFolder;
+  };
+  const addFile = (newFileName, parentFolder) => {
+    const newFile = {
+      type: 'file',
+      name: newFileName,
+      path: `${parentFolder.path}/${newFileName}`,
+    };
+    parentFolder.contents.push(newFile);
+  };
+  const isFile = (pathSections, currentIndex) => {
+    return pathSections.length - 1 == currentIndex;
+  };
 
-	files.forEach((file) => {
-		const pathSections = file.path.split('/');
-		pathSections.reduce((parentFolder, pathSection, pathSectionIndex) => {
-			const subFolder = findSubFolder(parentFolder, pathSection);
-			if (subFolder) {
-				return subFolder;
-			} else if (isFile(pathSections, pathSectionIndex)) {
-				return addFile(pathSection, parentFolder);
-			} else {
-				return addSubFolder(pathSection, parentFolder);
-			}
-		}, result);
-	});
-	return result;
+  files.forEach((file) => {
+    const pathSections = file.path.split('/');
+    pathSections.reduce((parentFolder, pathSection, pathSectionIndex) => {
+      const subFolder = findSubFolder(parentFolder, pathSection);
+      if (subFolder) {
+        return subFolder;
+      } else if (isFile(pathSections, pathSectionIndex)) {
+        return addFile(pathSection, parentFolder);
+      } else {
+        return addSubFolder(pathSection, parentFolder);
+      }
+    }, result);
+  });
+  return result;
 };
 
 /**
@@ -561,14 +561,14 @@ const _unflattenContents = (flatContents) => {
  * @returns {Promise}
  */
 const searchCode = async (query, page, per_page) => {
-	const response = await octokit.search.code({
-		q: query,
-		page,
-		per_page,
-		mediaType: { format: 'text-match' },
-	});
+  const response = await octokit.search.code({
+    q: query,
+    page,
+    per_page,
+    mediaType: { format: 'text-match' },
+  });
 
-	return response;
+  return response;
 };
 
 /**
@@ -580,14 +580,14 @@ const searchCode = async (query, page, per_page) => {
  * @returns {Promise}
  */
 const searchRepos = async (query, page, per_page) => {
-	const response = await octokit.search.repos({
-		q: query,
-		page,
-		per_page,
-		mediaType: { format: 'text-match' },
-	});
+  const response = await octokit.search.repos({
+    q: query,
+    page,
+    per_page,
+    mediaType: { format: 'text-match' },
+  });
 
-	return response;
+  return response;
 };
 
 /**
@@ -598,23 +598,23 @@ const searchRepos = async (query, page, per_page) => {
  * @returns {Promise}
  */
 const getRepoContents = async ({ owner, repo }) => {
-	const masterBranch = await _getMasterBranchSHAs({ owner, repo });
-	return await _getTreeContentsRecursively(masterBranch);
+  const masterBranch = await _getMasterBranchSHAs({ owner, repo });
+  return await _getTreeContentsRecursively(masterBranch);
 };
 
 const _getTreeContentsRecursively = async (chainedResult) => {
-	const githubResponse = await octokit.git.getTree({
-		owner: chainedResult.owner,
-		repo: chainedResult.repo,
-		tree_sha: chainedResult.baseTreeSHA,
-		recursive: 1,
-	});
+  const githubResponse = await octokit.git.getTree({
+    owner: chainedResult.owner,
+    repo: chainedResult.repo,
+    tree_sha: chainedResult.baseTreeSHA,
+    recursive: 1,
+  });
 
-	return {
-		...chainedResult,
-		contents: _unflattenContents(githubResponse.data.tree),
-		truncated: githubResponse.data.truncated,
-	};
+  return {
+    ...chainedResult,
+    contents: _unflattenContents(githubResponse.data.tree),
+    truncated: githubResponse.data.truncated,
+  };
 };
 
 /**
@@ -625,54 +625,54 @@ const _getTreeContentsRecursively = async (chainedResult) => {
  * @returns {Promise}
  */
 const getRepoContentsByDrillDown = async (owner, repo) => {
-	const results = await _getMasterBranchSHAs({ owner, repo });
-	return await _getTreeContentsByDrillDown(results);
+  const results = await _getMasterBranchSHAs({ owner, repo });
+  return await _getTreeContentsByDrillDown(results);
 };
 
 const _checkForBranch = async (theDetails) => {
-	const results = await octokit.git
-		.getRef({
-			owner: theDetails.owner,
-			repo: theDetails.repo,
-			ref: `heads/${theDetails.branch}`,
-		})
-		.catch((error) => {
-			if (error.status === 404) {
-				return false;
-			} else {
-				throw new Error(
-					`Something went wrong with the call to check for a branch. ${error.message}`
-				);
-			}
-		});
+  const results = await octokit.git
+    .getRef({
+      owner: theDetails.owner,
+      repo: theDetails.repo,
+      ref: `heads/${theDetails.branch}`,
+    })
+    .catch((error) => {
+      if (error.status === 404) {
+        return false;
+      } else {
+        throw new Error(
+          `Something went wrong with the call to check for a branch. ${error.message}`
+        );
+      }
+    });
 
-	if (results === false) return false;
+  if (results === false) return false;
 
-	// this next check also handles the case where the branch name doesn't exist, but there are branches
-	// for which this name is a prefix, in which case the call returns an array of those 'matching' branches.
-	// See:  https://developer.github.com/v3/git/refs/#get-a-reference
-	return Object.prototype.hasOwnProperty.call(results.data, 'object');
-	// return results.data.hasOwnProperty('object');
+  // this next check also handles the case where the branch name doesn't exist, but there are branches
+  // for which this name is a prefix, in which case the call returns an array of those 'matching' branches.
+  // See:  https://developer.github.com/v3/git/refs/#get-a-reference
+  return Object.prototype.hasOwnProperty.call(results.data, 'object');
+  // return results.data.hasOwnProperty('object');
 };
 
 module.exports = {
-	authenticate,
-	createFork,
-	createRepo,
-	createOrgRepo,
-	getDetailsForAuthenticatedUser,
-	getDetailsForUser,
-	getDetailsForOrg,
-	getDoc,
-	getMembershipForUser,
-	getRepoContents,
-	getRepoContentsByDrillDown,
-	getReposForAuthenticatedUser,
-	getReposForUser,
-	getPermissionsForUser,
-	getTemplates,
-	saveAsPullRequest,
-	saveDoc,
-	searchCode,
-	searchRepos,
+  authenticate,
+  createFork,
+  createRepo,
+  createOrgRepo,
+  getDetailsForAuthenticatedUser,
+  getDetailsForUser,
+  getDetailsForOrg,
+  getDoc,
+  getMembershipForUser,
+  getRepoContents,
+  getRepoContentsByDrillDown,
+  getReposForAuthenticatedUser,
+  getReposForUser,
+  getPermissionsForUser,
+  getTemplates,
+  saveAsPullRequest,
+  saveDoc,
+  searchCode,
+  searchRepos,
 };
