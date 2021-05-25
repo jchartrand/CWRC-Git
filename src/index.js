@@ -152,7 +152,7 @@ const getDoc = async ({ owner, repo, path, ref }) => {
  * @param {String|Boolean} isPrivate Is the repo private
  * @returns {Promise}
  */
-const createRepo = async ({ repo, description, isPrivate }) => {
+const createRepo = async ({ owner, repo, description, isPrivate }) => {
   isPrivate = isPrivate === 'true' ? true : false;
 
   const githubResponse = await octokit.repos
@@ -164,12 +164,38 @@ const createRepo = async ({ repo, description, isPrivate }) => {
     })
     .catch(logError);
 
+  //rename branch to master 
+  //TODO remove this and add option to the user choose the branch they want to work with
+  const branch = await renameRepo({ owner, repo, branch:'main', new_name:'master' })
+
   return {
     description,
     isPrivate,
     owner: githubResponse.data.owner.login,
     repo: githubResponse.data.name,
+    branch,
   };
+};
+
+/**
+ * Create a new repo for the authenticated user.
+ * See {@link https://developer.github.com/v3/repos/#create}
+ * @param {String} repo The repo
+ * @param {String} description The repo description
+ * @param {String|Boolean} isPrivate Is the repo private
+ * @returns {Promise}
+ */
+ const renameRepo = async ({ owner, repo, branch, new_name }) => {
+  const response = await octokit.repos.renameBranch({
+    owner,
+    repo,
+    branch,
+    new_name,
+  })
+  .catch(logError);
+
+  if (response.status === 201) return new_name;
+  return branch;
 };
 
 /**

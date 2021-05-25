@@ -111,7 +111,7 @@ describe('cwrcGit', () => {
     }).timeout(5000); // to force mocha to wait longer for async to return
   });
 
-  describe('.createRepo', () => {
+  describe.skip('.createRepo', () => {
     beforeEach(() => {
       mocks.getCreateGithubRepoNock();
       mocks.getMasterBranchFromGithubNock();
